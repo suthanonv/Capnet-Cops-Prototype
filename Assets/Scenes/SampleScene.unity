@@ -19653,7 +19653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453a1124258b2f94e9500310d8a6ec04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movedata: {fileID: 11400000, guid: dd6f1c9025f1ba945b2082ff9cda2f56, type: 2}
+  movedata: {fileID: 11400000, guid: 3b7fd348dbf74384ea55bec85e32d2b5, type: 2}
   characterTile: {fileID: 0}
   GroundLayerMask:
     serializedVersion: 2
@@ -38578,7 +38578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453a1124258b2f94e9500310d8a6ec04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movedata: {fileID: 11400000, guid: dd6f1c9025f1ba945b2082ff9cda2f56, type: 2}
+  movedata: {fileID: 11400000, guid: 3b7fd348dbf74384ea55bec85e32d2b5, type: 2}
   characterTile: {fileID: 0}
   GroundLayerMask:
     serializedVersion: 2

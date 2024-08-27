@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f422ba19980d12b4f833bb6f2bf6a17a, type: 3}
-  m_Name: FastCharacter
+  m_Name: EnemyMoveData
   m_EditorClassIdentifier: 
-  MaxMove: 3
+  MaxMove: 8
   AttackRange: 1
-  MoveSpeed: 0.2
+  MoveSpeed: 0.5

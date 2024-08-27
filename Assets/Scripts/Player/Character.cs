@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -49,7 +50,6 @@ public class Character : MonoBehaviour
 
     IEnumerator MoveAlongPath(Path path)
     {
-        bool IsMoveRangeMoreThanMaxRange = false;
 
         CanAttack = true;
 
@@ -63,11 +63,27 @@ public class Character : MonoBehaviour
         Tile currentTile = path.tiles[0];
         float animationTime = 0f;
 
-        if(pathLength > movedata.MaxMove)
+        if (pathLength > movedata.MaxMove)
         {
-            IsMoveRangeMoreThanMaxRange = true;
-            pathLength = movedata.MaxMove+1;
+
+            int increasingValue = 0;
+
+            if (path.tiles[pathLength - 1].occupyingCharacter != null) {
+                for (int i = 0; i < movedata.MaxMove; i++)
+                {
+                    if (movedata.MaxMove + movedata.AttackRange >= path.PathLenght)
+                    {
+                        increasingValue = i;
+                    }
+                }
+                pathLength = increasingValue;
+            }
+            else
+            {
+                pathLength = movedata.MaxMove + 1;
+            }
         }
+
 
 
         if (path.tiles[pathLength - 1].occupyingCharacter != null)
@@ -105,41 +121,19 @@ public class Character : MonoBehaviour
 
 
 
-        if (path.tiles[pathLength - 1].occupyingCharacter == null)
+        if (path.tiles[path.tiles.Length - 1].occupyingCharacter == null)
         {
             FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
         }
         else
         {
-            if (path.tiles[pathLength - 1].occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
+            if (path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
             {
                 Attack();
             }
             FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
         }
 
-
-        if(IsMoveRangeMoreThanMaxRange)
-        {
-            Path RamaingPath = new Path();
-
-            RamaingPath.tiles = path.tiles.Skip(pathLength - 1).Take(path.tiles.Length - 1).ToArray();
-
-            foreach(Tile i in RamaingPath.tiles)
-            {
-               if(i.occupyingCharacter)
-                {
-                   if(i.TryGetComponent<EntityTeam>(out EntityTeam team))
-                    {
-                        if (team.EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
-                        {
-                            Attack();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
     }
 
 
