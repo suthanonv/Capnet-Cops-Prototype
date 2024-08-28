@@ -44,18 +44,26 @@ public class Character : MonoBehaviour
     {
         CanAttack = true;
 
+
+        CharacterMoveData newData = new CharacterMoveData();
+
+        newData.AttackRange = movedata.AttackRange;
+        newData.MoveSpeed = movedata.MoveSpeed;
+        newData.MaxMove = movedata.MaxMove + 1;
+
+
         const float MIN_DISTANCE = 0.05f;
         const float TERRAIN_PENALTY = 0.5f;
 
         Path moveingPath = new Path();
         int pathLength = path.tiles.Length;
-        int moveLimit = movedata.MaxMove;
+        int moveLimit = newData.MaxMove;
 
         // Determine if the destination has an enemy character
         bool destinationOccupied = path.tiles[path.tiles.Length - 1].occupyingCharacter != null;
 
         // Calculate required movement to reach attack range
-        int requiredSteps = Mathf.Max(0, pathLength - movedata.AttackRange);
+        int requiredSteps = Mathf.Max(0, pathLength - newData.AttackRange);
 
         if (destinationOccupied)
         {
@@ -66,7 +74,7 @@ public class Character : MonoBehaviour
         else
         {
             // Case 2: Destination is not occupied, move up to movement limit or to attack range
-            pathLength = Mathf.Min(moveLimit, requiredSteps + movedata.AttackRange);
+            pathLength = Mathf.Min(moveLimit, requiredSteps + newData.AttackRange);
         }
 
         // Copy the appropriate number of steps into the moving path
@@ -83,7 +91,7 @@ public class Character : MonoBehaviour
 
             Vector3 nextTilePosition = moveingPath.tiles[currentStep].transform.position;
 
-            float movementTime = animationTime / (movedata.MoveSpeed + moveingPath.tiles[currentStep].terrainCost * TERRAIN_PENALTY);
+            float movementTime = animationTime / (newData.MoveSpeed + moveingPath.tiles[currentStep].terrainCost * TERRAIN_PENALTY);
             MoveAndRotate(currentTile.transform.position, nextTilePosition, movementTime);
             animationTime += Time.deltaTime;
 
