@@ -63,30 +63,36 @@ public class Character : MonoBehaviour
         Tile currentTile = path.tiles[0];
         float animationTime = 0f;
 
-        if (pathLength > movedata.MaxMove)
+        if (path.tiles.Length > movedata.MaxMove)
         {
+             pathLength = movedata.MaxMove;
 
-            int increasingValue = 0;
+            // Check if the last tile in the path is occupied by an enemy character
+            if (path.tiles[path.tiles.Length - 1].occupyingCharacter != null)
+            {
+                // Calculate the difference between attack range and movement range
+                int attackRangeDifference = movedata.AttackRange - movedata.MaxMove;
 
-            if (path.tiles[pathLength - 1].occupyingCharacter != null) {
-                for (int i = 0; i < movedata.MaxMove; i++)
-                {
-                    if (movedata.MaxMove + movedata.AttackRange >= path.PathLenght)
-                    {
-                        increasingValue = i;
-                    }
-                }
-                pathLength = increasingValue;
+                // Ensure the difference is non-negative
+                if (attackRangeDifference < 0)
+                    attackRangeDifference = 0;
+
+                // Adjust path length to bring the character into attack range
+                pathLength += attackRangeDifference;
             }
             else
             {
-                pathLength = movedata.MaxMove + 1;
+                // Move as far as possible within movement range
+                pathLength = movedata.MaxMove;
             }
+
+            // Limit the pathLength to the actual number of tiles in the path
+            pathLength = Mathf.Min(pathLength, path.tiles.Length);
         }
 
 
 
-        if (path.tiles[pathLength - 1].occupyingCharacter != null)
+        if (path.tiles[path.tiles.Length -1].occupyingCharacter != null)
         {
             moveingPath.tiles = new Tile[pathLength - 1];
             Array.Copy(path.tiles, moveingPath.tiles, pathLength - 1);

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,15 +9,10 @@ public class OldPathFinding : MonoBehaviour
     LayerMask tileMask;
     #endregion
 
-    /// <summary>
-    /// Main pathfinding function, marks tiles as being in frontier, while keeping a copy of the frontier
-    /// in "currentFrontier" for later clearing
-    /// </summary>
-    /// <param name="character"></param>
     public Path FindPath(Tile origin, Tile destination, CharacterMoveData moveData)
     {
         List<Tile> openSet = new List<Tile>();
-        List<Tile> closedSet = new List<Tile>();
+        HashSet<Tile> closedSet = new HashSet<Tile>();
 
         openSet.Add(origin);
         origin.costFromOrigin = 0;
@@ -31,8 +25,7 @@ public class OldPathFinding : MonoBehaviour
             Tile currentTile = openSet[0];
 
             openSet.Remove(currentTile);
-            if (currentTile != destination) // Only add to closedSet if not the destination
-                closedSet.Add(currentTile);
+            closedSet.Add(currentTile);
 
             // Destination reached
             if (currentTile == destination)
@@ -61,13 +54,6 @@ public class OldPathFinding : MonoBehaviour
         return null;
     }
 
-    /// <summary>
-    /// Returns a list of all neighboring hexagonal tiles and ladders,
-    /// including the destination tile even if it is occupied.
-    /// </summary>
-    /// <param name="origin"></param>
-    /// <param name="destination"></param>
-    /// <returns></returns>
     private List<Tile> NeighborTiles(Tile origin, Tile destination)
     {
         const float HEXAGONAL_OFFSET = 1.75f;
@@ -76,7 +62,6 @@ public class OldPathFinding : MonoBehaviour
         float rayLength = 4f;
         float rayHeightOffset = 1f;
 
-        // Rotate a raycast in 60 degree steps and find all adjacent tiles
         for (int i = 0; i < 6; i++)
         {
             direction = Quaternion.Euler(0f, 60f, 0f) * direction;
@@ -86,38 +71,27 @@ public class OldPathFinding : MonoBehaviour
             if (Physics.Raycast(aboveTilePos, Vector3.down, out RaycastHit hit, rayLength, tileMask))
             {
                 Tile hitTile = hit.transform.GetComponent<Tile>();
-                if (!tiles.Contains(hitTile) && (hitTile.Occupied == false || hitTile == destination))
+                if (hitTile != null && !tiles.Contains(hitTile) && (hitTile.Occupied == false || hitTile == destination))
+                {
                     tiles.Add(hitTile);
+                }
             }
 
             Debug.DrawRay(aboveTilePos, Vector3.down * rayLength, Color.blue);
         }
 
-        // Additionally add connected tiles such as ladders
         if (origin.connectedTile != null)
             tiles.Add(origin.connectedTile);
 
         return tiles;
     }
 
-    /// <summary>
-    /// Called by Interact.cs to create a path between two tiles on the grid 
-    /// </summary>
-    /// <param name="dest"></param>
-    /// <param name="source"></param>
-    /// <returns></returns>
     public Path PathBetween(Tile dest, Tile source, CharacterMoveData moveData)
     {
         Path path = MakePath(dest, source, moveData);
         return path;
     }
 
-    /// <summary>
-    /// Creates a path between two tiles
-    /// </summary>
-    /// <param name="destination"></param>
-    /// <param name="origin"></param>
-    /// <returns></returns>
     private Path MakePath(Tile destination, Tile origin, CharacterMoveData moveData)
     {
         List<Tile> tiles = new List<Tile>();
@@ -126,16 +100,23 @@ public class OldPathFinding : MonoBehaviour
         while (current != origin)
         {
             tiles.Add(current);
-            if (current.parent != null)
-                current = current.parent;
-            else
-                break;
+            current = current.parent;
+
+            if (current == null)
+                break; // Safety check in case of missing parents
         }
 
         tiles.Add(origin);
         tiles.Reverse();
 
-        tiles = tiles.Take(moveData.MaxMove+moveData.AttackRange).ToList();
+        // Ensure the path doesn't exceed the movement range
+        List<Tile> moveRange = tiles.Take(moveData.MaxMove).ToList();
+        List<Tile> attackRange = tiles.Skip(moveData.MaxMove).Take(moveData.AttackRange).ToList();
+
+        tiles = moveRange.Concat(attackRange).ToList();
+
+        if (tiles.Count > 0)
+            Debug.Log(tiles[tiles.Count - 1].occupyingCharacter == null);
 
         Path path = new Path();
         path.tiles = tiles.ToArray();
