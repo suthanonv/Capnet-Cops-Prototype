@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DefaultMove
   m_EditorClassIdentifier: 
   MaxMove: 3
-  AttackRange: 1
+  AttackRange: 2
   MoveSpeed: 0.35
