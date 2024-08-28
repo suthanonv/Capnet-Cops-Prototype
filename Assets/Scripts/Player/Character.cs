@@ -1,11 +1,6 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections;
-using System.IO;
-using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Character : MonoBehaviour
 {
@@ -17,8 +12,6 @@ public class Character : MonoBehaviour
     [SerializeField]
     LayerMask GroundLayerMask;
     #endregion
-
-
 
     public bool IsObstacle;
 
@@ -38,7 +31,6 @@ public class Character : MonoBehaviour
             return;
         }
 
-
         if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 50f, GroundLayerMask))
         {
             FinalizePosition(hit.transform.GetComponent<Tile>());
@@ -50,58 +42,40 @@ public class Character : MonoBehaviour
 
     IEnumerator MoveAlongPath(Path path)
     {
-
         CanAttack = true;
 
         const float MIN_DISTANCE = 0.05f;
         const float TERRAIN_PENALTY = 0.5f;
 
         Path moveingPath = new Path();
-
-        int currentStep = 0;
         int pathLength = path.tiles.Length;
-        Tile currentTile = path.tiles[0];
-        float animationTime = 0f;
+        int moveLimit = movedata.MaxMove;
 
-        if (path.tiles.Length > movedata.MaxMove)
+        // Determine if the destination has an enemy character
+        bool destinationOccupied = path.tiles[path.tiles.Length - 1].occupyingCharacter != null;
+
+        // Calculate required movement to reach attack range
+        int requiredSteps = Mathf.Max(0, pathLength - movedata.AttackRange);
+
+        if (destinationOccupied)
         {
-             pathLength = movedata.MaxMove;
+            // Case 1: Destination has an enemy character, calculate the number of steps required to reach attack range
 
-            // Check if the last tile in the path is occupied by an enemy character
-            if (path.tiles[path.tiles.Length - 1].occupyingCharacter != null)
-            {
-                // Calculate the difference between attack range and movement range
-                int attackRangeDifference = movedata.AttackRange - movedata.MaxMove;
-
-                // Ensure the difference is non-negative
-                if (attackRangeDifference < 0)
-                    attackRangeDifference = 0;
-
-                // Adjust path length to bring the character into attack range
-                pathLength += attackRangeDifference;
-            }
-            else
-            {
-                // Move as far as possible within movement range
-                pathLength = movedata.MaxMove;
-            }
-
-            // Limit the pathLength to the actual number of tiles in the path
-            pathLength = Mathf.Min(pathLength, path.tiles.Length);
-        }
-
-
-
-        if (path.tiles[path.tiles.Length -1].occupyingCharacter != null)
-        {
-            moveingPath.tiles = new Tile[pathLength - 1];
-            Array.Copy(path.tiles, moveingPath.tiles, pathLength - 1);
+            pathLength = Mathf.Min(requiredSteps, moveLimit);
         }
         else
         {
-            moveingPath.tiles = new Tile[pathLength];
-            Array.Copy(path.tiles, moveingPath.tiles, pathLength);
+            // Case 2: Destination is not occupied, move up to movement limit or to attack range
+            pathLength = Mathf.Min(moveLimit, requiredSteps + movedata.AttackRange);
         }
+
+        // Copy the appropriate number of steps into the moving path
+        moveingPath.tiles = new Tile[pathLength];
+        Array.Copy(path.tiles, moveingPath.tiles, pathLength);
+
+        int currentStep = 0;
+        Tile currentTile = moveingPath.tiles[0];
+        float animationTime = 0f;
 
         while (currentStep < moveingPath.tiles.Length)
         {
@@ -124,36 +98,28 @@ public class Character : MonoBehaviour
 
         TurnBaseSystem.instance.ActionEnd = true;
 
-
-
-
-        if (path.tiles[path.tiles.Length - 1].occupyingCharacter == null)
+        if (destinationOccupied)
         {
-            FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
-        }
-        else
-        {
+            // Attack if the final tile is within attack range and has an enemy character
             if (path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
             {
                 Attack(path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<Health>());
             }
-            FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
         }
 
+        FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
     }
-
 
     bool CanAttack = false;
-    public void Attack(Health Target)
+    public void Attack(Health target)
     {
-        if(CanAttack)
+        if (CanAttack)
         {
-            
             CanAttack = false;
-            Target.TakeDamage(50);
+            target.TakeDamage(50);
         }
     }
-    
+
     public void StartMove(Path _path)
     {
         if (IsObstacle) return;
@@ -164,11 +130,7 @@ public class Character : MonoBehaviour
         characterTile.Occupied = false;
         characterTile.occupyingCharacter = null;
 
-
-
         StartCoroutine(MoveAlongPath(_path));
-
-
     }
 
     int count = 0;
@@ -181,18 +143,13 @@ public class Character : MonoBehaviour
         tile.Occupied = true;
         tile.occupyingCharacter = this.gameObject;
 
-
         if (count > 0)
         {
             PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
-
             pathDraw.ClearPaht();
-
         }
 
         count++;
-
-
     }
 
     void MoveAndRotate(Vector3 origin, Vector3 destination, float duration)
@@ -200,5 +157,4 @@ public class Character : MonoBehaviour
         transform.position = Vector3.Lerp(origin, destination, duration);
         transform.rotation = Quaternion.LookRotation(origin.DirectionTo(destination).Flat(), Vector3.up);
     }
-
 }

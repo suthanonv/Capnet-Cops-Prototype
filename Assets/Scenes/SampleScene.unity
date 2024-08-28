@@ -1654,7 +1654,6 @@ MonoBehaviour:
           m_CallState: 2
   PlayerMovingScript: {fileID: 330585548}
   EnemyPathFindingScript: {fileID: 936874842}
-  StopBattlePhase: 0
 --- !u!4 &53572003
 Transform:
   m_ObjectHideFlags: 0
@@ -70744,7 +70743,7 @@ Transform:
   m_GameObject: {fileID: 220303032761379983}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.39, y: -0.21691258, z: 6.16}
+  m_LocalPosition: {x: 6.39, y: -0.21691258, z: 4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
