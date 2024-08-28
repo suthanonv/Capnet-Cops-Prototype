@@ -1,9 +1,11 @@
-using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+
+
+
     #region member fields
     public Tile parent;
     public Tile connectedTile;
@@ -20,14 +22,15 @@ public class Tile : MonoBehaviour
     bool isinrange = false;
     public bool IsInAttackRange
     {
-        get {
+        get
+        {
             return isinrange;
         }
         set
         {
             isinrange = value;
 
-            if(isinrange)
+            if (isinrange)
             {
                 if (occupyingCharacter != null)
                 {
@@ -88,11 +91,17 @@ public class Tile : MonoBehaviour
 
     #endregion
 
+
+    private void Start()
+    {
+        SetColor(costMap[terrainCost]);
+    }
+
     Dictionary<int, Color> costMap = new Dictionary<int, Color>()
     {
-        {0, new Color(0.42f, 0.38f, 0.38f) }, //Gray
-        {1, new Color(0.45f, 0.23f, 0.15f) },//Red
-        {2, new Color(0.3f, 0.1f, 0f) } //Dark red
+        {0, new Color(0.1f, 0.6f, 0.1f) }, //Gray
+        {1, new Color(0.1f, 0.6f, 0.1f) },//Red
+        {2, new Color(0.1f, 0.6f, 0.1f) } //Dark red
     };
 
     /// <summary>
@@ -103,10 +112,10 @@ public class Tile : MonoBehaviour
     bool OnHighlight = false;
     public void Highlight()
     {
-      
+
         SetColor(Color.white);
-        
-        
+
+
     }
 
     public void ClearHighlight()
@@ -117,7 +126,7 @@ public class Tile : MonoBehaviour
 
         IsInAttackRange = isinrange;
 
-         ShowRangeVisual = showVisual;
+        ShowRangeVisual = showVisual;
     }
 
     /// <summary>
@@ -127,7 +136,7 @@ public class Tile : MonoBehaviour
     public void ModifyCost()
     {
         terrainCost++;
-        if (terrainCost > costMap.Count-1)
+        if (terrainCost > costMap.Count - 1)
             terrainCost = 0;
 
         if (costMap.TryGetValue(terrainCost, out Color col))
@@ -144,7 +153,7 @@ public class Tile : MonoBehaviour
     {
         GetComponent<MeshRenderer>().material.color = color;
     }
-   
+
     /*
     public void DebugCostText()
     {

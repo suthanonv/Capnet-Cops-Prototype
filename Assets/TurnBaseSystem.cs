@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using JetBrains.Annotations;
+using UnityEngine;
 public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 {
 
@@ -14,7 +11,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public OldPathFinding EnemyPathFindingScript;
 
 
-
+    bool CanEndPahse = false;
 
     bool onBattlePhase = true;
 
@@ -32,13 +29,15 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     bool actionEnd = true;
 
-    
-    
+
+
     bool IsContinueCombatPhase()
     {
-        foreach(EntityTurnBehaviour i in turnSystems.List)
+        if (!CanEndPahse) return true;
+
+        foreach (EntityTurnBehaviour i in turnSystems.List)
         {
-            if(i.gameObject.GetComponent<EntityTeam>().EntityTeamSide == Team.Enemy)
+            if (i.gameObject.GetComponent<EntityTeam>().EntityTeamSide == Team.Enemy)
             {
                 return true;
             }
@@ -47,7 +46,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     }
 
 
-    
+
     public Character GetHumenNearestChar(Character Enemy)
     {
         Character Nearest = null;
@@ -55,11 +54,11 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
 
 
-        foreach(EntityTurnBehaviour i in turnSystems.List)
+        foreach (EntityTurnBehaviour i in turnSystems.List)
         {
-            if(i.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+            if (i.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
             {
-                if(Vector3.Distance(Enemy.transform.position , i.transform.position) < PreviosDistance)
+                if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
                 {
                     Nearest = i.gameObject.GetComponent<Character>();
                     PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
@@ -89,11 +88,11 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public bool ActionEnd
     {
         get { return actionEnd; }
-        set 
+        set
         {
-            actionEnd = value;    
+            actionEnd = value;
 
-            if(actionEnd)
+            if (actionEnd)
             {
                 TurnNum++;
                 TurnNum %= turnSystems.List.Count;
@@ -108,9 +107,9 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     private void Update()
     {
-        if(OnBattlePhase)
+        if (OnBattlePhase)
         {
-           
+
             if (ActionEnd)
             {
                 ActionEnd = false;
@@ -126,7 +125,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         }
     }
 
-  
 
-    
+
+
 }
