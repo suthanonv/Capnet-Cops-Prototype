@@ -135,7 +135,7 @@ public class OldPathFinding : MonoBehaviour
         tiles.Add(origin);
         tiles.Reverse();
 
-        tiles = tiles.Take(moveData.MaxMove).ToList();
+        tiles = tiles.Take(moveData.MaxMove+moveData.AttackRange).ToList();
 
         Path path = new Path();
         path.tiles = tiles.ToArray();

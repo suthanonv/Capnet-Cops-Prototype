@@ -129,7 +129,7 @@ public class Character : MonoBehaviour
         {
             if (path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
             {
-                Attack();
+                Attack(path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<Health>());
             }
             FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
         }
@@ -138,12 +138,13 @@ public class Character : MonoBehaviour
 
 
     bool CanAttack = false;
-    public void Attack()
+    public void Attack(Health Target)
     {
         if(CanAttack)
         {
+            
             CanAttack = false;
-            Debug.Log(this.gameObject.name + "Attack");
+            Target.TakeDamage(50);
         }
     }
     

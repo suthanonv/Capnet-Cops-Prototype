@@ -19,13 +19,19 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
     public override void onTurn()
     {
-        // Start the coroutine to find the path
+        destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
+
+        if (destinationTile == null) return;
+
         StartCoroutine(FindAndMove());
     }
 
     IEnumerator FindAndMove()
     {
         destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
+
+       
+
 
         Path newPath = null;
         int maxAttempts = 10;  // Safeguard to prevent infinite loops
