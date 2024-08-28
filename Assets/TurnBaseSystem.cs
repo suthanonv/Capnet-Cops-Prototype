@@ -13,18 +13,40 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public Interact PlayerMovingScript;
     public OldPathFinding EnemyPathFindingScript;
 
-    
 
 
 
+    bool onBattlePhase = true;
 
-    [SerializeField] bool StopBattlePhase = false;
+    public bool OnBattlePhase
+    {
+        get { return onBattlePhase; }
+
+        set
+        {
+            onBattlePhase = value;
+        }
+    }
+
 
 
     bool actionEnd = true;
 
     
     
+    bool IsContinueCombatPhase()
+    {
+        foreach(EntityTurnBehaviour i in turnSystems.List)
+        {
+            if(i.gameObject.GetComponent<EntityTeam>().EntityTeamSide == Team.Enemy)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     
     public Character GetHumenNearestChar(Character Enemy)
     {
@@ -53,9 +75,17 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         return Nearest;
     }
-    
-    
-    
+
+
+    public void OrderingTurn()
+    {
+        turnSystems.List.OrderByDescending(i => i.Status.Speed);
+
+    }
+
+
+
+
     public bool ActionEnd
     {
         get { return actionEnd; }
@@ -67,6 +97,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             {
                 TurnNum++;
                 TurnNum %= turnSystems.List.Count;
+
+                OnBattlePhase = IsContinueCombatPhase();
             }
         }
     }
@@ -74,26 +106,21 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     int TurnNum = 0;
 
 
-
-
-
-
-    public void OrderingTurn()
-    {
-        turnSystems.List.OrderByDescending(i => i.Status.Speed);
-      
-    }
-
-
-   
-
     private void Update()
     {
-        if(!StopBattlePhase)
+        if(OnBattlePhase)
         {
+           
             if (ActionEnd)
             {
                 ActionEnd = false;
+
+                OnBattlePhase = IsContinueCombatPhase();
+
+                if (!OnBattlePhase)
+                {
+                    return;
+                }
                 turnSystems.List[TurnNum].onTurn();
             }
         }

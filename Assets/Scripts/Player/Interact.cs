@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Interact : MonoBehaviour
 {
-    [SerializeField] bool NeedMouseInteraction = false; 
+    public bool NeedMouseInteraction = false; 
 
     #region member fields
     [SerializeField]
