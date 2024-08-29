@@ -30,6 +30,11 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     bool actionEnd = true;
 
 
+    private void Start()
+    {
+
+    }
+
 
     bool IsContinueCombatPhase()
     {
@@ -78,7 +83,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     public void OrderingTurn()
     {
-        turnSystems.List.OrderByDescending(i => i.Status.Speed);
+        turnSystems.List = turnSystems.List.OrderByDescending(i => i.Status.Speed).ToList();
 
     }
 
