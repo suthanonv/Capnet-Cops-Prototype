@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -10,7 +8,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(int Damage)
     {
         Maxhealth -= Damage;
-        if(Maxhealth <= 0)
+        if (Maxhealth <= 0)
         {
             Died();
         }
@@ -19,6 +17,9 @@ public class Health : MonoBehaviour
 
     void Died()
     {
+        this.GetComponent<Character>().characterTile.occupyingCharacter = null;
+        this.GetComponent<Character>().characterTile.Occupied = false;
+
         TurnBaseSystem.instance.turnSystems.Remove(this.GetComponent<EnemyTurnBehaviour>());
         Destroy(this.gameObject);
 

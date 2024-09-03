@@ -78,7 +78,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public void OrderingTurn()
     {
         turnSystems.List = turnSystems.List.OrderByDescending(i => i.Status.Speed).ToList();
-
     }
 
 
@@ -100,12 +99,10 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 if (TurnNum > turnSystems.List.Count - 1)
                 {
                     TurnNum = 0;
+                    OrderingTurn();
                 }
 
 
-
-
-                OnBattlePhase = IsContinueCombatPhase();
 
             }
         }
@@ -118,7 +115,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         if (OnBattlePhase)
         {
-
             if (ActionEnd)
             {
                 ActionEnd = false;
