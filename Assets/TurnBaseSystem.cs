@@ -7,7 +7,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     public DelegateList<EntityTurnBehaviour> turnSystems;
 
-    public Interact PlayerMovingScript;
+    public Interact PlayerInteractScript;
     public OldPathFinding EnemyPathFindingScript;
 
 
@@ -28,12 +28,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
 
     bool actionEnd = true;
-
-
-    private void Start()
-    {
-
-    }
 
 
     bool IsContinueCombatPhase()
@@ -100,9 +94,19 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             if (actionEnd)
             {
                 TurnNum++;
-                TurnNum %= turnSystems.List.Count;
+
+
+
+                if (TurnNum > turnSystems.List.Count - 1)
+                {
+                    TurnNum = 0;
+                }
+
+
+
 
                 OnBattlePhase = IsContinueCombatPhase();
+
             }
         }
     }

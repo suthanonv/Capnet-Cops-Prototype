@@ -44,79 +44,120 @@ public class Character : MonoBehaviour
     {
         CanAttack = true;
 
+        EntityStat Stat = this.GetComponent<EntityTurnBehaviour>().Status;
 
 
         const float MIN_DISTANCE = 0.05f;
         const float TERRAIN_PENALTY = 0.5f;
 
-        Path moveingPath = new Path();
         int pathLength = path.tiles.Length;
-        int moveLimit = movedata.MaxMove + 1; ;
+        Path movingPath = new Path();
+        int totalTiles = path.tiles.Length;
+        int moveLimit = Stat.AvalibleMoveStep + 1;
 
         // Determine if the destination has an enemy character
-        bool destinationOccupied = path.tiles[path.tiles.Length - 1].occupyingCharacter != null;
+        bool destinationOccupied = totalTiles > 0 && path.tiles[totalTiles - 1].occupyingCharacter != null;
 
         // Calculate required movement to reach attack range
-        int requiredSteps = Mathf.Max(0, pathLength - movedata.AttackRange);
+        int requiredSteps = Mathf.Max(0, totalTiles - movedata.AttackRange);
 
+        // Adjust the path length based on whether the destination is occupied
         if (destinationOccupied)
         {
-            // Case 1: Destination has an enemy character, calculate the number of steps required to reach attack range
-
+            // Case 1: Destination has an enemy character
             pathLength = Mathf.Min(requiredSteps, moveLimit);
         }
         else
         {
-            // Case 2: Destination is not occupied, move up to movement limit or to attack range
+            // Case 2: Destination is not occupied
             pathLength = Mathf.Min(moveLimit, requiredSteps + movedata.AttackRange);
         }
 
+        // Ensure we don't exceed the length of the tiles array
+        pathLength = Mathf.Min(pathLength, totalTiles);
+
+
+
         // Copy the appropriate number of steps into the moving path
-        moveingPath.tiles = new Tile[pathLength];
-        Array.Copy(path.tiles, moveingPath.tiles, pathLength);
+        movingPath.tiles = new Tile[pathLength];
+        Array.Copy(path.tiles, movingPath.tiles, pathLength);
 
         int currentStep = 0;
-        Tile currentTile = moveingPath.tiles[0];
+
+
+        if (movingPath.tiles.Length <= 0)
+        {
+
+            if (destinationOccupied)
+            {
+                // Attack if the final tile is within attack range and has an enemy character
+                var finalCharacter = path.tiles[totalTiles - 1].occupyingCharacter;
+                if (finalCharacter != null && finalCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
+                {
+                    Attack(finalCharacter.GetComponent<Health>());
+                }
+            }
+
+            // Finalize position at the end of the movement
+            FinalizePosition(path.tiles[0]);
+            this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
+
+            yield break;
+        }
+
+
+        Tile currentTile = movingPath.tiles[currentStep];
+
         float animationTime = 0f;
 
-        while (currentStep < moveingPath.tiles.Length)
+        while (currentStep < movingPath.tiles.Length)
         {
             yield return null;
 
-            Vector3 nextTilePosition = moveingPath.tiles[currentStep].transform.position;
+            Vector3 nextTilePosition = movingPath.tiles[currentStep].transform.position;
 
-            float movementTime = animationTime / (movedata.MoveSpeed + moveingPath.tiles[currentStep].terrainCost * TERRAIN_PENALTY);
+            float movementTime = animationTime / (movedata.MoveSpeed + movingPath.tiles[currentStep].terrainCost * TERRAIN_PENALTY);
             MoveAndRotate(currentTile.transform.position, nextTilePosition, movementTime);
             animationTime += Time.deltaTime;
 
             if (Vector3.Distance(transform.position, nextTilePosition) > MIN_DISTANCE)
                 continue;
 
-            // Min dist has been reached, look to next step in path
-            currentTile = moveingPath.tiles[currentStep];
+            if (currentStep != 0)
+            {
+                this.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep -= 1;
+            }
+            currentTile = movingPath.tiles[currentStep];
             currentStep++;
             animationTime = 0f;
         }
 
-        TurnBaseSystem.instance.ActionEnd = true;
 
         if (destinationOccupied)
         {
             // Attack if the final tile is within attack range and has an enemy character
-            if (path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
+            var finalCharacter = path.tiles[totalTiles - 1].occupyingCharacter;
+            if (finalCharacter != null && finalCharacter.GetComponent<EntityTeam>().EntityTeamSide != this.GetComponent<EntityTeam>().EntityTeamSide)
             {
-                Attack(path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<Health>());
+                Attack(finalCharacter.GetComponent<Health>());
             }
         }
 
-        FinalizePosition(moveingPath.tiles[moveingPath.tiles.Length - 1]);
+        // Finalize position at the end of the movement
+        FinalizePosition(movingPath.tiles[movingPath.tiles.Length - 1]);
+        this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
+
     }
+
+
 
     bool CanAttack = false;
     public void Attack(Health target)
     {
+
         if (CanAttack)
         {
+            this.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
             CanAttack = false;
             target.TakeDamage(50);
         }

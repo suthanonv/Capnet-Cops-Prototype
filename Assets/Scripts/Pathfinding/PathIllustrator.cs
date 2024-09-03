@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathIllustrator : MonoBehaviour
@@ -16,7 +13,7 @@ public class PathIllustrator : MonoBehaviour
         line = GetComponent<LineRenderer>();
     }
 
-    public void IllustratePath(Path path , CharacterMoveData moveData)
+    public void IllustratePath(Path path, EntityStat moveData)
     {
         line.positionCount = path.tiles.Length;
 
@@ -36,22 +33,22 @@ public class PathIllustrator : MonoBehaviour
         int loopCount = path.tiles.Length;
 
 
-        
 
-        if (path.tiles.Length > moveData.MaxMove)
+
+        if (path.tiles.Length > moveData.AvalibleMoveStep)
         {
-            if(path.tiles[path.tiles.Length - 1].occupyingCharacter == null)
+            if (path.tiles[path.tiles.Length - 1].occupyingCharacter == null)
             {
-                loopCount = moveData.MaxMove+1;
+                loopCount = moveData.AvalibleMoveStep + 1;
             }
             else if (path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
             {
-              loopCount = moveData.MaxMove+1;
+                loopCount = moveData.AvalibleMoveStep + 1;
             }
-          
+
         }
 
-    
+
 
 
         for (int i = 0; i < loopCount; i++)
@@ -59,17 +56,17 @@ public class PathIllustrator : MonoBehaviour
             path.tiles[i].Highlight();
 
             // Set the position for the LineRenderer
-          //  Transform tileTransform = path.tiles[i].transform;
-           // line.SetPosition(i, tileTransform.position.With(y: tileTransform.position.y + LineHeightOffset));
+            //  Transform tileTransform = path.tiles[i].transform;
+            // line.SetPosition(i, tileTransform.position.With(y: tileTransform.position.y + LineHeightOffset));
         }
     }
 
 
     public void ClearPaht()
     {
-        if(previousPath != null)
+        if (previousPath != null)
         {
-            foreach(Tile tile in previousPath.tiles)
+            foreach (Tile tile in previousPath.tiles)
             {
                 tile.ClearHighlight();
             }
@@ -79,5 +76,5 @@ public class PathIllustrator : MonoBehaviour
 
     }
 
-  
+
 }

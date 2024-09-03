@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyTurnBehaviour : EntityTurnBehaviour
@@ -10,7 +9,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
     private void Start()
     {
-    
+
         enemyChar = GetComponent<Character>();
 
         // Register this entity's turn behavior with the TurnBaseSystem
@@ -19,6 +18,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
     public override void onTurn()
     {
+        base.onTurn();
         destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
 
         if (destinationTile == null) return;
@@ -30,7 +30,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
     {
         destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
 
-       
+
 
 
         Path newPath = null;
@@ -71,5 +71,10 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
         // Return true if a valid path is found, false otherwise
         return path != null;
+    }
+
+    public override void OnActionEnd()
+    {
+        TurnBaseSystem.instance.ActionEnd = true;
     }
 }

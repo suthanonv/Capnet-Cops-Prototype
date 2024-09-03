@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.TextCore.Text;
-
 public class SampleTroopTurn : EntityTurnBehaviour
 {
     Character character;
@@ -12,22 +6,44 @@ public class SampleTroopTurn : EntityTurnBehaviour
     {
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.turnSystems.Add(this);
-   
+
     }
 
     public override void onTurn()
     {
-        Invoke("Delay", 0.1f);
+        base.onTurn();
+        PlayerActionUI.instance.TroopsStat = Status;
+        SelectingCharacter();
     }
 
 
-   void Delay()
+    void SelectingCharacter()
     {
-        TurnBaseSystem.instance.PlayerMovingScript.SelectCharacter(character);
+        PlayerActionUI.instance.EnableUI = true;
+        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+        TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character);
+
     }
-    
+
 
     public override void DoingAction(int TypeOfAction)
     {
+
+    }
+
+    public override void OnActionEnd()
+    {
+
+        if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+        {
+            SelectingCharacter();
+        }
+        else
+        {
+            PlayerActionUI.instance.TroopsStat = null;
+            PlayerActionUI.instance.EnableUI = false;
+            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+            TurnBaseSystem.instance.ActionEnd = true;
+        }
     }
 }

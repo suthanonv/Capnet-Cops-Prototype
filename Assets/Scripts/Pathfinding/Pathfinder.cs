@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(PathIllustrator))]
 public class Pathfinder : MonoBehaviour
@@ -18,7 +17,7 @@ public class Pathfinder : MonoBehaviour
             illustrator = GetComponent<PathIllustrator>();
     }
 
-    public Path FindPath(Tile origin, Tile destination, CharacterMoveData moveData, EntityTeam teamOfEntity)
+    public Path FindPath(Tile origin, Tile destination, EntityStat MoveStat, EntityTeam teamOfEntity, bool IsAttacking)
     {
         List<Tile> openSet = new List<Tile>();
         List<Tile> closedSet = new List<Tile>();
@@ -41,14 +40,14 @@ public class Pathfinder : MonoBehaviour
             if (currentTile == destination)
             {
                 List<Tile> path = RetracePath(destination, origin);
-                if (path.Count <= moveData.MaxMove  + moveData.AttackRange+ 1)
+                if (path.Count <= MoveStat.AvalibleMoveStep + MoveStat.moveData.AttackRange + 1)
                 {
-                    return PathBetween(destination, origin, moveData);
+                    return PathBetween(destination, origin, MoveStat);
                 }
                 return null;
             }
 
-            foreach (Tile neighbor in NeighborTiles(currentTile, teamOfEntity, destination, false))
+            foreach (Tile neighbor in NeighborTiles(currentTile, teamOfEntity, destination, false, IsAttacking))
             {
                 if (closedSet.Contains(neighbor)) continue;
 
@@ -84,7 +83,7 @@ public class Pathfinder : MonoBehaviour
         return path;
     }
 
-    public List<Tile> NeighborTiles(Tile origin, EntityTeam typeOfEntity, Tile destination, bool JustShowRange)
+    public List<Tile> NeighborTiles(Tile origin, EntityTeam typeOfEntity, Tile destination, bool JustShowRange, bool isAttacking)
     {
         const float HEXAGONAL_OFFSET = 1.75f;
         List<Tile> tiles = new List<Tile>();
@@ -103,10 +102,19 @@ public class Pathfinder : MonoBehaviour
                 Tile hitTile = hit.transform.GetComponent<Tile>();
                 if (hitTile != null)
                 {
-                    // Allow moving to the destination even if it's occupied
-                    if (!hitTile.Occupied || hitTile == destination || JustShowRange)
+                    if (isAttacking)
                     {
-                        tiles.Add(hitTile);
+                        if (!hitTile.Occupied || hitTile == destination || JustShowRange)
+                        {
+                            tiles.Add(hitTile);
+                        }
+                    }
+                    else
+                    {
+                        if (!hitTile.Occupied)
+                        {
+                            tiles.Add(hitTile);
+                        }
                     }
                 }
             }
@@ -121,14 +129,14 @@ public class Pathfinder : MonoBehaviour
         return tiles;
     }
 
-    public Path PathBetween(Tile dest, Tile source, CharacterMoveData moveData)
+    public Path PathBetween(Tile dest, Tile source, EntityStat MoveStat)
     {
-        Path path = MakePath(dest, source, moveData);
-        illustrator.IllustratePath(path , moveData);
+        Path path = MakePath(dest, source, MoveStat);
+        illustrator.IllustratePath(path, MoveStat);
         return path;
     }
 
-    private Path MakePath(Tile destination, Tile origin, CharacterMoveData moveData)
+    private Path MakePath(Tile destination, Tile origin, EntityStat MoveStat)
     {
         List<Tile> tiles = new List<Tile>();
         Tile current = destination;
@@ -145,7 +153,7 @@ public class Pathfinder : MonoBehaviour
         tiles.Reverse();
 
         // Ensure the path length is limited by MaxMove
-        tiles = tiles.Take(moveData.MaxMove  + moveData.AttackRange+ 1).ToList();
+        tiles = tiles.Take(MoveStat.AvalibleMoveStep + MoveStat.moveData.AttackRange + 1).ToList();
 
         Path path = new Path();
         path.tiles = tiles.ToArray();

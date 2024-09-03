@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ public class ShowMoveingRange : MonoBehaviour
             pathfinder = GameObject.Find("Pathfinder").GetComponent<Pathfinder>();
     }
 
-    public void ShowCharacterMoveRange(Tile centerTile, CharacterMoveData moveData, EntityTeam entityTeam)
+    public void ShowCharacterMoveRange(Tile centerTile, EntityStat moveData, EntityTeam entityTeam)
     {
         // If the center tile is the same as before, do nothing
         if (previousCenter == centerTile) return;
@@ -36,10 +35,10 @@ public class ShowMoveingRange : MonoBehaviour
 
 
         // Calculate the movement range
-        HashSet<Tile> moveRange = CalculatePathfindingRange(centerTile, moveData.MaxMove, entityTeam);
+        HashSet<Tile> moveRange = CalculatePathfindingRange(centerTile, moveData.AvalibleMoveStep, entityTeam);
 
         // Calculate the attack range based on the movement range
-        HashSet<Tile> attackRange = CalculateAttackRange(moveRange, moveData.AttackRange, entityTeam);
+        HashSet<Tile> attackRange = CalculateAttackRange(moveRange, moveData.moveData.AttackRange, entityTeam);
 
 
 
@@ -54,19 +53,19 @@ public class ShowMoveingRange : MonoBehaviour
 
             if (tile.occupyingCharacter != null)
             {
-               
+
 
                 if (tile.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
                     if ((teamCheck.EntityTeamSide == Team.Enemy))
                     {
-                        tile.ShowRangeVisual = true ;
+                        tile.ShowRangeVisual = true;
                     }
                 }
 
-               
+
             }
-          
+
         }
 
 
@@ -78,9 +77,9 @@ public class ShowMoveingRange : MonoBehaviour
 
             if (tile.occupyingCharacter != null)
             {
-                if(tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
+                if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
-                    if(teamCheck.EntityTeamSide == Team.Enemy)
+                    if (teamCheck.EntityTeamSide == Team.Enemy)
                     {
                         tile.ShowRangeVisual = true;
                     }
@@ -114,7 +113,7 @@ public class ShowMoveingRange : MonoBehaviour
             for (int j = 0; j < count; j++)
             {
                 Tile tile = tilesToProcess.Dequeue();
-                List<Tile> neighborTiles = pathfinder.NeighborTiles(tile, entityTeam, centerTile, true);
+                List<Tile> neighborTiles = pathfinder.NeighborTiles(tile, entityTeam, centerTile, true, false);
 
                 foreach (Tile neighbor in neighborTiles)
                 {
@@ -149,7 +148,7 @@ public class ShowMoveingRange : MonoBehaviour
             for (int j = 0; j < count; j++)
             {
                 Tile tile = tilesToProcess.Dequeue();
-                List<Tile> neighborTiles = pathfinder.NeighborTiles(tile, entityTeam, tile, true);
+                List<Tile> neighborTiles = pathfinder.NeighborTiles(tile, entityTeam, tile, true, true);
 
                 foreach (Tile neighbor in neighborTiles)
                 {

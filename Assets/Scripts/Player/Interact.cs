@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Interact : MonoBehaviour
 {
-    public bool NeedMouseInteraction = false; 
+    public bool NeedMouseInteraction = false;
 
     #region member fields
     [SerializeField]
@@ -18,12 +18,23 @@ public class Interact : MonoBehaviour
 
     Camera mainCam;
     Tile currentTile;
-    Character selectedCharacter;
+
+    Character CharacterDebug;
+    public Character selectedCharacter
+    {
+        get { return CharacterDebug; }
+        set
+        {
+            CharacterDebug = value;
+
+
+        }
+    }
     Pathfinder pathfinder;
     #endregion
 
 
-
+    public bool Attacking { get; set; }
 
     private void Start()
     {
@@ -60,9 +71,9 @@ public class Interact : MonoBehaviour
         }
         else
         {
-           
-                NavigateToTile();
-            
+
+            NavigateToTile();
+
         }
     }
 
@@ -72,7 +83,6 @@ public class Interact : MonoBehaviour
 
 
 
-    Character PreviosCharacter = null;
 
     private void InspectCharacter()
     {
@@ -96,7 +106,7 @@ public class Interact : MonoBehaviour
 
     private void Clear()
     {
-        if (currentTile == null  || currentTile.Occupied == false)
+        if (currentTile == null || currentTile.Occupied == false)
             return;
 
         //currentTile.ModifyCost(currentTile.terrainCost-1);//Reverses to previous cost and color after being highlighted
@@ -106,20 +116,20 @@ public class Interact : MonoBehaviour
 
     public void SelectCharacter(Character charecter)
     {
-        if(charecter != PreviosCharacter)
-        {
-            PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
-
-            pathDraw.ClearPaht();
-
-            ShowMoveingRange.instance.CloseMovingRangeVisual();
 
 
-        }
-        
+        PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
+
+        pathDraw.ClearPaht();
+
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+
+
+
+
         selectedCharacter = charecter;
 
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.movedata, selectedCharacter.GetComponent<EntityTeam>());
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
         GetComponent<AudioSource>().PlayOneShot(pop);
     }
 
@@ -128,7 +138,7 @@ public class Interact : MonoBehaviour
         if (selectedCharacter == null || selectedCharacter.Moving == true)
             return;
 
-        if (RetrievePath(out Path newPath ))
+        if (RetrievePath(out Path newPath))
         {
             if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
             {
@@ -136,35 +146,24 @@ public class Interact : MonoBehaviour
                 GetComponent<AudioSource>().PlayOneShot(click);
 
                 selectedCharacter.StartMove(newPath);
-                selectedCharacter = null;
-            }
-
-            if(Input.GetMouseButton(1))
-            {
-                selectedCharacter = null;
-
-
-                PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
-
-                pathDraw.ClearPaht();
-
-                ShowMoveingRange.instance.CloseMovingRangeVisual();
-
-
 
             }
+
+
         }
     }
 
+
+
     bool RetrievePath(out Path path)
     {
-      
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.movedata, selectedCharacter.GetComponent<EntityTeam>());
-        path = pathfinder.FindPath(selectedCharacter.characterTile, currentTile , selectedCharacter.movedata , selectedCharacter.GetComponent<EntityTeam>());
+
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+        path = pathfinder.FindPath(selectedCharacter.characterTile, currentTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>(), Attacking);
 
 
 
-        if (path == null )
+        if (path == null)
             return false;
 
         //Debug only
