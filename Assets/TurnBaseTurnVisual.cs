@@ -33,7 +33,7 @@ public class TurnBaseTurnVisual : MonoBehaviour
 
     IEnumerator WaitFinishAddComponentInList(List<EntityTurnBehaviour> AllEntity)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
 
 
         for (int LoopCount = 0; LoopCount < ImageLimitInVisual; LoopCount++)
