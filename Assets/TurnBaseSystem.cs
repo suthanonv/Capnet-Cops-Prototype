@@ -102,7 +102,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 if (TurnNum > turnSystems.List.Count - 1)
                 {
                     TurnNum = 0;
-                    OrderingTurn();
+                    // OrderingTurn();
                 }
             }
         }
