@@ -21,7 +21,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         base.onTurn();
         destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
 
-        if (destinationTile == null) return;
+        if (destinationTile == null) OnActionEnd();
 
         StartCoroutine(FindAndMove());
     }

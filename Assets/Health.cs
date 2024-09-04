@@ -3,7 +3,12 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int Maxhealth;
+    EnemyTurnBehaviour turnBehaviour;
 
+    private void Start()
+    {
+        turnBehaviour = this.GetComponent<EnemyTurnBehaviour>();
+    }
 
     public void TakeDamage(int Damage)
     {
@@ -17,12 +22,20 @@ public class Health : MonoBehaviour
 
     void Died()
     {
+
+
         this.GetComponent<Character>().characterTile.occupyingCharacter = null;
         this.GetComponent<Character>().characterTile.Occupied = false;
 
-        TurnBaseSystem.instance.turnSystems.Remove(this.GetComponent<EnemyTurnBehaviour>());
         TurnBaseTurnVisual.Instance.RemoveImageFromTurnVisual(this.gameObject.GetComponent<EntityTurnBehaviour>());
+
         Destroy(this.gameObject);
 
+
+        TurnBaseSystem.instance.turnSystems.Remove(turnBehaviour);
+
+
     }
+
+
 }

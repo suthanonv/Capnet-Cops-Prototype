@@ -129,6 +129,8 @@ public class Interact : MonoBehaviour
 
         selectedCharacter = charecter;
 
+        if (charecter == null) TurnBaseSystem.instance.ActionEnd = true;
+
         ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
         GetComponent<AudioSource>().PlayOneShot(pop);
     }

@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
+
 public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 {
 
@@ -39,7 +41,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         foreach (EntityTurnBehaviour i in turnSystems.List)
         {
-            if (i.gameObject.GetComponent<EntityTeam>().EntityTeamSide == Team.Enemy)
+            if (i != null && i.gameObject.GetComponent<EntityTeam>().EntityTeamSide == Team.Enemy)
             {
                 return true;
             }
@@ -58,7 +60,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         foreach (EntityTurnBehaviour i in turnSystems.List)
         {
-            if (i.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+            if (i != null && i.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
             {
                 if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
                 {
@@ -91,6 +93,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         get { return actionEnd; }
         set
         {
+
             actionEnd = value;
 
             if (actionEnd)
@@ -98,6 +101,9 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 TurnNum++;
 
                 TurnBaseTurnVisual.Instance.UpdateTurnVisual();
+
+                turnSystems.List.RemoveAll(item => item == null);
+
 
                 if (TurnNum > turnSystems.List.Count - 1)
                 {
@@ -109,6 +115,13 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     }
 
     int TurnNum = 0;
+
+
+    IEnumerator NextActionDelay(bool value)
+    {
+        yield return new WaitForSeconds(0.1f);
+        actionEnd = value;
+    }
 
 
     private void Update()
