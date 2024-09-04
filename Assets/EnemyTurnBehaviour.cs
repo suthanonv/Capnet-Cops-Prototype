@@ -48,6 +48,8 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
             attempts++;
             if (RetrievePath(out newPath))
             {
+                Debug.Log(this.gameObject.name + ": " + newPath.tiles[newPath.tiles.Length - 1].Occupied + ": " + newPath.tiles.Length);
+
                 enemyChar.StartMove(newPath);
                 yield break;  // Exit the coroutine once a valid path is found and movement starts
             }

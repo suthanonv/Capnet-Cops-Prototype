@@ -13,9 +13,16 @@ public class Health : MonoBehaviour
     public void TakeDamage(int Damage)
     {
         Maxhealth -= Damage;
+
+
+
         if (Maxhealth <= 0)
         {
             Died();
+        }
+        else
+        {
+            this.transform.GetChild(0).GetComponent<MaterialChange>().OnHitMeterial();
         }
     }
 

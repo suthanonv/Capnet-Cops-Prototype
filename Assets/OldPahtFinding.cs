@@ -111,7 +111,7 @@ public class OldPathFinding : MonoBehaviour
 
         // Ensure the path doesn't exceed the movement range
         List<Tile> moveRange = tiles.Take(moveData.MaxMove).ToList();
-        List<Tile> attackRange = tiles.Skip(moveData.MaxMove).Take(moveData.AttackRange).ToList();
+        List<Tile> attackRange = tiles.Skip(moveData.MaxMove).Take(moveData.AttackRange + 1).ToList();
 
         tiles = moveRange.Concat(attackRange).ToList();
 
@@ -120,6 +120,8 @@ public class OldPathFinding : MonoBehaviour
 
         Path path = new Path();
         path.tiles = tiles.ToArray();
+
+
 
         return path;
     }

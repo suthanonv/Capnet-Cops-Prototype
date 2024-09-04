@@ -58,7 +58,6 @@ public class TurnBaseTurnVisual : MonoBehaviour
 
     public void UpdateTurnVisual()
     {
-        Debug.Log("Set");
         CombatTurnImageHolder.GetChild(0).SetAsLastSibling();
     }
 
