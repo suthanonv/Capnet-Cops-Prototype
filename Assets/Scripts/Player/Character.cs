@@ -100,6 +100,7 @@ public class Character : MonoBehaviour
 
             // Finalize position at the end of the movement
             FinalizePosition(path.tiles[0]);
+
             this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
 
             yield break;

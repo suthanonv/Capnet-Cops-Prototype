@@ -30,6 +30,9 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     bool actionEnd = true;
 
 
+
+
+
     bool IsContinueCombatPhase()
     {
         if (!CanEndPahse) return true;
@@ -94,16 +97,13 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             {
                 TurnNum++;
 
-
+                TurnBaseTurnVisual.Instance.UpdateTurnVisual();
 
                 if (TurnNum > turnSystems.List.Count - 1)
                 {
                     TurnNum = 0;
                     OrderingTurn();
                 }
-
-
-
             }
         }
     }

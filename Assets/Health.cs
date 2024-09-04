@@ -21,6 +21,7 @@ public class Health : MonoBehaviour
         this.GetComponent<Character>().characterTile.Occupied = false;
 
         TurnBaseSystem.instance.turnSystems.Remove(this.GetComponent<EnemyTurnBehaviour>());
+        TurnBaseTurnVisual.Instance.RemoveImageFromTurnVisual(this.gameObject.GetComponent<EntityTurnBehaviour>());
         Destroy(this.gameObject);
 
     }
