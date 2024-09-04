@@ -95,7 +95,7 @@ public class Character : MonoBehaviour
 
         if (movingPath.tiles.Length <= 0)
         {
-
+            FinalizePosition(path.tiles[0]);
             if (destinationOccupied)
             {
                 // Attack if the final tile is within attack range and has an enemy character
@@ -104,12 +104,14 @@ public class Character : MonoBehaviour
                 {
                     Attack(finalCharacter.GetComponent<Health>());
                 }
+                else
+                {
+                    this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
+                }
             }
 
             // Finalize position at the end of the movement
-            FinalizePosition(path.tiles[0]);
 
-            this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
 
             yield break;
         }
@@ -144,6 +146,7 @@ public class Character : MonoBehaviour
 
         anim.SetBool("Walking", false);
 
+        FinalizePosition(movingPath.tiles[movingPath.tiles.Length - 1]);
 
         if (destinationOccupied)
         {
@@ -153,11 +156,20 @@ public class Character : MonoBehaviour
             {
                 Attack(finalCharacter.GetComponent<Health>());
             }
+            else
+            {
+
+                {
+                    this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
+                }
+            }
+        }
+        else
+        {
+            this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
         }
 
         // Finalize position at the end of the movement
-        FinalizePosition(movingPath.tiles[movingPath.tiles.Length - 1]);
-        this.GetComponent<EntityTurnBehaviour>().OnActionEnd();
 
     }
 
@@ -169,10 +181,14 @@ public class Character : MonoBehaviour
 
         if (CanAttack)
         {
+            Vector3 origin = this.transform.position;
+            Vector3 destination = target.transform.position;
+
+            transform.rotation = Quaternion.LookRotation(origin.DirectionTo(destination).Flat(), Vector3.up);
             this.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
+            anim.gameObject.GetComponent<AnimationControll>().Target = target;
             anim.SetTrigger("Attacking");
             CanAttack = false;
-            target.TakeDamage(50);
         }
     }
 
