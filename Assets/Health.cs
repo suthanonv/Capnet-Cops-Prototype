@@ -5,12 +5,12 @@ public class Health : MonoBehaviour
     public int Maxhealth;
     EnemyTurnBehaviour turnBehaviour;
 
-    private void Start()
+    public virtual void Start()
     {
         turnBehaviour = this.GetComponent<EnemyTurnBehaviour>();
     }
 
-    public void TakeDamage(int Damage)
+    public virtual void TakeDamage(int Damage)
     {
         Maxhealth -= Damage;
 

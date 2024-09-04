@@ -30,16 +30,13 @@ public class Tile : MonoBehaviour
         {
             isinrange = value;
 
-            if (isinrange)
+            if (isinrange && occupyingCharacter != null)
             {
-                if (occupyingCharacter != null)
+                if (occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam team))
                 {
-                    if (occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam team))
+                    if (team.EntityTeamSide == Team.Enemy)
                     {
-                        if (team.EntityTeamSide == Team.Enemy)
-                        {
-                            SetColor(Color.red);
-                        }
+                        SetColor(Color.red);
                     }
                 }
             }
