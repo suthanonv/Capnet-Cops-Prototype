@@ -14,10 +14,18 @@ public class Character : MonoBehaviour
     #endregion
 
     public bool IsObstacle;
+    Animator anim;
+
+
 
     private void Awake()
     {
         FindTileAtStart();
+    }
+
+    private void Start()
+    {
+        anim = this.transform.GetChild(0).GetComponent<Animator>();
     }
 
     /// <summary>
@@ -113,6 +121,7 @@ public class Character : MonoBehaviour
 
         while (currentStep < movingPath.tiles.Length)
         {
+            anim.SetBool("Walking", true);
             yield return null;
 
             Vector3 nextTilePosition = movingPath.tiles[currentStep].transform.position;
@@ -132,6 +141,8 @@ public class Character : MonoBehaviour
             currentStep++;
             animationTime = 0f;
         }
+
+        anim.SetBool("Walking", false);
 
 
         if (destinationOccupied)
@@ -159,6 +170,7 @@ public class Character : MonoBehaviour
         if (CanAttack)
         {
             this.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
+            anim.SetTrigger("Attacking");
             CanAttack = false;
             target.TakeDamage(50);
         }

@@ -19,9 +19,14 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
     public override void onTurn()
     {
         base.onTurn();
-        destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
+        Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar);
 
-        if (destinationTile == null) OnActionEnd();
+
+        if (Human == null) OnActionEnd();
+
+        destinationTile = Human.characterTile;
+
+
 
         StartCoroutine(FindAndMove());
     }
