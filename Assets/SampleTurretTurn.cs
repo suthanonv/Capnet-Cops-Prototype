@@ -41,7 +41,6 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
         foreach (Tile tile in attackRange)
         {
-            tile.IsInAttackRange = true;
 
             if (tile.occupyingCharacter != null)
             {
