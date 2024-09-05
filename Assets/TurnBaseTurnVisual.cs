@@ -54,6 +54,12 @@ public class TurnBaseTurnVisual : MonoBehaviour
                 UI.GetComponent<TurnVisualComponent>().ObjectParent = AllEntity[Pattern];
             }
         }
+
+
+        for (int i = 0; i < TurnBaseSystem.instance.TurnNum; i++)
+        {
+            this.transform.GetChild(i).SetAsFirstSibling();
+        }
     }
 
     public void UpdateTurnVisual()

@@ -114,7 +114,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         }
     }
 
-    int TurnNum = 0;
+    public int TurnNum { get; set; } = 0;
 
 
     IEnumerator NextActionDelay(bool value)

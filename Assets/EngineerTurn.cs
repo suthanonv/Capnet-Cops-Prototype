@@ -118,11 +118,18 @@ public class EngineerTurn : EntityTurnBehaviour
         }
         else
         {
-            PlayerActionUI.instance.Troops = null;
-            PlayerActionUI.instance.EnableUI = false;
-            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
-            TurnBaseSystem.instance.ActionEnd = true;
+
+            Invoke("Delay", 0.1f);
         }
+    }
+
+
+    void Delay()
+    {
+        PlayerActionUI.instance.Troops = null;
+        PlayerActionUI.instance.EnableUI = false;
+        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+        TurnBaseSystem.instance.ActionEnd = true;
     }
 
 
