@@ -73,6 +73,7 @@ public class EngineerTurn : EntityTurnBehaviour
                 }
             }
 
+
             if (BuidlAbleTile.Contains(TurnBaseSystem.instance.PlayerInteractScript.currentTile))
             {
                 if (previsoTile != TurnBaseSystem.instance.PlayerInteractScript.currentTile)
@@ -102,6 +103,13 @@ public class EngineerTurn : EntityTurnBehaviour
                     BuildingMode = false;
                     Status.AvalibleActionPoint--;
                     OnActionEnd();
+                }
+            }
+            else
+            {
+                if (previsoTile != null)
+                {
+                    previsoTile.ClearHighlight();
                 }
             }
         }
