@@ -9,8 +9,7 @@ public class MaterialChange : MonoBehaviour
 
 
 
-    [Header("Hiting Effect")]
-    [SerializeField] float HitChageperiod;
+    float HitChageperiod = 0.125f;
 
 
 

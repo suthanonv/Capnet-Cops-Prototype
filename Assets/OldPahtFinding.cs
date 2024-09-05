@@ -115,8 +115,7 @@ public class OldPathFinding : MonoBehaviour
 
         tiles = moveRange.Concat(attackRange).ToList();
 
-        if (tiles.Count > 0)
-            Debug.Log(tiles[tiles.Count - 1].occupyingCharacter == null);
+
 
         Path path = new Path();
         path.tiles = tiles.ToArray();
