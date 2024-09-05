@@ -18,6 +18,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
     public override void onTurn()
     {
+        CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
         base.onTurn();
         Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar);
 

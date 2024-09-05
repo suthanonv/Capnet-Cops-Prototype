@@ -12,7 +12,10 @@ public class SampleTroopTurn : EntityTurnBehaviour
     public override void onTurn()
     {
         base.onTurn();
-        PlayerActionUI.instance.TroopsStat = Status;
+        CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
+        CameraBehaviouerControll.instance.LookAtTarget(null);
+
+        PlayerActionUI.instance.Troops = this;
         SelectingCharacter();
     }
 
@@ -40,10 +43,20 @@ public class SampleTroopTurn : EntityTurnBehaviour
         }
         else
         {
-            PlayerActionUI.instance.TroopsStat = null;
+            PlayerActionUI.instance.Troops = null;
             PlayerActionUI.instance.EnableUI = false;
             TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
             TurnBaseSystem.instance.ActionEnd = true;
         }
+    }
+
+    public override void AttackingButton()
+    {
+        TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+    }
+
+    public override void WalkingButton()
+    {
+        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
     }
 }

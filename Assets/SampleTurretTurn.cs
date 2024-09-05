@@ -30,7 +30,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
     public override void onTurn()
     {
-
+        bool Attacking = false;
         Debug.Log("Start Turn");
 
         HashSet<Tile> moveRange = CalculatePathfindingRange(Char.characterTile, turnBehaviour.Status.AvalibleMoveStep, this.GetComponent<EntityTeam>());
@@ -50,15 +50,22 @@ public class SampleTurretTurn : EntityTurnBehaviour
                 {
                     if ((teamCheck.EntityTeamSide == Team.Enemy))
                     {
-                        animC.Target = tile.occupyingCharacter.GetComponent<EnemyHealth>();
+                        CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
 
+
+                        animC.Target = tile.occupyingCharacter.GetComponent<EnemyHealth>();
+                        transform.rotation = Quaternion.LookRotation(Char.characterTile.transform.position.DirectionTo(tile.transform.position).Flat(), Vector3.up);
+                        Attacking = true;
                         anim.SetTrigger("Attacking");
                         break;
                     }
                 }
             }
         }
-
+        if (!Attacking)
+        {
+            OnActionEnd();
+        }
 
     }
     public override void OnActionEnd()

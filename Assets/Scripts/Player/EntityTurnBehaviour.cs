@@ -19,4 +19,17 @@ public class EntityTurnBehaviour : MonoBehaviour
     {
 
     }
+
+    public virtual void WalkingButton()
+    {
+
+    }
+
+    public virtual void AttackingButton()
+    {
+
+    }
+
+
+
 }

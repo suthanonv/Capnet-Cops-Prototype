@@ -17,7 +17,7 @@ public class Interact : MonoBehaviour
     Path Lastpath;
 
     Camera mainCam;
-    Tile currentTile;
+    public Tile currentTile { get; set; }
 
     Character CharacterDebug;
     public Character selectedCharacter
@@ -25,8 +25,16 @@ public class Interact : MonoBehaviour
         get { return CharacterDebug; }
         set
         {
-            CharacterDebug = value;
+            if (CharacterDebug != null)
+            {
+                PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
+                pathDraw.ClearPaht();
+
+                ShowMoveingRange.instance.CloseMovingRangeVisual();
+            }
+
+            CharacterDebug = value;
 
         }
     }

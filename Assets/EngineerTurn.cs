@@ -1,0 +1,136 @@
+using System.Collections.Generic;
+using UnityEngine;
+public class EngineerTurn : EntityTurnBehaviour
+{
+    Character character;
+
+    [SerializeField] int BuildingRange;
+
+
+
+    [SerializeField] GameObject Turret;
+
+    private void Start()
+    {
+        character = this.gameObject.GetComponent<Character>();
+        TurnBaseSystem.instance.turnSystems.Add(this);
+
+    }
+    public override void onTurn()
+    {
+        PlayerActionUI.instance.Troops = this;
+        CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
+        CameraBehaviouerControll.instance.LookAtTarget(null);
+
+        base.onTurn();
+        SelectingCharacter();
+
+    }
+
+
+
+    bool BuildingMode = false;
+
+    public override void WalkingButton()
+    {
+        BuildingMode = false;
+        SelectingCharacter();
+    }
+
+
+
+
+
+    public override void AttackingButton()
+    {
+        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+        showedVisual = false;
+        BuildingMode = true;
+    }
+
+
+
+
+    bool showedVisual;
+
+    Tile previsoTile;
+
+    private void Update()
+    {
+
+
+
+        if (BuildingMode)
+        {
+            HashSet<Tile> BuidlAbleTile = ShowMoveingRange.instance.CalculatePathfindingRange(character.characterTile, BuildingRange, this.GetComponent<EntityTeam>());
+
+            if (!showedVisual)
+            {
+                showedVisual = true;
+                foreach (Tile tile in BuidlAbleTile)
+                {
+                    tile.ShowRangeVisual = true;
+                }
+            }
+
+            if (BuidlAbleTile.Contains(TurnBaseSystem.instance.PlayerInteractScript.currentTile))
+            {
+                if (previsoTile != TurnBaseSystem.instance.PlayerInteractScript.currentTile)
+                {
+                    if (previsoTile != null)
+                    {
+                        previsoTile.ClearHighlight();
+                    }
+                    previsoTile = TurnBaseSystem.instance.PlayerInteractScript.currentTile;
+                    TurnBaseSystem.instance.PlayerInteractScript.currentTile.Highlight();
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    TurnBaseSystem.instance.PlayerInteractScript.currentTile.ClearHighlight();
+
+
+                    foreach (Tile tile in BuidlAbleTile)
+                    {
+                        tile.ShowRangeVisual = false;
+                    }
+
+                    Instantiate(Turret, TurnBaseSystem.instance.PlayerInteractScript.currentTile.transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+
+
+
+                    BuidlAbleTile.Clear();
+                    BuildingMode = false;
+                    Status.AvalibleActionPoint--;
+                    OnActionEnd();
+                }
+            }
+        }
+    }
+
+
+
+    public override void OnActionEnd()
+    {
+
+        if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+        {
+            SelectingCharacter();
+        }
+        else
+        {
+            PlayerActionUI.instance.Troops = null;
+            PlayerActionUI.instance.EnableUI = false;
+            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+            TurnBaseSystem.instance.ActionEnd = true;
+        }
+    }
+
+
+    void SelectingCharacter()
+    {
+        PlayerActionUI.instance.EnableUI = true;
+        PlayerActionUI.instance.Troops = this;
+        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+        TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character);
+    }
+}

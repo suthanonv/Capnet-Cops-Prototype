@@ -1,5 +1,17 @@
 using TMPro;
 using UnityEngine;
+
+public enum PlayerActionUiButton
+{
+    Walk = 0,
+    Attack = 1,
+    Build = 2,
+    SKill = 3,
+    EndTurn = 4
+
+
+}
+
 public class PlayerActionUI : MonoBehaviour
 {
     bool enable = false;
@@ -27,7 +39,7 @@ public class PlayerActionUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI ApText;
 
 
-    public EntityStat TroopsStat { get; set; }
+    public EntityTurnBehaviour Troops { get; set; }
 
 
     private void Awake()
@@ -38,10 +50,10 @@ public class PlayerActionUI : MonoBehaviour
 
     private void Update()
     {
-        if (TroopsStat != null)
+        if (Troops != null)
         {
-            MpText.text = "MP: " + TroopsStat.AvalibleMoveStep.ToString();
-            ApText.text = "AP: " + TroopsStat.AvalibleActionPoint.ToString();
+            MpText.text = "MP: " + Troops.Status.AvalibleMoveStep.ToString();
+            ApText.text = "AP: " + Troops.Status.AvalibleActionPoint.ToString();
 
 
         }
@@ -49,11 +61,11 @@ public class PlayerActionUI : MonoBehaviour
     }
     public void WalkButton()
     {
-        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+        Troops.WalkingButton();
     }
     public void AttackButton()
     {
-        TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+        Troops.AttackingButton();
     }
 
 

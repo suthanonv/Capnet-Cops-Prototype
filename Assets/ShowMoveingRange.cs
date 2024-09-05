@@ -97,7 +97,7 @@ public class ShowMoveingRange : MonoBehaviour
 
     }
 
-    private HashSet<Tile> CalculatePathfindingRange(Tile centerTile, int range, EntityTeam entityTeam)
+    public HashSet<Tile> CalculatePathfindingRange(Tile centerTile, int range, EntityTeam entityTeam)
     {
         HashSet<Tile> tilesInRange = new HashSet<Tile>();
         Queue<Tile> tilesToProcess = new Queue<Tile>();
@@ -130,7 +130,7 @@ public class ShowMoveingRange : MonoBehaviour
         return tilesInRange;
     }
 
-    private HashSet<Tile> CalculateAttackRange(HashSet<Tile> moveRange, int attackRange, EntityTeam entityTeam)
+    public HashSet<Tile> CalculateAttackRange(HashSet<Tile> moveRange, int attackRange, EntityTeam entityTeam)
     {
         HashSet<Tile> tilesInRange = new HashSet<Tile>();
         Queue<Tile> tilesToProcess = new Queue<Tile>();
