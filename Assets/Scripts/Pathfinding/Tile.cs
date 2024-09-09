@@ -18,6 +18,8 @@ public class Tile : MonoBehaviour
     public bool Occupied { get; set; } = false;
 
 
+    int tileHight;
+    public int TileHight { get { return tileHight; } set { tileHight = value; } }
 
     bool isinrange = false;
     public bool IsInAttackRange
