@@ -70,6 +70,18 @@ public class ShowMoveingRange : MonoBehaviour
 
 
         currentTileRange = moveRange;
+
+
+
+
+
+
+
+        if (entityTeam.gameObject.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turnStatus))
+        {
+            if (turnStatus.Status.AvalibleActionPoint <= 0) return;
+        }
+
         foreach (Tile tile in moveRange)
         {
 

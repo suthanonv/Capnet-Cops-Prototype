@@ -48,7 +48,7 @@ public class Character : MonoBehaviour
         Debug.Log("Unable to find a start position");
     }
 
-    IEnumerator MoveAlongPath(Path path)
+    protected IEnumerator MoveAlongPath(Path path)
     {
         CanAttack = true;
 
@@ -192,7 +192,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void StartMove(Path _path)
+    public virtual void StartMove(Path _path)
     {
         if (IsObstacle) return;
         ShowMoveingRange.instance.CloseMovingRangeVisual();

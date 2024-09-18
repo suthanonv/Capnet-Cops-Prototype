@@ -41,6 +41,16 @@ public class EntityStat
     public void ResetStatus()
     {
         AvalibleActionPoint = ActionPoint;
-        AvalibleMoveStep = moveData.MaxMove;
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+
+
+            AvalibleMoveStep = moveData.MaxMove;
+        }
+        else
+        {
+            AvalibleMoveStep = 99;
+
+        }
     }
 }

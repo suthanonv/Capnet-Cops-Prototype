@@ -15,7 +15,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     bool CanEndPahse = false;
 
-    bool onBattlePhase = true;
+    bool onBattlePhase = false;
 
     public bool OnBattlePhase
     {
@@ -128,6 +128,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         if (OnBattlePhase)
         {
+            PlayerInteractScript.NeedMouseInteraction = false;
             if (ActionEnd)
             {
                 ActionEnd = false;
@@ -140,6 +141,10 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 }
                 turnSystems.List[TurnNum].onTurn();
             }
+        }
+        else
+        {
+            PlayerInteractScript.NeedMouseInteraction = true;
         }
     }
 

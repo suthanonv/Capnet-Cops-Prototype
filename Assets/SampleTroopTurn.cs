@@ -52,7 +52,12 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
-        TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+        if (Status.AvalibleActionPoint > 0)
+            TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+        else
+        {
+            TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+        }
     }
 
     public override void WalkingButton()

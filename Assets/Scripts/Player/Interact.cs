@@ -104,7 +104,10 @@ public class Interact : MonoBehaviour
             currentTile.Highlight();
 
             if (Input.GetMouseButtonDown(0))
+            {
+                charrecter.gameObject.GetComponent<EntityTurnBehaviour>().onTurn();
                 SelectCharacter(charrecter);
+            }
         }
         else
         {

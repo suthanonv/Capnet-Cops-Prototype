@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public enum Team
 {
-    Human , Enemy 
+    Human, Enemy
 }
 
 public class EntityTeam : MonoBehaviour
