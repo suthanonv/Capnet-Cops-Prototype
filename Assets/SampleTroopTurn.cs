@@ -36,17 +36,23 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void OnActionEnd()
     {
-
-        if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+        if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            SelectingCharacter();
+            if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+            {
+                SelectingCharacter();
+            }
+            else
+            {
+                PlayerActionUI.instance.Troops = null;
+                PlayerActionUI.instance.EnableUI = false;
+                TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+                TurnBaseSystem.instance.ActionEnd = true;
+            }
         }
         else
         {
-            PlayerActionUI.instance.Troops = null;
-            PlayerActionUI.instance.EnableUI = false;
-            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
-            TurnBaseSystem.instance.ActionEnd = true;
+            SelectingCharacter();
         }
     }
 

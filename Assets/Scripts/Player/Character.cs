@@ -50,6 +50,7 @@ public class Character : MonoBehaviour
 
     protected IEnumerator MoveAlongPath(Path path)
     {
+
         CanAttack = true;
 
         EntityStat Stat = this.GetComponent<EntityTurnBehaviour>().Status;
@@ -194,6 +195,7 @@ public class Character : MonoBehaviour
 
     public virtual void StartMove(Path _path)
     {
+        TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
         if (IsObstacle) return;
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
@@ -209,6 +211,8 @@ public class Character : MonoBehaviour
 
     void FinalizePosition(Tile tile)
     {
+        TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
+
         transform.position = tile.transform.position;
         characterTile = tile;
         Moving = false;

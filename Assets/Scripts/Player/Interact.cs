@@ -105,7 +105,12 @@ public class Interact : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                charrecter.gameObject.GetComponent<EntityTurnBehaviour>().onTurn();
+                if (charrecter.gameObject.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn))
+                {
+                    turn.onTurn();
+                }
+
+
                 SelectCharacter(charrecter);
             }
         }
@@ -142,13 +147,17 @@ public class Interact : MonoBehaviour
 
         if (charecter == null) TurnBaseSystem.instance.ActionEnd = true;
 
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+
+        if (selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour entity))
+            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, entity.Status, selectedCharacter.GetComponent<EntityTeam>());
         GetComponent<AudioSource>().PlayOneShot(pop);
     }
 
     public void NavigateToTile()
     {
-        if (selectedCharacter == null || selectedCharacter.Moving == true)
+
+
+        if (selectedCharacter == null || selectedCharacter.Moving == true && (!selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn)))
             return;
 
         if (RetrievePath(out Path newPath))
