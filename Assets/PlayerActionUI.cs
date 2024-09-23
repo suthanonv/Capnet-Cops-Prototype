@@ -26,6 +26,18 @@ public class PlayerActionUI : MonoBehaviour
         {
             enable = value;
             PlayerActionHolder.SetActive(enable);
+            PlayerActionUiLayOut.instance.EnableUI = enable;
+            if (TurnBaseSystem.instance.OnBattlePhase)
+            {
+
+                MpText.gameObject.SetActive(enable);
+                MpText.gameObject.SetActive(enable);
+            }
+            else
+            {
+                MpText.gameObject.SetActive(false);
+                MpText.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -68,9 +80,9 @@ public class PlayerActionUI : MonoBehaviour
         Troops.AttackingButton();
     }
 
-
     public void EndPhase()
     {
+
         EnableUI = false;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.ActionEnd = true;

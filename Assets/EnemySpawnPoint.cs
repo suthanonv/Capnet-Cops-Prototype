@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 public class EnemySpawnPoint : MonoBehaviour
 {
+    public static EnemySpawnPoint Instance;
+
     [SerializeField] LayerMask TileLayer;
 
     Vector3 Size = new Vector3(0, 10, 10);
@@ -22,12 +24,23 @@ public class EnemySpawnPoint : MonoBehaviour
     EntityTeam en;
 
 
-    [SerializeField] int AmountToSpawn;
-
-
 
 
     List<GameObject> DestroyingEnemies = new List<GameObject>();
+
+
+
+
+
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
+
 
     void Start()
     {
@@ -35,31 +48,12 @@ public class EnemySpawnPoint : MonoBehaviour
         en = this.GetComponent<EntityTeam>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            foreach (GameObject i in DestroyingEnemies)
-            {
-                Destroy(i);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SpawningEnemy();
-        }
-    }
 
 
 
-    public void SpawningEnemy()
+    public void SpawningEnemy(int AmountToSpawn)
     {
         List<Tile> SpawnAbleTile = new List<Tile>();
-
-
-
-
 
         HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, EnemySpawnDistance, en);
 
@@ -93,16 +87,7 @@ public class EnemySpawnPoint : MonoBehaviour
                 }
             }
         }
-
-
-
     }
-
-
-
-
-
-
 
 
 
@@ -152,6 +137,4 @@ public class EnemySpawnPoint : MonoBehaviour
 
         return tiles;
     }
-
-
 }

@@ -149,7 +149,12 @@ public class Interact : MonoBehaviour
 
 
         if (selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour entity))
-            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, entity.Status, selectedCharacter.GetComponent<EntityTeam>());
+        {
+            if (TurnBaseSystem.instance.OnBattlePhase)
+                ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, entity.Status, selectedCharacter.GetComponent<EntityTeam>());
+
+
+        }
         GetComponent<AudioSource>().PlayOneShot(pop);
     }
 
@@ -179,9 +184,16 @@ public class Interact : MonoBehaviour
 
     bool RetrievePath(out Path path)
     {
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+        }
+
 
         ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+
         path = pathfinder.FindPath(selectedCharacter.characterTile, currentTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>(), Attacking);
+
 
 
 

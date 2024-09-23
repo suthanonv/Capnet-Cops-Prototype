@@ -138,7 +138,8 @@ public class Character : MonoBehaviour
 
             if (currentStep != 0)
             {
-                this.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep -= 1;
+                if (TurnBaseSystem.instance.OnBattlePhase) this.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep -= 1;
+                else PreparationPharse.instance.AddingTimeToCurrentTime(PreparationPharse.instance.MovementCost);
             }
             currentTile = movingPath.tiles[currentStep];
             currentStep++;
@@ -195,6 +196,8 @@ public class Character : MonoBehaviour
 
     public virtual void StartMove(Path _path)
     {
+        PlayerActionUI.instance.EnableUI = false;
+
         TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
         if (IsObstacle) return;
         ShowMoveingRange.instance.CloseMovingRangeVisual();

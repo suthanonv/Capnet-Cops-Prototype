@@ -12,7 +12,6 @@ public class SampleTurretTurn : EntityTurnBehaviour
     private void Start()
     {
 
-        TurnBaseSystem.instance.turnSystems.Add(this);
 
         if (pathfinder == null)
             pathfinder = GameObject.Find("Pathfinder").GetComponent<Pathfinder>();
@@ -30,6 +29,8 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
     public override void onTurn()
     {
+
+        return;
         bool Attacking = false;
         Debug.Log("Start Turn");
 

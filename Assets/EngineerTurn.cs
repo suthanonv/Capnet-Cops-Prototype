@@ -10,6 +10,11 @@ public class EngineerTurn : EntityTurnBehaviour
 
     [SerializeField] GameObject Turret;
 
+
+
+
+
+
     private void Start()
     {
         character = this.gameObject.GetComponent<Character>();
@@ -18,6 +23,7 @@ public class EngineerTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
+        OpenUI();
         PlayerActionUI.instance.Troops = this;
         CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
         CameraBehaviouerControll.instance.LookAtTarget(null);
@@ -25,6 +31,32 @@ public class EngineerTurn : EntityTurnBehaviour
         base.onTurn();
         SelectingCharacter();
 
+    }
+
+
+    public void OpenUI()
+    {
+        IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
+        List<PlayerActionUiButton> ButtonToUse = new List<PlayerActionUiButton>();
+
+
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            ButtonToUse.Add(PlayerActionUiButton.Walk);
+            ButtonToUse.Add(PlayerActionUiButton.Attack);
+            PlayerActionUiLayOut.instance.EditingActionButtonName("Healing");
+
+            ButtonToUse.Add(PlayerActionUiButton.EndTurn);
+        }
+        else
+        {
+            ButtonToUse.Add(PlayerActionUiButton.Walk);
+            ButtonToUse.Add(PlayerActionUiButton.Attack);
+            PlayerActionUiLayOut.instance.EditingActionButtonName("Building");
+            ButtonToUse.Add(PlayerActionUiButton.EndTurn);
+        }
+
+        PlayerActionUiLayOut.instance.ArrangementUiButton(ButtonToUse);
     }
 
 
@@ -72,8 +104,6 @@ public class EngineerTurn : EntityTurnBehaviour
                     tile.ShowRangeVisual = true;
                 }
             }
-
-
             if (BuidlAbleTile.Contains(TurnBaseSystem.instance.PlayerInteractScript.currentTile))
             {
                 if (previsoTile != TurnBaseSystem.instance.PlayerInteractScript.currentTile)
@@ -117,18 +147,40 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
+
+
+
+
+
+
+
+
+
+    bool IsPreviosBattlePhase = false;
+
+
+
     public override void OnActionEnd()
     {
 
-        if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+
+        if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            SelectingCharacter();
+            if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+            {
+                SelectingCharacter();
+            }
+            else
+            {
+
+                Invoke("Delay", 0.1f);
+            }
         }
         else
         {
-
-            Invoke("Delay", 0.1f);
+            SelectingCharacter();
         }
+
     }
 
 
@@ -143,6 +195,8 @@ public class EngineerTurn : EntityTurnBehaviour
 
     void SelectingCharacter()
     {
+        OpenUI();
+        PlayerActionUiLayOut.instance.EnableUI = true;
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUI.instance.Troops = this;
         TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
