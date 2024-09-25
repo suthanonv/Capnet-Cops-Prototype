@@ -13,7 +13,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
 
 
-
+    [SerializeField] AttackingRadius attackingRadius;
 
 
 
@@ -38,49 +38,18 @@ public class SampleTurretTurn : EntityTurnBehaviour
     public override void onTurn()
     {
 
-        return;
-        bool Attacking = false;
-        Debug.Log("Start Turn");
-
-        HashSet<Tile> moveRange = CalculatePathfindingRange(Char.characterTile, turnBehaviour.Status.AvalibleMoveStep, this.GetComponent<EntityTeam>());
-
-        // Calculate the attack range based on the movement range
-        HashSet<Tile> attackRange = CalculateAttackRange(moveRange, turnBehaviour.Status.moveData.AttackRange, this.GetComponent<EntityTeam>());
 
 
-        foreach (Tile tile in attackRange)
-        {
-
-            if (tile.occupyingCharacter != null)
-            {
+        animC.Target = attackingRadius.EnemyToAttack.GetComponent<EnemyHealth>();
+        transform.rotation = Quaternion.LookRotation(Char.characterTile.transform.position.DirectionTo(attackingRadius.EnemyToAttack.transform.position).Flat(), Vector3.up);
+        anim.SetTrigger("Attacking");
 
 
-                if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
-                {
-                    if ((teamCheck.EntityTeamSide == Team.Enemy))
-                    {
-                        CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
 
 
-                        animC.Target = tile.occupyingCharacter.GetComponent<EnemyHealth>();
-                        transform.rotation = Quaternion.LookRotation(Char.characterTile.transform.position.DirectionTo(tile.transform.position).Flat(), Vector3.up);
-                        Attacking = true;
-                        anim.SetTrigger("Attacking");
-                        break;
-                    }
-                }
-            }
-        }
-        if (!Attacking)
-        {
-            OnActionEnd();
-        }
 
     }
-    public override void OnActionEnd()
-    {
-        TurnBaseSystem.instance.ActionEnd = true;
-    }
+
 
 
     private HashSet<Tile> CalculatePathfindingRange(Tile centerTile, int range, EntityTeam entityTeam)
