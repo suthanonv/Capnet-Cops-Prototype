@@ -69,10 +69,16 @@ public class Interact : MonoBehaviour
     private void InspectTile()
     {
 
-            if (currentTile.Occupied)
-                InspectCharacter();
-            else
-                NavigateToTile();
+
+        if (currentTile.Occupied)
+        {
+            if (currentTile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamSide))
+            {
+                if (teamSide.EntityTeamSide == Team.Human)
+                    InspectCharacter();
+                else
+                    NavigateToTile();
+            }
         }
         else
             NavigateToTile();

@@ -32,10 +32,28 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         set
         {
             onBattlePhase = value;
+            if (OnBattlePhase == false)
+            {
+                PreparationPharse.instance.SetToStartTime();
+                PlayerActionUI.instance.EnableUI = false;
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+                TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+                TurnBaseSystem.instance.PlayerInteractScript.enabled = true;// make player can choosing a tile to moving
+            }
         }
     }
 
     bool actionEnd = true;
+
+
+
+
+
+
+    public void UpdateCombatPhase()
+    {
+        OnBattlePhase = isAttackPhaseEnded();
+    }
 
     bool IsContinueCombatPhase()
     {

@@ -186,6 +186,10 @@ public class EngineerTurn : EntityTurnBehaviour
                 Invoke("Delay", 0.1f);
             }
         }
+        else if (IsPreviosBattlePhase == true && !TurnBaseSystem.instance.OnBattlePhase)
+        {
+            return;
+        }
         else
         {
             SelectingCharacter();
