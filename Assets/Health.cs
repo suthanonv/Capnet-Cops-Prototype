@@ -44,6 +44,8 @@ public class Health : MonoBehaviour
         if (EntityTeam == Team.Enemy) TurnBaseSystem.instance.enemiesTurnSystems.Remove(turnBehaviour);
         else TurnBaseSystem.instance.playerTurnSystems.Remove(turnBehaviour);
 
+        TurnBaseSystem.instance.UpdateCombatPhase();
+
     }
 
 

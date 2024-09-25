@@ -41,6 +41,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
 
         animC.Target = attackingRadius.EnemyToAttack.GetComponent<EnemyHealth>();
+        if (animC.Target == null) return;
         transform.rotation = Quaternion.LookRotation(Char.characterTile.transform.position.DirectionTo(attackingRadius.EnemyToAttack.transform.position).Flat(), Vector3.up);
         anim.SetTrigger("Attacking");
 

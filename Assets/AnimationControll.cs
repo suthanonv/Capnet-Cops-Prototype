@@ -14,7 +14,8 @@ public class AnimationControll : MonoBehaviour
 
     public void Attacking()
     {
-        Target.TakeDamage(50);
+        if (Target != null)
+            Target.TakeDamage(50);
     }
 
     public void EndAction()

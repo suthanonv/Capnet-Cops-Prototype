@@ -8,8 +8,9 @@ public class TimeText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Clock clock = PreparationPharse.instance.CurrentClockTime;
 
+        Clock clock = PreparationPharse.instance.CurrentClockTime;
+        if (clock == null) return;
 
         if (clock.Hour <= 9 && clock.Min <= 9)
         {
