@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Interact : MonoBehaviour
 {
-    public bool NeedMouseInteraction = false;
 
     #region member fields
     [SerializeField]
@@ -69,8 +68,6 @@ public class Interact : MonoBehaviour
 
     private void InspectTile()
     {
-        if (NeedMouseInteraction)
-        {
 
             if (currentTile.Occupied)
                 InspectCharacter();
@@ -78,11 +75,9 @@ public class Interact : MonoBehaviour
                 NavigateToTile();
         }
         else
-        {
-
             NavigateToTile();
 
-        }
+
     }
 
 
@@ -107,11 +102,14 @@ public class Interact : MonoBehaviour
             {
                 if (charrecter.gameObject.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn))
                 {
-                    turn.onTurn();
+                    if (turn.InterActacle())
+                    {
+                        turn.onTurn();
+                    }
                 }
 
 
-                SelectCharacter(charrecter);
+                //    SelectCharacter(charrecter);
             }
         }
         else
@@ -155,6 +153,14 @@ public class Interact : MonoBehaviour
 
 
         }
+
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+        }
+
+
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
         GetComponent<AudioSource>().PlayOneShot(pop);
     }
 
@@ -167,6 +173,7 @@ public class Interact : MonoBehaviour
 
         if (RetrievePath(out Path newPath))
         {
+            DebugPath = newPath;
             if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
             {
 
@@ -180,7 +187,7 @@ public class Interact : MonoBehaviour
         }
     }
 
-
+    Path DebugPath = new Path();
 
     bool RetrievePath(out Path path)
     {

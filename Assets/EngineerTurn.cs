@@ -14,11 +14,21 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
+    public override bool InterActacle()
+    {
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0) return true;
+            else return false;
+        }
 
+
+        return true;
+    }
     private void Start()
     {
         character = this.gameObject.GetComponent<Character>();
-        TurnBaseSystem.instance.turnSystems.Add(this);
+        TurnBaseSystem.instance.playerTurnSystems.Add(this);
 
     }
     public override void onTurn()
@@ -28,7 +38,6 @@ public class EngineerTurn : EntityTurnBehaviour
         CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
         CameraBehaviouerControll.instance.LookAtTarget(null);
 
-        base.onTurn();
         SelectingCharacter();
 
     }
@@ -95,6 +104,7 @@ public class EngineerTurn : EntityTurnBehaviour
         if (BuildingMode)
         {
             HashSet<Tile> BuidlAbleTile = ShowMoveingRange.instance.CalculatePathfindingRange(character.characterTile, BuildingRange, this.GetComponent<EntityTeam>());
+            BuidlAbleTile.Remove(this.GetComponent<Character>().characterTile);
 
             if (!showedVisual)
             {

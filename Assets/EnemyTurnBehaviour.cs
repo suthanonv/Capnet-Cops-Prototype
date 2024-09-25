@@ -13,7 +13,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         enemyChar = GetComponent<Character>();
 
         // Register this entity's turn behavior with the TurnBaseSystem
-        TurnBaseSystem.instance.GetComponent<TurnBaseSystem>().turnSystems.Add(this);
+        TurnBaseSystem.instance.GetComponent<TurnBaseSystem>().enemiesTurnSystems.Add(this);
     }
 
     public override void onTurn()
@@ -49,7 +49,6 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
             attempts++;
             if (RetrievePath(out newPath))
             {
-                Debug.Log(this.gameObject.name + ": " + newPath.tiles[newPath.tiles.Length - 1].Occupied + ": " + newPath.tiles.Length);
 
                 enemyChar.StartMove(newPath);
                 yield break;  // Exit the coroutine once a valid path is found and movement starts

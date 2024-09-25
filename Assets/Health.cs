@@ -4,10 +4,12 @@ public class Health : MonoBehaviour
 {
     public int Maxhealth;
     EnemyTurnBehaviour turnBehaviour;
+    Team EntityTeam;
 
     public virtual void Start()
     {
         turnBehaviour = this.GetComponent<EnemyTurnBehaviour>();
+        EntityTeam = this.GetComponent<EntityTeam>().EntityTeamSide;
     }
 
     public virtual void TakeDamage(int Damage)
@@ -39,8 +41,8 @@ public class Health : MonoBehaviour
         Destroy(this.gameObject);
 
 
-        TurnBaseSystem.instance.turnSystems.Remove(turnBehaviour);
-
+        if (EntityTeam == Team.Enemy) TurnBaseSystem.instance.enemiesTurnSystems.Remove(turnBehaviour);
+        else TurnBaseSystem.instance.playerTurnSystems.Remove(turnBehaviour);
 
     }
 

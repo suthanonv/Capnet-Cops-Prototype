@@ -66,8 +66,6 @@ public class PlayerActionUI : MonoBehaviour
         {
             MpText.text = "MP: " + Troops.Status.AvalibleMoveStep.ToString();
             ApText.text = "AP: " + Troops.Status.AvalibleActionPoint.ToString();
-
-
         }
 
     }

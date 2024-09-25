@@ -9,6 +9,14 @@ public class SampleTurretTurn : EntityTurnBehaviour
     private AnimationControll animC;
 
     private Animator anim;
+
+
+
+
+
+
+
+
     private void Start()
     {
 

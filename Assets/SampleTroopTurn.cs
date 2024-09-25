@@ -7,13 +7,24 @@ public class SampleTroopTurn : EntityTurnBehaviour
     private void Start()
     {
         character = this.gameObject.GetComponent<Character>();
-        TurnBaseSystem.instance.turnSystems.Add(this);
+        TurnBaseSystem.instance.playerTurnSystems.Add(this);
 
     }
 
+
+    public override bool InterActacle()
+    {
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0) return true;
+            else return false;
+        }
+
+
+        return true;
+    }
     public override void onTurn()
     {
-        base.onTurn();
 
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
@@ -22,10 +33,11 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
             PlayerActionUI.instance.Troops = this;
             SelectingCharacter();
+
         }
         else
         {
-            OpenUi();
+            SelectingCharacter();
         }
     }
 
@@ -35,7 +47,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
         OpenUi();
         PlayerActionUI.instance.EnableUI = true;
         TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
-        TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character);
+        TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character); // make player can choosing a tile to moving
 
     }
 
@@ -63,11 +75,6 @@ public class SampleTroopTurn : EntityTurnBehaviour
     }
 
 
-
-    public override void DoingAction(int TypeOfAction)
-    {
-
-    }
 
     public override void OnActionEnd()
     {

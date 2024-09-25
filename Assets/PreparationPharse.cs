@@ -53,6 +53,12 @@ public class PreparationPharse : MonoBehaviour
     }
 
 
+    public void SetToAttackTime()
+    {
+        CurrentClockTime = PhaseTransitionTime;
+
+    }
+
 
 
     public void AddingTimeToCurrentTime(Clock TimeToAdd)
@@ -67,19 +73,22 @@ public class PreparationPharse : MonoBehaviour
         float PhaseTransTime = PhaseTransitionTime.Hour * 3600 + PhaseTransitionTime.Min * 60 + PhaseTransitionTime.Second;
 
 
-
-
         if (CurrenClockTimeSecond >= PhaseTransTime)
         {
             if (TurnBaseSystem.instance.OnBattlePhase == false)
             {
-                EnemyWaveSpawn.instance.CurrentWave++;
-                EnemyWaveSpawn.instance.StartEnemyWave();
-                TurnBaseSystem.instance.OnBattlePhase = true;
+                StartEnemyWave();
             }
-
-
         }
 
+    }
+
+
+    public void StartEnemyWave()
+    {
+
+        EnemyWaveSpawn.instance.CurrentWave++;
+        EnemyWaveSpawn.instance.StartEnemyWave();
+        TurnBaseSystem.instance.OnBattlePhase = true;
     }
 }

@@ -26,7 +26,7 @@ public class TurnBaseTurnVisual : MonoBehaviour
 
         StopAllCoroutines();
 
-        StartCoroutine(WaitFinishAddComponentInList(TurnBaseSystem.instance.turnSystems.List));
+        // StartCoroutine(WaitFinishAddComponentInList(TurnBaseSystem.instance.turnSystems.List));
 
     }
 
@@ -64,7 +64,7 @@ public class TurnBaseTurnVisual : MonoBehaviour
 
     public void UpdateTurnVisual()
     {
-        CombatTurnImageHolder.GetChild(0).SetAsLastSibling();
+        // CombatTurnImageHolder.GetChild(0).SetAsLastSibling();
     }
 
 
