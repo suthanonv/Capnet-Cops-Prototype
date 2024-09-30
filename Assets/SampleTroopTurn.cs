@@ -44,8 +44,10 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     void SelectingCharacter()
     {
-        OpenUi();
         PlayerActionUI.instance.EnableUI = true;
+        PlayerActionUiLayOut.instance.EnableUI = true;
+
+        OpenUi();
         TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
         TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character); // make player can choosing a tile to moving
     }
@@ -79,23 +81,19 @@ public class SampleTroopTurn : EntityTurnBehaviour
     {
 
 
-        if (TurnBaseSystem.instance.OnBattlePhase && IsPreviosBattlePhase)
+        if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            if (TurnBaseSystem.instance.OnBattlePhase == false)
-
-
-
-                if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
-                {
-                    SelectingCharacter();
-                }
-                else
-                {
-                    PlayerActionUI.instance.Troops = null;
-                    PlayerActionUI.instance.EnableUI = false;
-                    TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
-                    TurnBaseSystem.instance.ActionEnd = true;
-                }
+            if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
+            {
+                SelectingCharacter();
+            }
+            else
+            {
+                PlayerActionUI.instance.Troops = null;
+                PlayerActionUI.instance.EnableUI = false;
+                TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+                TurnBaseSystem.instance.ActionEnd = true;
+            }
         }
         else if (IsPreviosBattlePhase == true && !TurnBaseSystem.instance.OnBattlePhase)
         {

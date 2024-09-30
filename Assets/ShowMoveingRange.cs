@@ -23,6 +23,7 @@ public class ShowMoveingRange : MonoBehaviour
 
     public void ShowCharacterMoveRange(Tile centerTile, EntityStat moveData, EntityTeam entityTeam)
     {
+        Debug.Log($"Calling | {centerTile.occupyingCharacter.name} : {moveData.AvalibleMoveStep}");
         // If the center tile is the same as before, do nothing
         if (previousCenter == centerTile) return;
 
@@ -36,6 +37,9 @@ public class ShowMoveingRange : MonoBehaviour
 
         // Calculate the movement range
         HashSet<Tile> moveRange = CalculatePathfindingRange(centerTile, moveData.AvalibleMoveStep, entityTeam);
+
+
+
 
         // Calculate the attack range based on the movement range
         HashSet<Tile> attackRange = CalculateAttackRange(moveRange, moveData.moveData.AttackRange, entityTeam);

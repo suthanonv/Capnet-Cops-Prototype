@@ -155,6 +155,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 CameraBehaviouerControll.instance.LookAtTarget(null);
 
                 currentTurn = Turn.Player;
+                PlayerInteractScript.enabled = true;
+
             }
         }
         else
@@ -253,7 +255,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 else if (ActionEnd && currentTurn == Turn.Player)
                 {
                     EndPharseButton.SetActive(true);
-                    PlayerInteractScript.enabled = true;
                 }
             }
         }

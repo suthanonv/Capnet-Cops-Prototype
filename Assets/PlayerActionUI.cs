@@ -27,6 +27,9 @@ public class PlayerActionUI : MonoBehaviour
             enable = value;
             PlayerActionHolder.SetActive(enable);
             PlayerActionUiLayOut.instance.EnableUI = enable;
+
+
+
             if (TurnBaseSystem.instance.OnBattlePhase)
             {
 
