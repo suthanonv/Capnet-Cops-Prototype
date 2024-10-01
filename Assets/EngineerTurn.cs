@@ -12,7 +12,8 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
-
+    [SerializeField] private GameObject resourceManagement;
+    [SerializeField] private GameObject cost;
 
     public override bool InterActacle()
     {
@@ -29,6 +30,16 @@ public class EngineerTurn : EntityTurnBehaviour
     {
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
+        
+        if (resourceManagement == null)
+        {
+            resourceManagement = GameObject.Find("ResourceManagement");
+        }
+
+        if (cost == null)
+        {
+            cost = GameObject.Find("Cost");
+        }
 
     }
     public override void onTurn()
@@ -101,7 +112,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
-        if (BuildingMode)
+        if (BuildingMode && resourceManagement.GetComponent<ResourceManagement>().scrap >= cost.GetComponent<Cost>().turret)
         {
             HashSet<Tile> BuidlAbleTile = ShowMoveingRange.instance.CalculatePathfindingRange(character.characterTile, BuildingRange, this.GetComponent<EntityTeam>());
             BuidlAbleTile.Remove(this.GetComponent<Character>().characterTile);
@@ -127,6 +138,8 @@ public class EngineerTurn : EntityTurnBehaviour
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
+                    resourceManagement.GetComponent<ResourceManagement>().DecreaseResource(cost.GetComponent<Cost>().turret, 1);
+                    
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.ClearHighlight();
 
 
