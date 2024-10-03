@@ -20,6 +20,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
 
     [SerializeField] GameObject EndPharseButton;
+    [SerializeField] GameObject House;
 
     private Turn currentTurn;
 
@@ -105,6 +106,11 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             }
         }
 
+        if (Vector3.Distance(House.transform.position, Enemy.transform.position) < PreviosDistance)
+        {
+            Nearest = House.gameObject.GetComponent<Character>();
+        }
+
         return Nearest;
     }
 
@@ -139,7 +145,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         TurretTurn.List.RemoveAll(item => item == null);
 
-        foreach(EntityTurnBehaviour i in TurretTurn.List)
+        foreach (EntityTurnBehaviour i in TurretTurn.List)
         {
             i.onTurn();
         }
@@ -189,7 +195,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         enemiesTurnSystems.List.RemoveAll(item => item == null);
         playerTurnSystems.List.RemoveAll(item => item == null);
-        TurretTurn.List.RemoveAll(item => item == null);    
+        TurretTurn.List.RemoveAll(item => item == null);
 
         if (enemiesTurnSystems.List.Count == 0 || enemiesTurnSystems.List.Count == 0) return false;
 
