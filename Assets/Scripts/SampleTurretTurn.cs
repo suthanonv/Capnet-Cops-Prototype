@@ -27,7 +27,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
         Char = this.GetComponent<Character>();
 
         turnBehaviour = this.GetComponent<EntityTurnBehaviour>();
-
+        TurnBaseSystem.instance.TurretTurn.Add(this);
         anim = this.transform.GetChild(0).GetComponent<Animator>();
         animC = this.transform.GetChild(0).GetComponent<AnimationControll>();
     }
@@ -38,7 +38,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
     public override void onTurn()
     {
 
-
+       if(attackingRadius.EnemyToAttack == null) return;
 
         animC.Target = attackingRadius.EnemyToAttack.GetComponent<EnemyHealth>();
         if (animC.Target == null) return;

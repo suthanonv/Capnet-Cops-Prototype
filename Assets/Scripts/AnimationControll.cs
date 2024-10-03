@@ -15,7 +15,7 @@ public class AnimationControll : MonoBehaviour
     public void Attacking()
     {
         if (Target != null)
-            Target.TakeDamage(50);
+            Target.TakeDamage(EntityTurn.Status.BaseDamage);
     }
 
     public void EndAction()

@@ -1073,6 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Status:
+    BaseDamage: 25
     Speed: 0
     moveData: {fileID: 11400000, guid: 298bfae150d9423449d1868d7773cd29, type: 2}
     ActionPoint: 1

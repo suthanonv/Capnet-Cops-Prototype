@@ -13,6 +13,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public DelegateList<EntityTurnBehaviour> enemiesTurnSystems;
     public DelegateList<EntityTurnBehaviour> playerTurnSystems;
 
+    public DelegateList<EntityTurnBehaviour> TurretTurn;
+
     public Interact PlayerInteractScript;
     public OldPathFinding EnemyPathFindingScript;
 
@@ -133,6 +135,16 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         }
     }
 
+    public void TurretTurncall()
+    {
+        TurretTurn.List.RemoveAll(item => item == null);
+
+        foreach(EntityTurnBehaviour i in TurretTurn.List)
+        {
+            i.onTurn();
+        }
+    }
+
 
     void SwitchingSide()
     {
@@ -149,6 +161,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 {
                     i.Status.ResetStatus();
                 }
+                TurretTurncall();
                 PlayerInteractScript.selectedCharacter = null;
                 PlayerInteractScript.enabled = true;
                 CameraBehaviouerControll.instance.LookAtTarget(playerTurnSystems.List[0].transform);
@@ -176,7 +189,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         enemiesTurnSystems.List.RemoveAll(item => item == null);
         playerTurnSystems.List.RemoveAll(item => item == null);
-
+        TurretTurn.List.RemoveAll(item => item == null);    
 
         if (enemiesTurnSystems.List.Count == 0 || enemiesTurnSystems.List.Count == 0) return false;
 

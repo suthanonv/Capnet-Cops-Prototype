@@ -43174,7 +43174,7 @@ GameObject:
   m_Layer: 0
   m_Name: EnemySpawning
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -43206,7 +43206,7 @@ Transform:
   m_GameObject: {fileID: 1210772755}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.6015053, y: 23.885183, z: 18.573143}
+  m_LocalPosition: {x: 9999, y: 39.83, z: 18.573143}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

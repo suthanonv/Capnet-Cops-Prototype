@@ -29,7 +29,7 @@ public class CameraControl : MonoBehaviour
     {
         // Mouse movement and zoom
         Vector3 values = new Vector3();
-        values.y = Input.GetAxis("Mouse ScrollWheel");
+        values.y = -Input.GetAxis("Mouse ScrollWheel");
 
         // Moving camera when holding right mouse button
         if (Input.GetMouseButton(2)) // Right mouse button held down

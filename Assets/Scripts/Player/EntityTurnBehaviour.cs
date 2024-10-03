@@ -15,7 +15,6 @@ public class EntityTurnBehaviour : MonoBehaviour
     public State currentState;
 
 
-
     public virtual bool InterActacle()
     {
         return false;

@@ -95,9 +95,23 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
-        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
-        showedVisual = false;
-        BuildingMode = true;
+        if (TurnBaseSystem.instance.OnBattlePhase == false)
+        {
+            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+            showedVisual = false;
+            BuildingMode = true;
+        }
+
+        else
+        {
+            SelectingCharacter();
+            if (Status.AvalibleActionPoint > 0)
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+            else
+            {
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+            }
+        }
     }
 
 
