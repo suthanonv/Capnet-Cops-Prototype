@@ -189,6 +189,11 @@ public class Interact : MonoBehaviour
 
             }
 
+            if (Input.GetMouseButtonDown(0) && currentTile == selectedCharacter.characterTile)
+            {
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().OnActionEnd();
+                return;
+            }
 
         }
     }

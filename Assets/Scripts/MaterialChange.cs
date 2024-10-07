@@ -17,6 +17,11 @@ public class MaterialChange : MonoBehaviour
     [SerializeField] Material OnHit;
     [SerializeField] Material OffHit;
 
+    private void Start()
+    {
+        NormleMaterial();
+    }
+
 
     public void OnHitMeterial()
     {

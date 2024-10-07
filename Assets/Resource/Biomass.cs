@@ -20,6 +20,7 @@ public class Biomass : MonoBehaviour
     public void OnDie()
     {
         resourceManagement.GetComponent<ResourceManagement>().IncreaseResource(Random.Range(minResourceGet, maxResourceGet), 0);
+        resourceManagement.GetComponent<ResourceManagement>().IncreaseResource(Random.Range(minResourceGet, maxResourceGet), 1);
     }
     
 }
