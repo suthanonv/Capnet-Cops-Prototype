@@ -16,7 +16,7 @@ public class PlayerActionUI : MonoBehaviour
 {
     bool enable = false;
 
-
+    public GameObject cam;
 
 
     public bool EnableUI
@@ -62,6 +62,11 @@ public class PlayerActionUI : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        cam = GameObject.Find("CameraHolder");
+    }
+
 
     private void Update()
     {
@@ -83,10 +88,20 @@ public class PlayerActionUI : MonoBehaviour
 
     public void EndPhase()
     {
-
+        CameraBehaviouerControll.instance.ResetTransform();
         EnableUI = false;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.ActionEnd = true;
+    }
+
+    public void OnMouseEnter()
+    {
+        cam.GetComponent<Interact>().enabled = false;
+    }
+
+    public void OnMouseExit()
+    {
+        cam.GetComponent<Interact>().enabled = true;
     }
 
 

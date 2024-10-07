@@ -89,6 +89,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
             }
             else
             {
+                CameraBehaviouerControll.instance.ResetTransform();
                 PlayerActionUI.instance.Troops = null;
                 PlayerActionUI.instance.EnableUI = false;
                 TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;

@@ -15,4 +15,10 @@ public class EnemyHealth : Health
         HealthText.text = Maxhealth.ToString();
 
     }
+
+    public override void Died()
+    {
+        base.Died();
+        this.GetComponent<Biomass>().OnDie();
+    }
 }

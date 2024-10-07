@@ -1858,9 +1858,18 @@ MonoBehaviour:
     OnAdd:
       m_PersistentCalls:
         m_Calls: []
+  TurretTurn:
+    List: []
+    OnRemove:
+      m_PersistentCalls:
+        m_Calls: []
+    OnAdd:
+      m_PersistentCalls:
+        m_Calls: []
   PlayerInteractScript: {fileID: 330585548}
   EnemyPathFindingScript: {fileID: 936874842}
   EndPharseButton: {fileID: 1191329316}
+  House: {fileID: 0}
 --- !u!4 &53572003
 Transform:
   m_ObjectHideFlags: 0
@@ -9679,6 +9688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1836da10b0bdfe48b4cfc06090a2441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   PlayerActionHolder: {fileID: 1301189793}
   MpText: {fileID: 488287658}
   ApText: {fileID: 976716215}
@@ -11720,6 +11730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630e804dc10f5c04e8a206bfe4997d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  origin: {fileID: 0}
 --- !u!1 &331348492
 GameObject:
   m_ObjectHideFlags: 0
@@ -34724,6 +34735,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983907003}
   m_CullTransparentMesh: 1
+--- !u!1001 &984599569
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9914449
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.13052624
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203207706692325530, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384344341604485509, guid: 60bede28f8deee442a5997b90a82783b,
+        type: 3}
+      propertyPath: m_Name
+      value: CameraOrigin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 60bede28f8deee442a5997b90a82783b, type: 3}
 --- !u!1 &987292815
 GameObject:
   m_ObjectHideFlags: 0
@@ -59221,6 +59300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Status:
+    BaseDamage: 50
     Speed: 10
     moveData: {fileID: 11400000, guid: ff790b658231e3d41a011d8706463d73, type: 2}
     ActionPoint: 2
@@ -79098,6 +79178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Status:
+    BaseDamage: 50
     Speed: 3
     moveData: {fileID: 11400000, guid: dd6f1c9025f1ba945b2082ff9cda2f56, type: 2}
     ActionPoint: 2
@@ -79657,3 +79738,4 @@ SceneRoots:
   - {fileID: 1896075674}
   - {fileID: 1362709196}
   - {fileID: 722648481}
+  - {fileID: 984599569}

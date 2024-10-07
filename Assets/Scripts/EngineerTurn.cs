@@ -227,10 +227,12 @@ public class EngineerTurn : EntityTurnBehaviour
 
     void Delay()
     {
+        CameraBehaviouerControll.instance.ResetTransform();
         PlayerActionUI.instance.Troops = null;
         PlayerActionUI.instance.EnableUI = false;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.ActionEnd = true;
+        
     }
 
 
