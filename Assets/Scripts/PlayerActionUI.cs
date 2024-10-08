@@ -62,10 +62,6 @@ public class PlayerActionUI : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        cam = GameObject.Find("CameraHolder");
-    }
 
 
     private void Update()
@@ -79,10 +75,13 @@ public class PlayerActionUI : MonoBehaviour
     }
     public void WalkButton()
     {
+        if (Troops == null) return;
         Troops.WalkingButton();
     }
     public void AttackButton()
     {
+        if (Troops == null) return;
+
         Troops.AttackingButton();
     }
 
