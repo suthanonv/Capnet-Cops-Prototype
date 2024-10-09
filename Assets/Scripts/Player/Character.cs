@@ -20,11 +20,12 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        FindTileAtStart();
+       
     }
 
     private void Start()
     {
+        FindTileAtStart();
         anim = this.transform.GetChild(0).GetComponent<Animator>();
     }
 
