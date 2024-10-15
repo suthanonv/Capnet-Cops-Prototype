@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyTurnBehaviour : EntityTurnBehaviour
 {
     private Character enemyChar;
     private Tile destinationTile;
+    [SerializeField] List<Target> targets = new List<Target>();
 
 
     private void Start()
@@ -20,7 +22,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
     {
         CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
         base.onTurn();
-        Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar);
+        Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar, targets);
 
 
         if (Human == null) OnActionEnd();
@@ -34,7 +36,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
     IEnumerator FindAndMove()
     {
-        destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar).characterTile;
+        destinationTile = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar, targets).characterTile;
 
 
 

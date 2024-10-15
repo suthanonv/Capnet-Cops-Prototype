@@ -18,6 +18,8 @@ public class MaterialAssign : MonoBehaviour
         MeshRenderer[] AllChild = GetComponentsInChildren<MeshRenderer>();
 
         SetMeterial.ModelPart = AllChild;
+
+        SetMeterial.NormleMaterial();
     }
 
 }

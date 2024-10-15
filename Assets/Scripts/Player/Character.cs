@@ -18,9 +18,11 @@ public class Character : MonoBehaviour
 
 
 
+    bool walkAble = true;
+    public bool WalkAble { get { return walkAble; } set { walkAble = value; } }
     private void Awake()
     {
-       
+
     }
 
     private void Start()
@@ -197,6 +199,7 @@ public class Character : MonoBehaviour
 
     public virtual void StartMove(Path _path)
     {
+        if (WalkAble == false) return;
         PlayerActionUI.instance.EnableUI = false;
 
         TurnBaseSystem.instance.PlayerInteractScript.enabled = false;

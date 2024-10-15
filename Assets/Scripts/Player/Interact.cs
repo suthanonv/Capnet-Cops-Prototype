@@ -41,6 +41,8 @@ public class Interact : MonoBehaviour
     #endregion
 
 
+    public bool EnableInteracting = true;
+
     public bool Attacking { get; set; }
 
     private void Start()
@@ -68,7 +70,7 @@ public class Interact : MonoBehaviour
 
     private void InspectTile()
     {
-
+        if (EnableInteracting == false) return;
 
         if (currentTile.Occupied)
         {

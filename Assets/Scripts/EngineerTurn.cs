@@ -30,7 +30,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
-        
+
         if (resourceManagement == null)
         {
             resourceManagement = GameObject.Find("ResourceManagement");
@@ -95,23 +95,14 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
+
         if (TurnBaseSystem.instance.OnBattlePhase == false)
         {
-            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
             showedVisual = false;
             BuildingMode = true;
+            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         }
 
-        else
-        {
-            SelectingCharacter();
-            if (Status.AvalibleActionPoint > 0)
-                TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
-            else
-            {
-                TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
-            }
-        }
     }
 
 
@@ -152,8 +143,9 @@ public class EngineerTurn : EntityTurnBehaviour
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
+                    this.GetComponent<Character>().WalkAble = false;
                     resourceManagement.GetComponent<ResourceManagement>().DecreaseResource(cost.GetComponent<Cost>().turret, 1);
-                    
+
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.ClearHighlight();
 
 
@@ -167,7 +159,6 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
                     BuidlAbleTile.Clear();
-                    BuildingMode = false;
                     Status.AvalibleActionPoint--;
                     OnActionEnd();
                 }
@@ -201,6 +192,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
 
 
+
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             if (Status.AvalibleActionPoint > 0 || Status.AvalibleMoveStep > 0)
@@ -227,22 +219,30 @@ public class EngineerTurn : EntityTurnBehaviour
 
     void Delay()
     {
+
         CameraBehaviouerControll.instance.ResetTransform();
         PlayerActionUI.instance.Troops = null;
         PlayerActionUI.instance.EnableUI = false;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.ActionEnd = true;
-        
+
     }
 
 
     void SelectingCharacter()
     {
         OpenUI();
+        Invoke("EnableWalk", 0.1f);
         PlayerActionUiLayOut.instance.EnableUI = true;
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUI.instance.Troops = this;
         TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
         TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character);
     }
+
+    void EnableWalk()
+    {
+        this.GetComponent<Character>().WalkAble = true;
+    }
+
 }

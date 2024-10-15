@@ -9,4 +9,5 @@ public enum Team
 public class EntityTeam : MonoBehaviour
 {
     public Team EntityTeamSide = Team.Human;
+    public Target TypeOfTarget;
 }

@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
     }
 
 
-   public virtual void Died()
+    public virtual void Died()
     {
 
 

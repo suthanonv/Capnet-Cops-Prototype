@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Biomass : MonoBehaviour
 {
 
-    [SerializeField] private GameObject resourceManagement;
+    private GameObject resourceManagement;
     [SerializeField] private int minResourceGet;
     [SerializeField] private int maxResourceGet;
-    
+
     private void Awake()
     {
         if (resourceManagement == null)
@@ -16,11 +14,11 @@ public class Biomass : MonoBehaviour
             resourceManagement = GameObject.Find("ResourceManagement");
         }
     }
-    
+
     public void OnDie()
     {
         resourceManagement.GetComponent<ResourceManagement>().IncreaseResource(Random.Range(minResourceGet, maxResourceGet), 0);
         resourceManagement.GetComponent<ResourceManagement>().IncreaseResource(Random.Range(minResourceGet, maxResourceGet), 1);
     }
-    
+
 }

@@ -3267,6 +3267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityTeamSide: 1
+  TypeOfTarget: 0
 --- !u!114 &3439470770501021438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,6 +3286,7 @@ MonoBehaviour:
     moveData: {fileID: 11400000, guid: 3b7fd348dbf74384ea55bec85e32d2b5, type: 2}
     ActionPoint: 1
   currentState: 0
+  targets: 02000000
 --- !u!114 &3119947200055264286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3338,7 +3340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38e8a654ae702a40839adf2192c70ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceManagement: {fileID: 0}
   minResourceGet: 10
   maxResourceGet: 11
 --- !u!1 &7655676979454477135

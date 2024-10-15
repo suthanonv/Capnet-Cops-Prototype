@@ -55,7 +55,7 @@ public class MaterialChange : MonoBehaviour
         }
     }
 
-    void NormleMaterial()
+    public void NormleMaterial()
     {
         foreach (MeshRenderer i in ModelPart)
         {

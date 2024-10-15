@@ -1,6 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+public enum Target
+{
+    Player, Turret, Base
+}
+
+
 public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 {
 
@@ -20,7 +28,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
 
     [SerializeField] GameObject EndPharseButton;
-    [SerializeField] GameObject House;
+    [SerializeField] GameObject BaseHitBox;
 
     private Turn currentTurn;
 
@@ -85,31 +93,76 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         return false;
     }
 
-    public Character GetHumenNearestChar(Character Enemy)
+    public Character GetHumenNearestChar(Character Enemy, List<Target> TargetPriority)
     {
         Character Nearest = null;
         float PreviosDistance = 99999999;
 
-        foreach (EntityTurnBehaviour i in playerTurnSystems.List)
+        foreach (Target PriorityTarget in TargetPriority)
         {
-            if (i != null)
+            if (PriorityTarget == Target.Player)
             {
-                if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                foreach (EntityTurnBehaviour i in playerTurnSystems.List)
                 {
-                    Nearest = i.gameObject.GetComponent<Character>();
-                    PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                    if (i != null)
+                    {
+                        if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                        {
+                            Nearest = i.gameObject.GetComponent<Character>();
+                            PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
-            else
+            else if (PriorityTarget == Target.Turret)
             {
-                continue;
+
+                foreach (EntityTurnBehaviour i in playerTurnSystems.List)
+                {
+                    if (i != null)
+                    {
+                        if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                        {
+                            Nearest = i.gameObject.GetComponent<Character>();
+                            PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
             }
+
+            if (Nearest != null) break;
+        }
+        if (TargetPriority[0] == Target.Base || Nearest == null)
+        {
+            foreach (Transform i in BaseHitBox.transform)
+            {
+                if (i != null)
+                {
+                    if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                    {
+                        Nearest = i.gameObject.GetComponent<Character>();
+                        PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+
         }
 
-        if (Vector3.Distance(House.transform.position, Enemy.transform.position) < PreviosDistance)
-        {
-            Nearest = House.gameObject.GetComponent<Character>();
-        }
+
+
 
         return Nearest;
     }
@@ -135,8 +188,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 OnBattlePhase = isAttackPhaseEnded();
 
                 SwitchingSide();
-
-
             }
         }
     }

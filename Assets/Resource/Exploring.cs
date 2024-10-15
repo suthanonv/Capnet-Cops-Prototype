@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Exploring : MonoBehaviour
 {
 
     [SerializeField] private GameObject resourceManagement;
-    
+
     [SerializeField] public int timeToComplete;
     [SerializeField] public float currentProgress;
     [SerializeField] public int minResourceGet;
     [SerializeField] public int maxResourceGet;
-    
+
+
+    [SerializeField] Clock ExploreingCost;
     private bool isExploring;
 
     [SerializeField] public Slider progressBar;
@@ -25,7 +24,7 @@ public class Exploring : MonoBehaviour
             resourceManagement = GameObject.Find("ResourceManagement");
         }
     }
-    
+
     public void Start()
     {
         timeToComplete *= 60;
@@ -35,12 +34,16 @@ public class Exploring : MonoBehaviour
 
     public void OnExploringStart()
     {
-        isExploring = true;
+        if (PreparationPharse.instance.CurrentClockTime.SecondSum() + ExploreingCost.SecondSum() <= PreparationPharse.instance.PhaseTransitionTime.SecondSum())
+        {
+            PreparationPharse.instance.AddingTimeToCurrentTime(ExploreingCost);
+            OnExploringComplete();
+        }
     }
 
     public void OnExploringComplete()
     {
-        progressBar.value = 0;
+        //  progressBar.value = 0;
         resourceManagement.GetComponent<ResourceManagement>().IncreaseResource(Random.Range(minResourceGet, maxResourceGet), 1);
     }
 

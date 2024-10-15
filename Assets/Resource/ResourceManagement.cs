@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ResourceManagement : MonoBehaviour
 {
@@ -14,34 +11,44 @@ public class ResourceManagement : MonoBehaviour
     [SerializeField] public TextMeshProUGUI text2;
     [SerializeField] public TextMeshProUGUI text3;
 
+
+
+    public static ResourceManagement Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     private void Start()
     {
         OnResourceChange();
     }
-    
+
     public void IncreaseResource(int num, int type)
     {
         switch (type)
         {
-            case 0 :
+            case 0:
                 bioMass += num; break;
-            case 1 :
+            case 1:
                 scrap += num; break;
-            case 2 : 
+            case 2:
                 humanResource += num; break;
         }
         OnResourceChange();
     }
-    
+
     public void DecreaseResource(int num, int type)
     {
         switch (type)
         {
-            case 0 :
+            case 0:
                 bioMass -= num; break;
-            case 1 :
+            case 1:
                 scrap -= num; break;
-            case 2 : 
+            case 2:
                 humanResource -= num; break;
         }
         OnResourceChange();
@@ -66,7 +73,7 @@ public class ResourceManagement : MonoBehaviour
         scrap = data.scraps;
         bioMass = data.biomass;
         humanResource = data.humanResource;
-        
+
         OnResourceChange();
     }
 
@@ -75,7 +82,7 @@ public class ResourceManagement : MonoBehaviour
         scrap = 0;
         bioMass = 0;
         humanResource = 0;
-        
+
         SaveResource();
     }
 
