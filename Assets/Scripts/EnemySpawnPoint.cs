@@ -15,18 +15,20 @@ public class EnemySpawnPoint : MonoBehaviour
 
     Pathfinder pathfinder;
 
-    [SerializeField] GameObject Enemy;
+
     [SerializeField] Character Base;
+    [Header("Spawning Range")]
     [SerializeField] int EnemySpawnDistance = 6;
     [SerializeField] int EnemySpawningRange = 3;
-    List<int> IndexOfTilToSpawnEnemy;
+
+    [Header("ALl Wave")]
+    [SerializeField] List<Wave> AllWaveComponent = new List<Wave>();
 
     EntityTeam en;
 
 
 
 
-    List<GameObject> DestroyingEnemies = new List<GameObject>();
 
 
 
@@ -51,7 +53,20 @@ public class EnemySpawnPoint : MonoBehaviour
 
 
 
-    public void SpawningEnemy(int AmountToSpawn)
+
+
+
+    public void SpawningWave(int CurrentWave)
+    {
+        if (CurrentWave > AllWaveComponent.Count) CurrentWave = AllWaveComponent.Count - 1;
+
+        foreach (EnemyInWave i in AllWaveComponent[CurrentWave].AllEnemyInWave)
+        {
+            SpawningEnemy(i.AmountToSpawn, i.EnemyPrefab);
+        }
+    }
+
+    public void SpawningEnemy(int AmountToSpawn, GameObject Enemy)
     {
         List<Tile> SpawnAbleTile = new List<Tile>();
 

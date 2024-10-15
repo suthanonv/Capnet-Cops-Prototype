@@ -19,7 +19,7 @@ public class EnemyWaveSpawn : MonoBehaviour
 
     public void StartEnemyWave()
     {
-        EnemySpawnPoint.Instance.SpawningEnemy(Start_EnemyQuantity + (currentWave * EnemyMultiple_Scaling_PerWave));
+        EnemySpawnPoint.Instance.SpawningWave(currentWave);
     }
 
 
