@@ -7,6 +7,8 @@ public class FuelButton : MonoBehaviour
     [SerializeField] Slider biomassSlider;
     [SerializeField] Slider scrapsSlider;
     [SerializeField] ProgressBar progressBar;
+    [SerializeField] int biomassToFuelMultiplier = 1;
+    [SerializeField] int scrapsToTankMultiplier = 1;
 
     [SerializeField] Button fuelButton;
     [SerializeField] TMP_Text biomasssAmount;
@@ -53,8 +55,8 @@ public class FuelButton : MonoBehaviour
     }
     void Fuel()
     {
-        progressBar.progress += biomassSlider.value;
-        progressBar.currentMaximum += scrapsSlider.value;
+        progressBar.progress += biomassSlider.value * biomassToFuelMultiplier;
+        progressBar.currentMaximum += scrapsSlider.value * scrapsToTankMultiplier;
         ResourceManagement.Instance.bioMass -= (int)biomassSlider.value;
         ResourceManagement.Instance.scrap -= (int)scrapsSlider.value;
         biomassSlider.value = 0;

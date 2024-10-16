@@ -8,6 +8,7 @@ public class inspectingEnemy : MonoBehaviour
     {
         if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null)
         {
+
             this.transform.GetChild(0).gameObject.SetActive(true);
         }
 
