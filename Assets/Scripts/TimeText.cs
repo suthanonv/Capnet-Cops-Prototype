@@ -10,6 +10,8 @@ public class TimeText : MonoBehaviour
     {
 
         Clock clock = PreparationPharse.instance.CurrentClockTime;
+
+
         if (clock == null) return;
 
         if (clock.Hour <= 9 && clock.Min <= 9)

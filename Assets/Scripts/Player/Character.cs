@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
     {
         FindTileAtStart();
         anim = this.transform.GetChild(0).GetComponent<Animator>();
+        Entityteam = this.GetComponent<EntityTeam>();
     }
 
     /// <summary>
@@ -51,6 +52,8 @@ public class Character : MonoBehaviour
         Debug.Log("Unable to find a start position");
     }
 
+
+    EntityTeam Entityteam;
     protected IEnumerator MoveAlongPath(Path path)
     {
 
@@ -132,7 +135,7 @@ public class Character : MonoBehaviour
 
             Vector3 nextTilePosition = movingPath.tiles[currentStep].transform.position;
 
-            float movementTime = animationTime / (movedata.MoveSpeed + movingPath.tiles[currentStep].terrainCost * TERRAIN_PENALTY);
+            float movementTime = animationTime / (AnimeSpeedAdjust.Instance.GetAnimSpeed(Entityteam) + movingPath.tiles[currentStep].terrainCost * TERRAIN_PENALTY);
             MoveAndRotate(currentTile.transform.position, nextTilePosition, movementTime);
             animationTime += Time.deltaTime;
 
