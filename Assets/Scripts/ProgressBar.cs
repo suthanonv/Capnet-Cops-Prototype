@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField] Slider biomassSlider;
     [SerializeField] Slider scrapsSlider;
-    [SerializeField] public float maxFuelTank = 1000;
-    public float currentMaximum;
-    public float progress;
+    [SerializeField] public float maxFuelTank = 500;
+    public float currentMaximum { get { return BaseHealth.Instance.MaxHealth; } set { BaseHealth.Instance.MaxHealth = value; } }
+
+
+    float Progess_Holder;
+    public float progress { get { return Progess_Holder; } set { Progess_Holder = value; if (Progess_Holder >= maxFuelTank) SceneManager.LoadScene("Win"); } }
     public Image mask;
     public Image tankMax;
     public Image fuelingAmount;

@@ -9,25 +9,22 @@ public class BaseHealth : MonoBehaviour
 
     [SerializeField] MaterialChange ModelHolder;
 
-    [SerializeField] float MaxHealth;
-    float CurrentHealth;
+    public float MaxHealth = 50;
+
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Start()
-    {
-        CurrentHealth = MaxHealth;
-    }
+
     public void TakeDamage(int Damage)
     {
-        CurrentHealth -= Damage;
+        MaxHealth -= Damage;
 
 
 
-        if (CurrentHealth <= 0)
+        if (MaxHealth <= 0)
         {
             Died();
         }
