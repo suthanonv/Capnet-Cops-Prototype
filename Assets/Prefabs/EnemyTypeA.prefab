@@ -653,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -955.93115, y: -536.63605}
+  m_AnchoredPosition: {x: -955.93115, y: -536.156}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4302020178125186229
@@ -974,7 +974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -955.93115, y: -537.52}
+  m_AnchoredPosition: {x: -955.93115, y: -537.04}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7004359196699654198
@@ -2968,7 +2968,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3300,6 +3300,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 100
+  OnDied:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2636413917966779121}
+        m_TargetAssemblyTypeName: inspectingEnemy, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   HealthText: {fileID: 5742809294754636584}
 --- !u!54 &3509428601749178241
 Rigidbody:

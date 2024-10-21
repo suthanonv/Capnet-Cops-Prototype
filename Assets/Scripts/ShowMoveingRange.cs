@@ -23,7 +23,6 @@ public class ShowMoveingRange : MonoBehaviour
 
     public void ShowCharacterMoveRange(Tile centerTile, EntityStat moveData, EntityTeam entityTeam)
     {
-        Debug.Log($"Calling | {centerTile.occupyingCharacter.name} : {moveData.AvalibleMoveStep}");
         // If the center tile is the same as before, do nothing
         if (previousCenter == centerTile) return;
 

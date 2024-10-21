@@ -1,7 +1,9 @@
 using TMPro;
-
+using UnityEngine;
+using UnityEngine.Events;
 public class EnemyHealth : Health
 {
+    [SerializeField] UnityEvent OnDied;
     public TextMeshProUGUI HealthText;
 
     public override void Start()
@@ -18,6 +20,7 @@ public class EnemyHealth : Health
 
     public override void Died()
     {
+        OnDied.Invoke();
         base.Died();
         this.GetComponent<Biomass>().OnDie();
     }

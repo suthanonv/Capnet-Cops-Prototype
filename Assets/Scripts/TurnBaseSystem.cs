@@ -7,16 +7,16 @@ public enum Target
 {
     Player, Turret, Base
 }
+public enum Turn
+{
+    Enemies,
+    Player
+};
 
 
 public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 {
 
-    enum Turn
-    {
-        Enemies,
-        Player
-    };
 
     public DelegateList<EntityTurnBehaviour> enemiesTurnSystems;
     public DelegateList<EntityTurnBehaviour> playerTurnSystems;
@@ -30,7 +30,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     [SerializeField] GameObject EndPharseButton;
     [SerializeField] GameObject BaseHitBox;
 
-    private Turn currentTurn;
+    public Turn currentTurn { get; set; }
 
     bool CanEndPahse = false;
 
