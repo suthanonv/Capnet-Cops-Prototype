@@ -13,8 +13,10 @@ public class SoilderTraining : MonoBehaviour
     [SerializeField] private Transform spawnPos;
     [SerializeField] public int timeToComplete;
     [SerializeField] public float currentProgress;
-    private bool isTraining;
-    [SerializeField] public Slider progressBar;
+    [SerializeField] private int price;
+    [SerializeField] public TextMeshProUGUI priceTxt;
+
+    [SerializeField] private GameObject window;
     
     private void Awake()
     {
@@ -27,22 +29,16 @@ public class SoilderTraining : MonoBehaviour
     public void Start()
     {
         timeToComplete *= 60;
-        progressBar.maxValue = timeToComplete;
-        progressBar.value = 0;
+        priceTxt.SetText(price.ToString());
+        CloseWindow();
     }
     
     public void Update()
     {
-        if (isTraining)
-        {
-            currentProgress += Time.deltaTime;
-            progressBar.value = currentProgress;
-        }
 
         if (currentProgress >= timeToComplete)
         {
             Debug.Log("Training complete");
-            isTraining = false;
             currentProgress = 0;
             OnTrainingComplete();
         }
@@ -51,7 +47,6 @@ public class SoilderTraining : MonoBehaviour
     public void OnTrainingComplete()
     {
         Debug.Log("Training complete");
-        progressBar.value = 0;
         Instantiate(soilder, spawnPos.position, Quaternion.identity);
     }
 
@@ -59,9 +54,18 @@ public class SoilderTraining : MonoBehaviour
     {
         if (resourceManagement.GetComponent<ResourceManagement>().humanResource > 0)
         {
-            resourceManagement.GetComponent<ResourceManagement>().DecreaseResource(1, 2);
-            isTraining = true;
+            resourceManagement.GetComponent<ResourceManagement>().DecreaseResource(price, 2);
         }
+    }
+
+    public void ShowWindow()
+    {
+        window.SetActive(true);
+    }
+
+    public void CloseWindow()
+    {
+        window.SetActive(false);
     }
     
 }
