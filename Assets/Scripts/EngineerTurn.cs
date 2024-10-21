@@ -191,6 +191,8 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
+       
+
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)
@@ -238,6 +240,8 @@ public class EngineerTurn : EntityTurnBehaviour
         PlayerActionUI.instance.Troops = this;
         TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
         TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character);
+        
+        TurnBaseSystem.instance.EndPharseButton.SetActive(true);
     }
 
     void EnableWalk()

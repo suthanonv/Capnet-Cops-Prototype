@@ -17,6 +17,8 @@ public class PlayerActionUI : MonoBehaviour
     bool enable = false;
 
     public GameObject cam;
+    
+    public GameObject behemoth;
 
 
     public bool EnableUI
@@ -96,11 +98,16 @@ public class PlayerActionUI : MonoBehaviour
     public void OnMouseEnter()
     {
         cam.GetComponent<Interact>().enabled = false;
+        behemoth.GetComponent<Uprade_Interact>().enabled = false;
+        behemoth.GetComponent<Collider>().enabled = false;
+
     }
 
     public void OnMouseExit()
     {
         cam.GetComponent<Interact>().enabled = true;
+        behemoth.GetComponent<Uprade_Interact>().enabled = true;
+        behemoth.GetComponent<Collider>().enabled = true;
     }
 
 

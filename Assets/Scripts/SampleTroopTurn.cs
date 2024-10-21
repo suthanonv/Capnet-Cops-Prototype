@@ -79,6 +79,12 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void OnActionEnd()
     {
+        CameraBehaviouerControll.instance.ResetTransform();
+        
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            TurnBaseSystem.instance.EndPharseButton.SetActive(true);
+        }
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)

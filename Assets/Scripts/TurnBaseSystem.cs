@@ -27,7 +27,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public OldPathFinding EnemyPathFindingScript;
 
 
-    [SerializeField] GameObject EndPharseButton;
+  public GameObject EndPharseButton;
     [SerializeField] GameObject BaseHitBox;
 
     public Turn currentTurn { get; set; }
@@ -340,7 +340,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
             PreparationPharse.instance.SetToAttackTime();
         }
-
+        
         EndPharseButton.SetActive(false);
         PlayerInteractScript.enabled = false;
         TurnNum = 0;

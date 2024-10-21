@@ -85,5 +85,6 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
     public override void OnActionEnd()
     {
         TurnBaseSystem.instance.ActionEnd = true;
+        CameraBehaviouerControll.instance.ResetTransform();
     }
 }

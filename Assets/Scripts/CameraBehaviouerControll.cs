@@ -35,8 +35,8 @@ public class CameraBehaviouerControll : MonoBehaviour
         Debug.Log("reset transform");
         this.transform.localRotation = Quaternion.Euler(55, 0, 0);
         
-        transform.parent.position = new Vector3(origin.transform.position.x, origin.transform.position.y,
-            origin.transform.position.z);
+        // transform.parent.position = new Vector3(origin.transform.position.x, origin.transform.position.y,
+        //     origin.transform.position.z);
         
         transform.parent.localRotation = Quaternion.Euler(origin.transform.rotation.x, origin.transform.rotation.y,
             origin.transform.rotation.z);
