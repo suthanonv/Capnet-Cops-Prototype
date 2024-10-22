@@ -19,7 +19,8 @@ public class EnemyWaveSpawn : MonoBehaviour
 
     public void StartEnemyWave()
     {
-        EnemySpawnPoint.Instance.SpawningWave(currentWave);
+        Debug.Log(CurrentWave);
+        EnemySpawnPoint.Instance.SpawningWave(CurrentWave);
     }
 
 

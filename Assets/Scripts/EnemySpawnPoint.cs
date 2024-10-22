@@ -58,9 +58,10 @@ public class EnemySpawnPoint : MonoBehaviour
 
     public void SpawningWave(int CurrentWave)
     {
-        if (CurrentWave > AllWaveComponent.Count) CurrentWave = AllWaveComponent.Count - 1;
+        int WaveIndex = CurrentWave;
+        if (CurrentWave >= AllWaveComponent.Count) WaveIndex = AllWaveComponent.Count - 1;
 
-        foreach (EnemyInWave i in AllWaveComponent[CurrentWave].AllEnemyInWave)
+        foreach (EnemyInWave i in AllWaveComponent[WaveIndex].AllEnemyInWave)
         {
             SpawningEnemy(i.AmountToSpawn, i.EnemyPrefab);
         }

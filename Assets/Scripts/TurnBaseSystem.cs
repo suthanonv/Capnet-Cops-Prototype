@@ -27,7 +27,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public OldPathFinding EnemyPathFindingScript;
 
 
-  public GameObject EndPharseButton;
+    public GameObject EndPharseButton;
     [SerializeField] GameObject BaseHitBox;
 
     public Turn currentTurn { get; set; }
@@ -43,7 +43,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         set
         {
             onBattlePhase = value;
-            if (OnBattlePhase == false)
+            Debug.Log(onBattlePhase);
+            if (onBattlePhase == false)
             {
                 PreparationPharse.instance.SetToStartTime();
                 PlayerActionUI.instance.EnableUI = false;
@@ -340,7 +341,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
             PreparationPharse.instance.SetToAttackTime();
         }
-        
+
         EndPharseButton.SetActive(false);
         PlayerInteractScript.enabled = false;
         TurnNum = 0;

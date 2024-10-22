@@ -7,7 +7,23 @@ public class PreparationPharse : MonoBehaviour
 
 
     [SerializeField] Clock StartClockTIme = new Clock();
-    public Clock CurrentClockTime { get; set; }
+
+    Clock currentTime;
+    public Clock CurrentClockTime
+    {
+        get { return currentTime; }
+        set
+        {
+            currentTime = value;
+            if (currentTime.SecondSum() >= PhaseTransitionTime.SecondSum())
+            {
+                if (TurnBaseSystem.instance.OnBattlePhase == false)
+                {
+                    StartEnemyWave();
+                }
+            }
+        }
+    }
 
     public Clock PhaseTransitionTime = new Clock();
 
@@ -67,21 +83,11 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Min += TimeToAdd.Min;
         CurrentClockTime.Second += TimeToAdd.Second;
         CurrentClockTime.ReSizeTime();
-
-
-        float CurrenClockTimeSecond = CurrentClockTime.Hour * 3600 + CurrentClockTime.Min * 60 + CurrentClockTime.Second;
-        float PhaseTransTime = PhaseTransitionTime.Hour * 3600 + PhaseTransitionTime.Min * 60 + PhaseTransitionTime.Second;
-
-
-        if (CurrenClockTimeSecond >= PhaseTransTime)
-        {
-            if (TurnBaseSystem.instance.OnBattlePhase == false)
-            {
-                StartEnemyWave();
-            }
-        }
-
     }
+
+
+
+
 
 
     public void StartEnemyWave()
@@ -89,6 +95,7 @@ public class PreparationPharse : MonoBehaviour
 
         EnemyWaveSpawn.instance.CurrentWave++;
         EnemyWaveSpawn.instance.StartEnemyWave();
-        TurnBaseSystem.instance.OnBattlePhase = true;
     }
+
+
 }

@@ -23,7 +23,6 @@ public class inspectingEnemy : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Debug.Log("Mouse Over");
         if (TurnBaseSystem.instance.currentTurn == Turn.Player)
         {
 
