@@ -83,6 +83,14 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Min += TimeToAdd.Min;
         CurrentClockTime.Second += TimeToAdd.Second;
         CurrentClockTime.ReSizeTime();
+
+        if (currentTime.SecondSum() >= PhaseTransitionTime.SecondSum())
+        {
+            if (TurnBaseSystem.instance.OnBattlePhase == false)
+            {
+                StartEnemyWave();
+            }
+        }
     }
 
 
