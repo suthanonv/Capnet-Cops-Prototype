@@ -24,7 +24,7 @@ public class ShowMoveingRange : MonoBehaviour
     public void ShowCharacterMoveRange(Tile centerTile, EntityStat moveData, EntityTeam entityTeam)
     {
         // If the center tile is the same as before, do nothing
-        if (previousCenter == centerTile) return;
+        if (previousCenter == centerTile || TurnBaseSystem.instance.OnBattlePhase == false) return;
 
         // Set the new center tile
         previousCenter = centerTile;

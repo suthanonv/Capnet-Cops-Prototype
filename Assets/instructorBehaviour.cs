@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-
-public class SampleTroopTurn : EntityTurnBehaviour
+public class instructorBehaviour : EntityTurnBehaviour
 {
+
     Character character;
 
     private void Start()
@@ -28,7 +28,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            CameraBehaviouerControll.instance.LookAtTarget(this.transform);
+            CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
             CameraBehaviouerControll.instance.LookAtTarget(null);
 
             PlayerActionUI.instance.Troops = this;
@@ -46,6 +46,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     {
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUiLayOut.instance.EnableUI = true;
+        PlayerActionUI.instance.Troops = this;
         OpenUi();
         TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character); // make player can choosing a tile to moving
     }
@@ -61,15 +62,18 @@ public class SampleTroopTurn : EntityTurnBehaviour
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
+
+
         }
         else
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
+            ButtonToUse.Add(PlayerActionUiButton.Attack);
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
         }
 
         PlayerActionUiLayOut.instance.ArrangementUiButton(ButtonToUse);
-        PlayerActionUiLayOut.instance.EditingActionButtonName("Attacking");
+        PlayerActionUiLayOut.instance.EditingActionButtonName("Training");
     }
 
 
@@ -112,7 +116,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
-
+        SoilderTraining.Instance.ShowWindow();
     }
 
     public override void WalkingButton()

@@ -1,60 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class SoilderTraining : MonoBehaviour
 {
+    public static SoilderTraining Instance;
+
+
+
 
     [SerializeField] private GameObject resourceManagement;
 
     [SerializeField] private GameObject soilder;
-    [SerializeField] private Transform spawnPos;
-    [SerializeField] public int timeToComplete;
+    [SerializeField] private Tile spawnPos;
+    [SerializeField] public Clock timeToComplete;
     [SerializeField] public float currentProgress;
     [SerializeField] private int price;
     [SerializeField] public TextMeshProUGUI priceTxt;
 
     [SerializeField] private GameObject window;
-    
+
     private void Awake()
     {
+        SoilderTraining.Instance = this;
         if (resourceManagement == null)
         {
             resourceManagement = GameObject.Find("ResourceManagement");
         }
     }
-    
+
     public void Start()
     {
-        timeToComplete *= 60;
         priceTxt.SetText(price.ToString());
         CloseWindow();
     }
-    
+
     public void Update()
     {
 
-        if (currentProgress >= timeToComplete)
-        {
-            Debug.Log("Training complete");
-            currentProgress = 0;
-            OnTrainingComplete();
-        }
     }
 
     public void OnTrainingComplete()
     {
         Debug.Log("Training complete");
-        Instantiate(soilder, spawnPos.position, Quaternion.identity);
+        Instantiate(soilder, spawnPos.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
     }
 
     public void OnTrainingStart()
     {
-        if (resourceManagement.GetComponent<ResourceManagement>().humanResource > 0)
+        if (PreparationPharse.instance.CurrentClockTime.SecondSum() + timeToComplete.SecondSum() <= PreparationPharse.instance.PhaseTransitionTime.SecondSum())
         {
-            resourceManagement.GetComponent<ResourceManagement>().DecreaseResource(price, 2);
+
+
+            if (resourceManagement.GetComponent<ResourceManagement>().humanResource > 0 && spawnPos.occupyingCharacter == null)
+            {
+                PreparationPharse.instance.AddingTimeToCurrentTime(timeToComplete);
+                resourceManagement.GetComponent<ResourceManagement>().DecreaseResource(price, 2);
+                OnTrainingComplete();
+            }
         }
     }
 
@@ -67,5 +69,5 @@ public class SoilderTraining : MonoBehaviour
     {
         window.SetActive(false);
     }
-    
+
 }

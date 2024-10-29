@@ -5,6 +5,7 @@ public class CameraControl : MonoBehaviour
     public float speed = 8f;
     public float mouseRotateSpeed = 1f;
     public float mouseMoveSpeed = 0.5f; // Speed for moving with the mouse
+    public float mouseZoomSpeed = 2.0f;
     Camera cam;
 
     private void Start()
@@ -20,7 +21,11 @@ public class CameraControl : MonoBehaviour
     private void UpdateCamera()
     {
         Vector3 input = InputValues(out float yRotation).normalized;
-        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView + input.y * 2, 30, 110);
+        cam.orthographicSize -= input.y * mouseZoomSpeed;
+        if (cam.orthographicSize < 0)
+        {
+            cam.orthographicSize = 0;
+        }
         transform.parent.Translate(input * speed * Time.deltaTime); // Translate camera based on mouse movement
         transform.parent.Rotate(Vector3.up * yRotation * Time.deltaTime * speed * 4); // Rotate camera
     }

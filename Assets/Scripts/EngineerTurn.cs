@@ -46,7 +46,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
         OpenUI();
         PlayerActionUI.instance.Troops = this;
-        CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
+        CameraBehaviouerControll.instance.LookAtTarget(this.transform);
         CameraBehaviouerControll.instance.LookAtTarget(null);
 
         SelectingCharacter();

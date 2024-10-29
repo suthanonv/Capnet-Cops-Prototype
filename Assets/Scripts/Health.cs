@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
         }
         else
         {
-            this.transform.GetChild(0).GetComponent<MaterialChange>().OnHitMeterial();
+            this.transform.GetChild(1).GetComponent<MaterialChange>().OnHitMeterial();
         }
     }
 
