@@ -43,7 +43,7 @@ public class Interact : MonoBehaviour
 
     public bool EnableInteracting = true;
 
-    public bool Attacking { get; set; }
+    bool Attacking;
 
     private void Start()
     {
@@ -210,6 +210,9 @@ public class Interact : MonoBehaviour
         {
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         }
+
+
+        Attacking = TurnBaseSystem.instance.OnBattlePhase && selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.ActionPoint > 0;
 
 
         ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());

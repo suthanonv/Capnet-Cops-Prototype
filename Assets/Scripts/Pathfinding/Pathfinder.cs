@@ -125,8 +125,6 @@ public class Pathfinder : MonoBehaviour
         // Additionally add connected tiles such as ladders
         if (origin.connectedTile != null)
             tiles.Add(origin.connectedTile);
-
-        Debug.Log($"Tile Count {tiles.Count}");  
         return tiles;
     }
 

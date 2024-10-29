@@ -63,8 +63,7 @@ public class EngineerTurn : EntityTurnBehaviour
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
-            ButtonToUse.Add(PlayerActionUiButton.Attack);
-            PlayerActionUiLayOut.instance.EditingActionButtonName("Healing");
+
 
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
         }
@@ -191,7 +190,7 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-       
+
 
 
 
@@ -238,9 +237,8 @@ public class EngineerTurn : EntityTurnBehaviour
         PlayerActionUiLayOut.instance.EnableUI = true;
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUI.instance.Troops = this;
-        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
         TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character);
-        
+
         TurnBaseSystem.instance.EndPharseButton.SetActive(true);
     }
 

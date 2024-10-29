@@ -46,9 +46,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     {
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUiLayOut.instance.EnableUI = true;
-
         OpenUi();
-        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
         TurnBaseSystem.instance.PlayerInteractScript.SelectCharacter(character); // make player can choosing a tile to moving
     }
 
@@ -62,7 +60,6 @@ public class SampleTroopTurn : EntityTurnBehaviour
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
-            ButtonToUse.Add(PlayerActionUiButton.Attack);
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
         }
         else
@@ -80,7 +77,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
         CameraBehaviouerControll.instance.ResetTransform();
-        
+
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
             TurnBaseSystem.instance.EndPharseButton.SetActive(true);
@@ -115,18 +112,14 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
-        PlayerActionUI.instance.enabled = false;
-        if (Status.AvalibleActionPoint > 0)
-            TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
-        else
-        {
-            TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
-        }
+
     }
 
     public override void WalkingButton()
     {
         PlayerActionUI.instance.enabled = false;
-        TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+        PlayerActionUI.instance.enabled = false;
+
+
     }
 }
