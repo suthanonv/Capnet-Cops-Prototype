@@ -28,7 +28,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         FindTileAtStart();
-        anim = this.transform.GetChild(0).GetComponent<Animator>();
+        anim = this.transform.GetChild(1).GetComponent<Animator>();
         Entityteam = this.GetComponent<EntityTeam>();
     }
 

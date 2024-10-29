@@ -28,7 +28,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            CameraBehaviouerControll.instance.LookAtTarget(this.transform.GetChild(0));
+            CameraBehaviouerControll.instance.LookAtTarget(this.transform);
             CameraBehaviouerControll.instance.LookAtTarget(null);
 
             PlayerActionUI.instance.Troops = this;
