@@ -22,6 +22,28 @@ public class Tile : MonoBehaviour
     public int TileHight { get { return tileHight; } set { tileHight = value; } }
 
     bool isinrange = false;
+
+
+    Material baseMaterial;
+
+
+
+    private void Awake()
+    {
+        foreach (Transform i in this.transform)
+        {
+            if (i.TryGetComponent<MeshRenderer>(out MeshRenderer mesh))
+            {
+                baseMaterial = mesh.material;
+            }
+        }
+
+        if (baseMaterial == null)
+        {
+            baseMaterial = this.GetComponent<MeshRenderer>().material;
+        }
+    }
+
     public bool IsInAttackRange
     {
         get
@@ -38,7 +60,7 @@ public class Tile : MonoBehaviour
                 {
                     if (team.EntityTeamSide == Team.Enemy)
                     {
-                        SetColor(Color.red);
+                        SetColor(MaterialStorage.Instance.Red);
                     }
                 }
             }
@@ -62,11 +84,11 @@ public class Tile : MonoBehaviour
             {
                 if (!showVisual)
                 {
-                    SetColor(costMap[terrainCost]);
+                    SetColor(baseMaterial);
                 }
                 else
                 {
-                    Color newColor = new Color(0, 0.9f, 0.9f); // Default to Cyan Color
+                    Material newColor = MaterialStorage.Instance.Cyan;
 
                     if (occupyingCharacter != null)
                     {
@@ -74,7 +96,7 @@ public class Tile : MonoBehaviour
                         {
                             if (team.EntityTeamSide == Team.Enemy)
                             {
-                                newColor = Color.red;
+                                newColor = MaterialStorage.Instance.Red;
                             }
                         }
                     }
@@ -93,7 +115,7 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        SetColor(costMap[terrainCost]);
+        SetColor(baseMaterial);
     }
 
     Dictionary<int, Color> costMap = new Dictionary<int, Color>()
@@ -112,7 +134,7 @@ public class Tile : MonoBehaviour
     public void Highlight()
     {
 
-        SetColor(Color.white);
+        SetColor(MaterialStorage.Instance.White);
 
 
     }
@@ -120,7 +142,7 @@ public class Tile : MonoBehaviour
     public void ClearHighlight()
     {
         OnHighlight = false;
-        SetColor(costMap[terrainCost]);
+        SetColor(baseMaterial);
 
 
         IsInAttackRange = isinrange;
@@ -135,12 +157,13 @@ public class Tile : MonoBehaviour
     public void ModifyCost()
     {
         terrainCost++;
+
+        return;
         if (terrainCost > costMap.Count - 1)
             terrainCost = 0;
 
         if (costMap.TryGetValue(terrainCost, out Color col))
         {
-            SetColor(col);
         }
         else
         {
@@ -148,15 +171,15 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void SetColor(Color color)
+    private void SetColor(Material color)
     {
-        GetComponent<MeshRenderer>().material.color = color;
+        GetComponent<MeshRenderer>().material = color;
         if (this.transform.childCount > 1)
             foreach (Transform i in this.transform)
             {
                 if (i.TryGetComponent<MeshRenderer>(out MeshRenderer mesh))
                 {
-                    mesh.material.color = color;
+                    mesh.material = color;
                 }
             }
 
