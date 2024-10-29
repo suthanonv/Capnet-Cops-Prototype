@@ -151,6 +151,8 @@ public class EnemySpawnPoint : MonoBehaviour
         if (origin.connectedTile != null)
             tiles.Add(origin.connectedTile);
 
+        Debug.Log($"Spawning TIle : {tiles.Count}");
+
         return tiles;
     }
 }

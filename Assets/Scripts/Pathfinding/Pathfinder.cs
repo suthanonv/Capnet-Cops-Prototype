@@ -126,6 +126,7 @@ public class Pathfinder : MonoBehaviour
         if (origin.connectedTile != null)
             tiles.Add(origin.connectedTile);
 
+        Debug.Log($"Tile Count {tiles.Count}");  
         return tiles;
     }
 
