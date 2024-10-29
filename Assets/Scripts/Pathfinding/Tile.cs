@@ -151,6 +151,15 @@ public class Tile : MonoBehaviour
     private void SetColor(Color color)
     {
         GetComponent<MeshRenderer>().material.color = color;
+        if (this.transform.childCount > 1)
+            foreach (Transform i in this.transform)
+            {
+                if (i.TryGetComponent<MeshRenderer>(out MeshRenderer mesh))
+                {
+                    mesh.material.color = color;
+                }
+            }
+
     }
 
     /*
