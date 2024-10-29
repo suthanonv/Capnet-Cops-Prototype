@@ -21,11 +21,13 @@ public class CameraControl : MonoBehaviour
     private void UpdateCamera()
     {
         Vector3 input = InputValues(out float yRotation).normalized;
-        cam.orthographicSize -= input.y * mouseZoomSpeed;
-        if (cam.orthographicSize < 0)
+        float Zoom = cam.orthographicSize - input.y * mouseZoomSpeed;
+        if (Zoom < 0)
         {
-            cam.orthographicSize = 0;
+            Zoom = 1;
         }
+        cam.orthographicSize = Zoom;
+
         transform.parent.Translate(input * speed * Time.deltaTime); // Translate camera based on mouse movement
         transform.parent.Rotate(Vector3.up * yRotation * Time.deltaTime * speed * 4); // Rotate camera
     }
