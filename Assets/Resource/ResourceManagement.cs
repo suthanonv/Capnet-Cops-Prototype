@@ -54,6 +54,11 @@ public class ResourceManagement : MonoBehaviour
         OnResourceChange();
     }
 
+    private void Update()
+    {
+        OnResourceChange();
+    }
+
     public void OnResourceChange()
     {
         text1.SetText(bioMass.ToString());

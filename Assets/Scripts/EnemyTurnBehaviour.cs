@@ -63,7 +63,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         if (newPath == null)
         {
             // Handle the case where no valid path was found after max attempts
-            Debug.LogWarning("No valid path found after maximum attempts.");
+            OnActionEnd();
         }
     }
 

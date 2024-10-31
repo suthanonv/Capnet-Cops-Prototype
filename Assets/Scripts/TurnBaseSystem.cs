@@ -43,7 +43,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         set
         {
             onBattlePhase = value;
-            Debug.Log(onBattlePhase);
             if (onBattlePhase == false)
             {
                 PreparationPharse.instance.SetToStartTime();
@@ -205,8 +204,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     void SwitchingSide()
     {
-
-
         if (currentTurn == Turn.Enemies)
         {
 
@@ -302,6 +299,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         if (OnBattlePhase)
         {
+            UpdateCombatPhase();
             if (IsContinueCombatPhase() == false)
             {
                 ChangeTurn();
