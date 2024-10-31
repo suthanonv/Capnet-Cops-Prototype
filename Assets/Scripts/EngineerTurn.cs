@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class EngineerTurn : EntityTurnBehaviour
 {
@@ -84,6 +85,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void WalkingButton()
     {
+        offVisual();
         BuildingMode = false;
         SelectingCharacter();
     }
@@ -111,6 +113,8 @@ public class EngineerTurn : EntityTurnBehaviour
 
     Tile previsoTile;
 
+    List<Tile> ShowedTile = new List<Tile>();
+
     private void Update()
     {
 
@@ -120,7 +124,7 @@ public class EngineerTurn : EntityTurnBehaviour
         {
             HashSet<Tile> BuidlAbleTile = ShowMoveingRange.instance.CalculatePathfindingRange(character.characterTile, BuildingRange, this.GetComponent<EntityTeam>());
             BuidlAbleTile.Remove(this.GetComponent<Character>().characterTile);
-
+            ShowedTile = BuidlAbleTile.ToList();
             if (!showedVisual)
             {
                 showedVisual = true;
@@ -159,6 +163,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
                     BuidlAbleTile.Clear();
                     Status.AvalibleActionPoint--;
+                    ShowedTile = new List<Tile>();
                     OnActionEnd();
                 }
             }
@@ -178,7 +183,13 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
-
+    void offVisual()
+    {
+        foreach (Tile i in ShowedTile)
+        {
+            i.ShowRangeVisual = false;
+        }
+    }
 
 
 
@@ -191,7 +202,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
 
 
-
+        offVisual();
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)

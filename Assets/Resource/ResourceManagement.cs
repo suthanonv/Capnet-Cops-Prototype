@@ -58,7 +58,7 @@ public class ResourceManagement : MonoBehaviour
     {
         text1.SetText(bioMass.ToString());
         text2.SetText(scrap.ToString());
-        text3.SetText(humanResource.ToString());
+        //text3.SetText(humanResource.ToString());
     }
 
     public void SaveResource()
