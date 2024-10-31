@@ -1,0 +1,91 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class MainMenuSceneController : MonoBehaviour
+{
+    public Animator animator;
+    public bool fadeInFinished = false;
+
+    //used for exiting game
+    private float timer;
+    [SerializeField] private float holdDuration = 3f;
+
+    //for executing the "cutscene"
+    MainMenuStartGame mainMenuStart;
+
+    //when "cutscene" finishes
+    private float switchSceneTimer;
+    [SerializeField] private float switchSceneDuration = 1.5f;
+
+    //setting scene where the game takes place (this is where you'll update if more stages are added)
+
+    void Start()
+    {
+        mainMenuStart = GetComponent<MainMenuStartGame>();
+    }
+    void Update()
+    {
+        //if player presses 'Escape' for 'holdDuration' it will ExitGame()
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            timer = Time.time;
+        }
+        else if (Input.GetKey(KeyCode.Escape))
+        {
+            if (Time.time - timer > holdDuration)
+            {
+                timer = float.PositiveInfinity;
+                //I copied this code from: https://discussions.unity.com/t/solved-hold-button-for-3-seconds/652471/3 since it seems to work pretty well
+                SceneFadeOut();
+            }
+        }
+        else
+        {
+            timer = float.PositiveInfinity;
+        }
+
+        //if player presses any key it will initiate the start of the game
+        if(mainMenuStart.startFinished == true)//only starts when all animations in MainMenuStartGame have finished running
+        {
+            SceneCutToBlack();
+            switchSceneTimer = Time.time;
+            //waits for switchSceneDuration to get to zero before switching scenes
+            if (Time.time - switchSceneTimer > switchSceneDuration)
+            {
+                //adapted code from exit game.
+                timer = float.PositiveInfinity;
+                SceneManager.LoadScene("");
+            }
+            else
+            {
+                timer = float.PositiveInfinity;
+            }
+        }
+
+    }
+
+    public void SceneCutToBlack()
+    {
+        animator.SetTrigger("CutToBlack");
+    }
+
+    public void SceneFadeOut()
+    {
+        animator.SetTrigger("FadeOut");
+    }
+
+    public void OnFadeInComplete()
+    {
+        fadeInFinished = true;
+    }
+
+    public void OnFadeComplete()
+    {
+        Application.Quit();
+        Debug.Log("Exited Game");
+    }
+}
