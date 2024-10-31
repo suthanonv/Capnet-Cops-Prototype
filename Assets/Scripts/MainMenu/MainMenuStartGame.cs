@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MainMenuStartGame : MonoBehaviour
@@ -9,7 +10,7 @@ public class MainMenuStartGame : MonoBehaviour
     public bool start = false;
     private bool textFadeOutFinished = false;
     public bool startFinished = false;
-    
+
     void Start()
     {
         mainMenuSceneController = GetComponent<MainMenuSceneController>();
@@ -19,15 +20,16 @@ public class MainMenuStartGame : MonoBehaviour
     
     void Update()
     {
-        if(mainMenuSceneController.fadeInFinished && !Input.GetKeyDown(KeyCode.Escape))
+        if (mainMenuSceneController.fadeInFinished && Input.GetKeyDown(KeyCode.Space))
         {
             //only allow start game after fade in has finished
             start = true;
             Debug.Log("Game is starting.");
-            animator.SetTrigger("FadeOut");
+            animator.SetTrigger("FadeOutText");
         }
         if (textFadeOutFinished)
         {
+            Debug.Log("TextFadeOut finished");
             //cutting it short for now to test that it works. Later this will be the actual asteroid cutscene.
             startFinished = true;
         }

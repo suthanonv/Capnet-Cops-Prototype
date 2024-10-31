@@ -26,6 +26,7 @@ public class MainMenuSceneController : MonoBehaviour
     void Start()
     {
         mainMenuStart = GetComponent<MainMenuStartGame>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -40,6 +41,7 @@ public class MainMenuSceneController : MonoBehaviour
             {
                 timer = float.PositiveInfinity;
                 //I copied this code from: https://discussions.unity.com/t/solved-hold-button-for-3-seconds/652471/3 since it seems to work pretty well
+                Debug.Log("Exit game FadeOut");
                 SceneFadeOut();
             }
         }
@@ -51,19 +53,24 @@ public class MainMenuSceneController : MonoBehaviour
         //if player presses any key it will initiate the start of the game
         if(mainMenuStart.startFinished == true)//only starts when all animations in MainMenuStartGame have finished running
         {
+            Debug.Log("startFinished == true, now cutting to black");
             SceneCutToBlack();
-            switchSceneTimer = Time.time;
+            Debug.Log("switchSceneTimer has commenced.");
+            switchSceneTimer = Time.deltaTime;
             //waits for switchSceneDuration to get to zero before switching scenes
-            if (Time.time - switchSceneTimer > switchSceneDuration)
-            {
+            //if (Time.deltaTime - switchSceneTimer >= switchSceneDuration)
+            //{
+            //    Debug.Log("switchSceneTimer has ended: beginning load scene");
                 //adapted code from exit game.
                 timer = float.PositiveInfinity;
-                SceneManager.LoadScene("");
-            }
-            else
-            {
-                timer = float.PositiveInfinity;
-            }
+                SceneManager.GetSceneByName("BetaPresent");
+                SceneManager.LoadScene("BetaPresent");
+                Debug.Log("Loaded scene");
+            //}
+            //else
+            //{
+            //    timer = float.PositiveInfinity;
+            //}
         }
 
     }
@@ -81,11 +88,19 @@ public class MainMenuSceneController : MonoBehaviour
     public void OnFadeInComplete()
     {
         fadeInFinished = true;
+        Debug.Log("Fade in finished is TRUE");
     }
 
     public void OnFadeComplete()
     {
-        Application.Quit();
-        Debug.Log("Exited Game");
+        if(mainMenuStart.start == false)
+        {
+            Application.Quit();
+            Debug.Log("Exited Game");
+        }
+        else
+        {
+
+        }
     }
 }
