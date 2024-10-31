@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenuSceneController : MonoBehaviour
 {
+    private bool tempFixTimer;
     public Animator animator;
     public bool fadeInFinished = false;
 
@@ -55,17 +56,17 @@ public class MainMenuSceneController : MonoBehaviour
         {
             Debug.Log("startFinished == true, now cutting to black");
             SceneCutToBlack();
-            Debug.Log("switchSceneTimer has commenced.");
-            switchSceneTimer = Time.deltaTime;
+            //Debug.Log("switchSceneTimer has commenced.");
+            //switchSceneTimer = Time.deltaTime;
             //waits for switchSceneDuration to get to zero before switching scenes
             //if (Time.deltaTime - switchSceneTimer >= switchSceneDuration)
             //{
             //    Debug.Log("switchSceneTimer has ended: beginning load scene");
                 //adapted code from exit game.
-                timer = float.PositiveInfinity;
-                SceneManager.GetSceneByName("BetaPresent");
-                SceneManager.LoadScene("BetaPresent");
-                Debug.Log("Loaded scene");
+                //timer = float.PositiveInfinity;
+                //SceneManager.GetSceneByName("BetaPresent");
+                //SceneManager.LoadScene("BetaPresent");
+                //Debug.Log("Loaded scene");
             //}
             //else
             //{
@@ -102,5 +103,14 @@ public class MainMenuSceneController : MonoBehaviour
         {
 
         }
+    }
+
+    public void OnCompleteCutToBlack()
+    {
+        Debug.Log("CutToBlack 60 seconds have passed");
+        Debug.Log("Loading scene...");
+        SceneManager.GetSceneByName("BetaPresent");
+        SceneManager.LoadScene("BetaPresent");
+        Debug.Log("Loaded scene");
     }
 }
