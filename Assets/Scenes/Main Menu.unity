@@ -722,10 +722,11 @@ GameObject:
   - component: {fileID: 669911136}
   - component: {fileID: 669911135}
   - component: {fileID: 669911140}
-  - component: {fileID: 669911139}
+  - component: {fileID: 669911141}
   - component: {fileID: 669911138}
+  - component: {fileID: 669911142}
   m_Layer: 0
-  m_Name: Press Any Key
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -751,7 +752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: press any key
+  m_text: press space
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 94bac1d8a7b76ad4e9b70d5743b8daa6, type: 2}
   m_sharedMaterial: {fileID: -4616944379423455730, guid: 94bac1d8a7b76ad4e9b70d5743b8daa6,
@@ -899,7 +900,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: 0
   startFinished: 0
---- !u!95 &669911139
+--- !u!111 &669911140
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669911134}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 57bd9694eb3d71049ba6f28b7ca9ab79, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7b88aed76bb9df8428708460d3f158d5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &669911141
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -909,7 +926,7 @@ Animator:
   m_GameObject: {fileID: 669911134}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a470119e3c9ea14c8d64f71aeb9c4b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: a4ba4bf98335f0c4cb1ed943525f3da5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -920,22 +937,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &669911140
-Animation:
+--- !u!114 &669911142
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669911134}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 7b88aed76bb9df8428708460d3f158d5, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 7b88aed76bb9df8428708460d3f158d5, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea8dd6b8d0d3940943c9294133704f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 669911141}
+  fadeInFinished: 0
+  holdDuration: 3
+  switchSceneDuration: 1.5
 --- !u!1 &756712305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,8 +1271,9 @@ GameObject:
   - component: {fileID: 1107750543}
   - component: {fileID: 1107750542}
   - component: {fileID: 1107750541}
+  - component: {fileID: 1107750544}
   m_Layer: 0
-  m_Name: Logo
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1459,13 +1477,29 @@ Animation:
   m_GameObject: {fileID: 1107750537}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: ea91f314f555b3141ac989272121847b, type: 2}
   m_Animations:
-  - {fileID: 0}
+  - {fileID: 7400000, guid: ea91f314f555b3141ac989272121847b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &1107750544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107750537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea8dd6b8d0d3940943c9294133704f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1107750542}
+  fadeInFinished: 0
+  holdDuration: 3
+  switchSceneDuration: 1.5
 --- !u!1 &1241371887 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 643efe8a168933444be4936172ab7955,
@@ -2120,6 +2154,7 @@ GameObject:
   - component: {fileID: 1321090739}
   - component: {fileID: 1321090741}
   - component: {fileID: 1321090743}
+  - component: {fileID: 1321090744}
   m_Layer: 5
   m_Name: Black Screen + Scene Controller
   m_TagString: Untagged
@@ -2221,6 +2256,20 @@ MonoBehaviour:
   fadeInFinished: 0
   holdDuration: 3
   switchSceneDuration: 1.5
+--- !u!114 &1321090744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321090736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8132415ae52b544bea8cc5493eff03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: 0
+  startFinished: 0
 --- !u!1 &1441301110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,7 +2621,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9de3ca90a651d6749a12a70e46fadb54, type: 2}
+  - {fileID: 2100000, guid: be80ec22dd37a0242b20c69979a66c23, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
