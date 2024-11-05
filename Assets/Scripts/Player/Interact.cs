@@ -178,12 +178,14 @@ public class Interact : MonoBehaviour
     {
 
 
-        if (selectedCharacter == null || selectedCharacter.Moving == true && (!selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn)))
+        if (selectedCharacter == null || selectedCharacter.Moving == true && (!selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn)) || (selectedCharacter.anim.GetBool("Walking")))
             return;
-
         if (RetrievePath(out Path newPath))
         {
             DebugPath = newPath;
+            if (CameraBehaviouerControll.instance.isMoving == false)
+                selectedCharacter.Character_LookAt(currentTile);
+
             if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
             {
 

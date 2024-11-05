@@ -4,17 +4,28 @@ public class PreparationPharse : MonoBehaviour
 {
     public static PreparationPharse instance;
 
+    [Header("Light")]
+    [SerializeField] Light directionalLight;
 
+    [SerializeField] float dayIntensity;
+    [SerializeField] float nightIntensity;
+    [SerializeField] float nightTemperature;
+    [SerializeField] float dayTemperature;
+
+
+    Clock currentTime = new Clock();
+    [Header("Clock")]
 
     [SerializeField] Clock StartClockTIme = new Clock();
 
-    Clock currentTime;
     public Clock CurrentClockTime
     {
         get { return currentTime; }
         set
         {
             currentTime = value;
+            ChangeDirectionLight();
+
             if (currentTime.SecondSum() >= PhaseTransitionTime.SecondSum())
             {
                 if (TurnBaseSystem.instance.OnBattlePhase == false)
@@ -33,16 +44,12 @@ public class PreparationPharse : MonoBehaviour
 
     public Clock ClockMoveSpeed;
 
-    private void Start()
-    {
-        SetToStartTime();
-
-    }
 
 
     private void Awake()
     {
         instance = this;
+        SetToStartTime();
     }
 
     private void Update()
@@ -65,7 +72,9 @@ public class PreparationPharse : MonoBehaviour
 
     public void SetToStartTime()
     {
-        CurrentClockTime = StartClockTIme;
+        CurrentClockTime.Hour = StartClockTIme.Hour;
+        CurrentClockTime.Min = StartClockTIme.Min;
+        CurrentClockTime.Second = StartClockTIme.Second;
     }
 
 
@@ -83,7 +92,7 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Min += TimeToAdd.Min;
         CurrentClockTime.Second += TimeToAdd.Second;
         CurrentClockTime.ReSizeTime();
-
+        ChangeDirectionLight();
         if (currentTime.SecondSum() >= PhaseTransitionTime.SecondSum())
         {
             if (TurnBaseSystem.instance.OnBattlePhase == false)
@@ -94,6 +103,22 @@ public class PreparationPharse : MonoBehaviour
     }
 
 
+
+    void ChangeDirectionLight()
+    {
+        CurrentClockTime.ReSizeTime();
+
+        // Calculate hours elapsed from start time
+        int hoursElapsed = CurrentClockTime.Hour - StartClockTIme.Hour;
+
+        // Ensure `hoursElapsed` is within the day-to-night range (assuming a 12-hour cycle from 8 AM to 8 PM)
+        hoursElapsed = Mathf.Clamp(hoursElapsed, 0, 12);
+
+        // Adjust intensity and temperature based on hours elapsed
+
+        directionalLight.intensity = dayIntensity + (hoursElapsed * -(1f / 3f)); // Smooth transition to night intensity
+        directionalLight.colorTemperature = dayTemperature + (hoursElapsed * 1015f); // Smooth transition to night temperature
+    }
 
 
 

@@ -299,7 +299,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         if (OnBattlePhase)
         {
-            UpdateCombatPhase();
             if (IsContinueCombatPhase() == false)
             {
                 ChangeTurn();
@@ -310,9 +309,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 {
                     PlayerInteractScript.enabled = false;
                     ActionEnd = false;
-
-                    OnBattlePhase = isAttackPhaseEnded();
-
                     if (!OnBattlePhase)
                     {
                         return;

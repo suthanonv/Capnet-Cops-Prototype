@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     #endregion
 
     public bool IsObstacle;
-    Animator anim;
+    public Animator anim;
 
 
 
@@ -242,5 +242,11 @@ public class Character : MonoBehaviour
     {
         transform.position = Vector3.Lerp(origin, destination, duration);
         transform.rotation = Quaternion.LookRotation(origin.DirectionTo(destination).Flat(), Vector3.up);
+    }
+
+    public void Character_LookAt(Tile Destination)
+    {
+        Vector3 Tile_Position = new Vector3(Destination.transform.position.x, this.transform.position.y, Destination.transform.position.z);
+        transform.LookAt(Tile_Position);
     }
 }
