@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum PlayerActionUiButton
 {
@@ -17,7 +18,7 @@ public class PlayerActionUI : MonoBehaviour
     bool enable = false;
 
     public GameObject cam;
-    
+
     public GameObject behemoth;
 
 
@@ -86,9 +87,10 @@ public class PlayerActionUI : MonoBehaviour
 
         Troops.AttackingButton();
     }
-
+    public UnityEvent EndPhaseEvent = new UnityEvent();
     public void EndPhase()
     {
+        EndPhaseEvent.Invoke();
         CameraBehaviouerControll.instance.ResetTransform();
         EnableUI = false;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;

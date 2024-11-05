@@ -56,6 +56,11 @@ public class Interact : MonoBehaviour
     private void Update()
     {
         Clear();
+
+        if (Input.GetKeyDown(KeyCode.Escape) && selectedCharacter != null)
+        {
+            PlayerActionUI.instance.EndPhase();
+        }
         MouseUpdate();
     }
 
@@ -83,8 +88,9 @@ public class Interact : MonoBehaviour
             }
         }
         else
+        {
             NavigateToTile();
-
+        }
 
     }
 

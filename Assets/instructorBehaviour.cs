@@ -25,11 +25,11 @@ public class instructorBehaviour : EntityTurnBehaviour
     }
     public override void onTurn()
     {
+        CameraBehaviouerControll.instance.LookAtTarget(this.transform);
+        CameraBehaviouerControll.instance.LookAtTarget(null);
 
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            CameraBehaviouerControll.instance.LookAtTarget(this.transform);
-            CameraBehaviouerControll.instance.LookAtTarget(null);
 
             PlayerActionUI.instance.Troops = this;
             SelectingCharacter();
