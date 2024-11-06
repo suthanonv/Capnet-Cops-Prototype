@@ -43,7 +43,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         set
         {
             onBattlePhase = value;
-            if (onBattlePhase == false)
+            if (onBattlePhase == false && PreparationPharse.instance.CurrentClockTime.SecondSum() >= PreparationPharse.instance.PhaseTransitionTime.SecondSum())
             {
                 PreparationPharse.instance.SetToStartTime();
                 PlayerActionUI.instance.EnableUI = false;

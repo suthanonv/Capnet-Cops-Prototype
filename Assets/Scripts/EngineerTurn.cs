@@ -184,7 +184,6 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public void offVisual()
     {
-        Debug.Log("Called");
         foreach (Tile i in ShowedTile)
         {
             i.ShowRangeVisual = false;

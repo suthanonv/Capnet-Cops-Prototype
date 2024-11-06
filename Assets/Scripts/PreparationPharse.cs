@@ -24,7 +24,6 @@ public class PreparationPharse : MonoBehaviour
         set
         {
             currentTime = value;
-            ChangeDirectionLight();
 
             if (currentTime.SecondSum() >= PhaseTransitionTime.SecondSum())
             {
@@ -72,6 +71,7 @@ public class PreparationPharse : MonoBehaviour
 
     public void SetToStartTime()
     {
+        Debug.Log("StartTime");
         CurrentClockTime.Hour = StartClockTIme.Hour;
         CurrentClockTime.Min = StartClockTIme.Min;
         CurrentClockTime.Second = StartClockTIme.Second;
@@ -83,6 +83,7 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Hour = PhaseTransitionTime.Hour;
         CurrentClockTime.Min = PhaseTransitionTime.Min;
         CurrentClockTime.Second = PhaseTransitionTime.Second;
+        ChangeDirectionLight();
 
     }
 
