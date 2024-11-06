@@ -80,7 +80,9 @@ public class PreparationPharse : MonoBehaviour
 
     public void SetToAttackTime()
     {
-        CurrentClockTime = PhaseTransitionTime;
+        CurrentClockTime.Hour = PhaseTransitionTime.Hour;
+        CurrentClockTime.Min = PhaseTransitionTime.Min;
+        CurrentClockTime.Second = PhaseTransitionTime.Second;
 
     }
 

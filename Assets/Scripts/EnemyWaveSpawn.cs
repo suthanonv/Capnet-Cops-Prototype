@@ -19,8 +19,8 @@ public class EnemyWaveSpawn : MonoBehaviour
 
     public void StartEnemyWave()
     {
-        Debug.Log(CurrentWave);
-        EnemySpawnPoint.Instance.SpawningWave(CurrentWave);
+        if (PreparationPharse.instance.CurrentClockTime.SecondSum() >= PreparationPharse.instance.PhaseTransitionTime.SecondSum())
+            EnemySpawnPoint.Instance.SpawningWave(CurrentWave);
     }
 
 

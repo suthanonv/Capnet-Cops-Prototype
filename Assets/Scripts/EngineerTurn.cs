@@ -155,18 +155,14 @@ public class EngineerTurn : EntityTurnBehaviour
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.ClearHighlight();
 
 
-                    foreach (Tile tile in BuidlAbleTile)
-                    {
-                        tile.ShowRangeVisual = false;
-                    }
+
 
                     Instantiate(Turret, TurnBaseSystem.instance.PlayerInteractScript.currentTile.transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
 
+                    TurnBaseSystem.instance.PlayerInteractScript.currentTile.ShowRangeVisual = false;
 
-
-                    BuidlAbleTile.Clear();
                     Status.AvalibleActionPoint--;
-                    ShowedTile = new List<Tile>();
+
                     OnActionEnd();
                 }
             }
@@ -193,6 +189,8 @@ public class EngineerTurn : EntityTurnBehaviour
         {
             i.ShowRangeVisual = false;
         }
+
+        ShowedTile = new List<Tile>();
     }
 
 
@@ -206,7 +204,12 @@ public class EngineerTurn : EntityTurnBehaviour
     {
 
 
-        offVisual();
+        if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
+        {
+            BuildingMode = false;
+            offVisual();
+        }
+
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)

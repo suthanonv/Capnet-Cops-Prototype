@@ -313,7 +313,10 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                     {
                         return;
                     }
+                    Debug.Log($"{TurnNum} {enemiesTurnSystems.List.Count}");
 
+
+                    if (TurnNum >= enemiesTurnSystems.List.Count) TurnNum = 0;
                     enemiesTurnSystems.List[TurnNum].onTurn();
                 }
                 else if (ActionEnd && currentTurn == Turn.Player)
