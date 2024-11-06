@@ -111,6 +111,6 @@ public class MainMenuSceneController : MonoBehaviour
         Debug.Log("Loading scene...");
         SceneManager.GetSceneByName("BetaPresent");
         SceneManager.LoadScene("BetaPresent");
-        Debug.Log("Loaded scene");
+        Debug.Log("Loaded scene");//loading scene needs to be fixed, it doesnt work rn
     }
 }
