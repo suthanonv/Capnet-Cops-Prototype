@@ -21,6 +21,10 @@ public class EnemyHealth : Health
     public override void Died()
     {
         OnDied.Invoke();
+        if (this.transform.GetChild(1).GetComponent<Animator>().GetBool("Walking"))
+        {
+            TurnBaseSystem.instance.ActionEnd = true;
+        }
         base.Died();
         this.GetComponent<Biomass>().OnDie();
     }

@@ -4,10 +4,10 @@ public class CameraBehaviouerControll : MonoBehaviour
 {
     public static CameraBehaviouerControll instance;
     public Transform origin;
-    
+
     public float speed = 2f;
     private float elapsedTime = 0f;
-    private bool isMoving = false;
+    public bool isMoving = false;
     private GameObject targetTransform;
 
     private void Start()
@@ -47,11 +47,11 @@ public class CameraBehaviouerControll : MonoBehaviour
         float startYRotation = transform.parent.transform.eulerAngles.y;
         float endYRotation = targetTransform.transform.eulerAngles.y;
         float yRotation = Mathf.LerpAngle(startYRotation, endYRotation, t);
-        
+
         transform.parent.transform.rotation = Quaternion.Euler(transform.parent.transform.rotation.eulerAngles.x,
             yRotation, transform.parent.transform.rotation.eulerAngles.z);
 
-        if (t >= 1f)
+        if (t >= 0.1f)
         {
             isMoving = false;
             elapsedTime = 0f;
@@ -60,7 +60,7 @@ public class CameraBehaviouerControll : MonoBehaviour
 
     private void Update()
     {
-        if(isMoving) Moving();
+        if (isMoving) Moving();
     }
 
     public void ResetTransform()

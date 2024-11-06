@@ -42,6 +42,8 @@ public class EngineerTurn : EntityTurnBehaviour
             cost = GameObject.Find("Cost");
         }
 
+        PlayerActionUI.instance.EndPhaseEvent.AddListener(offVisual);
+
     }
     public override void onTurn()
     {
@@ -184,8 +186,9 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
-    void offVisual()
+    public void offVisual()
     {
+        Debug.Log("Called");
         foreach (Tile i in ShowedTile)
         {
             i.ShowRangeVisual = false;
@@ -259,4 +262,10 @@ public class EngineerTurn : EntityTurnBehaviour
         this.GetComponent<Character>().WalkAble = true;
     }
 
+
+    private void OnDestroy()
+    {
+        PlayerActionUI.instance.EndPhaseEvent.RemoveListener(offVisual);
+
+    }
 }
