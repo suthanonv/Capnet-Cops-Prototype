@@ -707,8 +707,8 @@ GameObject:
   - component: {fileID: 414275116412817439}
   - component: {fileID: 5089411448761358151}
   - component: {fileID: 1483426297274731518}
-  - component: {fileID: 6098785323685021964}
   - component: {fileID: 5633291526766710156}
+  - component: {fileID: 8647000432467834576}
   m_Layer: 0
   m_Name: AttackRadius
   m_TagString: Untagged
@@ -781,8 +781,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6098785323685021964
-CapsuleCollider:
+--- !u!114 &5633291526766710156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750765137391738297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be56e09e53889e54f9eb3b945b6aba05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyToAttack: {fileID: 0}
+--- !u!65 &8647000432467834576
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -799,24 +812,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5633291526766710156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750765137391738297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be56e09e53889e54f9eb3b945b6aba05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyToAttack: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 11.775808, y: 1.9999894, z: 6.998375}
+  m_Center: {x: 0.2784204, y: 0, z: 0.020288302}
 --- !u!1 &2268462547538327775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1535,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   IsObstacle: 0
+  anim: {fileID: 0}
 --- !u!114 &4571189814728560021
 MonoBehaviour:
   m_ObjectHideFlags: 0
