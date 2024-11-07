@@ -51,7 +51,7 @@ public class CameraBehaviouerControll : MonoBehaviour
         transform.parent.transform.rotation = Quaternion.Euler(transform.parent.transform.rotation.eulerAngles.x,
             yRotation, transform.parent.transform.rotation.eulerAngles.z);
 
-        if (t >= 0.5f)
+        if (t >= 1f)
         {
             isMoving = false;
             elapsedTime = 0f;
