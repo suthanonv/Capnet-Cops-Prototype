@@ -94,8 +94,6 @@ GameObject:
   - component: {fileID: 3310310297779447410}
   - component: {fileID: 4351441279015761407}
   - component: {fileID: 7598122055883455976}
-  - component: {fileID: 5957375961179491970}
-  - component: {fileID: 1175157885188736423}
   - component: {fileID: 6056804196911012050}
   - component: {fileID: 6153940831509724713}
   m_Layer: 0
@@ -162,33 +160,6 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
---- !u!114 &5957375961179491970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396987354340793819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0595243a71295ab42a1a55f5dcf335a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EntityTeamSide: 0
-  TypeOfTarget: 3
---- !u!114 &1175157885188736423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396987354340793819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2846e963330b1449bb10e9f7ba626e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Maxhealth: 100
 --- !u!136 &6056804196911012050
 CapsuleCollider:
   m_ObjectHideFlags: 0

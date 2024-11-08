@@ -30,7 +30,6 @@ public class Interact : MonoBehaviour
 
                 pathDraw.ClearPaht();
 
-                ShowMoveingRange.instance.CloseMovingRangeVisual();
             }
 
             CharacterDebug = value;
@@ -144,13 +143,14 @@ public class Interact : MonoBehaviour
 
     public void SelectCharacter(Character charecter)
     {
+        Debug.Log("Call");
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
 
         PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
         pathDraw.ClearPaht();
 
-        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
 
 
@@ -179,6 +179,10 @@ public class Interact : MonoBehaviour
         if (RetrievePath(out Path newPath))
         {
             DebugPath = newPath;
+
+            Debug.Log(selectedCharacter.characterTile == null);
+            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+
             if (CameraBehaviouerControll.instance.isMoving == false)
                 selectedCharacter.Character_LookAt(currentTile);
 

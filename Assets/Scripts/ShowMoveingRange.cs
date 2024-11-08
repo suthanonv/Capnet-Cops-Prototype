@@ -24,12 +24,16 @@ public class ShowMoveingRange : MonoBehaviour
     public void ShowCharacterMoveRange(Tile centerTile, EntityStat moveData, EntityTeam entityTeam)
     {
         // If the center tile is the same as before, do nothing
-        if (TurnBaseSystem.instance.OnBattlePhase == false) return;
 
+        if (TurnBaseSystem.instance.OnBattlePhase == false || centerTile == previousCenter) return;
+
+
+        previousCenter = centerTile;
+
+        Debug.Log(previousCenter == null);
         // Set the new center tile
 
         // Clear the previous tile range
-        CloseMovingRangeVisual();
 
 
 
@@ -182,7 +186,8 @@ public class ShowMoveingRange : MonoBehaviour
 
     public void CloseMovingRangeVisual()
     {
-        // Hide the range visual for all tiles
+        Debug.Log("Clear");
+
         foreach (Tile tile in currentTileRange)
         {
             tile.ShowRangeVisual = false;

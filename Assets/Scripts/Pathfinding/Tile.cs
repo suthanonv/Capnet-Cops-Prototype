@@ -4,7 +4,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
 
-
+    GameObject HighLightTile;
 
     #region member fields
     public Tile parent;
@@ -44,6 +44,8 @@ public class Tile : MonoBehaviour
         }
     }
 
+
+
     public bool IsInAttackRange
     {
         get
@@ -79,7 +81,7 @@ public class Tile : MonoBehaviour
         set
         {
             showVisual = value;
-
+            HighLightTile.SetActive(value);
             if (!OnHighlight)
             {
                 if (!showVisual)
@@ -97,10 +99,11 @@ public class Tile : MonoBehaviour
                             if (team.EntityTeamSide == Team.Enemy)
                             {
                                 newColor = MaterialStorage.Instance.Red;
+                                SetColor(newColor);
+
                             }
                         }
                     }
-                    SetColor(newColor);
                 }
             }
         }
@@ -115,7 +118,24 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        SetColor(baseMaterial);
+        try
+        {
+            SetColor(baseMaterial);
+            if (this.transform.childCount < 2)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                HighLightTile = this.transform.GetChild(1).gameObject;
+                HighLightTile.SetActive(false);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     Dictionary<int, Color> costMap = new Dictionary<int, Color>()
@@ -183,6 +203,7 @@ public class Tile : MonoBehaviour
                 }
             }
 
+        //HighLightTile.GetComponent<MeshRenderer>().material = color;
     }
 
     /*
