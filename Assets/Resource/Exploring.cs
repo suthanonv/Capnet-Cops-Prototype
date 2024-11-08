@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class Exploring : MonoBehaviour
 {
+    public static Exploring Instance;
+
 
     [SerializeField] private GameObject resourceManagement;
 
@@ -19,6 +21,7 @@ public class Exploring : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         if (resourceManagement == null)
         {
             resourceManagement = GameObject.Find("ResourceManagement");

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum Target
 {
-    Player, Turret, Base
+    Player, Turret, Base, None
 }
 public enum Turn
 {
@@ -47,8 +47,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             {
                 PreparationPharse.instance.SetToStartTime();
                 PlayerActionUI.instance.EnableUI = false;
-                TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
-                TurnBaseSystem.instance.PlayerInteractScript.enabled = true;// make player can choosing a tile to moving
+                PlayerInteractScript.selectedCharacter = null;
+                PlayerInteractScript.enabled = true;// make player can choosing a tile to moving
             }
         }
     }

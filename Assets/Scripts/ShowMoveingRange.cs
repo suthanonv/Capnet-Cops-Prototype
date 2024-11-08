@@ -114,6 +114,8 @@ public class ShowMoveingRange : MonoBehaviour
 
     public HashSet<Tile> CalculatePathfindingRange(Tile centerTile, int range, EntityTeam entityTeam)
     {
+        Debug.Log($"cetner {centerTile == null} : EntityTeam {entityTeam == null}");
+
         HashSet<Tile> tilesInRange = new HashSet<Tile>();
         Queue<Tile> tilesToProcess = new Queue<Tile>();
 

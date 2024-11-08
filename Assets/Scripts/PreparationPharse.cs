@@ -48,6 +48,10 @@ public class PreparationPharse : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
         SetToStartTime();
     }
 
@@ -75,6 +79,9 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Hour = StartClockTIme.Hour;
         CurrentClockTime.Min = StartClockTIme.Min;
         CurrentClockTime.Second = StartClockTIme.Second;
+        ChangeDirectionLight();
+
+        EnemySpawnPoint.Instance.SpawningPod();
     }
 
 

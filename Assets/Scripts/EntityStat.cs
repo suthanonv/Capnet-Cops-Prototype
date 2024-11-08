@@ -1,7 +1,7 @@
 [System.Serializable]
 public class EntityStat
 {
-   public  int BaseDamage = 50;
+    public int BaseDamage = 50;
 
     public int Speed = 1;
 

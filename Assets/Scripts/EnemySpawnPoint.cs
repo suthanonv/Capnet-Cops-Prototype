@@ -51,9 +51,54 @@ public class EnemySpawnPoint : MonoBehaviour
     }
 
 
+    List<GameObject> Pods = new List<GameObject>();
+
+    [SerializeField] GameObject Pod_Prefab;
+    public void SpawningPod()
+    {
+        Pods.RemoveAll(i => i == null);
+        if (Pods.Count == 0)
+            PodSpawn(2, Pod_Prefab);
+    }
+
+
+    public void PodSpawn(int AmountToSpawn, GameObject Pod)
+    {
+        List<Tile> SpawnAbleTile = new List<Tile>();
+
+        HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, EnemySpawnDistance, en);
+
+        // Calculate the attack range based on the movement range
+        HashSet<Tile> attackRange = ShowMoveingRange.instance.CalculateAttackRange(moveRange, EnemySpawningRange + EnemySpawnDistance, en);
+
+
+        attackRange.ExceptWith(moveRange);
+
+        List<int> IndexOfTilToSpawnEnemy = new List<int>();
 
 
 
+
+
+        for (int i = 0; i < AmountToSpawn; i++)
+        {
+            bool addedNum = false;
+
+            while (!addedNum)
+            {
+                int newIndex = Random.Range(0, attackRange.Count() - 1);
+
+                if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false)
+                {
+                    IndexOfTilToSpawnEnemy.Add(newIndex);
+
+                    GameObject PodNew = Instantiate(Pod, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+                    Pods.Add(PodNew);
+                    addedNum = true;
+                }
+            }
+        }
+    }
 
 
     public void SpawningWave(int CurrentWave)
