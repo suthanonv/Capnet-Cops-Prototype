@@ -20,7 +20,7 @@ public class MainMenuSceneController : MonoBehaviour
 
     //when "cutscene" finishes
     private float switchSceneTimer;
-    [SerializeField] private float switchSceneDuration = 1.5f;
+    //[SerializeField] private float switchSceneDuration = 1.5f;
 
     //setting scene where the game takes place (this is where you'll update if more stages are added)
 
