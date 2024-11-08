@@ -193,7 +193,6 @@ public class Character : MonoBehaviour
             Vector3 destination = target.transform.position;
 
             transform.rotation = Quaternion.LookRotation(origin.DirectionTo(destination).Flat(), Vector3.up);
-            this.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
             anim.gameObject.GetComponent<AnimationControll>().Target = target;
             anim.SetTrigger("Attacking");
             CanAttack = false;

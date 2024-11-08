@@ -160,22 +160,12 @@ public class Interact : MonoBehaviour
         if (charecter == null) TurnBaseSystem.instance.ActionEnd = true;
 
 
-        if (selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour entity))
-        {
-            if (TurnBaseSystem.instance.OnBattlePhase)
-                ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, entity.Status, selectedCharacter.GetComponent<EntityTeam>());
-
-
-        }
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         }
-        else
-        {
-            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
-        }
+
 
         GetComponent<AudioSource>().PlayOneShot(pop);
     }
@@ -197,6 +187,7 @@ public class Interact : MonoBehaviour
 
                 GetComponent<AudioSource>().PlayOneShot(click);
 
+                ShowMoveingRange.instance.CloseMovingRangeVisual();
                 selectedCharacter.StartMove(newPath);
 
             }
@@ -220,10 +211,8 @@ public class Interact : MonoBehaviour
         }
 
 
-        Attacking = TurnBaseSystem.instance.OnBattlePhase && selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.ActionPoint > 0;
+        Attacking = TurnBaseSystem.instance.OnBattlePhase && selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0;
 
-
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         path = pathfinder.FindPath(selectedCharacter.characterTile, currentTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>(), Attacking);
 

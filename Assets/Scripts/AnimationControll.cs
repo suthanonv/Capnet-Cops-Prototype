@@ -18,6 +18,7 @@ public class AnimationControll : MonoBehaviour
         {
 
             this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
+            Debug.Log(this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint);
             Target.TakeDamage(EntityTurn.Status.BaseDamage);
         }
     }

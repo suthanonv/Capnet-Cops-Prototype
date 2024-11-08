@@ -24,10 +24,9 @@ public class ShowMoveingRange : MonoBehaviour
     public void ShowCharacterMoveRange(Tile centerTile, EntityStat moveData, EntityTeam entityTeam)
     {
         // If the center tile is the same as before, do nothing
-        if (previousCenter == centerTile || TurnBaseSystem.instance.OnBattlePhase == false) return;
+        if (TurnBaseSystem.instance.OnBattlePhase == false) return;
 
         // Set the new center tile
-        previousCenter = centerTile;
 
         // Clear the previous tile range
         CloseMovingRangeVisual();
@@ -60,7 +59,7 @@ public class ShowMoveingRange : MonoBehaviour
 
                 if (tile.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
-                    if ((teamCheck.EntityTeamSide == Team.Enemy))
+                    if ((teamCheck.EntityTeamSide == Team.Enemy) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
                     {
                         tile.ShowRangeVisual = true;
                     }
@@ -114,7 +113,6 @@ public class ShowMoveingRange : MonoBehaviour
 
     public HashSet<Tile> CalculatePathfindingRange(Tile centerTile, int range, EntityTeam entityTeam)
     {
-        Debug.Log($"cetner {centerTile == null} : EntityTeam {entityTeam == null}");
 
         HashSet<Tile> tilesInRange = new HashSet<Tile>();
         Queue<Tile> tilesToProcess = new Queue<Tile>();

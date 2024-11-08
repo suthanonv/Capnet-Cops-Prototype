@@ -87,7 +87,6 @@ public class Pathfinder : MonoBehaviour
     {
         const float HEXAGONAL_OFFSET = 1.75f;
         List<Tile> tiles = new List<Tile>();
-        Debug.Log($"origin {origin == null} ,typeOfEntity {typeOfEntity == null} , destination {destination == null} ");
         Vector3 direction = Vector3.forward * (origin.GetComponent<MeshFilter>().sharedMesh.bounds.extents.x * HEXAGONAL_OFFSET);
         float rayLength = 4f;
         float rayHeightOffset = 1f;
