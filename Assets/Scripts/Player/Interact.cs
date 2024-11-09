@@ -144,7 +144,6 @@ public class Interact : MonoBehaviour
     public void SelectCharacter(Character charecter)
     {
         Debug.Log("Call");
-        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
 
         PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
@@ -166,6 +165,8 @@ public class Interact : MonoBehaviour
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         }
 
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         GetComponent<AudioSource>().PlayOneShot(pop);
     }
@@ -176,12 +177,14 @@ public class Interact : MonoBehaviour
 
         if (selectedCharacter == null || selectedCharacter.Moving == true && (!selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn)) || (selectedCharacter.anim.GetBool("Walking")))
             return;
+
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+
         if (RetrievePath(out Path newPath))
         {
             DebugPath = newPath;
 
             Debug.Log(selectedCharacter.characterTile == null);
-            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
             if (CameraBehaviouerControll.instance.isMoving == false)
                 selectedCharacter.Character_LookAt(currentTile);

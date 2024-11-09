@@ -44,6 +44,8 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     void SelectingCharacter()
     {
+        TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
+
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUiLayOut.instance.EnableUI = true;
         OpenUi();

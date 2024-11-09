@@ -52,6 +52,44 @@ public class ShowMoveingRange : MonoBehaviour
 
         // Mark all tiles in movement range
 
+        currentTileRange = moveRange;
+
+
+
+        foreach (Tile tile in moveRange)
+        {
+
+            tile.IsInAttackRange = true;
+
+            if (tile.occupyingCharacter != null)
+            {
+                if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
+                {
+                    if (teamCheck.EntityTeamSide == Team.Enemy)
+                    {
+                        tile.ShowRangeVisual = true;
+                    }
+                }
+            }
+            else
+            {
+                tile.ShowRangeVisual = true;
+            }
+
+        }
+
+
+
+
+
+
+
+        if (entityTeam.gameObject.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turnStatus))
+        {
+            if (turnStatus.Status.AvalibleActionPoint <= 0) return;
+        }
+
+
         currentAttackRange = attackRange;
         foreach (Tile tile in attackRange)
         {
@@ -75,40 +113,6 @@ public class ShowMoveingRange : MonoBehaviour
         }
 
 
-        currentTileRange = moveRange;
-
-
-
-
-
-
-
-        if (entityTeam.gameObject.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turnStatus))
-        {
-            if (turnStatus.Status.AvalibleActionPoint <= 0) return;
-        }
-
-        foreach (Tile tile in moveRange)
-        {
-
-            tile.IsInAttackRange = true;
-
-            if (tile.occupyingCharacter != null)
-            {
-                if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
-                {
-                    if (teamCheck.EntityTeamSide == Team.Enemy)
-                    {
-                        tile.ShowRangeVisual = true;
-                    }
-                }
-            }
-            else
-            {
-                tile.ShowRangeVisual = true;
-            }
-
-        }
 
         // Mark all tiles in attack range
 
@@ -186,7 +190,7 @@ public class ShowMoveingRange : MonoBehaviour
 
     public void CloseMovingRangeVisual()
     {
-        Debug.Log("Clear");
+        previousCenter = null;
 
         foreach (Tile tile in currentTileRange)
         {
@@ -201,6 +205,5 @@ public class ShowMoveingRange : MonoBehaviour
         // Clear the current tile ranges
         currentTileRange.Clear();
         currentAttackRange.Clear();
-        previousCenter = null;
     }
 }

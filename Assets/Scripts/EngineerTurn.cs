@@ -201,6 +201,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void OnActionEnd()
     {
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
 
         if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
@@ -251,6 +252,8 @@ public class EngineerTurn : EntityTurnBehaviour
     {
         OpenUI();
         Invoke("EnableWalk", 0.1f);
+        TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
+
         PlayerActionUiLayOut.instance.EnableUI = true;
         PlayerActionUI.instance.EnableUI = true;
         PlayerActionUI.instance.Troops = this;
