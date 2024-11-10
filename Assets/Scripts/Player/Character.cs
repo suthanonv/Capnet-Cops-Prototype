@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
-
 public class Character : MonoBehaviour
 {
     #region member fields
@@ -128,6 +128,16 @@ public class Character : MonoBehaviour
 
         float animationTime = 0f;
 
+        if (this.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+        {
+            Path clonedPath = new Path();
+
+            // Clone the tiles array
+            clonedPath.tiles = (Tile[])path.tiles.Clone();
+            PathIllustrator.instance.IllustratePath(clonedPath, Stat);
+        }
+
+
         while (currentStep < movingPath.tiles.Length)
         {
             anim.SetBool("Walking", true);
@@ -148,6 +158,17 @@ public class Character : MonoBehaviour
                 else PreparationPharse.instance.AddingTimeToCurrentTime(PreparationPharse.instance.MovementCost);
             }
             currentTile = movingPath.tiles[currentStep];
+
+            if (this.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+            {
+                Path clonedPath = new Path();
+
+                // Clone the tiles array
+                clonedPath.tiles = (Tile[])movingPath.tiles.Clone();
+                clonedPath.tiles = clonedPath.tiles.Skip(currentStep).Take(movingPath.tiles.Count()).ToArray();
+                PathIllustrator.instance.IllustratePath(clonedPath, Stat);
+            }
+
             currentStep++;
             animationTime = 0f;
         }

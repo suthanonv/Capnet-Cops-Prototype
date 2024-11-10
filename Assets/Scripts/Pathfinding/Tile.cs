@@ -128,6 +128,7 @@ public class Tile : MonoBehaviour
             else
             {
                 HighLightTile = this.transform.GetChild(1).gameObject;
+
                 HighLightTile.SetActive(false);
             }
         }
@@ -206,6 +207,17 @@ public class Tile : MonoBehaviour
         //HighLightTile.GetComponent<MeshRenderer>().material = color;
     }
 
+
+    void ChangeHighLightColor(Material Newmaterials)
+    {
+
+        MeshRenderer renderer = HighLightTile.GetComponent<MeshRenderer>();
+        Material[] materials = renderer.materials;
+        materials[1] = Newmaterials;
+        renderer.materials = materials;
+
+        Debug.Log(HighLightTile.GetComponent<MeshRenderer>().materials[1].name);
+    }
     /*
     public void DebugCostText()
     {

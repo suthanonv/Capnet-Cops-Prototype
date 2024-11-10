@@ -8,5 +8,7 @@ public class MaterialStorage : MonoBehaviour
     public Material White;
     public Material Red;
     public Material Cyan;
+    public Material RedNeon;
+    public Material CyanNeon;
 
 }

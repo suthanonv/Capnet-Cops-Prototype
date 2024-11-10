@@ -184,7 +184,6 @@ public class Interact : MonoBehaviour
         {
             DebugPath = newPath;
 
-            Debug.Log(selectedCharacter.characterTile == null);
 
             if (CameraBehaviouerControll.instance.isMoving == false)
                 selectedCharacter.Character_LookAt(currentTile);
