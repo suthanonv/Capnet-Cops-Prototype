@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 public class EnemyWaveSpawn : MonoBehaviour
 {
     public static EnemyWaveSpawn instance;
@@ -17,10 +17,12 @@ public class EnemyWaveSpawn : MonoBehaviour
     public int CurrentWave { get { return currentWave; } set { currentWave = value; } }
 
 
+    public UnityEvent SpawningEnemy = new UnityEvent();
+
     public void StartEnemyWave()
     {
         if (PreparationPharse.instance.CurrentClockTime.SecondSum() >= PreparationPharse.instance.PhaseTransitionTime.SecondSum())
-            EnemySpawnPoint.Instance.SpawningWave(CurrentWave);
+            SpawningEnemy.Invoke();
     }
 
 

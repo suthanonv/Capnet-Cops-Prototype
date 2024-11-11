@@ -55,4 +55,7 @@ public class EntityStat
 
         }
     }
+
+
+    public bool IsWalking { get; set; } = false;
 }

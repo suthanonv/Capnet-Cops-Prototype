@@ -80,7 +80,8 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Min = StartClockTIme.Min;
         CurrentClockTime.Second = StartClockTIme.Second;
         ChangeDirectionLight();
-
+        EnemyWaveSpawn.instance.CurrentWave++;
+        EnemySpawnPoint.Instance.SpawningWave(EnemyWaveSpawn.instance.CurrentWave);
         EnemySpawnPoint.Instance.SpawningPod();
     }
 
@@ -91,7 +92,7 @@ public class PreparationPharse : MonoBehaviour
         CurrentClockTime.Min = PhaseTransitionTime.Min;
         CurrentClockTime.Second = PhaseTransitionTime.Second;
         ChangeDirectionLight();
-
+        EnemyWaveSpawn.instance.StartEnemyWave();
     }
 
 
@@ -136,7 +137,6 @@ public class PreparationPharse : MonoBehaviour
     public void StartEnemyWave()
     {
 
-        EnemyWaveSpawn.instance.CurrentWave++;
         EnemyWaveSpawn.instance.StartEnemyWave();
     }
 

@@ -76,7 +76,7 @@ public class Interact : MonoBehaviour
     {
         if (EnableInteracting == false) return;
 
-        if (currentTile.Occupied)
+        if (currentTile.Occupied && currentTile.occupyingCharacter != null)
         {
             if (currentTile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamSide))
             {

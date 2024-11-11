@@ -134,6 +134,7 @@ public class Character : MonoBehaviour
 
             // Clone the tiles array
             clonedPath.tiles = (Tile[])path.tiles.Clone();
+            Stat.IsWalking = true;
             PathIllustrator.instance.IllustratePath(clonedPath, Stat);
         }
 
@@ -141,6 +142,7 @@ public class Character : MonoBehaviour
         while (currentStep < movingPath.tiles.Length)
         {
             anim.SetBool("Walking", true);
+            Stat.IsWalking = anim.GetBool("Walking");
             yield return null;
 
             Vector3 nextTilePosition = movingPath.tiles[currentStep].transform.position;
@@ -174,6 +176,7 @@ public class Character : MonoBehaviour
         }
 
         anim.SetBool("Walking", false);
+        Stat.IsWalking = anim.GetBool("Walking");
 
         FinalizePosition(movingPath.tiles[movingPath.tiles.Length - 1]);
 

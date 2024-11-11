@@ -53,8 +53,9 @@ public class PathIllustrator : MonoBehaviour
             }
         }
 
-        // Highlight starting and ending tiles
-        path.tiles[0].Highlight();
+        if (moveData.IsWalking == false)
+            path.tiles[0].Highlight();
+
         path.tiles[loopCount - 1].Highlight();
 
         // Temporary list to store positions excluding (0, 0, 0)

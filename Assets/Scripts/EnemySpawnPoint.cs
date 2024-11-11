@@ -142,7 +142,9 @@ public class EnemySpawnPoint : MonoBehaviour
                 {
                     IndexOfTilToSpawnEnemy.Add(newIndex);
 
-                    Instantiate(Enemy, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+                    attackRange.ToList()[newIndex].SetSpawnEnemy(Enemy);
+
+                    //                    Instantiate(Enemy, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
 
                     addedNum = true;
                 }

@@ -81,7 +81,11 @@ public class Tile : MonoBehaviour
         set
         {
             showVisual = value;
-            HighLightTile.SetActive(value);
+            if (HighLightTile != null)
+            {
+                HighLightTile.SetActive(value);
+
+            }
             if (!OnHighlight)
             {
                 if (!showVisual)
@@ -210,6 +214,7 @@ public class Tile : MonoBehaviour
 
     void ChangeHighLightColor(Material Newmaterials)
     {
+        if (HighLightTile == null) return;
 
         MeshRenderer renderer = HighLightTile.GetComponent<MeshRenderer>();
         Material[] materials = renderer.materials;
@@ -228,4 +233,29 @@ public class Tile : MonoBehaviour
     {
         costText.text = "";
     } */
+
+
+
+    public void SpawnEnemy()
+    {
+        ChangeHighLightColor(MaterialStorage.Instance.CyanNeon);
+        ShowRangeVisual = false;
+
+        EnemyWaveSpawn.instance.SpawningEnemy.RemoveListener(SpawnEnemy);
+        Instantiate(EnemyToSpawn, transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+
+        EnemyToSpawn = null;
+
+    }
+
+    GameObject EnemyToSpawn;
+    public void SetSpawnEnemy(GameObject Enemey)
+    {
+        EnemyToSpawn = Enemey;
+        EnemyWaveSpawn.instance.SpawningEnemy.AddListener(SpawnEnemy);
+        Occupied = true;
+        ShowRangeVisual = true;
+
+        ChangeHighLightColor(MaterialStorage.Instance.RedNeon);
+    }
 }

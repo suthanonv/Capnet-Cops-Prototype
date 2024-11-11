@@ -95,6 +95,8 @@ public class PlayerActionUI : MonoBehaviour
         EnableUI = false;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.ActionEnd = true;
+        TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
     }
 
     public void OnMouseEnter()
