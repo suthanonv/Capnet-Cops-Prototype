@@ -92,7 +92,7 @@ public class EnemySpawnPoint : MonoBehaviour
                 {
                     IndexOfTilToSpawnEnemy.Add(newIndex);
 
-                    GameObject PodNew = Instantiate(Pod, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+                    GameObject PodNew = Instantiate(Pod, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 200, 0), Quaternion.identity);
                     Pods.Add(PodNew);
                     addedNum = true;
                 }
