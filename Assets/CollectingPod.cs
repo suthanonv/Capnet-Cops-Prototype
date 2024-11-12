@@ -20,25 +20,22 @@ public class CollectingPod : MonoBehaviour
             explosion.Stop();
         }
     }
-    
+
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Exploring.Instance.OnExploringStart();
-            Destroy(this.gameObject);
-        }
+
     }
 
     private void Update()
     {
+
         if (transform.position.y <= 2)
         {
             spark.Stop();
             smoke.Stop();
             Explosion();
         }
-        else if(transform.position.y >= 2)
+        else if (transform.position.y >= 2)
         {
             spark.Play();
             smoke.Play();

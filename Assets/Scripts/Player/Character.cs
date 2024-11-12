@@ -75,7 +75,7 @@ public class Character : MonoBehaviour
         bool destinationOccupied = totalTiles > 0 && path.tiles[totalTiles - 1].occupyingCharacter != null;
 
         // Calculate required movement to reach attack range
-        int requiredSteps = Mathf.Max(0, totalTiles - movedata.AttackRange);
+        int requiredSteps = Mathf.Max(0, totalTiles - movedata.BaseAttackRange);
 
         // Adjust the path length based on whether the destination is occupied
         if (destinationOccupied)
@@ -86,7 +86,7 @@ public class Character : MonoBehaviour
         else
         {
             // Case 2: Destination is not occupied
-            pathLength = Mathf.Min(moveLimit, requiredSteps + movedata.AttackRange);
+            pathLength = Mathf.Min(moveLimit, requiredSteps + movedata.BaseAttackRange);
         }
 
         // Ensure we don't exceed the length of the tiles array

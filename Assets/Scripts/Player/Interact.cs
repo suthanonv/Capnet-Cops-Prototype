@@ -162,7 +162,13 @@ public class Interact : MonoBehaviour
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = 1;
+
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+        }
+        else
+        {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
         }
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
@@ -217,8 +223,10 @@ public class Interact : MonoBehaviour
         }
 
 
-        Attacking = TurnBaseSystem.instance.OnBattlePhase && selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0;
-
+        if (TurnBaseSystem.instance.OnBattlePhase)
+            Attacking = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0;
+        else
+            Attacking = true;
 
         path = pathfinder.FindPath(selectedCharacter.characterTile, currentTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>(), Attacking);
 

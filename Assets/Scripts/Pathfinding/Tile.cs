@@ -226,10 +226,13 @@ public class Tile : MonoBehaviour
 
     public void SpawnEnemy()
     {
+        this.GetComponent<Collider>().enabled = true;
+
         ChangeHighLightColor(MaterialStorage.Instance.CyanNeon);
         ShowRangeVisual = false;
 
         EnemyWaveSpawn.instance.SpawningEnemy.RemoveListener(SpawnEnemy);
+
         Instantiate(EnemyToSpawn, transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
 
         EnemyToSpawn = null;
@@ -241,6 +244,7 @@ public class Tile : MonoBehaviour
     {
         EnemyToSpawn = Enemey;
         EnemyWaveSpawn.instance.SpawningEnemy.AddListener(SpawnEnemy);
+        this.GetComponent<Collider>().enabled = false;
         Occupied = true;
         ShowRangeVisual = true;
 

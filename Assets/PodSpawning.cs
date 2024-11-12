@@ -22,8 +22,9 @@ public class PodSpawning : MonoBehaviour
     [SerializeField] int EnemySpawnDistance = 6;
     [SerializeField] int EnemySpawningRange = 3;
 
-    [Header("Prefab")]
+    [Header("Pod Component")]
     [SerializeField] GameObject Prefab;
+    [SerializeField] List<PodSpawningRange> podSpawningRanges = new List<PodSpawningRange>();
 
     EntityTeam en;
 
@@ -65,9 +66,50 @@ public class PodSpawning : MonoBehaviour
 
 
 
-        SpawningEnemy(2, Prefab);
+        foreach (var kvp in podSpawningRanges)
+        {
+            SpawnignPod(kvp);
+        }
 
     }
+
+    public void SpawnignPod(PodSpawningRange PodRange)
+    {
+        List<Tile> SpawnAbleTile = new List<Tile>();
+        HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, PodRange.SpawningDistance, en);
+
+        // Calculate the attack range based on the movement range
+        HashSet<Tile> attackRange = ShowMoveingRange.instance.CalculateAttackRange(moveRange, PodRange.SpawningInRange + PodRange.SpawningDistance, en);
+
+
+        attackRange.ExceptWith(moveRange);
+
+        List<int> IndexOfTilToSpawnEnemy = new List<int>();
+
+
+
+
+
+
+        bool addedNum = false;
+
+        while (!addedNum)
+        {
+            int newIndex = Random.Range(0, attackRange.Count() - 1);
+
+            if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false)
+            {
+                IndexOfTilToSpawnEnemy.Add(newIndex);
+
+                Instantiate(Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+
+                addedNum = true;
+            }
+        }
+    }
+
+
+
 
     public void SpawningEnemy(int AmountToSpawn, GameObject Enemy)
     {
@@ -109,5 +151,15 @@ public class PodSpawning : MonoBehaviour
 
 
 
+
+}
+
+
+[System.Serializable]
+public class PodSpawningRange
+{
+    public string Name = "Pod";
+    public int SpawningInRange;
+    public int SpawningDistance;
 
 }

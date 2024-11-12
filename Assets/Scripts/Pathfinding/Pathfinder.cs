@@ -40,7 +40,7 @@ public class Pathfinder : MonoBehaviour
             if (currentTile == destination)
             {
                 List<Tile> path = RetracePath(destination, origin);
-                if (path.Count <= MoveStat.AvalibleMoveStep + MoveStat.moveData.AttackRange + 1)
+                if (path.Count <= MoveStat.AvalibleMoveStep + MoveStat.moveData.BaseAttackRange + 1)
                 {
                     return PathBetween(destination, origin, MoveStat);
                 }
@@ -152,7 +152,7 @@ public class Pathfinder : MonoBehaviour
         tiles.Reverse();
 
         // Ensure the path length is limited by MaxMove
-        tiles = tiles.Take(MoveStat.AvalibleMoveStep + MoveStat.moveData.AttackRange + 1).ToList();
+        tiles = tiles.Take(MoveStat.AvalibleMoveStep + MoveStat.moveData.BaseAttackRange + 1).ToList();
 
         Path path = new Path();
         path.tiles = tiles.ToArray();

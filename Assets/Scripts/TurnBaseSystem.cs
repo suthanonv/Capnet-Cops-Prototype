@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum Target
 {
-    Player, Turret, Base, None
+    Player, Turret, Base, Pod, None
 }
 public enum Turn
 {

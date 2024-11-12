@@ -53,6 +53,8 @@ public class PreparationPharse : MonoBehaviour
     private void Start()
     {
         SetToStartTime();
+        EnemySpawnPoint.Instance.SpawningPod();
+
     }
 
     private void Update()
@@ -82,7 +84,6 @@ public class PreparationPharse : MonoBehaviour
         ChangeDirectionLight();
         EnemyWaveSpawn.instance.CurrentWave++;
         EnemySpawnPoint.Instance.SpawningWave(EnemyWaveSpawn.instance.CurrentWave);
-        EnemySpawnPoint.Instance.SpawningPod();
     }
 
 

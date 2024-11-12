@@ -28,11 +28,9 @@ public class EnemySpawnPoint : MonoBehaviour
 
 
 
-
-
-
-
-
+    [Header("Pod Component")]
+    [SerializeField] GameObject Pod_Prefab;
+    [SerializeField] List<PodSpawningRange> podSpawningRanges = new List<PodSpawningRange>();
 
 
 
@@ -53,23 +51,27 @@ public class EnemySpawnPoint : MonoBehaviour
 
     List<GameObject> Pods = new List<GameObject>();
 
-    [SerializeField] GameObject Pod_Prefab;
     public void SpawningPod()
     {
-        Pods.RemoveAll(i => i == null);
-        if (Pods.Count == 0)
-            PodSpawn(2, Pod_Prefab);
+
+        foreach (var pod in podSpawningRanges)
+        {
+            PodSpawn(pod);
+
+        }
     }
 
 
-    public void PodSpawn(int AmountToSpawn, GameObject Pod)
+
+
+    public void PodSpawn(PodSpawningRange podRange)
     {
         List<Tile> SpawnAbleTile = new List<Tile>();
 
-        HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, EnemySpawnDistance, en);
+        HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, podRange.SpawningDistance, en);
 
         // Calculate the attack range based on the movement range
-        HashSet<Tile> attackRange = ShowMoveingRange.instance.CalculateAttackRange(moveRange, EnemySpawningRange + EnemySpawnDistance, en);
+        HashSet<Tile> attackRange = ShowMoveingRange.instance.CalculateAttackRange(moveRange, podRange.SpawningInRange + podRange.SpawningDistance, en);
 
 
         attackRange.ExceptWith(moveRange);
@@ -80,24 +82,24 @@ public class EnemySpawnPoint : MonoBehaviour
 
 
 
-        for (int i = 0; i < AmountToSpawn; i++)
+
+        bool addedNum = false;
+
+        while (!addedNum)
         {
-            bool addedNum = false;
+            int newIndex = Random.Range(0, attackRange.Count() - 1);
 
-            while (!addedNum)
+            if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false)
             {
-                int newIndex = Random.Range(0, attackRange.Count() - 1);
+                IndexOfTilToSpawnEnemy.Add(newIndex);
 
-                if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false)
-                {
-                    IndexOfTilToSpawnEnemy.Add(newIndex);
-
-                    GameObject PodNew = Instantiate(Pod, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 200, 0), Quaternion.identity);
-                    Pods.Add(PodNew);
-                    addedNum = true;
-                }
+                GameObject PodNew = Instantiate(Pod_Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 200, 0), Quaternion.identity);
+                PodNew.gameObject.GetComponent<Character>().characterTile = attackRange.ToList()[newIndex];
+                Pods.Add(PodNew);
+                addedNum = true;
             }
         }
+
     }
 
 
