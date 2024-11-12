@@ -6,27 +6,59 @@ public class AttackingRadius : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<EntityTeam>(out EntityTeam team))
+        if (EnemyToAttack != null)
         {
-            if (team.EntityTeamSide == Team.Enemy)
+            if (EnemyToAttack.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
             {
-                EnemyToAttack = other.gameObject;
-                // Trigger the attack when an enemy enters the collider
-                this.transform.parent.GetComponent<EntityTurnBehaviour>().onTurn();
+                health.RemoveBulletQuque();
             }
+        }
+
+
+        if (other.gameObject.TryGetComponent<EntityTeam>(out EntityTeam team) &&
+            team.EntityTeamSide == Team.Enemy &&
+            other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth healths) &&
+            healths.CanbeTarget())
+        {
+            // Set the enemy to attack and initiate the attack
+            EnemyToAttack = other.gameObject;
+            healths.SetBulletQuque();
+            this.transform.parent.GetComponent<EntityTurnBehaviour>().onTurn();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent<EntityTeam>(out EntityTeam team))
+        if (EnemyToAttack != null)
         {
-            if (team.EntityTeamSide == Team.Enemy && EnemyToAttack == other.gameObject)
+            if (EnemyToAttack.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
             {
-                EnemyToAttack = null;
-                // Trigger the attack again when the enemy leaves the collider
+                health.RemoveBulletQuque();
+            }
+        }
+
+        if (other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth healths))
+        {
+            if (healths.CanbeTarget())
+            {
+                healths.SetBulletQuque();
+                EnemyToAttack = other.gameObject;
                 this.transform.parent.GetComponent<EntityTurnBehaviour>().onTurn();
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (EnemyToAttack == null &&
+            other.gameObject.TryGetComponent<EntityTeam>(out EntityTeam team) &&
+            team.EntityTeamSide == Team.Enemy &&
+            other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth healths) &&
+            healths.CanbeTarget())
+        {
+            // Set the enemy to attack if within range and no current target
+            EnemyToAttack = other.gameObject;
+            healths.SetBulletQuque();
         }
     }
 }

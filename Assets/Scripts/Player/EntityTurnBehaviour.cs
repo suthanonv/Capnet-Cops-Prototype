@@ -46,6 +46,9 @@ public class EntityTurnBehaviour : MonoBehaviour
 
     }
 
+    public virtual void Onwalking()
+    {
 
+    }
 
 }

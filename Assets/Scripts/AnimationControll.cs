@@ -1,11 +1,10 @@
 using UnityEngine;
-
 public class AnimationControll : MonoBehaviour
 {
 
     public Health Target { get; set; }
 
-    EntityTurnBehaviour EntityTurn;
+    protected EntityTurnBehaviour EntityTurn;
 
     private void Start()
     {
@@ -17,7 +16,7 @@ public class AnimationControll : MonoBehaviour
     {
         TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
     }
-    public void Attacking()
+    public virtual void Attacking()
     {
         if (Target != null)
         {

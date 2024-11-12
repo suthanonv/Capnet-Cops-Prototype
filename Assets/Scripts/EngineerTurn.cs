@@ -16,6 +16,11 @@ public class EngineerTurn : EntityTurnBehaviour
     [SerializeField] private GameObject resourceManagement;
     [SerializeField] private GameObject cost;
 
+    public override void Onwalking()
+    {
+        offVisual();
+    }
+
     public override bool InterActacle()
     {
         if (TurnBaseSystem.instance.OnBattlePhase)
@@ -162,7 +167,6 @@ public class EngineerTurn : EntityTurnBehaviour
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.ShowRangeVisual = false;
 
                     Status.AvalibleActionPoint--;
-
                     OnActionEnd();
                 }
             }

@@ -56,6 +56,7 @@ public class Character : MonoBehaviour
     EntityTeam Entityteam;
     protected IEnumerator MoveAlongPath(Path path)
     {
+        this.gameObject.GetComponent<EntityTurnBehaviour>().Onwalking();
 
         CanAttack = true;
 

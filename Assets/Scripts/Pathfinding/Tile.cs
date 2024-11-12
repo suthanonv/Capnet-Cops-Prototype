@@ -181,19 +181,7 @@ public class Tile : MonoBehaviour
     /// <param name="value"></param>
     public void ModifyCost()
     {
-        terrainCost++;
 
-        return;
-        if (terrainCost > costMap.Count - 1)
-            terrainCost = 0;
-
-        if (costMap.TryGetValue(terrainCost, out Color col))
-        {
-        }
-        else
-        {
-            Debug.Log("Invalid terraincost or mapping" + terrainCost);
-        }
     }
 
     private void SetColor(Material color)
