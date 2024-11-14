@@ -67,8 +67,11 @@ public class Interact : MonoBehaviour
     {
         if (!Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 200f, interactMask))
             return;
-
-        currentTile = hit.transform.GetComponent<Tile>();
+        if (hit.transform.gameObject.TryGetComponent<Tile>(out Tile tile))
+        {
+            if (tile.InteractAble)
+                currentTile = tile;
+        }
         InspectTile();
     }
 
@@ -196,7 +199,7 @@ public class Interact : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
             {
-
+                newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
                 GetComponent<AudioSource>().PlayOneShot(click);
                 PathIllustrator.ClearPaht();
                 ShowMoveingRange.instance.CloseMovingRangeVisual();

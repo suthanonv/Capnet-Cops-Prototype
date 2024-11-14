@@ -237,6 +237,8 @@ public class Character : MonoBehaviour
 
 
         }
+
+        FinalizePosition(characterTile);
     }
 
     public virtual void StartMove(Path _path)
@@ -265,10 +267,12 @@ public class Character : MonoBehaviour
 
     void FinalizePosition(Tile tile)
     {
+
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
 
         transform.position = tile.transform.position;
         characterTile = tile;
+        tile.InteractAble = true;
         Moving = false;
         tile.Occupied = true;
         tile.occupyingCharacter = this.gameObject;

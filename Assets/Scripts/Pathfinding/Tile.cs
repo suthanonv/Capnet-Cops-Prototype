@@ -27,7 +27,8 @@ public class Tile : MonoBehaviour
     Material baseMaterial;
 
 
-
+    bool interactable = true;
+    public bool InteractAble { get { return interactable; } set { interactable = value; } }
     private void Awake()
     {
         foreach (Transform i in this.transform)
