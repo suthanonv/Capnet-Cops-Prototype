@@ -20,13 +20,16 @@ public class Character : MonoBehaviour
 
     bool walkAble = true;
     public bool WalkAble { get { return walkAble; } set { walkAble = value; } }
+
+    [SerializeField] private bool FindLater = false; 
     private void Awake()
     {
 
     }
 
     private void Start()
-    {
+    { 
+        if(FindLater == false)
         FindTileAtStart();
         anim = this.transform.GetChild(1).GetComponent<Animator>();
         Entityteam = this.GetComponent<EntityTeam>();
@@ -35,7 +38,7 @@ public class Character : MonoBehaviour
     /// <summary>
     /// If no starting tile has been manually assigned, we find one beneath us
     /// </summary>
-    void FindTileAtStart()
+ public   void FindTileAtStart()
     {
         if (characterTile != null)
         {

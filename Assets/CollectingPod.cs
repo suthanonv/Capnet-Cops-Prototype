@@ -29,13 +29,14 @@ public class CollectingPod : MonoBehaviour
     private void Update()
     {
 
-        if (transform.position.y <= 2)
+        if (transform.position.y <= 1)
         {
+            this.GetComponent<Character>().FindTileAtStart();
             spark.Stop();
             smoke.Stop();
             Explosion();
         }
-        else if (transform.position.y >= 2)
+        else if (transform.position.y >= 1)
         {
             spark.Play();
             smoke.Play();

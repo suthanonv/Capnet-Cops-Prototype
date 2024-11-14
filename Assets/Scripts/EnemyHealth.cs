@@ -5,13 +5,15 @@ public class EnemyHealth : Health
 {
     [SerializeField] UnityEvent OnDied;
     public TextMeshProUGUI HealthText;
+    private ParticleSystem blood;
 
     public override void Start()
     {
         base.Start();
         MaxBulletQuque = MathScript.instance.Ceiling(Maxhealth);
         HealthText.text = Maxhealth.ToString();
-
+        blood = this.transform.GetChild(4).gameObject.GetComponent<ParticleSystem>();
+        blood.Stop();
 
     }
     public override void TakeDamage(int Damage)
@@ -20,7 +22,7 @@ public class EnemyHealth : Health
         RemoveBulletQuque();
         MaxBulletQuque = MathScript.instance.Ceiling(Maxhealth);
         HealthText.text = Maxhealth.ToString();
-
+        blood.Play();
     }
 
     public override void Died()
@@ -30,9 +32,11 @@ public class EnemyHealth : Health
         {
             TurnBaseSystem.instance.ActionEnd = true;
         }
-        base.Died();
+        Invoke("newDIed" , 0.5f);
         this.GetComponent<Biomass>().OnDie();
     }
+    
+    void newDIed(){ base.Died();}
 
     public bool CanbeTarget()
     {
