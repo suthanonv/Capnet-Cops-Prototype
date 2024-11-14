@@ -71,6 +71,8 @@ public class Interact : MonoBehaviour
         {
             if (tile.InteractAble)
                 currentTile = tile;
+            else return;
+
         }
         InspectTile();
     }

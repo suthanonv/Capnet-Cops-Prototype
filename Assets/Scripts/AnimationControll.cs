@@ -23,6 +23,7 @@ public class AnimationControll : MonoBehaviour
             ShowMoveingRange.instance.CloseMovingRangeVisual();
             this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
             Debug.Log(this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint);
+            Target.GetComponent<Character>().characterTile.InteractAble = true;
             Target.TakeDamage(EntityTurn.Status.BaseDamage);
         }
     }
