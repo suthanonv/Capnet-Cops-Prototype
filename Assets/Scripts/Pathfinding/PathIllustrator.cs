@@ -7,13 +7,6 @@ public class PathIllustrator : MonoBehaviour
     private LineRenderer line;
     private Path previousPath;
 
-    public static PathIllustrator instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
 
     private void Start()
     {
@@ -21,6 +14,9 @@ public class PathIllustrator : MonoBehaviour
 
 
     }
+
+
+    bool OnUse = false;
 
     public void IllustratePath(Path path, EntityStat moveData)
     {

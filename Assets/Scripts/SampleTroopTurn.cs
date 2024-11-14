@@ -78,6 +78,10 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void OnActionEnd()
     {
+
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null) return;
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+
         CameraBehaviouerControll.instance.ResetTransform();
 
         if (!TurnBaseSystem.instance.OnBattlePhase)

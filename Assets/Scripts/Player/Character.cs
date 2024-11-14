@@ -21,16 +21,16 @@ public class Character : MonoBehaviour
     bool walkAble = true;
     public bool WalkAble { get { return walkAble; } set { walkAble = value; } }
 
-    [SerializeField] private bool FindLater = false; 
+    [SerializeField] private bool FindLater = false;
     private void Awake()
     {
 
     }
 
     private void Start()
-    { 
-        if(FindLater == false)
-        FindTileAtStart();
+    {
+        if (FindLater == false)
+            FindTileAtStart();
         anim = this.transform.GetChild(1).GetComponent<Animator>();
         Entityteam = this.GetComponent<EntityTeam>();
     }
@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
     /// <summary>
     /// If no starting tile has been manually assigned, we find one beneath us
     /// </summary>
- public   void FindTileAtStart()
+    public void FindTileAtStart()
     {
         if (characterTile != null)
         {
@@ -139,7 +139,10 @@ public class Character : MonoBehaviour
             // Clone the tiles array
             clonedPath.tiles = (Tile[])path.tiles.Clone();
             Stat.IsWalking = true;
-            PathIllustrator.instance.IllustratePath(clonedPath, Stat);
+            if (this.gameObject.TryGetComponent<PathIllustrator>(out PathIllustrator instance))
+            {
+                instance.IllustratePath(clonedPath, Stat);
+            }
         }
 
 
@@ -172,7 +175,10 @@ public class Character : MonoBehaviour
                 // Clone the tiles array
                 clonedPath.tiles = (Tile[])movingPath.tiles.Clone();
                 clonedPath.tiles = clonedPath.tiles.Skip(currentStep).Take(movingPath.tiles.Count()).ToArray();
-                PathIllustrator.instance.IllustratePath(clonedPath, Stat);
+                if (this.gameObject.TryGetComponent<PathIllustrator>(out PathIllustrator instance))
+                {
+                    instance.IllustratePath(clonedPath, Stat);
+                }
             }
 
             currentStep++;
@@ -217,6 +223,10 @@ public class Character : MonoBehaviour
 
         if (CanAttack)
         {
+            if (this.gameObject.TryGetComponent<PathIllustrator>(out PathIllustrator instance))
+            {
+                instance.ClearPaht();
+            }
             Vector3 origin = this.transform.position;
             Vector3 destination = target.transform.position;
 
@@ -224,6 +234,8 @@ public class Character : MonoBehaviour
             anim.gameObject.GetComponent<AnimationControll>().Target = target;
             anim.SetTrigger("Attacking");
             CanAttack = false;
+
+
         }
     }
 
@@ -232,7 +244,12 @@ public class Character : MonoBehaviour
         if (WalkAble == false) return;
         PlayerActionUI.instance.EnableUI = false;
 
-        TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
+        if (TurnBaseSystem.instance.OnBattlePhase)
+            TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
+        else
+        {
+            TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
+        }
         if (IsObstacle) return;
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
@@ -258,8 +275,10 @@ public class Character : MonoBehaviour
 
         if (count > 0)
         {
-            PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
-            pathDraw.ClearPaht();
+            if (this.gameObject.TryGetComponent<PathIllustrator>(out PathIllustrator instance))
+            {
+                instance.ClearPaht();
+            }
         }
 
         count++;

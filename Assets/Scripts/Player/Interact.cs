@@ -39,7 +39,7 @@ public class Interact : MonoBehaviour
     Pathfinder pathfinder;
     #endregion
 
-
+    [SerializeField] PathIllustrator PathIllustrator;
     public bool EnableInteracting = true;
 
     bool Attacking;
@@ -148,7 +148,7 @@ public class Interact : MonoBehaviour
 
         PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
-        pathDraw.ClearPaht();
+        // pathDraw.ClearPaht();
 
 
 
@@ -198,7 +198,7 @@ public class Interact : MonoBehaviour
             {
 
                 GetComponent<AudioSource>().PlayOneShot(click);
-
+                PathIllustrator.ClearPaht();
                 ShowMoveingRange.instance.CloseMovingRangeVisual();
                 selectedCharacter.StartMove(newPath);
 

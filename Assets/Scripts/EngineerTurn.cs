@@ -205,8 +205,9 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void OnActionEnd()
     {
-        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null) return;
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
         {
