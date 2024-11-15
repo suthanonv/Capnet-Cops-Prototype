@@ -19,6 +19,8 @@ public class Interact : MonoBehaviour
     public Tile currentTile { get; set; }
 
     Character CharacterDebug;
+
+
     public Character selectedCharacter
     {
         get { return CharacterDebug; }
@@ -26,6 +28,7 @@ public class Interact : MonoBehaviour
         {
             if (CharacterDebug != null)
             {
+
                 PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
                 pathDraw.ClearPaht();
@@ -50,6 +53,7 @@ public class Interact : MonoBehaviour
 
         if (pathfinder == null)
             pathfinder = GameObject.Find("Pathfinder").GetComponent<Pathfinder>();
+        selectedCharacter = null;
     }
 
     private void Update()

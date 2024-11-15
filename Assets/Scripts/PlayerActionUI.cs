@@ -97,21 +97,40 @@ public class PlayerActionUI : MonoBehaviour
         TurnBaseSystem.instance.ActionEnd = true;
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
         ShowMoveingRange.instance.CloseMovingRangeVisual();
+
+
+        TurnBaseSystem.instance.EndPharseButton.SetActive(true);
+
+
+    }
+
+    bool OnEnter = false;
+
+
+
+    private void FixedUpdate()
+    {
+        if (OnEnter)
+        {
+            cam.GetComponent<Interact>().enabled = false;
+
+        }
     }
 
     public void OnMouseEnter()
     {
-        cam.GetComponent<Interact>().enabled = false;
-        behemoth.GetComponent<Uprade_Interact>().enabled = false;
-        behemoth.GetComponent<Collider>().enabled = false;
+        TurnBaseSystem.instance.PlayerInteractScript.EnableInteracting = false;
+
+
 
     }
 
     public void OnMouseExit()
     {
-        cam.GetComponent<Interact>().enabled = true;
-        behemoth.GetComponent<Uprade_Interact>().enabled = true;
-        behemoth.GetComponent<Collider>().enabled = true;
+        OnEnter = false;
+
+        TurnBaseSystem.instance.PlayerInteractScript.EnableInteracting = true;
+
     }
 
 

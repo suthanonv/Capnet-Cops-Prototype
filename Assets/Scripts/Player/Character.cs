@@ -238,11 +238,11 @@ public class Character : MonoBehaviour
 
         }
 
-        FinalizePosition(characterTile);
     }
 
     public virtual void StartMove(Path _path)
     {
+        TurnBaseSystem.instance.EndPharseButton.SetActive(false);
         if (WalkAble == false) return;
         PlayerActionUI.instance.EnableUI = false;
 
@@ -265,7 +265,7 @@ public class Character : MonoBehaviour
 
     int count = 0;
 
-    void FinalizePosition(Tile tile)
+    public void FinalizePosition(Tile tile)
     {
 
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;

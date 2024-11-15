@@ -53,7 +53,6 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void onTurn()
     {
         BuildingMode = false;
-        OpenUI();
         PlayerActionUI.instance.Troops = this;
         CameraBehaviouerControll.instance.LookAtTarget(this.transform);
         CameraBehaviouerControll.instance.LookAtTarget(null);

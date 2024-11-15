@@ -210,7 +210,6 @@ public class Tile : MonoBehaviour
         materials[1] = Newmaterials;
         renderer.materials = materials;
 
-        Debug.Log(HighLightTile.GetComponent<MeshRenderer>().materials[1].name);
     }
     /*
     public void DebugCostText()

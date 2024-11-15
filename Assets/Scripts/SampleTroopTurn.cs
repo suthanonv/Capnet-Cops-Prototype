@@ -88,6 +88,10 @@ public class SampleTroopTurn : EntityTurnBehaviour
         {
             TurnBaseSystem.instance.EndPharseButton.SetActive(true);
         }
+        else
+        {
+            TurnBaseSystem.instance.EndPharseButton.SetActive(false);
+        }
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)
