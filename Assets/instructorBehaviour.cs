@@ -4,8 +4,9 @@ public class instructorBehaviour : EntityTurnBehaviour
 
     Character character;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
 

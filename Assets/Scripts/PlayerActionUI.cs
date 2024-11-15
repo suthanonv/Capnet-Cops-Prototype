@@ -93,6 +93,7 @@ public class PlayerActionUI : MonoBehaviour
         EndPhaseEvent.Invoke();
         CameraBehaviouerControll.instance.ResetTransform();
         EnableUI = false;
+        TurnBaseSystem.instance.ActionEnd = true;
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.ActionEnd = true;
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;

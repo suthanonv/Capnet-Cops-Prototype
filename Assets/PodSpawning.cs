@@ -59,7 +59,6 @@ public class PodSpawning : MonoBehaviour
 
 
 
-    bool isFirst = true;
 
     public void Spawningod()
     {

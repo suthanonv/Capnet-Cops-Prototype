@@ -16,6 +16,10 @@ public class EngineerTurn : EntityTurnBehaviour
     [SerializeField] private GameObject resourceManagement;
     [SerializeField] private GameObject cost;
 
+    Animator anim;
+
+
+
     public override void Onwalking()
     {
         offVisual();
@@ -32,8 +36,10 @@ public class EngineerTurn : EntityTurnBehaviour
 
         return true;
     }
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
 
@@ -49,10 +55,14 @@ public class EngineerTurn : EntityTurnBehaviour
 
         PlayerActionUI.instance.EndPhaseEvent.AddListener(offVisual);
 
+        anim = this.transform.GetChild(1).GetComponent<Animator>();
+
     }
     public override void onTurn()
     {
+
         BuildingMode = false;
+        TurnBaseSystem.instance.ActionEnd = false;
         PlayerActionUI.instance.Troops = this;
         CameraBehaviouerControll.instance.LookAtTarget(this.transform);
         CameraBehaviouerControll.instance.LookAtTarget(null);
@@ -208,7 +218,7 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null) return;
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) return;
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
@@ -227,7 +237,7 @@ public class EngineerTurn : EntityTurnBehaviour
             }
             else
             {
-                Invoke("Delay", 0.1f);
+                Invoke("OffACtion", 0.1f);
             }
         }
         else if (IsPreviosBattlePhase == true && !TurnBaseSystem.instance.OnBattlePhase)
@@ -236,7 +246,7 @@ public class EngineerTurn : EntityTurnBehaviour
         }
         else
         {
-            OpenUI();
+
             if (BuildingMode == false)
                 SelectingCharacter();
         }
@@ -244,9 +254,10 @@ public class EngineerTurn : EntityTurnBehaviour
     }
 
 
-    void Delay()
+    public override void OffACtion()
     {
 
+        anim.SetTrigger("deselect");
         CameraBehaviouerControll.instance.ResetTransform();
         PlayerActionUI.instance.Troops = null;
         PlayerActionUI.instance.EnableUI = false;

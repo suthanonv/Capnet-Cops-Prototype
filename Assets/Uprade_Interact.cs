@@ -9,9 +9,9 @@ public class Uprade_Interact : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter == null || TurnBaseSystem.instance.PlayerInteractScript.enabled == false))
         {
-            return;
-            UpgradeUI.SetActive(true);
-            this.enabled = false;
+
+            /*  UpgradeUI.SetActive(true);
+              this.enabled = false; */
         }
     }
 }

@@ -14,7 +14,23 @@ public class EntityTurnBehaviour : MonoBehaviour
     public EntityStat Status;
     public State currentState;
 
+    Animator animator;
 
+    protected virtual void Start()
+    {
+        animator = this.gameObject.transform.GetChild(1).GetComponent<Animator>();
+    }
+
+    public virtual void DeSelect()
+    {
+        animator.SetTrigger("deselect");
+    }
+
+    public virtual void Select()
+    {
+        animator.SetTrigger("Select");
+
+    }
     public virtual bool InterActacle()
     {
         return false;
@@ -47,6 +63,11 @@ public class EntityTurnBehaviour : MonoBehaviour
     }
 
     public virtual void Onwalking()
+    {
+
+    }
+
+    public virtual void OffACtion()
     {
 
     }

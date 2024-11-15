@@ -32,8 +32,19 @@ public class Interact : MonoBehaviour
                 PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
                 pathDraw.ClearPaht();
+                if (value == null && TurnBaseSystem.instance.ActionEnd)
+                {
+                    CharacterDebug.gameObject.GetComponent<EntityTurnBehaviour>().DeSelect();
+                }
+                else
+                {
+                    CharacterDebug.gameObject.GetComponent<EntityTurnBehaviour>().Select();
+
+                }
 
             }
+
+
 
             CharacterDebug = value;
 
@@ -184,6 +195,7 @@ public class Interact : MonoBehaviour
         ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         GetComponent<AudioSource>().PlayOneShot(pop);
+        charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();
     }
 
     public void NavigateToTile()

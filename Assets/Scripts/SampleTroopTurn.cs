@@ -4,8 +4,9 @@ public class SampleTroopTurn : EntityTurnBehaviour
 {
     Character character;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
 
@@ -25,7 +26,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
-
+        TurnBaseSystem.instance.ActionEnd = false;
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             CameraBehaviouerControll.instance.LookAtTarget(this.transform);
@@ -79,7 +80,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null) return;
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) return;
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         CameraBehaviouerControll.instance.ResetTransform();
@@ -102,11 +103,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
             }
             else
             {
-                CameraBehaviouerControll.instance.ResetTransform();
-                PlayerActionUI.instance.Troops = null;
-                PlayerActionUI.instance.EnableUI = false;
-                TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
-                TurnBaseSystem.instance.ActionEnd = true;
+                OffACtion();
             }
         }
         else if (IsPreviosBattlePhase == true && !TurnBaseSystem.instance.OnBattlePhase)
@@ -118,6 +115,16 @@ public class SampleTroopTurn : EntityTurnBehaviour
         {
             SelectingCharacter();
         }
+    }
+
+    public override void OffACtion()
+    {
+        this.DeSelect();
+        CameraBehaviouerControll.instance.ResetTransform();
+        PlayerActionUI.instance.Troops = null;
+        PlayerActionUI.instance.EnableUI = false;
+        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+        TurnBaseSystem.instance.ActionEnd = true;
     }
 
     public override void AttackingButton()

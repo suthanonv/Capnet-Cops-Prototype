@@ -16,7 +16,6 @@ public class PathIllustrator : MonoBehaviour
     }
 
 
-    bool OnUse = false;
 
     public void IllustratePath(Path path, EntityStat moveData)
     {

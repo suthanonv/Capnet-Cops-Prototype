@@ -16,8 +16,9 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
 
 
         if (pathfinder == null)

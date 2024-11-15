@@ -9,8 +9,9 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
     [SerializeField] List<Target> targets = new List<Target>();
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Status.moveData.BaseAttackRange = Status.moveData.AttackRange;
         enemyChar = GetComponent<Character>();
 
