@@ -64,6 +64,9 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public void OpenUI()
     {
+        Debug.Log("Open UI");
+        PlayerActionUI.instance.EnableUI = true;
+
         IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
         List<PlayerActionUiButton> ButtonToUse = new List<PlayerActionUiButton>();
 
@@ -224,7 +227,6 @@ public class EngineerTurn : EntityTurnBehaviour
             }
             else
             {
-
                 Invoke("Delay", 0.1f);
             }
         }
@@ -234,7 +236,9 @@ public class EngineerTurn : EntityTurnBehaviour
         }
         else
         {
-            SelectingCharacter();
+            OpenUI();
+            if (BuildingMode == false)
+                SelectingCharacter();
         }
 
     }

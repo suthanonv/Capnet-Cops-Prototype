@@ -242,6 +242,7 @@ public class Character : MonoBehaviour
 
     public virtual void StartMove(Path _path)
     {
+        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.EndPharseButton.SetActive(false);
         if (WalkAble == false) return;
         PlayerActionUI.instance.EnableUI = false;
