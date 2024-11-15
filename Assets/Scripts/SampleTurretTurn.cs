@@ -44,7 +44,6 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
         animC.Target = attackingRadius.EnemyToAttack.GetComponent<EnemyHealth>();
         if (animC.Target == null) return;
-        Debug.Log("Turret Attack");
         anim.SetTrigger("Attacking");
 
     }

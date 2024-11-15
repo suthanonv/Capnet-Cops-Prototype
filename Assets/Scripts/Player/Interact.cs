@@ -203,22 +203,20 @@ public class Interact : MonoBehaviour
             if (CameraBehaviouerControll.instance.isMoving == false)
                 selectedCharacter.Character_LookAt(currentTile);
 
-            if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
+            if (currentTile != null)
             {
-                newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
-                GetComponent<AudioSource>().PlayOneShot(click);
-                PathIllustrator.ClearPaht();
-                ShowMoveingRange.instance.CloseMovingRangeVisual();
-                selectedCharacter.StartMove(newPath);
+                if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
+                {
+                    newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
+                    GetComponent<AudioSource>().PlayOneShot(click);
+                    PathIllustrator.ClearPaht();
+                    ShowMoveingRange.instance.CloseMovingRangeVisual();
+                    selectedCharacter.StartMove(newPath);
+
+                }
+
 
             }
-
-            if (Input.GetMouseButtonDown(0) && currentTile == selectedCharacter.characterTile)
-            {
-                selectedCharacter.GetComponent<EntityTurnBehaviour>().OnActionEnd();
-                return;
-            }
-
         }
     }
 
