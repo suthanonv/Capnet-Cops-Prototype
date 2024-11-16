@@ -163,7 +163,6 @@ public class Interact : MonoBehaviour
 
     public void SelectCharacter(Character charecter)
     {
-        Debug.Log("Call");
 
 
         PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
@@ -171,7 +170,13 @@ public class Interact : MonoBehaviour
         // pathDraw.ClearPaht();
 
 
-
+        if (selectedCharacter != null)
+        {
+            if (selectedCharacter.GetComponent<Character>().Moving == false)
+            {
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().DeSelect();
+            }
+        }
 
 
         selectedCharacter = charecter;

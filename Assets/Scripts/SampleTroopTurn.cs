@@ -80,7 +80,11 @@ public class SampleTroopTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) return;
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase)
+        {
+            DeSelect();
+            return;
+        }
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         CameraBehaviouerControll.instance.ResetTransform();

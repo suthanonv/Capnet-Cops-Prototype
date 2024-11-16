@@ -74,7 +74,6 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public void OpenUI()
     {
-        Debug.Log("Open UI");
         PlayerActionUI.instance.EnableUI = true;
 
         IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
@@ -218,7 +217,7 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) return;
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) { DeSelect(); return; }
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
