@@ -57,6 +57,12 @@ public class Character : MonoBehaviour
 
 
     EntityTeam Entityteam;
+
+
+    [SerializeField] bool paused;
+
+    public bool Paused { get { return paused; } set { paused = value; } }
+
     protected IEnumerator MoveAlongPath(Path path)
     {
         this.gameObject.GetComponent<EntityTurnBehaviour>().Onwalking();
@@ -128,6 +134,9 @@ public class Character : MonoBehaviour
         }
 
 
+
+
+
         Tile currentTile = movingPath.tiles[currentStep];
 
         float animationTime = 0f;
@@ -151,6 +160,20 @@ public class Character : MonoBehaviour
             anim.SetBool("Walking", true);
             Stat.IsWalking = anim.GetBool("Walking");
             yield return null;
+
+
+            while (Paused)
+            {
+                anim.SetBool("Walking", false);
+                yield return null;
+                if (!Paused)
+                {
+                    anim.SetBool("Walking", true);
+                }
+            }
+
+
+
 
             Vector3 nextTilePosition = movingPath.tiles[currentStep].transform.position;
 
