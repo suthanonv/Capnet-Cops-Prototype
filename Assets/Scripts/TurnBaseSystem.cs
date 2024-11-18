@@ -183,6 +183,14 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             if (actionEnd)
             {
                 TurnNum++;
+                foreach (EntityTurnBehaviour i in TurretTurn.List)
+                {
+                    if (i.TryGetComponent<SampleTurretTurn>(out SampleTurretTurn Turret))
+                    {
+                        Turret.attackingRadius.GetEnemy(null);
+                    }
+
+                }
 
                 OnBattlePhase = isAttackPhaseEnded();
 
@@ -197,7 +205,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         foreach (EntityTurnBehaviour i in TurretTurn.List)
         {
-            i.onTurn();
+            i.GetComponent<SampleTurretTurn>().attackingRadius.AttackAnyEnemy();
         }
     }
 
@@ -317,7 +325,19 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
 
                     if (TurnNum >= enemiesTurnSystems.List.Count) TurnNum = 0;
-                    enemiesTurnSystems.List[TurnNum].onTurn();
+                    {
+
+                        enemiesTurnSystems.List[TurnNum].onTurn();
+
+                        foreach (EntityTurnBehaviour i in TurretTurn.List)
+                        {
+                            if (i.TryGetComponent<SampleTurretTurn>(out SampleTurretTurn Turret))
+                            {
+                                Turret.attackingRadius.GetEnemy(enemiesTurnSystems.List[TurnNum].gameObject);
+                            }
+
+                        }
+                    }
                 }
                 else if (ActionEnd && currentTurn == Turn.Player)
                 {

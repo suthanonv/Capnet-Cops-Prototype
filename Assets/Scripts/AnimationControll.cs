@@ -18,20 +18,17 @@ public class AnimationControll : MonoBehaviour
     }
     public virtual void Attacking()
     {
-        if (Target != null)
-        {
-            ShowMoveingRange.instance.CloseMovingRangeVisual();
-            this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
-            this.transform.parent.GetComponent<Character>().FinalizePosition(this.transform.parent.GetComponent<Character>().characterTile);
-            Target.GetComponent<Character>().characterTile.InteractAble = true;
-            Target.TakeDamage(EntityTurn.Status.BaseDamage);
+
+        if (Target == null) return;
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+        this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
+        this.transform.parent.GetComponent<Character>().FinalizePosition(this.transform.parent.GetComponent<Character>().characterTile);
+        Target.GetComponent<Character>().characterTile.InteractAble = true;
+        Target.TakeDamage(EntityTurn.Status.BaseDamage);
 
 
-            if (PausedChar != null)
-            {
-                PausedChar.Paused = false;
-            }
-        }
+
+
     }
 
     public void EndAction()
@@ -40,13 +37,12 @@ public class AnimationControll : MonoBehaviour
 
     }
 
-    Character PausedChar;
-    public void PauseTarGet()
+
+
+
+    public void ActiveObject()
     {
-        if (Target != null)
-        {
-            PausedChar = Target.GetComponent<Character>();
-            PausedChar.Paused = true;
-        }
+        this.gameObject.SetActive(true);
     }
 }
+

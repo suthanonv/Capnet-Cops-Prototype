@@ -5030,6 +5030,7 @@ MonoBehaviour:
   IsObstacle: 0
   anim: {fileID: 0}
   FindLater: 1
+  paused: 0
 --- !u!136 &4818632073841198933
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -49240,6 +49241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lootcapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 4287405866783128512, guid: 3937f74fe5895b84ab1780d5a9ea8b34,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 77199c19d181b254187810aac45cef7f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,64 +1,81 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackingRadius : MonoBehaviour
 {
     public GameObject EnemyToAttack;
+    [SerializeField] float ActiveRange;
+    [SerializeField] Transform Center;
 
-    private void OnTriggerEnter(Collider other)
+    List<GameObject> AttackAlready = new List<GameObject>();
+
+    SampleTurretTurn entity;
+
+    private void Start()
+    {
+        entity = this.transform.parent.GetComponent<SampleTurretTurn>();
+    }
+    public void GetEnemy(GameObject Enemy)
+    {
+        EnemyToAttack = Enemy;
+
+
+    }
+
+
+    public void AttackAnyEnemy()
+    {
+        GameObject Enemy = GetEnemy();
+
+        if (Enemy != null)
+        {
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            entity.SetTarget(Enemy);
+            entity.onTurn();
+        }
+    }
+
+    public GameObject GetEnemy()
+    {
+        TurnBaseSystem.instance.enemiesTurnSystems.List.RemoveAll(i => i == null);
+
+        foreach (EntityTurnBehaviour i in TurnBaseSystem.instance.enemiesTurnSystems.List)
+        {
+            Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
+            Vector3 EnemyTransform = new Vector3(i.transform.position.x, 0, i.transform.position.z);
+            if (i.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
+                if (Vector3.Distance(thisTransform, EnemyTransform) <= ActiveRange && health.CanbeTarget())
+                {
+                    return i.gameObject;
+                }
+        }
+        return null;
+    }
+
+    private void Update()
     {
         if (EnemyToAttack != null)
         {
-            if (EnemyToAttack.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
+            Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
+            Vector3 EnemyTransform = new Vector3(EnemyToAttack.transform.position.x, 0, EnemyToAttack.transform.position.z);
+
+            if (Vector3.Distance(thisTransform, EnemyTransform) <= ActiveRange && EnemyToAttack.GetComponent<EnemyHealth>().CanbeTarget() && !AttackAlready.Contains(EnemyToAttack))
             {
-                health.RemoveBulletQuque();
+                AttackAlready.Add(EnemyToAttack);
+                entity.SetTarget(EnemyToAttack);
+                entity.onTurn();
             }
-        }
-
-
-        if (other.gameObject.TryGetComponent<EntityTeam>(out EntityTeam team) &&
-            team.EntityTeamSide == Team.Enemy &&
-            other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth healths) &&
-            healths.CanbeTarget())
-        {
-            // Set the enemy to attack and initiate the attack
-            EnemyToAttack = other.gameObject;
-            healths.SetBulletQuque();
-            this.transform.parent.GetComponent<EntityTurnBehaviour>().onTurn();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+
+    private void OnDrawGizmos()
     {
-        if (EnemyToAttack != null)
+        if (Center != null)
         {
-            if (EnemyToAttack.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
-            {
-                health.RemoveBulletQuque();
-            }
-        }
-
-        if (other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth healths))
-        {
-            if (healths.CanbeTarget())
-            {
-                healths.SetBulletQuque();
-                EnemyToAttack = other.gameObject;
-                this.transform.parent.GetComponent<EntityTurnBehaviour>().onTurn();
-            }
+            Gizmos.color = Color.red; // Set Gizmos color for visualization
+            Gizmos.DrawWireSphere(Center.transform.position, ActiveRange);
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (EnemyToAttack == null &&
-            other.gameObject.TryGetComponent<EntityTeam>(out EntityTeam team) &&
-            team.EntityTeamSide == Team.Enemy &&
-            other.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth healths) &&
-            healths.CanbeTarget())
-        {
-            // Set the enemy to attack if within range and no current target
-            EnemyToAttack = other.gameObject;
-            healths.SetBulletQuque();
-        }
-    }
 }

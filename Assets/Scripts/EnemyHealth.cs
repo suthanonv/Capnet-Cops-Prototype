@@ -32,11 +32,15 @@ public class EnemyHealth : Health
         {
             TurnBaseSystem.instance.ActionEnd = true;
         }
-        Invoke("newDIed" , 0.5f);
+        Invoke("newDIed", 0.5f);
         this.GetComponent<Biomass>().OnDie();
     }
-    
-    void newDIed(){ base.Died();}
+
+    void newDIed()
+    {
+
+        base.Died();
+    }
 
     public bool CanbeTarget()
     {
