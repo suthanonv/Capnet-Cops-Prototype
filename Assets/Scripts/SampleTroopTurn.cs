@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using UnityEngine;
 public class SampleTroopTurn : EntityTurnBehaviour
 {
     Character character;
@@ -27,6 +27,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     public override void onTurn()
     {
         TurnBaseSystem.instance.ActionEnd = false;
+        OpenUi();
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             CameraBehaviouerControll.instance.LookAtTarget(this.transform);
@@ -57,6 +58,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     bool IsPreviosBattlePhase;
     public void OpenUi()
     {
+        Debug.Log("kuy");
         List<PlayerActionUiButton> ButtonToUse = new List<PlayerActionUiButton>();
 
         IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
