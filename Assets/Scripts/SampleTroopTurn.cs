@@ -64,6 +64,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
+            ButtonToUse.Add(PlayerActionUiButton.MP_AP);
         }
         else
         {

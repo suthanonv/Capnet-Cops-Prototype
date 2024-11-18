@@ -82,9 +82,10 @@ public class Tile : MonoBehaviour
         set
         {
             showVisual = value;
+
             if (HighLightTile != null)
             {
-                HighLightTile.SetActive(value);
+                HighLightTile.SetActive(showVisual);
 
             }
             if (!OnHighlight)
@@ -134,7 +135,6 @@ public class Tile : MonoBehaviour
             {
                 HighLightTile = this.transform.GetChild(1).gameObject;
 
-                HighLightTile.SetActive(false);
             }
         }
         catch (System.Exception ex)

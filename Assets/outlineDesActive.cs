@@ -6,7 +6,11 @@ public class outlineDesActive : MonoBehaviour
     void Start()
     {
         this.gameObject.SetActive(false);
+        this.enabled = false;
     }
 
-
+    private void OnDisable()
+    {
+        Debug.Log("Bruh");
+    }
 }

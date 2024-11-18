@@ -67,12 +67,14 @@ public class ShowMoveingRange : MonoBehaviour
                 {
                     if (teamCheck.EntityTeamSide == Team.Enemy)
                     {
+                        Debug.Log("ddd");
                         tile.ShowRangeVisual = true;
                     }
                 }
             }
             else
             {
+                Debug.Log("ddd");
                 tile.ShowRangeVisual = true;
             }
 

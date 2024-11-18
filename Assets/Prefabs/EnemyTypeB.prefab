@@ -8129,6 +8129,8 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
+  FindLater: 0
+  paused: 0
 --- !u!114 &819049922978127021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8158,7 +8160,7 @@ MonoBehaviour:
   Status:
     BaseDamage: 50
     Speed: 2
-    moveData: {fileID: 11400000, guid: 3b7fd348dbf74384ea55bec85e32d2b5, type: 2}
+    moveData: {fileID: 11400000, guid: c42b70b41a86d9d4a927558a9e428d42, type: 2}
     ActionPoint: 1
   currentState: 0
   targets: 00000000
@@ -8230,8 +8232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38e8a654ae702a40839adf2192c70ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minResourceGet: 10
-  maxResourceGet: 11
+  minResourceGet: 0
+  maxResourceGet: 0
 --- !u!1 &7655676979454477135
 GameObject:
   m_ObjectHideFlags: 0

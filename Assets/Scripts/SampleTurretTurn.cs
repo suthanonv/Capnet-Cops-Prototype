@@ -56,16 +56,6 @@ public class SampleTurretTurn : EntityTurnBehaviour
     }
 
 
-    public void PauseCharacter()
-    {
-
-    }
-
-    public void UnPauseCharacter()
-    {
-
-    }
-
     public override void OnActionEnd()
     {
         Debug.Log("ENDDDDDDDDDDDDD");
