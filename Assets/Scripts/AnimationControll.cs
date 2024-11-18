@@ -25,6 +25,12 @@ public class AnimationControll : MonoBehaviour
             this.transform.parent.GetComponent<Character>().FinalizePosition(this.transform.parent.GetComponent<Character>().characterTile);
             Target.GetComponent<Character>().characterTile.InteractAble = true;
             Target.TakeDamage(EntityTurn.Status.BaseDamage);
+
+
+            if (PausedChar != null)
+            {
+                PausedChar.Paused = false;
+            }
         }
     }
 
@@ -32,5 +38,15 @@ public class AnimationControll : MonoBehaviour
     {
         EntityTurn.OnActionEnd();
 
+    }
+
+    Character PausedChar;
+    public void PauseTarGet()
+    {
+        if (Target != null)
+        {
+            PausedChar = Target.GetComponent<Character>();
+            PausedChar.Paused = true;
+        }
     }
 }

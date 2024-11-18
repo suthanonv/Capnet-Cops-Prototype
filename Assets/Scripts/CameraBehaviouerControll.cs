@@ -19,8 +19,16 @@ public class CameraBehaviouerControll : MonoBehaviour
     {
         instance = this;
     }
+    public bool GetTarGet()
+    {
+        return (TargetCheck != null);
+    }
+
+
+    Transform TargetCheck;
     public void LookAtTarget(Transform target)
     {
+        TargetCheck = target;
         // Check if the target is not null
         if (target != null)
         {

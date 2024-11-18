@@ -28,8 +28,8 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
         turnBehaviour = this.GetComponent<EntityTurnBehaviour>();
         TurnBaseSystem.instance.TurretTurn.Add(this);
-        anim = this.transform.GetChild(0).GetComponent<Animator>();
-        animC = this.transform.GetChild(0).GetComponent<AnimationControll>();
+        anim = this.transform.GetChild(1).GetComponent<Animator>();
+        animC = this.transform.GetChild(1).GetComponent<AnimationControll>();
 
 
         Status.BaseDamage = TurretDamage.Instance.Damage;
