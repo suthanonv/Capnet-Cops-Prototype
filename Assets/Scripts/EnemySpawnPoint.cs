@@ -110,18 +110,18 @@ public class EnemySpawnPoint : MonoBehaviour
 
         foreach (EnemyInWave i in AllWaveComponent[WaveIndex].AllEnemyInWave)
         {
-            SpawningEnemy(i.AmountToSpawn, i.EnemyPrefab);
+            SpawningEnemy(i);
         }
     }
 
-    public void SpawningEnemy(int AmountToSpawn, GameObject Enemy)
+    public void SpawningEnemy(EnemyInWave Enemy)
     {
         List<Tile> SpawnAbleTile = new List<Tile>();
 
-        HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, EnemySpawnDistance, en);
+        HashSet<Tile> moveRange = ShowMoveingRange.instance.CalculatePathfindingRange(CenterTile, Enemy.SpawningDistance, en);
 
         // Calculate the attack range based on the movement range
-        HashSet<Tile> attackRange = ShowMoveingRange.instance.CalculateAttackRange(moveRange, EnemySpawningRange + EnemySpawnDistance, en);
+        HashSet<Tile> attackRange = ShowMoveingRange.instance.CalculateAttackRange(moveRange, Enemy.SpawningInRange + Enemy.SpawningDistance, en);
 
 
         attackRange.ExceptWith(moveRange);
@@ -132,7 +132,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
 
 
-        for (int i = 0; i < AmountToSpawn; i++)
+        for (int i = 0; i < Enemy.AmountToSpawn; i++)
         {
             bool addedNum = false;
 
@@ -144,7 +144,7 @@ public class EnemySpawnPoint : MonoBehaviour
                 {
                     IndexOfTilToSpawnEnemy.Add(newIndex);
 
-                    attackRange.ToList()[newIndex].SetSpawnEnemy(Enemy);
+                    attackRange.ToList()[newIndex].SetSpawnEnemy(Enemy.EnemyPrefab);
 
                     //                    Instantiate(Enemy, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
 
