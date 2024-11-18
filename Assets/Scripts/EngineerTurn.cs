@@ -86,6 +86,8 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
+            ButtonToUse.Add(PlayerActionUiButton.MP_AP);
+
         }
         else
         {

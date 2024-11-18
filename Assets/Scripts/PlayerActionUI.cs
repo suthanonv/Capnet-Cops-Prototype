@@ -8,8 +8,8 @@ public enum PlayerActionUiButton
     Attack = 1,
     Build = 2,
     SKill = 3,
-    EndTurn = 4
-
+    EndTurn = 4,
+    MP_AP = 5
 
 }
 
