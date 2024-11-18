@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 public class SampleTroopTurn : EntityTurnBehaviour
 {
     Character character;
@@ -58,10 +57,9 @@ public class SampleTroopTurn : EntityTurnBehaviour
     bool IsPreviosBattlePhase;
     public void OpenUi()
     {
-        Debug.Log("kuy");
+        TurnBaseSystem.instance.EndPharseButton.SetActive(true);
         List<PlayerActionUiButton> ButtonToUse = new List<PlayerActionUiButton>();
 
-        IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);

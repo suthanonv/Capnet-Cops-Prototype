@@ -79,6 +79,7 @@ public class EngineerTurn : EntityTurnBehaviour
         IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
         List<PlayerActionUiButton> ButtonToUse = new List<PlayerActionUiButton>();
 
+        TurnBaseSystem.instance.EndPharseButton.SetActive(true);
 
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
