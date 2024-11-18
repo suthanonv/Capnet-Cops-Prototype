@@ -9,5 +9,8 @@ public class outlineDesActive : MonoBehaviour
         this.enabled = false;
     }
 
-
+    private void OnDisable()
+    {
+        Debug.Log("Bruh");
+    }
 }

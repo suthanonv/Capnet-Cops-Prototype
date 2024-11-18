@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyToAttack: {fileID: 0}
-  ActiveRange: 50
+  ActiveRange: 25
   Center: {fileID: 2373568793679879991}
 --- !u!1 &2268462547538327775
 GameObject:
