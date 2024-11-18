@@ -27,6 +27,10 @@ public class EnemyHealth : Health
 
     public override void Died()
     {
+        if (TurnBaseSystem.instance.CurrentEnemyTurn == this.GetComponent<EntityTurnBehaviour>())
+        {
+            TurnBaseSystem.instance.ActionEnd = true;
+        }
         OnDied.Invoke();
         if (this.transform.GetChild(1).GetComponent<Animator>().GetBool("Walking"))
         {
@@ -45,8 +49,6 @@ public class EnemyHealth : Health
     public bool CanbeTarget()
     {
         return CurrentBulletQuque < MaxBulletQuque;
-
-
     }
 
     int MaxBulletQuque;

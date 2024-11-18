@@ -31,6 +31,23 @@ public class AnimationControll : MonoBehaviour
 
     }
 
+    Character PausingChar;
+    public void PauseCharacter()
+    {
+        PausingChar = Target.GetComponent<Character>();
+        PausingChar.Paused = true;
+
+    }
+
+    public void UnPauseCharacter()
+    {
+        if (PausingChar != null)
+        {
+            PausingChar.Paused = false;
+        }
+    }
+
+
     public void EndAction()
     {
         EntityTurn.OnActionEnd();

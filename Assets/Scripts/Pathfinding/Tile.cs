@@ -139,6 +139,7 @@ public class Tile : MonoBehaviour
         }
         catch (System.Exception ex)
         {
+            Debug.Log(ex);
             Destroy(this.gameObject);
         }
 

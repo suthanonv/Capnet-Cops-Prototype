@@ -301,7 +301,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     }
 
 
-
+    public EntityTurnBehaviour CurrentEnemyTurn;
 
     private void Update()
     {
@@ -321,12 +321,12 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                     {
                         return;
                     }
-                    Debug.Log($"{TurnNum} {enemiesTurnSystems.List.Count}");
 
 
                     if (TurnNum >= enemiesTurnSystems.List.Count) TurnNum = 0;
                     {
 
+                        CurrentEnemyTurn = enemiesTurnSystems.List[TurnNum];
                         enemiesTurnSystems.List[TurnNum].onTurn();
 
                         foreach (EntityTurnBehaviour i in TurretTurn.List)

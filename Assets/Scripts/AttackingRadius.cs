@@ -31,7 +31,7 @@ public class AttackingRadius : MonoBehaviour
         {
             Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             entity.SetTarget(Enemy);
-            entity.onTurn();
+            TurretQuque.instance.AddingQuque(entity);
         }
     }
 
@@ -63,7 +63,7 @@ public class AttackingRadius : MonoBehaviour
             {
                 AttackAlready.Add(EnemyToAttack);
                 entity.SetTarget(EnemyToAttack);
-                entity.onTurn();
+                TurretQuque.instance.AddingQuque(entity);
             }
         }
     }

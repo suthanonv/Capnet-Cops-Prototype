@@ -44,15 +44,33 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
     public override void onTurn()
     {
-        Debug.Log(Target == null);
-        if (Target == null) return;
+        Debug.Log("Turn Play");
+        if (Target == null)
+        {
+            OnActionEnd();
+            return;
+        }
         animC.Target = Target.GetComponent<EnemyHealth>();
         anim.SetTrigger("Attacking");
 
     }
 
 
+    public void PauseCharacter()
+    {
 
+    }
+
+    public void UnPauseCharacter()
+    {
+
+    }
+
+    public override void OnActionEnd()
+    {
+        Debug.Log("ENDDDDDDDDDDDDD");
+        TurretQuque.instance.ActionEnd = true;
+    }
     private void Update()
     {
         if (Target != null)
