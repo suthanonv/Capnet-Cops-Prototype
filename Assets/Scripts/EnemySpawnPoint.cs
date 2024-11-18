@@ -17,9 +17,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
 
     [SerializeField] Character Base;
-    [Header("Spawning Range")]
-    [SerializeField] int EnemySpawnDistance = 6;
-    [SerializeField] int EnemySpawningRange = 3;
+
 
     [Header("ALl Wave")]
     [SerializeField] List<Wave> AllWaveComponent = new List<Wave>();
