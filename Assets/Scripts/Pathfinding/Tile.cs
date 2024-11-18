@@ -84,6 +84,8 @@ public class Tile : MonoBehaviour
             showVisual = value;
             if (HighLightTile != null)
             {
+
+
                 HighLightTile.SetActive(value);
 
             }
