@@ -198,6 +198,8 @@ public class Interact : MonoBehaviour
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
         ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         GetComponent<AudioSource>().PlayOneShot(pop);
         charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();

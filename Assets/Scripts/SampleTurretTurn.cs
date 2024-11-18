@@ -12,7 +12,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
 
 
-    [SerializeField] AttackingRadius attackingRadius;
+    public AttackingRadius attackingRadius;
 
 
 
@@ -36,25 +36,36 @@ public class SampleTurretTurn : EntityTurnBehaviour
     }
 
 
-
+    GameObject Target;
+    public void SetTarget(GameObject Target)
+    {
+        this.Target = Target;
+    }
 
     public override void onTurn()
     {
-
-        if (attackingRadius.EnemyToAttack == null) return;
-
-        animC.Target = attackingRadius.EnemyToAttack.GetComponent<EnemyHealth>();
-        if (animC.Target == null) return;
+        Debug.Log("Turn Play");
+        if (Target == null)
+        {
+            OnActionEnd();
+            return;
+        }
+        animC.Target = Target.GetComponent<EnemyHealth>();
         anim.SetTrigger("Attacking");
 
     }
 
 
+    public override void OnActionEnd()
+    {
+        Debug.Log("ENDDDDDDDDDDDDD");
+        TurretQuque.instance.ActionEnd = true;
+    }
     private void Update()
     {
-        if (attackingRadius.EnemyToAttack != null)
+        if (Target != null)
         {
-            transform.rotation = Quaternion.LookRotation(Char.transform.position.DirectionTo(attackingRadius.EnemyToAttack.transform.position).Flat(), Vector3.up);
+            transform.rotation = Quaternion.LookRotation(Char.transform.position.DirectionTo(Target.transform.position).Flat(), Vector3.up);
 
         }
         else

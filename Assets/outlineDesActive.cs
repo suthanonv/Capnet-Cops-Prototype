@@ -6,11 +6,11 @@ public class outlineDesActive : MonoBehaviour
     void Start()
     {
         this.gameObject.SetActive(false);
+        this.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-
+        Debug.Log("Bruh");
     }
 }

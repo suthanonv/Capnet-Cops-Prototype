@@ -27,22 +27,28 @@ public class EnemyHealth : Health
 
     public override void Died()
     {
+        if (TurnBaseSystem.instance.CurrentEnemyTurn == this.GetComponent<EntityTurnBehaviour>())
+        {
+            TurnBaseSystem.instance.ActionEnd = true;
+        }
         OnDied.Invoke();
         if (this.transform.GetChild(1).GetComponent<Animator>().GetBool("Walking"))
         {
             TurnBaseSystem.instance.ActionEnd = true;
         }
-        Invoke("newDIed" , 0.5f);
+        Invoke("newDIed", 0.5f);
         this.GetComponent<Biomass>().OnDie();
     }
-    
-    void newDIed(){ base.Died();}
+
+    void newDIed()
+    {
+
+        base.Died();
+    }
 
     public bool CanbeTarget()
     {
         return CurrentBulletQuque < MaxBulletQuque;
-
-
     }
 
     int MaxBulletQuque;

@@ -183,6 +183,14 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             if (actionEnd)
             {
                 TurnNum++;
+                foreach (EntityTurnBehaviour i in TurretTurn.List)
+                {
+                    if (i.TryGetComponent<SampleTurretTurn>(out SampleTurretTurn Turret))
+                    {
+                        Turret.attackingRadius.GetEnemy(null);
+                    }
+
+                }
 
                 OnBattlePhase = isAttackPhaseEnded();
 
@@ -197,7 +205,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         foreach (EntityTurnBehaviour i in TurretTurn.List)
         {
-            i.onTurn();
+            i.GetComponent<SampleTurretTurn>().attackingRadius.AttackAnyEnemy();
         }
     }
 
@@ -293,7 +301,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     }
 
 
-
+    public EntityTurnBehaviour CurrentEnemyTurn;
 
     private void Update()
     {
@@ -313,11 +321,23 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                     {
                         return;
                     }
-                    Debug.Log($"{TurnNum} {enemiesTurnSystems.List.Count}");
 
 
                     if (TurnNum >= enemiesTurnSystems.List.Count) TurnNum = 0;
-                    enemiesTurnSystems.List[TurnNum].onTurn();
+                    {
+
+                        CurrentEnemyTurn = enemiesTurnSystems.List[TurnNum];
+                        enemiesTurnSystems.List[TurnNum].onTurn();
+
+                        foreach (EntityTurnBehaviour i in TurretTurn.List)
+                        {
+                            if (i.TryGetComponent<SampleTurretTurn>(out SampleTurretTurn Turret))
+                            {
+                                Turret.attackingRadius.GetEnemy(enemiesTurnSystems.List[TurnNum].gameObject);
+                            }
+
+                        }
+                    }
                 }
                 else if (ActionEnd && currentTurn == Turn.Player)
                 {
@@ -333,6 +353,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     public void EndPlayerPhase()
     {
+        
         ActionEnd = true;
         PlayerInteractScript.selectedCharacter = null;
 
@@ -340,7 +361,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
             PreparationPharse.instance.SetToAttackTime();
         }
-
+        
         EndPharseButton.SetActive(false);
         PlayerInteractScript.enabled = false;
 

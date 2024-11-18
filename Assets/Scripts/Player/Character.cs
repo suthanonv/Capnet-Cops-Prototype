@@ -291,7 +291,6 @@ public class Character : MonoBehaviour
 
     public void FinalizePosition(Tile tile)
     {
-
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
 
         transform.position = tile.transform.position;
