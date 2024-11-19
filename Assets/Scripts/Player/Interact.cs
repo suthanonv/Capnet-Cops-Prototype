@@ -192,7 +192,7 @@ public class Interact : MonoBehaviour
 
             if (selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange > 4)
             {
-                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange - 4;
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = 4 - selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
 
 
             }
