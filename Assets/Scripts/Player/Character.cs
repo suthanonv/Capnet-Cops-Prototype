@@ -256,6 +256,11 @@ public class Character : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(origin.DirectionTo(destination).Flat(), Vector3.up);
             anim.gameObject.GetComponent<AnimationControll>().Target = target;
+            if (this.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+            {
+                anim.SetBool("Select", false);
+            }
+
             anim.SetTrigger("Attacking");
 
 
