@@ -15,12 +15,14 @@ public class AnimationControll : MonoBehaviour
     public void onStartAttacking()
     {
         TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
+
+        CurrentFreme = 0;
     }
     public virtual void Attacking()
     {
-
-        if (Target == null) return;
-        ShowMoveingRange.instance.CloseMovingRangeVisual();
+        Debug.Log($"Target {Target == null}");
+        if (Target != null)
+            ShowMoveingRange.instance.CloseMovingRangeVisual();
         this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
         this.transform.parent.GetComponent<Character>().FinalizePosition(this.transform.parent.GetComponent<Character>().characterTile);
         Target.GetComponent<Character>().characterTile.InteractAble = true;
@@ -60,6 +62,13 @@ public class AnimationControll : MonoBehaviour
     public void ActiveObject()
     {
         this.gameObject.SetActive(true);
+    }
+
+    int CurrentFreme;
+    public void DebugFreme()
+    {
+        Debug.Log($"Freme {CurrentFreme} Work!");
+        CurrentFreme++;
     }
 }
 

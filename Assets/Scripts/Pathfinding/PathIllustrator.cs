@@ -21,14 +21,17 @@ public class PathIllustrator : MonoBehaviour
     {
         line.positionCount = path.tiles.Length;
 
-        // Clear highlights if the path is different from the previous path
-        if (previousPath != null && !previousPath.IsSamePath(path))
+        if (previousPath != null)
         {
-            foreach (Tile tile in previousPath.tiles)
+            if (previousPath.IsSamePath(path) == false)
             {
-                tile.ClearHighlight();
+                foreach (Tile tile in previousPath.tiles)
+                {
+                    tile.ClearHighlight();
+                }
             }
         }
+
 
         // Update the previous path to the current one
         previousPath = path;
