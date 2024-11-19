@@ -2,7 +2,7 @@ using System.Diagnostics;
 using TMPro;
 public class Pod : Health
 {
-    private bool Used = false;
+    //private bool Used = false;
     public override void Died()
     {
         //if (Used) return;

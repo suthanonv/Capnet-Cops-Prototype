@@ -11,7 +11,7 @@ public class CameraControl : MonoBehaviour
     private float mouseCursorSpeedX;
     private float mouseCursorSpeedY;
     private float mouseCursorSpeed;
-    private float screenEdgeDetectionArea = 100f;
+    public float screenEdgeDetectionArea = 100f;
     private bool isCaptured = false;
     Camera cam;
 
