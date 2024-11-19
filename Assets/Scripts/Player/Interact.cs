@@ -187,7 +187,16 @@ public class Interact : MonoBehaviour
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
+
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = 1;
+
+            if (selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange > 4)
+            {
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange - 4;
+
+
+            }
+
 
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         }
