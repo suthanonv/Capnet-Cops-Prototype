@@ -243,9 +243,10 @@ public class Character : MonoBehaviour
     bool CanAttack = false;
     public void Attack(Health target)
     {
-
         if (CanAttack)
         {
+            CanAttack = false;
+
             if (this.gameObject.TryGetComponent<PathIllustrator>(out PathIllustrator instance))
             {
                 instance.ClearPaht();
@@ -255,8 +256,12 @@ public class Character : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(origin.DirectionTo(destination).Flat(), Vector3.up);
             anim.gameObject.GetComponent<AnimationControll>().Target = target;
+            if (this.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+            {
+                anim.SetBool("Select", false);
+            }
+
             anim.SetTrigger("Attacking");
-            CanAttack = false;
 
 
         }
@@ -283,7 +288,6 @@ public class Character : MonoBehaviour
 
         characterTile.Occupied = false;
         characterTile.occupyingCharacter = null;
-
         StartCoroutine(MoveAlongPath(_path));
     }
 

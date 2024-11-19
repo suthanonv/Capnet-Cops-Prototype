@@ -224,7 +224,11 @@ public class Interact : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
                 {
-                    newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
+                    if (newPath.tiles[newPath.tiles.Length - 1].occupyingCharacter == null)
+                    {
+                        newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
+                    }
+
                     GetComponent<AudioSource>().PlayOneShot(click);
                     PathIllustrator.ClearPaht();
                     ShowMoveingRange.instance.CloseMovingRangeVisual();

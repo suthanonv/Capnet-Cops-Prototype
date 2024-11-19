@@ -3,10 +3,16 @@ public class Path
 {
     public Tile[] tiles;
 
-    public int PathLenght = 0;
+    public int PathLength = 0;
 
     public bool IsSamePath(Path PathCheck)
     {
+        // Check if the PathCheck object is null
+        if (PathCheck == null) return false;
+
+        // Check if tiles in either path are null
+        if (tiles == null || PathCheck.tiles == null) return false;
+
         // Check if the number of tiles is different
         if (tiles.Length != PathCheck.tiles.Length)
         {
