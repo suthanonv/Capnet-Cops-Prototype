@@ -13,7 +13,7 @@ public class AnimationControll : MonoBehaviour
     }
 
 
-    public void onStartAttacking()
+    public virtual void onStartAttacking()
     {
         TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
 

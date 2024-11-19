@@ -46,6 +46,7 @@ public class CameraBehaviouerControll : MonoBehaviour
 
     private void Moving()
     {
+        if (targetTransform == null) return;
         elapsedTime += Time.deltaTime;
         float t = elapsedTime / speed;
 
