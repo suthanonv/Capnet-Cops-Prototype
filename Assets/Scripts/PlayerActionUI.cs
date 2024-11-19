@@ -105,30 +105,28 @@ public class PlayerActionUI : MonoBehaviour
 
     }
 
-    bool OnEnter = false;
 
 
 
     private void FixedUpdate()
     {
-        if (OnEnter)
-        {
-            cam.GetComponent<Interact>().enabled = false;
 
-        }
     }
+
+    public bool IsMouseOnUI;
 
     public void OnMouseEnter()
     {
+        IsMouseOnUI = true;
         TurnBaseSystem.instance.PlayerInteractScript.EnableInteracting = false;
-
 
 
     }
 
     public void OnMouseExit()
     {
-        OnEnter = false;
+        IsMouseOnUI = false;
+
 
         TurnBaseSystem.instance.PlayerInteractScript.EnableInteracting = true;
 

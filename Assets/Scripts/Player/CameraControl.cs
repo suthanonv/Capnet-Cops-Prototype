@@ -34,6 +34,10 @@ public class CameraControl : MonoBehaviour
 
     private void UpdateCamera()
     {
+        if (PlayerActionUI.instance.IsMouseOnUI == true)
+        {
+            return;
+        }
         //assign mouse cursor speed to translate speed
         translateSpeed = mouseCursorSpeed;
         //use absolute so the speed always positive
