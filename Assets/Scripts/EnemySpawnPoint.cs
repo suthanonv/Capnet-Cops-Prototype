@@ -60,7 +60,7 @@ public class EnemySpawnPoint : MonoBehaviour
     }
 
 
-
+    List<Tile> PodTile = new List<Tile>();
 
     public void PodSpawn(PodSpawningRange podRange)
     {
@@ -87,12 +87,13 @@ public class EnemySpawnPoint : MonoBehaviour
         {
             int newIndex = Random.Range(0, attackRange.Count() - 1);
 
-            if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false)
+            if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false && !PodTile.Contains(attackRange.ToList()[newIndex]))
             {
                 IndexOfTilToSpawnEnemy.Add(newIndex);
 
                 GameObject PodNew = Instantiate(Pod_Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 200, 0), Quaternion.identity);
                 PodNew.gameObject.GetComponent<Character>().characterTile = attackRange.ToList()[newIndex];
+                PodTile.Add(attackRange.ToList()[newIndex]);
                 Pods.Add(PodNew);
                 addedNum = true;
             }

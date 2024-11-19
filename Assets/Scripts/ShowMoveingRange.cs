@@ -30,7 +30,6 @@ public class ShowMoveingRange : MonoBehaviour
 
         previousCenter = centerTile;
 
-        Debug.Log(previousCenter == null);
         // Set the new center tile
 
         // Clear the previous tile range
@@ -67,14 +66,12 @@ public class ShowMoveingRange : MonoBehaviour
                 {
                     if (teamCheck.EntityTeamSide == Team.Enemy)
                     {
-                        Debug.Log("ddd");
                         tile.ShowRangeVisual = true;
                     }
                 }
             }
             else
             {
-                Debug.Log("ddd");
                 tile.ShowRangeVisual = true;
             }
 
