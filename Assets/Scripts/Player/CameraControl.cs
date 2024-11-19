@@ -3,9 +3,13 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public float speed = 8f;
+    public float translateSpeed;
     public float mouseRotateSpeed = 1f;
     public float mouseMoveSpeed = 0.5f; // Speed for moving with the mouse
     public float mouseZoomSpeed = 2.0f;
+    private float mouseCursorSpeedX;
+    private float mouseCursorSpeedY;
+    private float mouseCursorSpeed;
     Camera cam;
 
     private void Start()
@@ -15,11 +19,22 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
+        //get mouse speed of X axis
+        mouseCursorSpeedX = Input.GetAxis("Mouse X") / Time.deltaTime;
+        //get mouse speed of Y axis
+        mouseCursorSpeedY = Input.GetAxis("Mouse Y") / Time.deltaTime;
+        //find normalize speed of mouse speed of X and Y axis
+        mouseCursorSpeed = Mathf.Sqrt(Mathf.Pow(mouseCursorSpeedX, 2) + Mathf.Pow(mouseCursorSpeedY, 2));
+        
         UpdateCamera();
     }
 
     private void UpdateCamera()
     {
+        //assign mouse cursor speed to translate speed
+        translateSpeed = mouseCursorSpeed;
+        //use absolute so the speed always positive
+        translateSpeed = Mathf.Abs(translateSpeed);
         Vector3 input = InputValues(out float yRotation).normalized;
         float Zoom = cam.orthographicSize - input.y * mouseZoomSpeed;
         if (Zoom < 0)
@@ -28,7 +43,7 @@ public class CameraControl : MonoBehaviour
         }
         cam.orthographicSize = Zoom;
 
-        transform.parent.Translate(input * speed * Time.deltaTime); // Translate camera based on mouse movement
+        transform.parent.Translate(input * translateSpeed * Time.deltaTime); // Translate camera based on mouse movement
         transform.parent.Rotate(Vector3.up * yRotation * Time.deltaTime * speed * 4); // Rotate camera
     }
 
