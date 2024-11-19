@@ -6,6 +6,7 @@ public class AnimationControll : MonoBehaviour
 
     protected EntityTurnBehaviour EntityTurn;
 
+
     private void Start()
     {
         EntityTurn = transform.parent.GetComponent<EntityTurnBehaviour>();
@@ -17,6 +18,7 @@ public class AnimationControll : MonoBehaviour
         TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
 
         CurrentFreme = 0;
+
     }
     public virtual void Attacking()
     {
