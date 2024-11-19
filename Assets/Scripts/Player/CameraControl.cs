@@ -1,4 +1,3 @@
-using TreeEditor;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
@@ -29,7 +28,7 @@ public class CameraControl : MonoBehaviour
         mouseCursorSpeedY = Input.GetAxis("Mouse Y") / Time.deltaTime;
         //find normalize speed of mouse speed of X and Y axis
         mouseCursorSpeed = Mathf.Sqrt(Mathf.Pow(mouseCursorSpeedX, 2) + Mathf.Pow(mouseCursorSpeedY, 2));
-        
+
         UpdateCamera();
     }
 
@@ -54,7 +53,7 @@ public class CameraControl : MonoBehaviour
         {
             transform.parent.Translate(Vector3.left * speed * Time.deltaTime);
         }
-        
+
         if (Input.mousePosition.x >= Screen.width - screenEdgeDetectionArea)
         {
             transform.parent.Translate(Vector3.right * speed * Time.deltaTime);
