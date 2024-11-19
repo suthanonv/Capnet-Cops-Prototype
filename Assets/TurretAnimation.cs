@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TurretAnimation : AnimationControll
 {
+    [SerializeField] GameObject Bullet;
+    [SerializeField] Transform ShootingPoint;
     public override void Attacking()
     {
         if (Target != null)
