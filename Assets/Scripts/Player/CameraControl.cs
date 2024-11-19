@@ -32,6 +32,11 @@ public class CameraControl : MonoBehaviour
         UpdateCamera();
     }
 
+    public void SetCamSize(float Size)
+    {
+        cam.orthographicSize = Size;
+    }
+
     private void UpdateCamera()
     {
         if (PlayerActionUI.instance.IsMouseOnUI == true)
