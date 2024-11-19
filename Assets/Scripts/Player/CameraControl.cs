@@ -1,15 +1,19 @@
+using TreeEditor;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
     public float speed = 8f;
     public float translateSpeed;
+    public float capturedTranslateSpeed;
     public float mouseRotateSpeed = 1f;
     public float mouseMoveSpeed = 0.5f; // Speed for moving with the mouse
     public float mouseZoomSpeed = 2.0f;
     private float mouseCursorSpeedX;
     private float mouseCursorSpeedY;
     private float mouseCursorSpeed;
+    private float screenEdgeDetectionArea = 100f;
+    private bool isCaptured = false;
     Camera cam;
 
     private void Start()
@@ -45,6 +49,26 @@ public class CameraControl : MonoBehaviour
 
         transform.parent.Translate(input * translateSpeed * Time.deltaTime); // Translate camera based on mouse movement
         transform.parent.Rotate(Vector3.up * yRotation * Time.deltaTime * speed * 4); // Rotate camera
+
+        if (Input.mousePosition.x <= 0 + screenEdgeDetectionArea)
+        {
+            transform.parent.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        
+        if (Input.mousePosition.x >= Screen.width - screenEdgeDetectionArea)
+        {
+            transform.parent.Translate(Vector3.right * speed * Time.deltaTime);
+        }
+
+        if (Input.mousePosition.y >= Screen.height - screenEdgeDetectionArea)
+        {
+            transform.parent.Translate(Vector3.up * speed * Time.deltaTime);
+        }
+
+        if (Input.mousePosition.y <= 0 + screenEdgeDetectionArea)
+        {
+            transform.parent.Translate(Vector3.down * speed * Time.deltaTime);
+        }
     }
 
     private Vector3 InputValues(out float yRotation)
