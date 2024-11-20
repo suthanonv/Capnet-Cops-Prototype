@@ -1381,7 +1381,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
-  - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6940,7 +6939,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
-  - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7994,6 +7992,10 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
+  shot1: {fileID: 0}
+  shot2: {fileID: 0}
+  shot3: {fileID: 0}
+  shot4: {fileID: 0}
   isAttacking: 0
   FindLater: 0
   paused: 0
