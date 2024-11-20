@@ -31,8 +31,10 @@ public class EnemyHealth : Health
 
     public override void Died()
     {
-        Animator.SetTrigger("Dies");
+        this.GetComponent<Character>().characterTile.occupyingCharacter = null;
+        this.GetComponent<Character>().characterTile.Occupied = false;
 
+        Animator.SetTrigger("Dies");
     }
 
     public override void OnDied()

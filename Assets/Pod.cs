@@ -6,16 +6,24 @@ public class Pod : Health
     public override void Died()
     {
         //if (Used) return;
-        Exploring.Instance.OnExploringComplete();
-        PodStroingScript.instance.CollecedPod += 1;
-        this.GetComponent<EntityTeam>().EntityTeamSide = Team.Pod;
+        this.GetComponent<Character>().characterTile.occupyingCharacter = null;
+        this.GetComponent<Character>().characterTile.Occupied = false;
+
+
+
         this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Open");
+
+
+
         //Used = true;
         //Destroy(this.gameObject);
     }
 
     public override void OnDied()
     {
+        Exploring.Instance.OnExploringComplete();
+        PodStroingScript.instance.CollecedPod += 1;
+        this.GetComponent<EntityTeam>().EntityTeamSide = Team.Pod;
         Destroy(gameObject);
     }
 }
