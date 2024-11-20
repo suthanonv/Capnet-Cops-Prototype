@@ -1214,7 +1214,7 @@ Transform:
   m_GameObject: {fileID: 3262309454265723199}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.025000572, y: 5.8059998, z: -0.05700016}
+  m_LocalPosition: {x: 0.025000572, y: 8.046, z: -0.05700016}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6829,7 +6829,7 @@ Transform:
   m_GameObject: {fileID: 5769032581749704325}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020000458, y: 4.22, z: -0.055000305}
+  m_LocalPosition: {x: 0.020000458, y: 6.46, z: -0.055000305}
   m_LocalScale: {x: 0.01, y: 2.4199998, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8322,6 +8322,7 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
+  isAttacking: 0
   FindLater: 0
   paused: 0
 --- !u!114 &819049922978127021
@@ -8370,21 +8371,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 100
-  OnDied:
+  OnDiedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2636413917966779121}
-        m_TargetAssemblyTypeName: inspectingEnemy, Assembly-CSharp
-        m_MethodName: DestroySelf
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  Animator: {fileID: 0}
   HealthText: {fileID: 5742809294754636584}
 --- !u!54 &3509428601749178241
 Rigidbody:
@@ -8621,6 +8611,7 @@ MonoBehaviour:
   - {fileID: 8735384001217727880}
   OnHit: {fileID: 2100000, guid: 8ea525e1c01a1bf4b9a7bb635076723e, type: 2}
   OffHit: {fileID: 2100000, guid: 4e6119a846356a54c9f4c05b9137dac5, type: 2}
+  OutLine: {fileID: 0}
 --- !u!114 &4249347290973946507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8633,6 +8624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e919317e107e548a88cfedf656a61f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPuasingSelf: 0
 --- !u!95 &2356218546964339734
 Animator:
   serializedVersion: 5
