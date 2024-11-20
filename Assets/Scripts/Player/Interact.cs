@@ -94,7 +94,7 @@ public class Interact : MonoBehaviour
 
     private void InspectTile()
     {
-        if (EnableInteracting == false) return;
+        if (EnableInteracting == false || TurnBaseSystem.instance.currentTurn == Turn.Enemies) return;
 
         if (currentTile.Occupied && currentTile.occupyingCharacter != null)
         {
@@ -137,6 +137,7 @@ public class Interact : MonoBehaviour
                 {
                     if (turn.InterActacle())
                     {
+                        ShowMoveingRange.instance.CloseMovingRangeVisual();
                         turn.onTurn();
                     }
                 }

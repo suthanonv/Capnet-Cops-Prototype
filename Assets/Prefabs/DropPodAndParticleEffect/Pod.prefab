@@ -10388,6 +10388,7 @@ GameObject:
   - component: {fileID: 2341302131520859633}
   - component: {fileID: 5966108572104981994}
   - component: {fileID: 3670676134062105962}
+  - component: {fileID: 6706997921954019055}
   m_Layer: 0
   m_Name: lootcapsule (1)
   m_TagString: Untagged
@@ -10462,6 +10463,19 @@ MonoBehaviour:
   OnHit: {fileID: 2100000, guid: 96603052b09d238458d8c26d64524d8d, type: 2}
   OffHit: {fileID: 2100000, guid: 96603052b09d238458d8c26d64524d8d, type: 2}
   OutLine: {fileID: 2100000, guid: 0a839cc7047e5764e85267b94495a3cc, type: 2}
+--- !u!114 &6706997921954019055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3113721611108890443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e919317e107e548a88cfedf656a61f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPuasingSelf: 0
 --- !u!1 &3127644188034985912
 GameObject:
   m_ObjectHideFlags: 0

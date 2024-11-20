@@ -13,4 +13,9 @@ public class Pod : Health
         //Used = true;
         //Destroy(this.gameObject);
     }
+
+    public override void OnDied()
+    {
+        Destroy(gameObject);
+    }
 }

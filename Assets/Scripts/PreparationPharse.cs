@@ -130,6 +130,14 @@ public class PreparationPharse : MonoBehaviour
 
         directionalLight.intensity = dayIntensity + (hoursElapsed * -(1f / 3f)); // Smooth transition to night intensity
         directionalLight.colorTemperature = dayTemperature + (hoursElapsed * 1015f); // Smooth transition to night temperature
+
+
+        if (currentTime.SecondSum() >= PhaseTransitionTime.SecondSum())
+        {
+            directionalLight.intensity = nightIntensity;
+            directionalLight.colorTemperature = nightTemperature;
+        }
+
     }
 
 

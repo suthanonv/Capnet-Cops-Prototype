@@ -269,15 +269,16 @@ public class Character : MonoBehaviour
 
     public virtual void StartMove(Path _path)
     {
+        TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
+
         TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
         TurnBaseSystem.instance.EndPharseButton.SetActive(false);
         if (WalkAble == false) return;
         PlayerActionUI.instance.EnableUI = false;
 
-        if (TurnBaseSystem.instance.OnBattlePhase)
-            TurnBaseSystem.instance.PlayerInteractScript.enabled = false;
-        else
+        if (this.transform.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
         {
+
             TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
         }
         if (IsObstacle) return;

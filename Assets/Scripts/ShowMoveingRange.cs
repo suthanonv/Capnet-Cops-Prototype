@@ -25,7 +25,7 @@ public class ShowMoveingRange : MonoBehaviour
     {
         // If the center tile is the same as before, do nothing
 
-        if (TurnBaseSystem.instance.OnBattlePhase == false || centerTile == previousCenter) return;
+        if (centerTile == previousCenter) return;
 
 
         previousCenter = centerTile;
