@@ -118,6 +118,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         if (TurnBaseSystem.instance.OnBattlePhase == false)
         {
