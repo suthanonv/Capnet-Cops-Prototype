@@ -46,24 +46,31 @@ public class CameraBehaviouerControll : MonoBehaviour
 
     private void Moving()
     {
-        if (targetTransform == null) return;
-        elapsedTime += Time.deltaTime;
-        float t = elapsedTime / speed;
+        if (targetTransform != null)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / speed;
 
-        transform.parent.transform.position =
-            Vector3.Lerp(this.transform.parent.transform.position, targetTransform.transform.position, t);
+            transform.parent.transform.position =
+                Vector3.Lerp(this.transform.parent.transform.position, targetTransform.transform.position, t);
 
-        float startYRotation = transform.parent.transform.eulerAngles.y;
-        float endYRotation = targetTransform.transform.eulerAngles.y;
-        float yRotation = Mathf.LerpAngle(startYRotation, endYRotation, t);
+            float startYRotation = transform.parent.transform.eulerAngles.y;
+            float endYRotation = targetTransform.transform.eulerAngles.y;
+            float yRotation = Mathf.LerpAngle(startYRotation, endYRotation, t);
 
-        transform.parent.transform.rotation = Quaternion.Euler(transform.parent.transform.rotation.eulerAngles.x,
-            yRotation, transform.parent.transform.rotation.eulerAngles.z);
+            transform.parent.transform.rotation = Quaternion.Euler(transform.parent.transform.rotation.eulerAngles.x,
+                yRotation, transform.parent.transform.rotation.eulerAngles.z);
 
-        if (t >= 1f)
+            if (t >= 1f)
+            {
+                isMoving = false;
+                elapsedTime = 0f;
+            }
+        }
+        else
         {
             isMoving = false;
-            elapsedTime = 0f;
+            LookAtTarget(null);
         }
     }
 

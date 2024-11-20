@@ -14,7 +14,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         base.Start();
         Status.moveData.BaseAttackRange = Status.moveData.AttackRange;
         enemyChar = GetComponent<Character>();
-
+        this.GetComponent<Character>().Paused = true;
         // Register this entity's turn behavior with the TurnBaseSystem
         TurnBaseSystem.instance.GetComponent<TurnBaseSystem>().enemiesTurnSystems.Add(this);
     }
