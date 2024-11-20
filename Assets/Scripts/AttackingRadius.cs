@@ -29,7 +29,6 @@ public class AttackingRadius : MonoBehaviour
 
         if (Enemy != null)
         {
-            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             entity.SetTarget(Enemy);
             TurretQuque.instance.AddingQuque(entity);
         }
@@ -56,14 +55,17 @@ public class AttackingRadius : MonoBehaviour
     {
         if (EnemyToAttack != null)
         {
-            Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
-            Vector3 EnemyTransform = new Vector3(EnemyToAttack.transform.position.x, 0, EnemyToAttack.transform.position.z);
-
-            if (Vector3.Distance(thisTransform, EnemyTransform) <= ActiveRange && EnemyToAttack.GetComponent<EnemyHealth>().CanbeTarget() && !AttackAlready.Contains(EnemyToAttack))
+            if (EnemyToAttack.transform.GetChild(1).gameObject.GetComponent<AnimationControll>().IsPuasingSelf == false)
             {
-                AttackAlready.Add(EnemyToAttack);
-                entity.SetTarget(EnemyToAttack);
-                TurretQuque.instance.AddingQuque(entity);
+                Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
+                Vector3 EnemyTransform = new Vector3(EnemyToAttack.transform.position.x, 0, EnemyToAttack.transform.position.z);
+
+                if (Vector3.Distance(thisTransform, EnemyTransform) <= ActiveRange && EnemyToAttack.GetComponent<EnemyHealth>().CanbeTarget() && !AttackAlready.Contains(EnemyToAttack))
+                {
+                    AttackAlready.Add(EnemyToAttack);
+                    entity.SetTarget(EnemyToAttack);
+                    TurretQuque.instance.AddingQuque(entity);
+                }
             }
         }
     }

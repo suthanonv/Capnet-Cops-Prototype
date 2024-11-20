@@ -78,13 +78,17 @@ public class AnimationControll : MonoBehaviour
     }
 
 
+    public bool IsPuasingSelf;
+
     public void PauseSelf()
     {
+        IsPuasingSelf = true;
         this.transform.parent.GetComponent<Character>().Paused = true;
     }
 
     public void UnPauseSelf()
     {
+        IsPuasingSelf = false;
         this.transform.parent.GetComponent<Character>().Paused = false;
     }
 }
