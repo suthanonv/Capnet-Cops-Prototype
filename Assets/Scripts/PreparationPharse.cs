@@ -84,6 +84,8 @@ public class PreparationPharse : MonoBehaviour
         ChangeDirectionLight();
         EnemyWaveSpawn.instance.CurrentWave++;
         EnemySpawnPoint.Instance.SpawningWave(EnemyWaveSpawn.instance.CurrentWave);
+        TurnBaseSystem.instance.PlayerInteractScript.SetAvalibeMoveStep();
+
     }
 
 

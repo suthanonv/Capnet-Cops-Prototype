@@ -21,6 +21,17 @@ public class Interact : MonoBehaviour
     Character CharacterDebug;
 
 
+    int CurrentMove = 0;
+    public void SetAvalibeMoveStep()
+    {
+        Debug.Log(PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum());
+        int MOvePoint = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+        Debug.Log(MOvePoint);
+
+        CurrentMove = MOvePoint;
+    }
+
+
     public Character selectedCharacter
     {
         get { return CharacterDebug; }
@@ -65,6 +76,7 @@ public class Interact : MonoBehaviour
         if (pathfinder == null)
             pathfinder = GameObject.Find("Pathfinder").GetComponent<Pathfinder>();
         selectedCharacter = null;
+
     }
 
     private void Update()
@@ -189,7 +201,7 @@ public class Interact : MonoBehaviour
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint = 99;
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
         }
         else
         {
@@ -228,7 +240,13 @@ public class Interact : MonoBehaviour
                 {
                     if (newPath.tiles[newPath.tiles.Length - 1].occupyingCharacter == null)
                     {
+                        CurrentMove -= newPath.tiles.Length - 1;
                         newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
+                    }
+                    else
+                    {
+                        CurrentMove -= newPath.tiles.Length;
+
                     }
 
                     GetComponent<AudioSource>().PlayOneShot(click);
