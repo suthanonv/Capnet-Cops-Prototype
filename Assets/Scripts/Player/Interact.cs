@@ -94,7 +94,7 @@ public class Interact : MonoBehaviour
 
     private void InspectTile()
     {
-        if (EnableInteracting == false || TurnBaseSystem.instance.currentTurn == Turn.Enemies) return;
+        if (EnableInteracting == false || (TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase)) return;
 
         if (currentTile.Occupied && currentTile.occupyingCharacter != null)
         {
@@ -188,11 +188,6 @@ public class Interact : MonoBehaviour
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
-
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = 1;
-
-
-
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         }
         else
@@ -249,9 +244,18 @@ public class Interact : MonoBehaviour
 
     bool RetrievePath(out Path path)
     {
+        selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
+
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+        }
+        if (currentTile.occupyingCharacter != null)
+        {
+            if (currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget == Target.Pod)
+            {
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = 1;
+            }
         }
 
 

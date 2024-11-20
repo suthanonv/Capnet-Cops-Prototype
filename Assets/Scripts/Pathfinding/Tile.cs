@@ -67,7 +67,7 @@ public class Tile : MonoBehaviour
                     }
                 }
             }
-            else if (occupyingCharacter != null)
+            else if (occupyingCharacter != null && !isinrange)
             {
                 if (occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam team))
                 {

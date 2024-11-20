@@ -58,15 +58,15 @@ public class ShowMoveingRange : MonoBehaviour
         foreach (Tile tile in moveRange)
         {
 
-            tile.IsInAttackRange = true;
 
             if (tile.occupyingCharacter != null)
             {
                 if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
-                    if (teamCheck.EntityTeamSide == Team.Enemy)
+                    if ((teamCheck.EntityTeamSide == Team.Enemy) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
                     {
                         tile.ShowRangeVisual = true;
+                        tile.IsInAttackRange = true;
                     }
                 }
             }
@@ -90,31 +90,43 @@ public class ShowMoveingRange : MonoBehaviour
 
 
         currentAttackRange = attackRange;
+
         foreach (Tile tile in attackRange)
         {
-            tile.IsInAttackRange = true;
 
             if (tile.occupyingCharacter != null)
             {
-
-
-                if (tile.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
+                if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
-                    if ((teamCheck.EntityTeamSide == Team.Enemy) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
+                    if ((teamCheck.EntityTeamSide == Team.Enemy && teamCheck.TypeOfTarget != Target.Pod) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
                     {
+
+                        tile.IsInAttackRange = true;
                         tile.ShowRangeVisual = true;
                     }
                 }
-
-
             }
-
         }
 
 
 
-        // Mark all tiles in attack range
+        HashSet<Tile> PodmoveRange = CalculatePathfindingRange(centerTile, moveData.AvalibleMoveStep + 1, entityTeam);
 
+        foreach (Tile tile in PodmoveRange)
+        {
+
+            if (tile.occupyingCharacter != null)
+            {
+                if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
+                {
+                    if ((teamCheck.EntityTeamSide == Team.Enemy && teamCheck.TypeOfTarget == Target.Pod) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
+                    {
+                        tile.IsInAttackRange = true;
+                        tile.ShowRangeVisual = true;
+                    }
+                }
+            }
+        }
 
     }
 
@@ -194,7 +206,9 @@ public class ShowMoveingRange : MonoBehaviour
         foreach (Tile tile in currentTileRange)
         {
             tile.ShowRangeVisual = false;
+
         }
+
         foreach (Tile tile in currentAttackRange)
         {
             tile.IsInAttackRange = false;

@@ -353,7 +353,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     public void EndPlayerPhase()
     {
-        
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+
         ActionEnd = true;
         PlayerInteractScript.selectedCharacter = null;
 
@@ -361,7 +362,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
             PreparationPharse.instance.SetToAttackTime();
         }
-        
+
         EndPharseButton.SetActive(false);
         PlayerInteractScript.enabled = false;
 
