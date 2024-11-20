@@ -15,7 +15,11 @@ public class Character : MonoBehaviour
 
     public bool IsObstacle;
     public Animator anim;
-
+    public AudioClip shot1;
+    public AudioClip shot2;
+    public AudioClip shot3;
+    public AudioClip shot4;
+    AudioSource audioSource;
 
 
     bool walkAble = true;
@@ -34,6 +38,7 @@ public class Character : MonoBehaviour
             FindTileAtStart();
         anim = this.transform.GetChild(1).GetComponent<Animator>();
         Entityteam = this.GetComponent<EntityTeam>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -262,7 +267,13 @@ public class Character : MonoBehaviour
                 anim.SetBool("Select", false);
             }
             isAttacking = true;
+            
             anim.SetTrigger("Attacking");
+
+            AudioClip[] shotSounds = { shot1, shot2, shot3, shot4 };
+            AudioClip selectedShotSound = shotSounds[UnityEngine.Random.Range(0, shotSounds.Length)];
+
+            audioSource.PlayOneShot(selectedShotSound, 0.7f);
         }
 
     }

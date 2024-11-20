@@ -7,13 +7,13 @@ public class MadeInHeaven : MonoBehaviour
     public void Pucci()
     {
 
-        if (Time.timeScale == 1)
+        if (Time.timeScale <= 1.5f)
         {
-            ChangeTimeScaleWithReturn(20f, 1f, 0f);
+            ChangeTimeScaleWithReturn(15f, 1f, 0f);
         }
-        else if (Time.timeScale > 1)
+        else if (Time.timeScale > 1.5f)
         {
-            ChangeTimeScaleWithReturn(1f, 1f, 0f);
+            ChangeTimeScaleWithReturn(1.5f, 1f, 0f);
         }
     }
     public void ChangeTimeScaleWithReturn(float targetTimeScale, float transitionDuration, float waitDuration)
@@ -23,7 +23,7 @@ public class MadeInHeaven : MonoBehaviour
 
     private System.Collections.IEnumerator TransitionTimeScale(float targetTimeScale, float transitionDuration, float waitDuration)
     {
-        float startScale = Time.timeScale;
+        float startScale = 1.5f;
 
         // Transition to the target time scale
         yield return StartCoroutine(Transition(startScale, targetTimeScale, transitionDuration));
