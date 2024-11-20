@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum Team
 {
-    Human, Enemy
+    Human, Enemy, Pod
 }
 
 public class EntityTeam : MonoBehaviour

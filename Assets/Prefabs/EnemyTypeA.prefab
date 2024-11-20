@@ -1470,6 +1470,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
+  - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7029,6 +7030,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
+  - {fileID: -5396273710960322316, guid: cad98ea52c9b98e4c8551dde3792ad1d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8517,6 +8519,7 @@ MonoBehaviour:
   - {fileID: 8735384001217727880}
   OnHit: {fileID: 2100000, guid: 8ea525e1c01a1bf4b9a7bb635076723e, type: 2}
   OffHit: {fileID: 2100000, guid: 777adf5ab98ddb4429e08c4b96f935a5, type: 2}
+  OutLine: {fileID: 2100000, guid: ff4d551fa2330b847840431ff2548668, type: 2}
 --- !u!114 &4249347290973946507
 MonoBehaviour:
   m_ObjectHideFlags: 0

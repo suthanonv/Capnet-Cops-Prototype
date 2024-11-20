@@ -63,10 +63,21 @@ public class Tile : MonoBehaviour
                 {
                     if (team.EntityTeamSide == Team.Enemy)
                     {
-                        SetColor(MaterialStorage.Instance.Red);
+                        occupyingCharacter.transform.GetChild(1).gameObject.GetComponent<MaterialChange>().AddingOutLine();
                     }
                 }
             }
+            else if (occupyingCharacter != null)
+            {
+                if (occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam team))
+                {
+                    if (team.EntityTeamSide == Team.Enemy)
+                    {
+                        occupyingCharacter.transform.GetChild(1).gameObject.GetComponent<MaterialChange>().RemovingOutLine();
+                    }
+                }
+            }
+
         }
 
     }
@@ -104,8 +115,8 @@ public class Tile : MonoBehaviour
                         {
                             if (team.EntityTeamSide == Team.Enemy)
                             {
-                                newColor = MaterialStorage.Instance.Red;
-                                SetColor(newColor);
+
+                                occupyingCharacter.transform.GetChild(1).gameObject.GetComponent<MaterialChange>().AddingOutLine();
 
                             }
                         }
@@ -175,6 +186,7 @@ public class Tile : MonoBehaviour
         IsInAttackRange = isinrange;
 
         ShowRangeVisual = showVisual;
+
     }
 
     /// <summary>
