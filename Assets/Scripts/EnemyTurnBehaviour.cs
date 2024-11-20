@@ -21,16 +21,19 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
     public override void onTurn()
     {
-        this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Play");
-
-        CameraBehaviouerControll.instance.LookAtTarget(this.gameObject.transform);
-        base.onTurn();
         Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar, targets);
-
 
         if (Human == null) OnActionEnd();
 
         destinationTile = Human.characterTile;
+
+        this.gameObject.GetComponent<Character>().Character_LookAt(destinationTile);
+
+        this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Play");
+
+        CameraBehaviouerControll.instance.LookAtTarget(this.gameObject.transform);
+        base.onTurn();
+
 
 
 
