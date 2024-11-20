@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
 
     bool walkAble = true;
     public bool WalkAble { get { return walkAble; } set { walkAble = value; } }
+    public bool isAttacking;
 
     [SerializeField] private bool FindLater = false;
     private void Awake()
@@ -260,10 +261,8 @@ public class Character : MonoBehaviour
             {
                 anim.SetBool("Select", false);
             }
-
+            isAttacking = true;
             anim.SetTrigger("Attacking");
-
-
         }
 
     }

@@ -4,8 +4,10 @@ using UnityEngine.Events;
 public class EnemyHealth : Health
 {
     [SerializeField] UnityEvent OnDied;
+    [SerializeField] Animator Animator;
     public TextMeshProUGUI HealthText;
     private ParticleSystem blood;
+    
 
     public override void Start()
     {
@@ -18,15 +20,18 @@ public class EnemyHealth : Health
     }
     public override void TakeDamage(int Damage)
     {
+        Animator.SetTrigger("TakesDamage");
         base.TakeDamage(Damage);
         RemoveBulletQuque();
         MaxBulletQuque = MathScript.instance.Ceiling(Maxhealth);
         HealthText.text = Maxhealth.ToString();
         blood.Play();
+        Animator.ResetTrigger("TakesDamage");
     }
 
     public override void Died()
     {
+        Animator.SetTrigger("Dies");
         if (TurnBaseSystem.instance.CurrentEnemyTurn == this.GetComponent<EntityTurnBehaviour>())
         {
             TurnBaseSystem.instance.ActionEnd = true;
