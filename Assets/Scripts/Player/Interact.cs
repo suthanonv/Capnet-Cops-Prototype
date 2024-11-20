@@ -188,10 +188,13 @@ public class Interact : MonoBehaviour
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint = 99;
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         }
         else
         {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.ActionPoint;
+
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
         }
 

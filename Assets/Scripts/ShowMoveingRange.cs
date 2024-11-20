@@ -45,7 +45,7 @@ public class ShowMoveingRange : MonoBehaviour
         // Calculate the attack range based on the movement range
         HashSet<Tile> attackRange = CalculateAttackRange(moveRange, moveData.moveData.BaseAttackRange, entityTeam);
 
-
+        HashSet<Tile> PodMoveRange = CalculateAttackRange(moveRange, 1, entityTeam);
 
 
 
@@ -110,16 +110,15 @@ public class ShowMoveingRange : MonoBehaviour
 
 
 
-        HashSet<Tile> PodmoveRange = CalculatePathfindingRange(centerTile, moveData.AvalibleMoveStep + 1, entityTeam);
 
-        foreach (Tile tile in PodmoveRange)
+        foreach (Tile tile in PodMoveRange)
         {
 
             if (tile.occupyingCharacter != null)
             {
                 if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
-                    if ((teamCheck.EntityTeamSide == Team.Enemy && teamCheck.TypeOfTarget == Target.Pod) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
+                    if ((teamCheck.EntityTeamSide == Team.Enemy) && centerTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0)
                     {
                         tile.IsInAttackRange = true;
                         tile.ShowRangeVisual = true;
