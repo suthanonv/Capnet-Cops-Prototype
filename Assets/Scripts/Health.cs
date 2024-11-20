@@ -32,7 +32,13 @@ public class Health : MonoBehaviour
     public virtual void Died()
     {
 
+        OnDied();
 
+    }
+
+
+    public virtual void OnDied()
+    {
         this.GetComponent<Character>().characterTile.occupyingCharacter = null;
         this.GetComponent<Character>().characterTile.Occupied = false;
 
@@ -45,8 +51,6 @@ public class Health : MonoBehaviour
         else TurnBaseSystem.instance.playerTurnSystems.Remove(turnBehaviour);
 
         TurnBaseSystem.instance.UpdateCombatPhase();
-
     }
-
 
 }

@@ -8171,8 +8171,8 @@ Transform:
   - {fileID: 8785500120605587353}
   - {fileID: 7447251478102742249}
   - {fileID: 8999898558890616380}
-  - {fileID: 2948041054475814005}
   - {fileID: 6724700604928538213}
+  - {fileID: 2948041054475814005}
   - {fileID: 7534558028391975747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8216,6 +8216,7 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
+  isAttacking: 0
   FindLater: 0
   paused: 0
 --- !u!114 &819049922978127021
@@ -8264,7 +8265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 100
-  OnDied:
+  OnDiedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2636413917966779121}

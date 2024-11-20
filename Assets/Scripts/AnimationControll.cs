@@ -58,7 +58,11 @@ public class AnimationControll : MonoBehaviour
 
     }
 
-
+    public void OnDied()
+    {
+        Debug.Log("Died");
+        this.transform.parent.GetComponent<Health>().OnDied();
+    }
 
 
     public void ActiveObject()
@@ -71,6 +75,17 @@ public class AnimationControll : MonoBehaviour
     {
         Debug.Log($"Freme {CurrentFreme} Work!");
         CurrentFreme++;
+    }
+
+
+    public void PauseSelf()
+    {
+        this.transform.parent.GetComponent<Character>().Paused = true;
+    }
+
+    public void UnPauseSelf()
+    {
+        this.transform.parent.GetComponent<Character>().Paused = false;
     }
 }
 

@@ -91,7 +91,7 @@ public class EnemySpawnPoint : MonoBehaviour
             {
                 IndexOfTilToSpawnEnemy.Add(newIndex);
 
-                GameObject PodNew = Instantiate(Pod_Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 200, 0), Quaternion.identity);
+                GameObject PodNew = Instantiate(Pod_Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 100, 0), Quaternion.identity);
                 PodNew.gameObject.GetComponent<Character>().characterTile = attackRange.ToList()[newIndex];
                 PodTile.Add(attackRange.ToList()[newIndex]);
                 Pods.Add(PodNew);
