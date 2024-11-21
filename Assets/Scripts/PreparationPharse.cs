@@ -16,7 +16,7 @@ public class PreparationPharse : MonoBehaviour
     Clock currentTime = new Clock();
     [Header("Clock")]
 
-    [SerializeField] Clock StartClockTIme = new Clock();
+    public Clock StartClockTIme = new Clock();
 
     public Clock CurrentClockTime
     {
