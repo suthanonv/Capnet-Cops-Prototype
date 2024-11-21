@@ -24,8 +24,8 @@ public class PodCutScene : MonoBehaviour
 
     private void Start()
     {
-        CameraControl.instance.SetCamPosition(CutScene_CamPosition);
-        CameraControl.instance.SetCamSize(CutSceneZoom);
+        CameraControl.instance.SetCamPosition(CutScene_CamPosition, 0);
+        CameraControl.instance.SetCamSize(CutSceneZoom, 0);
         OnStart.Invoke();
     }
 
@@ -39,7 +39,7 @@ public class PodCutScene : MonoBehaviour
     void End()
     {
         OnCutScenen = false;
-        CameraControl.instance.SetCamSize(EndZoom);
+        CameraControl.instance.SetCamSize(EndZoom, 0.5f);
         CameraBehaviouerControll.instance.LookAtTarget(Player);
         OnEnd.Invoke();
     }

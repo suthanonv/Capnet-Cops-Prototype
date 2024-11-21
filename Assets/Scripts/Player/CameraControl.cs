@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-
 public class CameraControl : MonoBehaviour
 {
     public static CameraControl instance;
@@ -54,14 +54,45 @@ public class CameraControl : MonoBehaviour
         UpdateCamera();
     }
 
-    public void SetCamSize(float Size)
+    public void SetCamSize(float targetSize, float duration)
     {
-        cam.orthographicSize = Size;
+        StartCoroutine(LerpToNewSize(targetSize, duration));
     }
 
-    public void SetCamPosition(Vector3 newcamPos)
+    private IEnumerator LerpToNewSize(float targetSize, float duration)
     {
-        transform.parent.position = newcamPos;
+        float startSize = cam.orthographicSize;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            cam.orthographicSize = Mathf.Lerp(startSize, targetSize, elapsedTime / duration);
+            yield return null;
+        }
+
+        // Ensure the final size is exactly the target size
+        cam.orthographicSize = targetSize;
+    }
+    public void SetCamPosition(Vector3 newCamPos, float duration)
+    {
+        StartCoroutine(LerpToNewPosition(newCamPos, duration));
+    }
+
+    private IEnumerator LerpToNewPosition(Vector3 targetPosition, float duration)
+    {
+        Vector3 startPosition = transform.parent.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.parent.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            yield return null;
+        }
+
+        // Ensure the final position is exactly the target position
+        transform.parent.position = targetPosition;
     }
 
     private void UpdateCamera()
