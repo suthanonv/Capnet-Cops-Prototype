@@ -60,22 +60,22 @@ public class CameraControl : MonoBehaviour
 
         if (Input.mousePosition.x <= 0 + screenEdgeDetectionArea)
         {
-            transform.parent.Translate(Vector3.left * speed * Time.deltaTime);
+            transform.parent.Translate(Vector3.left * speed / 2 * Time.deltaTime);
         }
 
         if (Input.mousePosition.x >= Screen.width - screenEdgeDetectionArea)
         {
-            transform.parent.Translate(Vector3.right * speed * Time.deltaTime);
+            transform.parent.Translate(Vector3.right * speed / 2 * Time.deltaTime);
         }
 
         if (Input.mousePosition.y >= Screen.height - screenEdgeDetectionArea)
         {
-            transform.parent.Translate(Vector3.up * speed * Time.deltaTime);
+            transform.parent.Translate(Vector3.up * speed / 2 * Time.deltaTime);
         }
 
         if (Input.mousePosition.y <= 0 + screenEdgeDetectionArea)
         {
-            transform.parent.Translate(Vector3.down * speed * Time.deltaTime);
+            transform.parent.Translate(Vector3.down * speed /2 * Time.deltaTime);
         }
     }
 
