@@ -161,12 +161,7 @@ public class Interact : MonoBehaviour
                         this.GetComponent<CameraControl>().SetPiviotPoint(charrecter.gameObject);
 
 
-                        if (TurnBaseSystem.instance.OnBattlePhase == false)
-                        {
-                            currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
-                        }
 
-                        ShowMoveingRange.instance.ShowCharacterMoveRange(currentTile, currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status, currentTile.occupyingCharacter.GetComponent<EntityTeam>());
                     }
                 }
 
@@ -229,6 +224,7 @@ public class Interact : MonoBehaviour
         }
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
+        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.GetComponent<Character>().characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         GetComponent<AudioSource>().PlayOneShot(pop);
         charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();
@@ -340,3 +336,4 @@ public class Interact : MonoBehaviour
         }
     }
 }
+
