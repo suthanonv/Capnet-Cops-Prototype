@@ -51,6 +51,7 @@ public class EntityStat
         }
         else
         {
+            AvalibleActionPoint = 99;
             AvalibleMoveStep = 99;
 
         }

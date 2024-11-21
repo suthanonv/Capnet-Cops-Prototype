@@ -25,7 +25,6 @@ public class Interact : MonoBehaviour
     int CurrentMove = 0;
     public void SetAvalibeMoveStep()
     {
-        Debug.Log(PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum());
         int MOvePoint = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
         Debug.Log(MOvePoint);
 
@@ -44,6 +43,7 @@ public class Interact : MonoBehaviour
                 PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
                 pathDraw.ClearPaht();
+                ShowMoveingRange.instance.CloseMovingRangeVisual();
                 if (value == null && TurnBaseSystem.instance.ActionEnd)
                 {
                     CharacterDebug.gameObject.GetComponent<EntityTurnBehaviour>().DeSelect();
@@ -207,19 +207,24 @@ public class Interact : MonoBehaviour
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint = 99;
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
         }
         else
         {
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.ActionPoint;
 
             selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
         }
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
-
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+        }
+        else
+        {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
+            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+        }
         GetComponent<AudioSource>().PlayOneShot(pop);
         charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();
     }
