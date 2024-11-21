@@ -25,12 +25,23 @@ public class CollectingPod : MonoBehaviour
         }
     }
 
+    public bool IsHighestPod;
+
+
+    public void ActivePod()
+    {
+        if (IsHighestPod)
+        {
+            PodCutScene.instance.OnCutSceneEnd();
+        }
+    }
+
     private void Update()
     {
 
         if (transform.position.y <= 1 && !hasExploded)
         {
-            PodCutScene.instance.OnCutSceneEnd();
+            ActivePod();
             this.GetComponent<Character>().FindTileAtStart();
             spark.Stop();
             smoke.Stop();

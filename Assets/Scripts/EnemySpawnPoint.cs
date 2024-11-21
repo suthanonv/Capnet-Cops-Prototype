@@ -79,25 +79,38 @@ public class EnemySpawnPoint : MonoBehaviour
 
 
 
-
+        GameObject HeighestPod = null;
+        float PreviosHeight = 0;
 
         bool addedNum = false;
 
         while (!addedNum)
         {
-            int newIndex = Random.Range(0, attackRange.Count() - 1);
+            int newIndex = UnityEngine.Random.Range(0, attackRange.Count() - 1);
 
             if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false && !PodTile.Contains(attackRange.ToList()[newIndex]))
             {
                 IndexOfTilToSpawnEnemy.Add(newIndex);
 
-                GameObject PodNew = Instantiate(Pod_Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, 100, 0), Quaternion.identity);
+                float RandomHeigh = UnityEngine.Random.Range(100, 151);
+
+
+
+                GameObject PodNew = Instantiate(Pod_Prefab, attackRange.ToList()[newIndex].transform.position + new Vector3(0, RandomHeigh, 0), Quaternion.identity);
                 PodNew.gameObject.GetComponent<Character>().characterTile = attackRange.ToList()[newIndex];
                 PodTile.Add(attackRange.ToList()[newIndex]);
                 Pods.Add(PodNew);
                 addedNum = true;
+
+                if (RandomHeigh > PreviosHeight)
+                {
+                    PreviosHeight = RandomHeigh;
+                    HeighestPod = PodNew;
+                }
             }
         }
+
+        HeighestPod.GetComponent<CollectingPod>().IsHighestPod = true;
 
     }
 
@@ -137,7 +150,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
             while (!addedNum)
             {
-                int newIndex = Random.Range(0, attackRange.Count() - 1);
+                int newIndex = UnityEngine.Random.Range(0, attackRange.Count() - 1);
 
                 if (!IndexOfTilToSpawnEnemy.Contains(newIndex) && attackRange.ToList()[newIndex].Occupied == false)
                 {
