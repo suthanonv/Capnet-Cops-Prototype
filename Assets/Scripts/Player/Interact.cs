@@ -42,6 +42,7 @@ public class Interact : MonoBehaviour
                 PathIllustrator pathDraw = GameObject.FindWithTag("Pathfinder").GetComponent<PathIllustrator>();
 
                 pathDraw.ClearPaht();
+                ShowMoveingRange.instance.CloseMovingRangeVisual();
                 if (value == null && TurnBaseSystem.instance.ActionEnd)
                 {
                     CharacterDebug.gameObject.GetComponent<EntityTurnBehaviour>().DeSelect();
@@ -208,8 +209,15 @@ public class Interact : MonoBehaviour
         }
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
-
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+        }
+        else
+        {
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
+            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
+        }
         GetComponent<AudioSource>().PlayOneShot(pop);
         charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();
     }
