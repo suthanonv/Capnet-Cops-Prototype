@@ -1,4 +1,3 @@
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -69,6 +68,12 @@ public class Interact : MonoBehaviour
     public bool EnableInteracting = true;
 
     bool Attacking;
+
+
+    public void SetEnableInteracting(bool Enable)
+    {
+        EnableInteracting = enabled;
+    }
 
     private void Start()
     {
@@ -154,6 +159,16 @@ public class Interact : MonoBehaviour
                         ShowMoveingRange.instance.CloseMovingRangeVisual();
                         turn.onTurn();
                         this.GetComponent<CameraControl>().SetPiviotPoint(charrecter.gameObject);
+
+                        if (!TurnBaseSystem.instance.OnBattlePhase)
+                        {
+                            currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
+                        }
+                        else
+                        {
+
+                            currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
+                        }
                     }
                 }
 

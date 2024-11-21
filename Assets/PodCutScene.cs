@@ -41,6 +41,8 @@ public class PodCutScene : MonoBehaviour
         OnCutScenen = false;
         CameraControl.instance.SetCamSize(EndZoom, 0.5f);
         CameraBehaviouerControll.instance.LookAtTarget(Player);
+        CameraBehaviouerControll.instance.LookAtTarget(null);
+
         OnEnd.Invoke();
     }
 
