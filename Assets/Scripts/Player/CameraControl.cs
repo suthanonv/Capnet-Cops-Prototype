@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour
     private bool isCaptured = false;
     Camera cam;
     [SerializeField] private GameObject piviotPoint;
-    [SerializeField] private bool isRotateAround = false; 
+    [SerializeField] private bool isRotateAround = false;
     private void Start()
     {
         cam = GetComponent<Camera>();
@@ -48,6 +48,11 @@ public class CameraControl : MonoBehaviour
     public void SetCamSize(float Size)
     {
         cam.orthographicSize = Size;
+    }
+
+    public void SetCamPosition(Vector3 newcamPos)
+    {
+        transform.parent.position = newcamPos;
     }
 
     private void UpdateCamera()
@@ -96,7 +101,7 @@ public class CameraControl : MonoBehaviour
 
         if (Input.mousePosition.y <= 0 + screenEdgeDetectionArea)
         {
-            transform.parent.Translate(Vector3.down * speed /2 * Time.deltaTime);
+            transform.parent.Translate(Vector3.down * speed / 2 * Time.deltaTime);
         }
     }
 
