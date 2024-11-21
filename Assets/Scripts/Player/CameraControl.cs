@@ -14,10 +14,23 @@ public class CameraControl : MonoBehaviour
     public float screenEdgeDetectionArea = 100f;
     private bool isCaptured = false;
     Camera cam;
-
+    [SerializeField] private GameObject piviotPoint;
+    [SerializeField] private bool isRotateAround = false; 
     private void Start()
     {
         cam = GetComponent<Camera>();
+    }
+
+    public void SetPiviotPoint(GameObject character)
+    {
+        isRotateAround = true;
+        piviotPoint = character;
+    }
+
+    public void UndoPiviotPoint()
+    {
+        isRotateAround = false;
+        piviotPoint = null;
     }
 
     void Update()
@@ -56,7 +69,15 @@ public class CameraControl : MonoBehaviour
         cam.orthographicSize = Zoom;
 
         transform.parent.Translate(input * translateSpeed * Time.deltaTime); // Translate camera based on mouse movement
-        transform.parent.Rotate(Vector3.up * yRotation * Time.deltaTime * speed * 4); // Rotate camera
+
+        if (isRotateAround && piviotPoint != null)
+        {
+            transform.parent.RotateAround(piviotPoint.transform.position, Vector3.up, yRotation * Time.deltaTime * speed * 4);
+        }
+        else if (!isRotateAround && piviotPoint == null)
+        {
+            transform.parent.Rotate(Vector3.up * yRotation * Time.deltaTime * speed * 4); // Rotate camera
+        }
 
         if (Input.mousePosition.x <= 0 + screenEdgeDetectionArea)
         {

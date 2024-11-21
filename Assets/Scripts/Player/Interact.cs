@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -86,6 +87,7 @@ public class Interact : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && selectedCharacter != null)
         {
             PlayerActionUI.instance.EndPhase();
+            this.GetComponent<CameraControl>().UndoPiviotPoint();
         }
         MouseUpdate();
     }
@@ -151,6 +153,7 @@ public class Interact : MonoBehaviour
                     {
                         ShowMoveingRange.instance.CloseMovingRangeVisual();
                         turn.onTurn();
+                        this.GetComponent<CameraControl>().SetPiviotPoint(charrecter.gameObject);
                     }
                 }
 
@@ -194,7 +197,11 @@ public class Interact : MonoBehaviour
 
         selectedCharacter = charecter;
 
-        if (charecter == null) TurnBaseSystem.instance.ActionEnd = true;
+        if (charecter == null)
+        {
+            TurnBaseSystem.instance.ActionEnd = true;
+            this.GetComponent<CameraControl>().UndoPiviotPoint();
+        }
 
 
 
