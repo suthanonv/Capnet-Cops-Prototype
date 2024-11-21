@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectingPod : MonoBehaviour
 {
-    public AudioSource audioSource; 
-    public AudioClip impact;        
+    public AudioSource audioSource;
+    public AudioClip impact;
 
     private GameObject effect;
     private ParticleSystem smoke;
@@ -28,9 +27,10 @@ public class CollectingPod : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (transform.position.y <= 1 && !hasExploded)
         {
+            PodCutScene.instance.OnCutSceneEnd();
             this.GetComponent<Character>().FindTileAtStart();
             spark.Stop();
             smoke.Stop();
@@ -40,10 +40,10 @@ public class CollectingPod : MonoBehaviour
         {
             spark.Play();
             smoke.Play();
-            hasExploded = false; 
+            hasExploded = false;
         }
 
-        
+
         if (transform.position.y <= 80 && !impactSoundPlayed)
         {
             PlayImpactSound();
@@ -57,7 +57,7 @@ public class CollectingPod : MonoBehaviour
             explosion.Play();
             hasExploded = true;
 
-            
+
             StartCoroutine(StopExplosionAfterDuration(explosion.main.duration));
         }
     }
@@ -73,7 +73,7 @@ public class CollectingPod : MonoBehaviour
         if (audioSource != null && impact != null)
         {
             audioSource.PlayOneShot(impact);
-            impactSoundPlayed = true; 
+            impactSoundPlayed = true;
         }
         else
         {

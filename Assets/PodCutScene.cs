@@ -1,18 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PodCutScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static PodCutScene instance;
+
+
+    [SerializeField] float CutSceneZoom;
+    [SerializeField] Vector3 CutScene_CamPosition;
+    [SerializeField] float EndZoom;
+    [SerializeField] Transform Player;
+
+    [SerializeField] UnityEvent OnStart;
+    [SerializeField] UnityEvent OnEnd;
+
+    [SerializeField] float Delay;
+
+    public bool OnCutScenen = true;
+    private void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        CameraControl.instance.SetCamPosition(CutScene_CamPosition);
+        CameraControl.instance.SetCamSize(CutSceneZoom);
+        OnStart.Invoke();
     }
+
+
+
+    public void OnCutSceneEnd()
+    {
+        Invoke("End", Delay);
+    }
+
+    void End()
+    {
+        OnCutScenen = false;
+        CameraControl.instance.SetCamSize(EndZoom);
+        CameraBehaviouerControll.instance.LookAtTarget(Player);
+        OnEnd.Invoke();
+    }
+
 }

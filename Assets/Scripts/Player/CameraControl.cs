@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+    public static CameraControl instance;
+
+
     public float speed = 8f;
     public float translateSpeed;
     public float capturedTranslateSpeed;
@@ -16,6 +19,12 @@ public class CameraControl : MonoBehaviour
     Camera cam;
     [SerializeField] private GameObject piviotPoint;
     [SerializeField] private bool isRotateAround = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         cam = GetComponent<Camera>();
@@ -57,7 +66,7 @@ public class CameraControl : MonoBehaviour
 
     private void UpdateCamera()
     {
-        if (PlayerActionUI.instance.IsMouseOnUI == true)
+        if (PlayerActionUI.instance.IsMouseOnUI == true || PodCutScene.instance.OnCutScenen)
         {
             return;
         }
