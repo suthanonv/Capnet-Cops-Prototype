@@ -113,7 +113,7 @@ public class Interact : MonoBehaviour
 
     private void InspectTile()
     {
-        if (EnableInteracting == false || (TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase)) return;
+        if (EnableInteracting == false || (TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) || PodCutScene.instance.OnCutScenen) return;
 
         if (currentTile.Occupied && currentTile.occupyingCharacter != null)
         {
