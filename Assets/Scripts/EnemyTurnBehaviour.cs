@@ -29,7 +29,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         destinationTile = Human.characterTile;
 
         this.gameObject.GetComponent<Character>().Character_LookAt(destinationTile);
-
+        CameraBehaviouerControll.instance.LookAtTarget(this.gameObject.transform);
         this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Play");
 
         if (Spawned == false)
@@ -38,7 +38,6 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
             return;
         }
 
-        CameraBehaviouerControll.instance.LookAtTarget(this.gameObject.transform);
         base.onTurn();
 
 
