@@ -19,6 +19,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         TurnBaseSystem.instance.GetComponent<TurnBaseSystem>().enemiesTurnSystems.Add(this);
     }
 
+    bool Spawned = false;
     public override void onTurn()
     {
         Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar, targets);
@@ -30,6 +31,12 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         this.gameObject.GetComponent<Character>().Character_LookAt(destinationTile);
 
         this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Play");
+
+        if (Spawned == false)
+        {
+            Spawned = true;
+            return;
+        }
 
         CameraBehaviouerControll.instance.LookAtTarget(this.gameObject.transform);
         base.onTurn();
