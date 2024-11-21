@@ -165,6 +165,8 @@ public class Interact : MonoBehaviour
                         {
                             currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
                         }
+
+                        ShowMoveingRange.instance.ShowCharacterMoveRange(currentTile, currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status, currentTile.occupyingCharacter.GetComponent<EntityTeam>());
                     }
                 }
 
