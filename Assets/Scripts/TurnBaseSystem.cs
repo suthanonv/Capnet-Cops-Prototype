@@ -17,7 +17,8 @@ public enum Turn
 public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 {
 
-
+    public AudioSource audioSource;
+    public AudioClip endturn;
     public DelegateList<EntityTurnBehaviour> enemiesTurnSystems;
     public DelegateList<EntityTurnBehaviour> playerTurnSystems;
 
@@ -353,6 +354,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     public void EndPlayerPhase()
     {
+        audioSource.PlayOneShot(endturn);
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         ActionEnd = true;

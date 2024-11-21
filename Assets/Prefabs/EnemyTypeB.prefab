@@ -8273,13 +8273,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6931105369674952681}
-  - {fileID: 7630390677845458592}
   - {fileID: 2825543972187359471}
   - {fileID: 8785500120605587353}
   - {fileID: 7447251478102742249}
   - {fileID: 8999898558890616380}
   - {fileID: 5790593251280968676}
+  - {fileID: 6931105369674952681}
+  - {fileID: 7630390677845458592}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7062314328381582131
@@ -8322,6 +8322,10 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
+  shot1: {fileID: 0}
+  shot2: {fileID: 0}
+  shot3: {fileID: 0}
+  shot4: {fileID: 0}
   isAttacking: 0
   FindLater: 0
   paused: 0
