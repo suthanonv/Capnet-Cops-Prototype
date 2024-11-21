@@ -192,7 +192,10 @@ public class Character : MonoBehaviour
 
             if (currentStep != 0)
             {
-                if (TurnBaseSystem.instance.OnBattlePhase) this.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep -= 1;
+                if (TurnBaseSystem.instance.OnBattlePhase)
+                {
+                    this.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep -= 1;
+                }
                 else PreparationPharse.instance.AddingTimeToCurrentTime(PreparationPharse.instance.MovementCost);
             }
             currentTile = movingPath.tiles[currentStep];
@@ -267,7 +270,7 @@ public class Character : MonoBehaviour
                 anim.SetBool("Select", false);
             }
             isAttacking = true;
-            
+
             anim.SetTrigger("Attacking");
 
             AudioClip[] shotSounds = { shot1, shot2, shot3, shot4 };

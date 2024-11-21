@@ -160,14 +160,10 @@ public class Interact : MonoBehaviour
                         turn.onTurn();
                         this.GetComponent<CameraControl>().SetPiviotPoint(charrecter.gameObject);
 
-                        if (!TurnBaseSystem.instance.OnBattlePhase)
+
+                        if (TurnBaseSystem.instance.OnBattlePhase == false)
                         {
                             currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
-                        }
-                        else
-                        {
-
-                            currentTile.occupyingCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
                         }
                     }
                 }
@@ -231,15 +227,7 @@ public class Interact : MonoBehaviour
         }
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
-        if (!TurnBaseSystem.instance.OnBattlePhase)
-        {
-            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
-        }
-        else
-        {
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
-            ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
-        }
+
         GetComponent<AudioSource>().PlayOneShot(pop);
         charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();
     }
@@ -272,8 +260,7 @@ public class Interact : MonoBehaviour
                     }
                     else
                     {
-                        CurrentMove -= newPath.tiles.Length;
-
+                        CurrentMove -= newPath.tiles.Length - 2;
                     }
 
                     GetComponent<AudioSource>().PlayOneShot(click);
@@ -296,7 +283,7 @@ public class Interact : MonoBehaviour
 
         if (!TurnBaseSystem.instance.OnBattlePhase)
         {
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
+            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
         }
         if (currentTile.occupyingCharacter != null)
         {

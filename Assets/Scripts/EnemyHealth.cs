@@ -20,7 +20,6 @@ public class EnemyHealth : Health
     }
     public override void TakeDamage(int Damage)
     {
-        Debug.Log(Damage);
         Animator.SetTrigger("TakesDamage");
         base.TakeDamage(Damage);
         RemoveBulletQuque();

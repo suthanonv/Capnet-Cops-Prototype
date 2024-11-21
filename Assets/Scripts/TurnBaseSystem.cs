@@ -223,6 +223,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 foreach (EntityTurnBehaviour i in playerTurnSystems.List)
                 {
                     i.Status.ResetStatus();
+                    Debug.Log(i.Status.AvalibleMoveStep);
                 }
                 TurretTurncall();
                 PlayerInteractScript.selectedCharacter = null;

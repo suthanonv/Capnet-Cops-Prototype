@@ -5155,10 +5155,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.9081578
+  m_Radius: 0.4485613
   m_Height: 3.6772733
   m_Direction: 1
-  m_Center: {x: -0.007129669, y: 1.3386366, z: 0.2294879}
+  m_Center: {x: -0.007129699, y: 1.3386366, z: 0.15011895}
 --- !u!54 &797166441287812807
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5214,6 +5214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 6599423849829133729}
   impact: {fileID: 8300000, guid: 2c8f41d6491faa043814524dac257c96, type: 3}
+  IsHighestPod: 0
 --- !u!114 &5150329015643960989
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class EntityStat
         set
         {
             avaliblemovestep = value;
-
+            UnityEngine.Debug.Log($"Avalible Move {avaliblemovestep}");
             if (avaliblemovestep <= 0)
             {
                 avaliblemovestep = 0;
@@ -42,18 +42,15 @@ public class EntityStat
 
     public void ResetStatus()
     {
-        AvalibleActionPoint = ActionPoint;
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
 
-
+            AvalibleActionPoint = ActionPoint;
             AvalibleMoveStep = moveData.MaxMove;
         }
         else
         {
             AvalibleActionPoint = 99;
-            AvalibleMoveStep = 99;
-
         }
     }
 
