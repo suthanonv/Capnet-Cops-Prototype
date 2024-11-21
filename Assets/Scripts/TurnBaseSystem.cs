@@ -234,6 +234,20 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 currentTurn = Turn.Player;
                 PlayerInteractScript.enabled = true;
 
+                if (onBattlePhase)
+                {
+                    if (currentTurn == Turn.Enemies)
+                    {
+                        PauseBattle = true;
+                        PhaseTelling.instance.ENemyturn();
+                    }
+                    else
+                    {
+                        PauseBattle = true;
+                        PhaseTelling.instance.Playerturn();
+
+                    }
+                }
             }
         }
         else
@@ -247,7 +261,11 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         }
 
+
     }
+
+
+    public bool PauseBattle = false;
 
     bool isAttackPhaseEnded()
     {
@@ -300,6 +318,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             }
         }
 
+
     }
 
 
@@ -307,7 +326,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     private void Update()
     {
-        if (OnBattlePhase)
+        if (OnBattlePhase && PauseBattle == false)
         {
             if (IsContinueCombatPhase() == false)
             {
@@ -371,6 +390,20 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         TurnNum = 0;
         currentTurn = Turn.Enemies;
+        if (onBattlePhase)
+        {
+            if (currentTurn == Turn.Enemies)
+            {
+                PauseBattle = true;
+                PhaseTelling.instance.ENemyturn();
+            }
+            else
+            {
+                PauseBattle = true;
+                PhaseTelling.instance.Playerturn();
+
+            }
+        }
     }
 
 
