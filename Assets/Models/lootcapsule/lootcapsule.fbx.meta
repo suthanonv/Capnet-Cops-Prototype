@@ -3,7 +3,12 @@ guid: 3ad210b6fab47464c9f3c9a19a6f67a2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lootcapsuletexture
+    second: {fileID: 2100000, guid: 96603052b09d238458d8c26d64524d8d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

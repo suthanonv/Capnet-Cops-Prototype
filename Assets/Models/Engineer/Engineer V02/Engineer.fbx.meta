@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d621e8006fa1bf944a1d05d1c80123f7
+guid: 26d0d38b43c46274cbe0e8c3d335a51b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mantistexture
-    second: {fileID: 2100000, guid: 777adf5ab98ddb4429e08c4b96f935a5, type: 2}
+      name: engineertexture
+    second: {fileID: 2100000, guid: 0a98d5fadfb4ead4ca9769ebba7e20d2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
