@@ -1,13 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectingPod : MonoBehaviour
 {
+    public AudioSource audioSource; 
+    public AudioClip impact;        
 
     private GameObject effect;
     private ParticleSystem smoke;
     private ParticleSystem spark;
     private ParticleSystem explosion;
-    private int n = 0;
+
+    private bool hasExploded = false;
+    private bool impactSoundPlayed = false;
 
     private void Start()
     {
@@ -21,39 +26,58 @@ public class CollectingPod : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
-    {
-
-    }
-
     private void Update()
     {
-
-        if (transform.position.y <= 1)
+        
+        if (transform.position.y <= 1 && !hasExploded)
         {
             this.GetComponent<Character>().FindTileAtStart();
             spark.Stop();
             smoke.Stop();
             Explosion();
         }
-        else if (transform.position.y >= 1)
+        else if (transform.position.y > 1)
         {
             spark.Play();
             smoke.Play();
-            n = 0;
+            hasExploded = false; 
+        }
+
+        
+        if (transform.position.y <= 80 && !impactSoundPlayed)
+        {
+            PlayImpactSound();
         }
     }
 
     private void Explosion()
     {
-        if (n <= 0)
+        if (!hasExploded)
         {
             explosion.Play();
-            n = 1;
+            hasExploded = true;
+
+            
+            StartCoroutine(StopExplosionAfterDuration(explosion.main.duration));
+        }
+    }
+
+    private System.Collections.IEnumerator StopExplosionAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        explosion.Stop();
+    }
+
+    private void PlayImpactSound()
+    {
+        if (audioSource != null && impact != null)
+        {
+            audioSource.PlayOneShot(impact);
+            impactSoundPlayed = true; 
         }
         else
         {
-            explosion.Stop();
+            Debug.LogWarning("AudioSource or Impact AudioClip not set!");
         }
     }
 }

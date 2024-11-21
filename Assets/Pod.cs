@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Pod : Health
 {
+    public AudioSource audioSource;
+    public AudioClip openning;
     //private bool Used = false;
     public override void Died()
     {
@@ -10,7 +12,7 @@ public class Pod : Health
         this.GetComponent<Character>().characterTile.Occupied = false;
 
 
-
+        audioSource.PlayOneShot(openning);
         this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Open");
 
 
@@ -21,6 +23,7 @@ public class Pod : Health
 
     public override void OnDied()
     {
+        
         Exploring.Instance.OnExploringComplete();
         PodStroingScript.instance.CollecedPod += 1;
         this.GetComponent<EntityTeam>().EntityTeamSide = Team.Pod;
