@@ -15,7 +15,6 @@ public class EntityStat
         set
         {
             avaliblemovestep = value;
-            UnityEngine.Debug.Log($"Avalible Move {avaliblemovestep}");
             if (avaliblemovestep <= 0)
             {
                 avaliblemovestep = 0;
