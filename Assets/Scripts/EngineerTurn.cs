@@ -60,7 +60,7 @@ public class EngineerTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
-
+        OffAction = false;
         BuildingMode = false;
         TurnBaseSystem.instance.ActionEnd = false;
         PlayerActionUI.instance.Troops = this;
@@ -221,7 +221,7 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) { DeSelect(); return; }
+        if (OffAction || TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) { DeSelect(); return; }
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
@@ -256,10 +256,10 @@ public class EngineerTurn : EntityTurnBehaviour
 
     }
 
-
+    bool OffAction = false;
     public override void OffACtion()
     {
-
+        OffAction = true;
         anim.SetTrigger("deselect");
         CameraBehaviouerControll.instance.ResetTransform();
         PlayerActionUI.instance.Troops = null;

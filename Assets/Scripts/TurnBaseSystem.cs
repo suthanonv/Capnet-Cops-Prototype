@@ -48,6 +48,12 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
             {
                 PreparationPharse.instance.SetToStartTime();
                 PlayerActionUI.instance.EnableUI = false;
+
+                if (PlayerInteractScript.selectedCharacter != null)
+                {
+                    PlayerInteractScript.selectedCharacter.GetComponent<EntityTurnBehaviour>().OffACtion();
+                }
+
                 PlayerInteractScript.selectedCharacter = null;
                 PlayerInteractScript.enabled = true;// make player can choosing a tile to moving
             }

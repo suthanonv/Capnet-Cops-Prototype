@@ -25,6 +25,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
+        OffAction = false;
         TurnBaseSystem.instance.ActionEnd = false;
         OpenUi();
         if (TurnBaseSystem.instance.OnBattlePhase)
@@ -42,7 +43,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
         }
     }
 
-
+    bool OffAction = false;
     void SelectingCharacter()
     {
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
@@ -81,7 +82,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     public override void OnActionEnd()
     {
 
-        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase)
+        if (OffAction || TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase)
         {
             DeSelect();
             return;
@@ -124,6 +125,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void OffACtion()
     {
+        OffAction = true;
         this.DeSelect();
         CameraBehaviouerControll.instance.ResetTransform();
         PlayerActionUI.instance.Troops = null;

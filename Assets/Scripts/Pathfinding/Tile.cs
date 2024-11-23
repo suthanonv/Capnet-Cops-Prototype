@@ -92,7 +92,9 @@ public class Tile : MonoBehaviour
         }
         set
         {
+
             showVisual = value;
+            if (EnemyToSpawn != null) showVisual = true;
 
             if (HighLightTile != null)
             {
@@ -239,16 +241,19 @@ public class Tile : MonoBehaviour
 
     public void SpawnEnemy()
     {
+        GameObject SpawningEnemy = EnemyToSpawn;
+
+        EnemyToSpawn = null;
+        ShowRangeVisual = false;
+
         this.GetComponent<Collider>().enabled = true;
 
         ChangeHighLightColor(MaterialStorage.Instance.CyanNeon);
-        ShowRangeVisual = false;
 
         EnemyWaveSpawn.instance.SpawningEnemy.RemoveListener(SpawnEnemy);
 
-        Instantiate(EnemyToSpawn, transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
+        Instantiate(SpawningEnemy, transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
 
-        EnemyToSpawn = null;
 
     }
 
