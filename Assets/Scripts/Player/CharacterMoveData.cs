@@ -4,9 +4,30 @@ using UnityEngine;
 public class CharacterMoveData : ScriptableObject
 {
     public int MaxMove = 8;
-    int baseAttackRange = 0;
+    [SerializeField] int baseAttackRange = 1;
     [SerializeField] bool IsEnemy = false;
-    public int BaseAttackRange { get { if (!IsEnemy) return baseAttackRange; else { return AttackRange; } } set { baseAttackRange = value; } }
+    public int BaseAttackRange
+    {
+
+        get
+        {
+            if (!IsEnemy)
+            {
+                if (TurnBaseSystem.instance.OnBattlePhase == false)
+                    return baseAttackRange;
+                else return AttackRange;
+            }
+            else
+            {
+                return AttackRange;
+            }
+
+        }
+
+
+
+        set { baseAttackRange = value; }
+    }
 
     public int AttackRange = 1;
 

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Engineer
   m_EditorClassIdentifier: 
   MaxMove: 8
+  IsEnemy: 0
   AttackRange: 15
   MoveSpeed: 0.5

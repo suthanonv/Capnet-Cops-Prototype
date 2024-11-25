@@ -12,6 +12,13 @@ public class SampleTroopTurn : EntityTurnBehaviour
     }
 
 
+    public override void ResetState()
+    {
+
+
+        base.ResetState();
+    }
+
     public override bool InterActacle()
     {
         if (TurnBaseSystem.instance.OnBattlePhase)

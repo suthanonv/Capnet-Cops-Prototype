@@ -70,15 +70,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
 
 
-        if (!TurnBaseSystem.instance.OnBattlePhase)
-        {
-            Status.AvalibleMoveStep = TurnBaseSystem.instance.PlayerInteractScript.CurrentMove;
-        }
-        else
-        {
 
-            Status.moveData.BaseAttackRange = Status.moveData.AttackRange;
-        }
 
         OffAction = false;
         BuildingMode = false;
@@ -294,6 +286,19 @@ public class EngineerTurn : EntityTurnBehaviour
     {
         OpenUI();
         Invoke("EnableWalk", 0.1f);
+
+
+
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            Status.AvalibleMoveStep = TurnBaseSystem.instance.PlayerInteractScript.CurrentMove;
+        }
+        else
+        {
+
+            Status.moveData.BaseAttackRange = Status.moveData.AttackRange;
+        }
+
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
 
         PlayerActionUiLayOut.instance.EnableUI = true;
