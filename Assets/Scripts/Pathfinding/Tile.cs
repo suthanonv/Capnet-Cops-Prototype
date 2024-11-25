@@ -273,10 +273,27 @@ public class Tile : MonoBehaviour
     GameObject EnemyToSpawn;
     public void SetSpawnEnemy(GameObject Enemey)
     {
+
+
         EnemyToSpawn = Enemey;
         EnemyWaveSpawn.instance.SpawningEnemy.AddListener(SpawnEnemy);
         this.GetComponent<Collider>().enabled = false;
         Occupied = true;
+
+        if (PodCutScene.instance.OnCutScenen == true)
+        {
+            PodCutScene.instance.OnEnd.AddListener(SetEnemyTileHighlight);
+        }
+        else
+        {
+            SetEnemyTileHighlight();
+        }
+    }
+
+
+    public void SetEnemyTileHighlight()
+    {
+
         ShowRangeVisual = true;
 
         ChangeHighLightColor(MaterialStorage.Instance.RedNeon);

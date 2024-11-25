@@ -12,7 +12,7 @@ public class PodCutScene : MonoBehaviour
     [SerializeField] Transform Player;
 
     [SerializeField] UnityEvent OnStart;
-    [SerializeField] UnityEvent OnEnd;
+    public UnityEvent OnEnd;
 
     [SerializeField] float Delay;
 

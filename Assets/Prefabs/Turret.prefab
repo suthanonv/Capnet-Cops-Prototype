@@ -1035,6 +1035,7 @@ MonoBehaviour:
     type: 3}
   ShootingPoint: {fileID: 6388770455997102468}
   Speed: 20
+  NeedReduceActionPoint: 0
 --- !u!1 &3156580749926950556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,7 +3936,7 @@ PrefabInstance:
     - target: {fileID: 6177372088256953090, guid: 0a85bb20ba2b983468be91ecd1e7285f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 3.7
       objectReference: {fileID: 0}
     - target: {fileID: 6177372088256953090, guid: 0a85bb20ba2b983468be91ecd1e7285f,
         type: 3}
