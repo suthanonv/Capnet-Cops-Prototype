@@ -69,11 +69,18 @@ public class PlayerActionUI : MonoBehaviour
 
     private void Update()
     {
-        if (Troops != null)
+        
+        if (Troops != null )
         {
-            MpText.text = "MP: " + Troops.Status.AvalibleMoveStep.ToString();
-            ApText.text = "AP: " + Troops.Status.AvalibleActionPoint.ToString();
+            if (Troops.Status.AvalibleMoveStep <= 20 || Troops.Status.AvalibleActionPoint <= 20)
+            {
+                MpText.text = "Move Points: " + Troops.Status.AvalibleMoveStep.ToString();
+                ApText.text = "Action Points: " + Troops.Status.AvalibleActionPoint.ToString();
+            }
+   
         }
+        
+
 
     }
     public void WalkButton()

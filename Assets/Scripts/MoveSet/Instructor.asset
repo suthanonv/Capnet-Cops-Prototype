@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f422ba19980d12b4f833bb6f2bf6a17a, type: 3}
   m_Name: Instructor
   m_EditorClassIdentifier: 
-  MaxMove: 12
+  MaxMove: 16
   baseAttackRange: 8
   IsEnemy: 0
   AttackRange: 8

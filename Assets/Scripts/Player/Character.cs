@@ -272,11 +272,7 @@ public class Character : MonoBehaviour
             isAttacking = true;
 
             anim.SetTrigger("Attacking");
-
-            AudioClip[] shotSounds = { shot1, shot2, shot3, shot4 };
-            AudioClip selectedShotSound = shotSounds[UnityEngine.Random.Range(0, shotSounds.Length)];
-
-            audioSource.PlayOneShot(selectedShotSound, 0.7f);
+            playAudio();
         }
 
     }
@@ -339,5 +335,14 @@ public class Character : MonoBehaviour
     {
         Vector3 Tile_Position = new Vector3(Destination.transform.position.x, this.transform.position.y, Destination.transform.position.z);
         transform.LookAt(Tile_Position);
+    }
+
+    public void playAudio()
+    {
+        AudioClip[] shotSounds = { shot1, shot2, shot3, shot4 };
+        AudioClip selectedShotSound = shotSounds[UnityEngine.Random.Range(0, shotSounds.Length)];
+
+        audioSource.PlayOneShot(selectedShotSound, 0.7f);
+        
     }
 }
