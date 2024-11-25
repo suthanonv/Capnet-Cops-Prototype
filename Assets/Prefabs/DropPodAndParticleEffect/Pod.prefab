@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8185069765059653931}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5238092314441172895}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 6690501075227319316}
   - component: {fileID: 1332365453776044176}
   - component: {fileID: 3091832113607443037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316895142020009674}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 8672813474040385895}
   - component: {fileID: 4652025157960461694}
   - component: {fileID: 8821672140596493338}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5085,7 +5085,7 @@ GameObject:
   - component: {fileID: 5150329015643960989}
   - component: {fileID: 6599423849829133729}
   - component: {fileID: 1311736489038125695}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pod
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5229,6 +5229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 0
+  anim: {fileID: 0}
   audioSource: {fileID: 1311736489038125695}
   openning: {fileID: 8300000, guid: 3b35a0ddf83332646b3f2a92f1d3bc7c, type: 3}
 --- !u!82 &6599423849829133729
@@ -5434,7 +5435,7 @@ GameObject:
   - component: {fileID: 8386113487207927166}
   - component: {fileID: 284532588837057064}
   - component: {fileID: 3779070178850750670}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5517,7 +5518,7 @@ GameObject:
   - component: {fileID: 3796730533796591506}
   - component: {fileID: 1257685446438134610}
   - component: {fileID: 6835306032471846555}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10405,7 +10406,7 @@ GameObject:
   - component: {fileID: 5696213387776918696}
   - component: {fileID: 7585506641218979438}
   - component: {fileID: 3264511749697995723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10489,7 +10490,7 @@ GameObject:
   - component: {fileID: 1462662363430690157}
   - component: {fileID: 2590667507289963578}
   - component: {fileID: 4669133609897787590}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10595,7 +10596,7 @@ GameObject:
   - component: {fileID: 5966108572104981994}
   - component: {fileID: 3670676134062105962}
   - component: {fileID: 6706997921954019055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lootcapsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10693,7 +10694,7 @@ GameObject:
   - component: {fileID: 6371865501703891152}
   - component: {fileID: 8307078726142031409}
   - component: {fileID: 97453015085029295}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15581,7 +15582,7 @@ GameObject:
   - component: {fileID: 6501841310953684131}
   - component: {fileID: 6436280699799336441}
   - component: {fileID: 2056082846965019098}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15664,7 +15665,7 @@ GameObject:
   - component: {fileID: 3696123345812923557}
   - component: {fileID: 7213302934098942581}
   - component: {fileID: 4907170949451157110}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15782,7 +15783,7 @@ GameObject:
   - component: {fileID: 6087699381606578135}
   - component: {fileID: 7852838503056325942}
   - component: {fileID: 7229346025539384382}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15865,7 +15866,7 @@ GameObject:
   - component: {fileID: 1211780892366083221}
   - component: {fileID: 7482145454507786620}
   - component: {fileID: 1072144460488662844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SparkEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20695,7 +20696,7 @@ GameObject:
   - component: {fileID: 4715308870738566608}
   - component: {fileID: 2373271469475363919}
   - component: {fileID: 1630063441110195377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20779,7 +20780,7 @@ GameObject:
   - component: {fileID: 8976312855613904250}
   - component: {fileID: 4525863544362247197}
   - component: {fileID: 9026804388743327458}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmokeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25609,7 +25610,7 @@ GameObject:
   - component: {fileID: 5974053939052979374}
   - component: {fileID: 912930933959567144}
   - component: {fileID: 1324026700294557991}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25692,7 +25693,7 @@ GameObject:
   - component: {fileID: 5282469039297113476}
   - component: {fileID: 6332370504363746802}
   - component: {fileID: 8741378810856839752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25775,7 +25776,7 @@ GameObject:
   - component: {fileID: 3333247450578579964}
   - component: {fileID: 1768328658963207103}
   - component: {fileID: 8902047133557222139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30663,7 +30664,7 @@ GameObject:
   - component: {fileID: 8624330479393120675}
   - component: {fileID: 2918714678213003440}
   - component: {fileID: 8005248126080888064}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cylinder_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30744,7 +30745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2852441439850023240}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30781,7 +30782,7 @@ GameObject:
   - component: {fileID: 1533963372253822689}
   - component: {fileID: 15080453447892285}
   - component: {fileID: 8547126940902889391}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30887,7 +30888,7 @@ GameObject:
   - component: {fileID: 1860073507120762694}
   - component: {fileID: 8990718051625419340}
   - component: {fileID: 98751049596932482}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35724,7 +35725,7 @@ GameObject:
   - component: {fileID: 64854110253511512}
   - component: {fileID: 213998775633435010}
   - component: {fileID: 6219964779441377780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40612,7 +40613,7 @@ GameObject:
   - component: {fileID: 6175885935322272801}
   - component: {fileID: 8452747420645938462}
   - component: {fileID: 4982355784271930017}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45500,7 +45501,7 @@ GameObject:
   - component: {fileID: 1766888110961364961}
   - component: {fileID: 3283184272320497947}
   - component: {fileID: 5700883173197986436}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

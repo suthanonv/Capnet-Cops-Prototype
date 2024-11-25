@@ -20,13 +20,15 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    public int SetDamage = 25;
+
     public void Damage(EnemyHealth Target)
     {
         CameraBehaviouerControll.instance.LookAtTarget(Target.transform);
         EFfect.transform.parent = null;
         EFfect.gameObject.SetActive(true);
         EFfect.GetComponent<DestroySelf>().turret = TurretAnimation;
-        Target.TakeDamage(TurretDamage.Instance.Damage);
+        Target.TakeDamage(SetDamage);
 
 
         if (TurnBaseSystem.instance.currentTurn == Turn.Player)

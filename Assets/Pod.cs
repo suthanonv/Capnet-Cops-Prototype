@@ -21,9 +21,22 @@ public class Pod : Health
         //Destroy(this.gameObject);
     }
 
+    private void Update()
+    {
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            this.GetComponent<Rigidbody>().useGravity = false;
+            this.gameObject.GetComponent<Character>().characterTile.GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            this.gameObject.GetComponent<Character>().characterTile.GetComponent<Collider>().enabled = true;
+
+        }
+    }
     public override void OnDied()
     {
-        
+
         Exploring.Instance.OnExploringComplete();
         PodStroingScript.instance.CollecedPod += 1;
         this.GetComponent<EntityTeam>().EntityTeamSide = Team.Pod;
