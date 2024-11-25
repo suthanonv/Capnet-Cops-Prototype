@@ -109,7 +109,7 @@ public class Tile : MonoBehaviour
                 }
                 else
                 {
-                    Material newColor = MaterialStorage.Instance.Cyan;
+                    Material newColor = MaterialStorage.Instance.CyanNeon;
 
                     if (occupyingCharacter != null)
                     {
@@ -117,12 +117,15 @@ public class Tile : MonoBehaviour
                         {
                             if (team.EntityTeamSide == Team.Enemy)
                             {
-
+                                newColor = MaterialStorage.Instance.RedNeon;
                                 occupyingCharacter.transform.GetChild(1).gameObject.GetComponent<MaterialChange>().AddingOutLine();
 
                             }
                         }
                     }
+
+                    ChangeHighLightColor(newColor);
+
                 }
             }
         }
@@ -173,9 +176,19 @@ public class Tile : MonoBehaviour
     bool OnHighlight = false;
     public void Highlight()
     {
-
-        SetColor(MaterialStorage.Instance.White);
-
+        if (occupyingCharacter == null)
+            SetColor(MaterialStorage.Instance.White);
+        else
+        {
+            if (occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide == Team.Human)
+            {
+                SetColor(MaterialStorage.Instance.White);
+            }
+            else
+            {
+                SetColor(MaterialStorage.Instance.Red);
+            }
+        }
 
     }
 
