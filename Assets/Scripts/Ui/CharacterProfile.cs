@@ -11,6 +11,7 @@ public class CharacterProfile : MonoBehaviour
     [SerializeField] Image characterProfile;
     private void Start()
     {
+        characterProfile = this.GetComponent<Image>();
         Slide.maxValue = Character.GetComponent<Health>().Maxhealth;
         Slide.onValueChanged.AddListener(ValueChangeCheck);
     }
@@ -19,7 +20,7 @@ public class CharacterProfile : MonoBehaviour
     {
         if (Character != null)
         {
-        
+
 
             Slide.value = Character.GetComponent<Health>().Maxhealth;
 
