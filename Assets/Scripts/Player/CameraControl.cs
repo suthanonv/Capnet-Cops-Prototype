@@ -35,14 +35,14 @@ public class CameraControl : MonoBehaviour
 
     public void SetPiviotPoint(GameObject character)
     {
-        isRotateAround = true;
-        piviotPoint = character;
+        /*isRotateAround = true;
+        piviotPoint = character;*/
     }
 
     public void UndoPiviotPoint()
     {
-        isRotateAround = false;
-        piviotPoint = null;
+        /*isRotateAround = false;
+        piviotPoint = null;*/
     }
 
     void Update()

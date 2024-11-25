@@ -54,12 +54,12 @@ public class CameraBehaviouerControll : MonoBehaviour
             transform.parent.transform.position =
                 Vector3.Lerp(this.transform.parent.transform.position, targetTransform.transform.position, t);
 
-            float startYRotation = transform.parent.transform.eulerAngles.y;
+            /*float startYRotation = transform.parent.transform.eulerAngles.y;
             float endYRotation = targetTransform.transform.eulerAngles.y;
             float yRotation = Mathf.LerpAngle(startYRotation, endYRotation, t);
 
             transform.parent.transform.rotation = Quaternion.Euler(transform.parent.transform.rotation.eulerAngles.x,
-                yRotation, transform.parent.transform.rotation.eulerAngles.z);
+                yRotation, transform.parent.transform.rotation.eulerAngles.z);*/
 
             if (t >= 1f)
             {
