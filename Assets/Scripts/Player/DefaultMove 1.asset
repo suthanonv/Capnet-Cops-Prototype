@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f422ba19980d12b4f833bb6f2bf6a17a, type: 3}
   m_Name: DefaultMove 1
   m_EditorClassIdentifier: 
-  MaxMove: 6
+  MaxMove: 8
+  baseAttackRange: 1
+  IsEnemy: 0
   AttackRange: 15
-  MoveSpeed: 0.35
+  MoveSpeed: 0.1

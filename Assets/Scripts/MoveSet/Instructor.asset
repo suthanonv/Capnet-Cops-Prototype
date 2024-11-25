@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Instructor
   m_EditorClassIdentifier: 
   MaxMove: 12
+  baseAttackRange: 8
   IsEnemy: 0
   AttackRange: 8
-  MoveSpeed: 0.5
+  MoveSpeed: 0.1
