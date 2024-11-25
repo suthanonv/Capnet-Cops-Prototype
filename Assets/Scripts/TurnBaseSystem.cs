@@ -18,6 +18,7 @@ public enum Turn
 public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 {
 
+    [SerializeField] Transform Base;
     public AudioSource audioSource;
     public AudioClip endturn;
     public DelegateList<EntityTurnBehaviour> enemiesTurnSystems;
@@ -32,7 +33,23 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public GameObject EndPharseButton;
     [SerializeField] GameObject BaseHitBox;
 
-    public Turn currentTurn { get; set; }
+    Turn turn;
+    public Turn currentTurn
+    {
+        get { return turn; }
+        set
+        {
+            turn = value;
+            if (turn == Turn.Player)
+            {
+                PlayerInteractScript.selectedCharacter = null;
+                PlayerInteractScript.enabled = true;
+                CameraBehaviouerControll.instance.LookAtTarget(Base);
+                CameraBehaviouerControll.instance.LookAtTarget(null);
+                PlayerInteractScript.enabled = true;
+            }
+        }
+    }
 
     bool CanEndPahse = false;
 
@@ -49,7 +66,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
 
             onBattlePhase = value;
-            if(onBattlePhase != PreviosBattlePhase)
+            if (onBattlePhase != PreviosBattlePhase)
             {
                 OnPhaseChange.Invoke(onBattlePhase);
             }
@@ -242,10 +259,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                     Debug.Log(i.Status.AvalibleMoveStep);
                 }
                 TurretTurncall();
-                PlayerInteractScript.selectedCharacter = null;
-                PlayerInteractScript.enabled = true;
-                CameraBehaviouerControll.instance.LookAtTarget(playerTurnSystems.List[0].transform);
-                CameraBehaviouerControll.instance.LookAtTarget(null);
+
 
                 currentTurn = Turn.Player;
                 PlayerInteractScript.enabled = true;

@@ -996,6 +996,7 @@ MonoBehaviour:
   - {fileID: 2665843456114888144}
   OnHit: {fileID: 2100000, guid: 8ea525e1c01a1bf4b9a7bb635076723e, type: 2}
   OffHit: {fileID: 2100000, guid: c5dd61ca33734af4b8d1f97b63dc1f11, type: 2}
+  OutLine: {fileID: 0}
 --- !u!95 &8773306611436192673
 Animator:
   serializedVersion: 5
@@ -1029,6 +1030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86e066ce0111a748a103df750986d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPuasingSelf: 0
   BulletPrefab: {fileID: 2734678675767300641, guid: 477ae6284a61e6346a88ef31fcb2ab90,
     type: 3}
   ShootingPoint: {fileID: 6388770455997102468}
@@ -1500,6 +1502,11 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
+  shot1: {fileID: 0}
+  shot2: {fileID: 0}
+  shot3: {fileID: 0}
+  shot4: {fileID: 0}
+  isAttacking: 0
   FindLater: 0
   paused: 0
 --- !u!114 &4571189814728560021
@@ -1529,6 +1536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 100
+  anim: {fileID: 0}
 --- !u!114 &4205419125290656270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3932,7 +3940,7 @@ PrefabInstance:
     - target: {fileID: 6177372088256953090, guid: 0a85bb20ba2b983468be91ecd1e7285f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6177372088256953090, guid: 0a85bb20ba2b983468be91ecd1e7285f,
         type: 3}

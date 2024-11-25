@@ -29,6 +29,11 @@ public class Bullet : MonoBehaviour
         Target.TakeDamage(TurretDamage.Instance.Damage);
 
 
+        if (TurnBaseSystem.instance.currentTurn == Turn.Player)
+        {
+            TurnBaseSystem.instance.currentTurn = Turn.Player;
+        }
+
         Destroy(this.gameObject);
     }
 }
