@@ -5,6 +5,7 @@ public class Health : MonoBehaviour
     public int Maxhealth;
     EnemyTurnBehaviour turnBehaviour;
     Team EntityTeam;
+    [SerializeField] Animator anim;
 
     public virtual void Start()
     {
@@ -17,13 +18,14 @@ public class Health : MonoBehaviour
         Maxhealth -= Damage;
 
 
-
         if (Maxhealth <= 0)
         {
             Died();
         }
         else
         {
+
+            anim.SetTrigger("Hurt");
             this.transform.GetChild(1).GetComponent<MaterialChange>().OnHitMeterial();
         }
     }
@@ -32,7 +34,8 @@ public class Health : MonoBehaviour
     public virtual void Died()
     {
 
-        OnDied();
+        anim.SetTrigger("Died");
+
 
     }
 

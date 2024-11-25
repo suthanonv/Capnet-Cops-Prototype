@@ -8194,6 +8194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 100
+  anim: {fileID: 2356218546964339734}
   OnDiedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -8209,7 +8210,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Animator: {fileID: 2356218546964339734}
   HealthText: {fileID: 5742809294754636584}
 --- !u!54 &3509428601749178241
 Rigidbody:

@@ -27,9 +27,17 @@ public class AnimationControll : MonoBehaviour
             ShowMoveingRange.instance.CloseMovingRangeVisual();
         this.transform.parent.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint -= 1;
         this.transform.parent.GetComponent<Character>().FinalizePosition(this.transform.parent.GetComponent<Character>().characterTile);
-        Target.GetComponent<Character>().characterTile.InteractAble = true;
-        Target.TakeDamage(EntityTurn.Status.BaseDamage);
 
+        if (Target != null)
+        {
+
+            Target.GetComponent<Character>().characterTile.InteractAble = true;
+            Target.TakeDamage(EntityTurn.Status.BaseDamage);
+        }
+        else
+        {
+            EndAction();
+        }
 
 
 

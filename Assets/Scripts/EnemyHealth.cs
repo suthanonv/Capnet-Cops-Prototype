@@ -4,7 +4,6 @@ using UnityEngine.Events;
 public class EnemyHealth : Health
 {
     [SerializeField] UnityEvent OnDiedEvent;
-    [SerializeField] Animator Animator;
     public TextMeshProUGUI HealthText;
     private ParticleSystem blood;
 
@@ -20,7 +19,6 @@ public class EnemyHealth : Health
     }
     public override void TakeDamage(int Damage)
     {
-        Animator.SetTrigger("TakesDamage");
         base.TakeDamage(Damage);
         RemoveBulletQuque();
         MaxBulletQuque = MathScript.instance.Ceiling(Maxhealth);
@@ -30,10 +28,10 @@ public class EnemyHealth : Health
 
     public override void Died()
     {
+        base.Died();
         this.GetComponent<Character>().characterTile.occupyingCharacter = null;
         this.GetComponent<Character>().characterTile.Occupied = false;
 
-        Animator.SetTrigger("Dies");
     }
 
     public override void OnDied()
