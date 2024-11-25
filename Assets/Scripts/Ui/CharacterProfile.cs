@@ -43,7 +43,6 @@ public class CharacterProfile : MonoBehaviour
 
     public void ValueChangeCheck(float Kuy)
     {
-        Debug.Log("äÍ â§è");
         characterProfile.color = Color.red;
         StartCoroutine(changeColorBack());
     }

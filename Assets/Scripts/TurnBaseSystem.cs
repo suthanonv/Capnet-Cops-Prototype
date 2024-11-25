@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum Target
 {
@@ -37,13 +38,22 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     bool onBattlePhase = false;
 
+    public UnityEvent<bool> OnPhaseChange = new UnityEvent<bool>();
+
+    bool PreviosBattlePhase = true;
     public bool OnBattlePhase
     {
         get { return onBattlePhase; }
 
         set
         {
+
             onBattlePhase = value;
+            if(onBattlePhase != PreviosBattlePhase)
+            {
+                OnPhaseChange.Invoke(onBattlePhase);
+            }
+            PreviosBattlePhase = value;
             if (onBattlePhase == false && PreparationPharse.instance.CurrentClockTime.SecondSum() >= PreparationPharse.instance.PhaseTransitionTime.SecondSum())
             {
                 PreparationPharse.instance.SetToStartTime();
