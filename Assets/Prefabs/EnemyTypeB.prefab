@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 9031311079688302830}
   - component: {fileID: 8868528334490066024}
   - component: {fileID: 3570643062476220333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1553,7 @@ GameObject:
   - component: {fileID: 4391147265049569806}
   - component: {fileID: 2049293740603244296}
   - component: {fileID: 1634927729778742169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: inspectingEnemyHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2639,7 +2639,7 @@ GameObject:
   - component: {fileID: 6119495109515787286}
   - component: {fileID: 1838523027380129959}
   - component: {fileID: 7242911717654294623}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2826,7 +2826,7 @@ GameObject:
   - component: {fileID: 2318908070058215857}
   - component: {fileID: 4128218084887426678}
   - component: {fileID: 731603457197026115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
