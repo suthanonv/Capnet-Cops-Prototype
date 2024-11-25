@@ -20,6 +20,14 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
+    public override void ResetState()
+    {
+
+        base.ResetState();
+        BuildingMode = false;
+        offVisual();
+    }
+
     public override void Onwalking()
     {
         offVisual();
@@ -60,6 +68,18 @@ public class EngineerTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
+
+
+        if (!TurnBaseSystem.instance.OnBattlePhase)
+        {
+            Status.AvalibleMoveStep = TurnBaseSystem.instance.PlayerInteractScript.CurrentMove;
+        }
+        else
+        {
+
+            Status.moveData.BaseAttackRange = Status.moveData.AttackRange;
+        }
+
         OffAction = false;
         BuildingMode = false;
         TurnBaseSystem.instance.ActionEnd = false;

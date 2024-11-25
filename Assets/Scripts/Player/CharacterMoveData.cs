@@ -4,7 +4,9 @@ using UnityEngine;
 public class CharacterMoveData : ScriptableObject
 {
     public int MaxMove = 8;
-    public int BaseAttackRange { get; set; }
+    int baseAttackRange = 0;
+    [SerializeField] bool IsEnemy = false;
+    public int BaseAttackRange { get { if (!IsEnemy) return baseAttackRange; else { return AttackRange; } } set { baseAttackRange = value; } }
 
     public int AttackRange = 1;
 

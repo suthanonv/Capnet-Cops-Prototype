@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: EnemyAMoveData
   m_EditorClassIdentifier: 
   MaxMove: 8
+  IsEnemy: 1
   AttackRange: 1
   MoveSpeed: 0.5

@@ -72,4 +72,9 @@ public class EntityTurnBehaviour : MonoBehaviour
 
     }
 
+    public virtual void ResetState()
+    {
+        Status.ResetStatus();
+    }
+
 }

@@ -6,6 +6,7 @@ public class CharacterProfile : MonoBehaviour
     [SerializeField] GameObject Character;
     [SerializeField] Slider Slide;
     [SerializeField] Button Button;
+    [SerializeField] Color color;
     private void Start()
     {
         Slide.maxValue = Character.GetComponent<Health>().Maxhealth;
@@ -13,14 +14,24 @@ public class CharacterProfile : MonoBehaviour
 
     void Update()
     {
-        Slide.value = Character.GetComponent<Health>().Maxhealth;
-
-        if ((TurnBaseSystem.instance.OnBattlePhase == false || (TurnBaseSystem.instance.currentTurn == Turn.Player)) && TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != Character)
+        if (Character != null)
         {
-            Button.enabled = true;
+            Slide.value = Character.GetComponent<Health>().Maxhealth;
+
+            if ((TurnBaseSystem.instance.OnBattlePhase == false || (TurnBaseSystem.instance.currentTurn == Turn.Player)) && TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != Character)
+            {
+                Button.enabled = true;
+            }
+            else
+            {
+                Button.enabled = false;
+            }
         }
         else
         {
+            Slide.value = 0;
+
+            this.GetComponent<Image>().color = color;
             Button.enabled = false;
         }
     }

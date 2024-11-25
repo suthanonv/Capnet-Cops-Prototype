@@ -228,7 +228,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 TurnNum = 0;
                 foreach (EntityTurnBehaviour i in playerTurnSystems.List)
                 {
-                    i.Status.ResetStatus();
+                    i.ResetState();
                     Debug.Log(i.Status.AvalibleMoveStep);
                 }
                 TurretTurncall();
@@ -396,6 +396,13 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         TurnNum = 0;
         currentTurn = Turn.Enemies;
+
+
+        foreach (EntityTurnBehaviour i in playerTurnSystems.List)
+        {
+            i.ResetState();
+        }
+
         if (onBattlePhase)
         {
             if (currentTurn == Turn.Enemies)

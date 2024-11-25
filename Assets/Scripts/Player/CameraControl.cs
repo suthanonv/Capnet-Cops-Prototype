@@ -20,6 +20,9 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private GameObject piviotPoint;
     [SerializeField] private bool isRotateAround = false;
 
+    [SerializeField] float MaxZoom = 12.5f;
+
+
     private void Awake()
     {
         instance = this;
@@ -111,7 +114,7 @@ public class CameraControl : MonoBehaviour
         {
             Zoom = 1;
         }
-        cam.orthographicSize = Zoom;
+        cam.orthographicSize = Mathf.Clamp(Zoom, 1, MaxZoom);
 
         transform.parent.Translate(input * translateSpeed * Time.deltaTime); // Translate camera based on mouse movement
 

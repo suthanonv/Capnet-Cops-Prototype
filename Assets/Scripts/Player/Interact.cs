@@ -21,7 +21,7 @@ public class Interact : MonoBehaviour
     Character CharacterDebug;
 
 
-    int CurrentMove = 0;
+    public int CurrentMove = 0;
     public void SetAvalibeMoveStep()
     {
         int MOvePoint = Mathf.RoundToInt((PreparationPharse.instance.PhaseTransitionTime.SecondSum() - PreparationPharse.instance.CurrentClockTime.SecondSum()) / PreparationPharse.instance.MovementCost.SecondSum());
@@ -157,6 +157,9 @@ public class Interact : MonoBehaviour
                     if (turn.InterActacle())
                     {
                         ShowMoveingRange.instance.CloseMovingRangeVisual();
+
+
+
                         turn.onTurn();
                         this.GetComponent<CameraControl>().SetPiviotPoint(charrecter.gameObject);
 
