@@ -133,7 +133,7 @@ public class MaterialChange : MonoBehaviour
                     {
                         if (i != 1) // Skip the outline material
                         {
-                            newMaterials[j] = materials[i];  
+                            newMaterials[j] = materials[i];
                             j++;
                         }
                     }
