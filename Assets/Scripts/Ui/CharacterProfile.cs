@@ -44,6 +44,7 @@ public class CharacterProfile : MonoBehaviour
 
     public void ValueChangeCheck(float Kuy)
     {
+        if (Slide.value == Slide.maxValue) return;
         characterProfile.color = Color.red;
         StartCoroutine(changeColorBack());
     }
