@@ -98,6 +98,10 @@ public class AnimationControll : MonoBehaviour
     {
         IsPuasingSelf = false;
         this.transform.parent.GetComponent<Character>().Paused = false;
+        if (this.TryGetComponent<EnemyTurnBehaviour>(out EnemyTurnBehaviour enemy))
+        {
+            enemy.Spawned = true;
+        }
     }
 }
 

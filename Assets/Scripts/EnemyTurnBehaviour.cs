@@ -34,7 +34,6 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
         if (Spawned == false)
         {
-            Spawned = true;
             return;
         }
 

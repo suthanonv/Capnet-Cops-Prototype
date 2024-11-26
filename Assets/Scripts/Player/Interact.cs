@@ -78,7 +78,7 @@ public class Interact : MonoBehaviour
     [SerializeField] PathIllustrator PathIllustrator;
     public bool EnableInteracting = true;
 
-    bool Attacking;
+    public bool Attacking;
 
 
     public void SetEnableInteracting(bool Enable)
@@ -317,10 +317,7 @@ public class Interact : MonoBehaviour
 
 
 
-        if (TurnBaseSystem.instance.OnBattlePhase)
-            Attacking = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleActionPoint > 0;
-        else
-            Attacking = true;
+        if (!TurnBaseSystem.instance.OnBattlePhase) Attacking = true;
 
         path = pathfinder.FindPath(selectedCharacter.characterTile, currentTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>(), Attacking);
 

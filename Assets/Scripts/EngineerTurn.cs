@@ -99,7 +99,7 @@ public class EngineerTurn : EntityTurnBehaviour
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
-
+            ButtonToUse.Add(PlayerActionUiButton.Attack);
 
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
             ButtonToUse.Add(PlayerActionUiButton.MP_AP);
@@ -123,7 +123,10 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void WalkingButton()
     {
 
-
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+        }
 
 
         BuildingMode = false;
@@ -151,9 +154,22 @@ public class EngineerTurn : EntityTurnBehaviour
 
         }
 
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            if (Status.AvalibleActionPoint > 0)
+            {
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+            }
+            else
+            {
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+
+            }
+
+
+        }
+
     }
-
-
 
 
     bool showedVisual;

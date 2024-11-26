@@ -81,6 +81,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
         else
         {
             ButtonToUse.Add(PlayerActionUiButton.Walk);
+            ButtonToUse.Add(PlayerActionUiButton.Attack);
             ButtonToUse.Add(PlayerActionUiButton.EndTurn);
         }
 
@@ -147,6 +148,18 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
+        if (TurnBaseSystem.instance.OnBattlePhase)
+        {
+            if (Status.AvalibleActionPoint > 0)
+            {
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+            }
+            else
+            {
+                TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
+
+            }
+        }
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
 
         TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
@@ -155,6 +168,8 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void WalkingButton()
     {
+
+
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
         TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
         ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
