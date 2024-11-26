@@ -121,7 +121,7 @@ public class Interact : MonoBehaviour
             {
                 if (teamSide.EntityTeamSide == Team.Human)
                     InspectCharacter();
-                else
+                else if (Walking)
                     NavigateToTile();
             }
         }
@@ -135,7 +135,7 @@ public class Interact : MonoBehaviour
 
 
 
-    public bool Walking;
+    public bool Walking = false;
 
 
 
@@ -228,7 +228,6 @@ public class Interact : MonoBehaviour
         }
 
         ShowMoveingRange.instance.CloseMovingRangeVisual();
-        ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.GetComponent<Character>().characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         GetComponent<AudioSource>().PlayOneShot(pop);
         charecter.gameObject.GetComponent<EntityTurnBehaviour>().Select();
