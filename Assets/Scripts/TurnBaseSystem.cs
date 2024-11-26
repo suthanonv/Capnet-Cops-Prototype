@@ -241,6 +241,9 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
             i.GetComponent<SampleTurretTurn>().attackingRadius.AttackAnyEnemy();
         }
+        PlayerInteractScript.enabled = true;
+        currentTurn = Turn.Player;
+
     }
 
 
@@ -261,8 +264,6 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                 TurretTurncall();
 
 
-                currentTurn = Turn.Player;
-                PlayerInteractScript.enabled = true;
 
                 if (onBattlePhase)
                 {

@@ -54,7 +54,7 @@ public class CharacterMoveData : ScriptableObject
 
 
     Target tarobj;
-    public Target TargetObj { get { return tarobj; } set { tarobj = value; Debug.Log(tarobj); } }
+    public Target TargetObj { get { return tarobj; } set { tarobj = value; } }
 
     public int AttackRange = 1;
 
