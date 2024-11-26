@@ -30,6 +30,14 @@ public class TurretQuque : MonoBehaviour
                     entityTurnBehaviours.Remove(CurrentnTurret);
             }
             actionEnd = value;
+
+            if (entityTurnBehaviours.Count <= 0)
+            {
+                if (TurnBaseSystem.instance.currentTurn == Turn.Player)
+                {
+                    TurnBaseSystem.instance.currentTurn = Turn.Player;
+                }
+            }
         }
     }
 
@@ -41,6 +49,9 @@ public class TurretQuque : MonoBehaviour
             CurrentnTurret = entityTurnBehaviours[0];
             CurrentnTurret.onTurn();
         }
+
+
+
     }
 
 
