@@ -69,30 +69,31 @@ public class PlayerActionUI : MonoBehaviour
 
     private void Update()
     {
-        
-        if (Troops != null )
+
+        if (Troops != null)
         {
             if (Troops.Status.AvalibleMoveStep <= 20 || Troops.Status.AvalibleActionPoint <= 20)
             {
                 MpText.text = ": " + Troops.Status.AvalibleMoveStep.ToString();
                 ApText.text = ": " + Troops.Status.AvalibleActionPoint.ToString();
             }
-   
+
         }
-        
+
 
 
     }
     public void WalkButton()
     {
-        if (Troops == null) return;
-        Troops.WalkingButton();
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter == null) return;
+        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter.GetComponent<EntityTurnBehaviour>().WalkingButton();
+
     }
     public void AttackButton()
     {
-        if (Troops == null) return;
+        if (TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter == null) return;
 
-        Troops.AttackingButton();
+        TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter.GetComponent<EntityTurnBehaviour>().AttackingButton();
     }
     public UnityEvent EndPhaseEvent = new UnityEvent();
     public void EndPhase()

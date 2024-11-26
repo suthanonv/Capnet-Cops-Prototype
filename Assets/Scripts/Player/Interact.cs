@@ -52,12 +52,23 @@ public class Interact : MonoBehaviour
                     CharacterDebug.gameObject.GetComponent<EntityTurnBehaviour>().Select();
 
                 }
-
+                CharacterDebug.transform.GetChild(1).gameObject.GetComponent<MaterialChange>().RemovingOutLine();
             }
 
 
 
+
             CharacterDebug = value;
+
+            if (value == null)
+            {
+                Walking = false;
+            }
+            else
+            {
+                CharacterDebug.transform.GetChild(1).gameObject.GetComponent<MaterialChange>().AddingOutLine();
+
+            }
 
         }
     }
@@ -121,7 +132,8 @@ public class Interact : MonoBehaviour
             {
                 if (teamSide.EntityTeamSide == Team.Human)
                     InspectCharacter();
-                else if (Walking)
+                else
+                    if (Walking)
                     NavigateToTile();
             }
         }
@@ -347,6 +359,11 @@ public class Interact : MonoBehaviour
         {
             //t.DebugCostText();
         }
+    }
+
+    public void ClearIlustatePath()
+    {
+        PathIllustrator.ClearPaht();
     }
 }
 

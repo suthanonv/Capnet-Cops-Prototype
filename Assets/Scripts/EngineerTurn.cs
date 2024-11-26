@@ -69,6 +69,7 @@ public class EngineerTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
+        TurnBaseSystem.instance.PlayerInteractScript.Walking = false;
 
 
 
@@ -87,6 +88,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public void OpenUI()
     {
+
         PlayerActionUI.instance.EnableUI = true;
 
         IsPreviosBattlePhase = TurnBaseSystem.instance.OnBattlePhase;
@@ -120,9 +122,14 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void WalkingButton()
     {
-        offVisual();
+
+
+
         BuildingMode = false;
-        SelectingCharacter();
+        offVisual();
+        TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
+        TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
+        ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
     }
 
 
@@ -132,12 +139,13 @@ public class EngineerTurn : EntityTurnBehaviour
     public override void AttackingButton()
     {
         ShowMoveingRange.instance.CloseMovingRangeVisual();
-
+        TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
         if (TurnBaseSystem.instance.OnBattlePhase == false)
         {
             showedVisual = false;
             BuildingMode = true;
-            TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter = null;
+            TurnBaseSystem.instance.PlayerInteractScript.Walking = false;
+
         }
 
     }

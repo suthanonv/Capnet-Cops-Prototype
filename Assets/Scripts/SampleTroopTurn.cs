@@ -32,6 +32,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
     }
     public override void onTurn()
     {
+        TurnBaseSystem.instance.PlayerInteractScript.Walking = false;
         OffAction = false;
         TurnBaseSystem.instance.ActionEnd = false;
         OpenUi();
@@ -65,6 +66,9 @@ public class SampleTroopTurn : EntityTurnBehaviour
     bool IsPreviosBattlePhase;
     public void OpenUi()
     {
+        PlayerActionUI.instance.EnableUI = false;
+        PlayerActionUI.instance.EnableUI = true;
+
         TurnBaseSystem.instance.EndPharseButton.SetActive(true);
         List<PlayerActionUiButton> ButtonToUse = new List<PlayerActionUiButton>();
 
@@ -143,14 +147,16 @@ public class SampleTroopTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
+        TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
 
+        TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
+        ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
     }
 
     public override void WalkingButton()
     {
-        PlayerActionUI.instance.enabled = false;
-        PlayerActionUI.instance.enabled = false;
-
-
+        TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
+        TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
+        ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
     }
 }
