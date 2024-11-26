@@ -14,26 +14,12 @@ public class Pod : Health
 
         audioSource.PlayOneShot(openning);
         this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Open");
-
-
-
-        //Used = true;
-        //Destroy(this.gameObject);
     }
 
-    private void Update()
-    {
-        if (TurnBaseSystem.instance.OnBattlePhase)
-        {
-            this.GetComponent<Rigidbody>().useGravity = false;
-            this.gameObject.GetComponent<Character>().characterTile.GetComponent<Collider>().enabled = false;
-        }
-        else
-        {
-            this.gameObject.GetComponent<Character>().characterTile.GetComponent<Collider>().enabled = true;
 
-        }
-    }
+    //Used = true;
+    //Destroy(this.gameObject);
+
     public override void OnDied()
     {
 

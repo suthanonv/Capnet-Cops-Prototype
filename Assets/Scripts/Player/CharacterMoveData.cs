@@ -14,8 +14,31 @@ public class CharacterMoveData : ScriptableObject
             if (!IsEnemy)
             {
                 if (TurnBaseSystem.instance.OnBattlePhase == false)
-                    return baseAttackRange;
-                else return AttackRange;
+                    return 1;
+                else
+                {
+                    if (TargetObj == Target.None)
+                    {
+                        Debug.Log($"None {AttackRange}");
+
+                        return AttackRange;
+                    }
+                    else
+                    {
+                        if (TargetObj == Target.Pod)
+                        {
+                            Debug.Log($"Pod {1}");
+                            return 1;
+                        }
+                        else
+                        {
+                            Debug.Log($"Player {AttackRange}");
+
+                            return AttackRange;
+                        }
+                    }
+                }
+
             }
             else
             {
@@ -28,6 +51,10 @@ public class CharacterMoveData : ScriptableObject
 
         set { baseAttackRange = value; }
     }
+
+
+    Target tarobj;
+    public Target TargetObj { get { return tarobj; } set { tarobj = value; Debug.Log(tarobj); } }
 
     public int AttackRange = 1;
 

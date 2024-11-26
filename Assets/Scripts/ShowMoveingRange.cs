@@ -43,7 +43,7 @@ public class ShowMoveingRange : MonoBehaviour
 
 
         // Calculate the attack range based on the movement range
-        HashSet<Tile> attackRange = CalculateAttackRange(moveRange, moveData.moveData.BaseAttackRange, entityTeam);
+        HashSet<Tile> attackRange = CalculateAttackRange(moveRange, moveData.moveData.AttackRange, entityTeam);
 
         HashSet<Tile> PodMoveRange = CalculateAttackRange(moveRange, 1, entityTeam);
 

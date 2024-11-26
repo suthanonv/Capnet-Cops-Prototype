@@ -240,11 +240,21 @@ public class Interact : MonoBehaviour
         if (selectedCharacter == null || selectedCharacter.Moving == true && (!selectedCharacter.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour turn)) || (selectedCharacter.anim.GetBool("Walking")))
             return;
 
+
         ShowMoveingRange.instance.ShowCharacterMoveRange(selectedCharacter.characterTile, selectedCharacter.GetComponent<EntityTurnBehaviour>().Status, selectedCharacter.GetComponent<EntityTeam>());
 
         if (RetrievePath(out Path newPath))
         {
             DebugPath = newPath;
+
+            if (currentTile.occupyingCharacter != null)
+            {
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget;
+            }
+            else
+            {
+                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = Target.None;
+            }
 
 
             if (CameraBehaviouerControll.instance.isMoving == false)
@@ -254,6 +264,7 @@ public class Interact : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
                 {
+
                     if (newPath.tiles[newPath.tiles.Length - 1].occupyingCharacter == null)
                     {
                         CurrentMove -= newPath.tiles.Length - 1;
@@ -267,8 +278,18 @@ public class Interact : MonoBehaviour
                     GetComponent<AudioSource>().PlayOneShot(click);
                     PathIllustrator.ClearPaht();
                     ShowMoveingRange.instance.CloseMovingRangeVisual();
-                    selectedCharacter.StartMove(newPath);
+                    if (currentTile.occupyingCharacter != null)
+                    {
+                        selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget;
+                    }
+                    else
+                    {
+                        selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = Target.None;
+                    }
 
+                    selectedCharacter.StartMove(newPath);
+                    selectedCharacter = null;
+                    return;
                 }
 
 
@@ -282,17 +303,6 @@ public class Interact : MonoBehaviour
     {
         selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.AttackRange;
 
-        if (!TurnBaseSystem.instance.OnBattlePhase)
-        {
-            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.AvalibleMoveStep = CurrentMove;
-        }
-        if (currentTile.occupyingCharacter != null)
-        {
-            if (currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget == Target.Pod)
-            {
-                selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.BaseAttackRange = 1;
-            }
-        }
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)

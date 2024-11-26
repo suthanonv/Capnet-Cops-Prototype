@@ -10,7 +10,8 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
     [SerializeField] GameObject Turret;
-
+    public AudioClip SetupTurret;
+    AudioSource audioSource;
 
 
     [SerializeField] private GameObject resourceManagement;
@@ -47,7 +48,7 @@ public class EngineerTurn : EntityTurnBehaviour
     protected override void Start()
     {
         base.Start();
-
+        audioSource = GetComponent<AudioSource>();
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
 
@@ -190,7 +191,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
                     Instantiate(Turret, TurnBaseSystem.instance.PlayerInteractScript.currentTile.transform.position + new Vector3(0, 0.17f, 0), Quaternion.identity);
-
+                    audioSource.PlayOneShot(SetupTurret, 0.7f);
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.ShowRangeVisual = false;
 
                     Status.AvalibleActionPoint--;

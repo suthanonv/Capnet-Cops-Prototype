@@ -89,8 +89,22 @@ public class Character : MonoBehaviour
         // Determine if the destination has an enemy character
         bool destinationOccupied = totalTiles > 0 && path.tiles[totalTiles - 1].occupyingCharacter != null;
 
+
+        int AttackRanges = movedata.AttackRange;
+
+
+        if (path.tiles[path.tiles.Length - 1].occupyingCharacter != null)
+        {
+            if (path.tiles[path.tiles.Length - 1].occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget == Target.Pod)
+            {
+                AttackRanges = 1;
+            }
+        }
+
+
+
         // Calculate required movement to reach attack range
-        int requiredSteps = Mathf.Max(0, totalTiles - movedata.BaseAttackRange);
+        int requiredSteps = Mathf.Max(0, totalTiles - AttackRanges);
 
         // Adjust the path length based on whether the destination is occupied
         if (destinationOccupied)
@@ -101,7 +115,7 @@ public class Character : MonoBehaviour
         else
         {
             // Case 2: Destination is not occupied
-            pathLength = Mathf.Min(moveLimit, requiredSteps + movedata.BaseAttackRange);
+            pathLength = Mathf.Min(moveLimit, requiredSteps + AttackRanges);
         }
 
         // Ensure we don't exceed the length of the tiles array
@@ -272,11 +286,7 @@ public class Character : MonoBehaviour
             isAttacking = true;
 
             anim.SetTrigger("Attacking");
-
-            AudioClip[] shotSounds = { shot1, shot2, shot3, shot4 };
-            AudioClip selectedShotSound = shotSounds[UnityEngine.Random.Range(0, shotSounds.Length)];
-
-            audioSource.PlayOneShot(selectedShotSound, 0.7f);
+            playAudio();
         }
 
     }
@@ -310,7 +320,7 @@ public class Character : MonoBehaviour
     public void FinalizePosition(Tile tile)
     {
         TurnBaseSystem.instance.PlayerInteractScript.enabled = true;
-
+        movedata.TargetObj = Target.None;
         transform.position = tile.transform.position;
         characterTile = tile;
         tile.InteractAble = true;
@@ -339,5 +349,14 @@ public class Character : MonoBehaviour
     {
         Vector3 Tile_Position = new Vector3(Destination.transform.position.x, this.transform.position.y, Destination.transform.position.z);
         transform.LookAt(Tile_Position);
+    }
+
+    public void playAudio()
+    {
+        AudioClip[] shotSounds = { shot1, shot2, shot3, shot4 };
+        AudioClip selectedShotSound = shotSounds[UnityEngine.Random.Range(0, shotSounds.Length)];
+
+        audioSource.PlayOneShot(selectedShotSound, 0.7f);
+        
     }
 }

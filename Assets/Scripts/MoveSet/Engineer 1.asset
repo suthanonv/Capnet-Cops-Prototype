@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f422ba19980d12b4f833bb6f2bf6a17a, type: 3}
   m_Name: Engineer 1
   m_EditorClassIdentifier: 
-  MaxMove: 8
-  AttackRange: 15
+  MaxMove: 12
+  baseAttackRange: 45
+  IsEnemy: 0
+  AttackRange: 45
   MoveSpeed: 0.5
