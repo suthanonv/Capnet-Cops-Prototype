@@ -21,7 +21,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
     {
         base.Start();
 
-
+        audioSource = GetComponent<AudioSource>();
         if (pathfinder == null)
             pathfinder = GameObject.Find("Pathfinder").GetComponent<Pathfinder>();
 
@@ -52,8 +52,9 @@ public class SampleTurretTurn : EntityTurnBehaviour
             return;
         }
         animC.Target = Target.GetComponent<EnemyHealth>();
-        anim.SetTrigger("Attacking");
         audioSource.PlayOneShot(shot1, 0.7f);
+        anim.SetTrigger("Attacking");
+       
 
     }
 
