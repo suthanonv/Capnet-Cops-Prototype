@@ -5,33 +5,48 @@ using UnityEngine.SceneManagement;
 public class PodStroingScript : MonoBehaviour
 {
     public static PodStroingScript instance;
+    [SerializeField] private EnemySpawnPoint Pod; 
+    [SerializeField] private TextMeshProUGUI UiTExt;
 
-    void Awake()
-    {
-        instance = this;
-    }
+    private int collecedPod;
 
-    [SerializeField] TextMeshProUGUI UiTExt;
-    int collecedPod;
     public int CollecedPod
     {
-        get
-        {
-            return collecedPod;
-        }
+        get => collecedPod;
         set
         {
             collecedPod = value;
-            UiTExt.text = $"{CollecedPod.ToString()}/12";
-            if (collecedPod == 12)
+            UiTExt.text = $"{CollecedPod}/{Pod.podSpawningRanges.Count}";
+            if (collecedPod == Pod.podSpawningRanges.Count)
             {
                 SceneManager.LoadScene("Win");
             }
         }
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
-        UiTExt.text = $"{CollecedPod.ToString()}/12";
+        if (Pod == null)
+        {
+            Pod = GameObject.FindObjectOfType<EnemySpawnPoint>();
+            if (Pod == null)
+            {
+                Debug.LogError("EnemySpawnPoint not found in the scene!");
+                return;
+            }
+        }
+
+        if (UiTExt == null)
+        {
+            Debug.LogError("UiTExt is not assigned! Assign a TextMeshProUGUI in the Inspector.");
+            return;
+        }
+
+        UiTExt.text = $"{CollecedPod}/{Pod.podSpawningRanges.Count}";
     }
 }

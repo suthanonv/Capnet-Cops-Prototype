@@ -28,8 +28,8 @@ public class EnemySpawnPoint : MonoBehaviour
 
     [Header("Pod Component")]
     [SerializeField] GameObject Pod_Prefab;
-    [SerializeField] List<PodSpawningRange> podSpawningRanges = new List<PodSpawningRange>();
-
+    [SerializeField] public List<PodSpawningRange> podSpawningRanges = new List<PodSpawningRange>();
+    
 
 
     private void Awake()
@@ -42,6 +42,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
     void Start()
     {
+        
         CenterTile = Base.characterTile;
         en = this.GetComponent<EntityTeam>();
     }
@@ -55,7 +56,6 @@ public class EnemySpawnPoint : MonoBehaviour
         foreach (var pod in podSpawningRanges)
         {
             PodSpawn(pod);
-
         }
     }
 
