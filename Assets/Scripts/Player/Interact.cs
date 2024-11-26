@@ -114,8 +114,11 @@ public class Interact : MonoBehaviour
             return;
         if (hit.transform.gameObject.TryGetComponent<Tile>(out Tile tile))
         {
+
             if (tile.InteractAble)
+            {
                 currentTile = tile;
+            }
             else return;
 
         }
@@ -274,34 +277,75 @@ public class Interact : MonoBehaviour
 
             if (currentTile != null)
             {
-                if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
+                if (Attacking == false)
                 {
-
-                    if (newPath.tiles[newPath.tiles.Length - 1].occupyingCharacter == null)
+                    if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
                     {
-                        CurrentMove -= newPath.tiles.Length - 1;
-                        newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
-                    }
-                    else
-                    {
-                        CurrentMove -= newPath.tiles.Length - 2;
-                    }
 
-                    GetComponent<AudioSource>().PlayOneShot(click);
-                    PathIllustrator.ClearPaht();
-                    ShowMoveingRange.instance.CloseMovingRangeVisual();
+                        if (newPath.tiles[newPath.tiles.Length - 1].occupyingCharacter == null)
+                        {
+                            CurrentMove -= newPath.tiles.Length - 1;
+                            newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
+                        }
+                        else
+                        {
+                            CurrentMove -= newPath.tiles.Length - 2;
+                        }
+
+                        GetComponent<AudioSource>().PlayOneShot(click);
+                        PathIllustrator.ClearPaht();
+                        ShowMoveingRange.instance.CloseMovingRangeVisual();
+                        if (currentTile.occupyingCharacter != null)
+                        {
+                            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget;
+                        }
+                        else
+                        {
+                            selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = Target.None;
+                        }
+
+                        selectedCharacter.StartMove(newPath);
+                        selectedCharacter = null;
+                        return;
+                    }
+                }
+                else
+                {
                     if (currentTile.occupyingCharacter != null)
                     {
-                        selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget;
-                    }
-                    else
-                    {
-                        selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = Target.None;
-                    }
+                        if (currentTile.occupyingCharacter.GetComponent<EntityTeam>().EntityTeamSide == Team.Enemy)
+                        {
+                            if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
+                            {
 
-                    selectedCharacter.StartMove(newPath);
-                    selectedCharacter = null;
-                    return;
+                                if (newPath.tiles[newPath.tiles.Length - 1].occupyingCharacter == null)
+                                {
+                                    CurrentMove -= newPath.tiles.Length - 1;
+                                    newPath.tiles[newPath.tiles.Length - 1].InteractAble = false;
+                                }
+                                else
+                                {
+                                    CurrentMove -= newPath.tiles.Length - 2;
+                                }
+
+                                GetComponent<AudioSource>().PlayOneShot(click);
+                                PathIllustrator.ClearPaht();
+                                ShowMoveingRange.instance.CloseMovingRangeVisual();
+                                if (currentTile.occupyingCharacter != null)
+                                {
+                                    selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = currentTile.occupyingCharacter.GetComponent<EntityTeam>().TypeOfTarget;
+                                }
+                                else
+                                {
+                                    selectedCharacter.GetComponent<EntityTurnBehaviour>().Status.moveData.TargetObj = Target.None;
+                                }
+
+                                selectedCharacter.StartMove(newPath);
+                                selectedCharacter = null;
+                                return;
+                            }
+                        }
+                    }
                 }
 
 

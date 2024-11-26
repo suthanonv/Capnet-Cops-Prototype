@@ -7,7 +7,7 @@ public class PathIllustrator : MonoBehaviour
     private LineRenderer line;
     private Path previousPath;
 
-
+    [SerializeField] bool IsMainPathDraw = false;
     private void Start()
     {
         line = GetComponent<LineRenderer>();
@@ -31,10 +31,18 @@ public class PathIllustrator : MonoBehaviour
                 }
             }
         }
-
+        if (IsMainPathDraw)
+        {
+            if (path.tiles[path.tiles.Length - 1].occupyingCharacter == null && TurnBaseSystem.instance.PlayerInteractScript.Attacking && TurnBaseSystem.instance.OnBattlePhase)
+            {
+                line.positionCount = 0;
+                return;
+            }
+        }
 
         // Update the previous path to the current one
         previousPath = path;
+
 
         // Highlight the tiles and set the line positions
         int loopCount = path.tiles.Length;

@@ -144,6 +144,8 @@ public class EngineerTurn : EntityTurnBehaviour
 
     public override void AttackingButton()
     {
+        if (TurnBaseSystem.instance.OnBattlePhase && Status.AvalibleActionPoint == 0) return;
+
         ShowMoveingRange.instance.CloseMovingRangeVisual();
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
         if (TurnBaseSystem.instance.OnBattlePhase == false && resourceManagement.GetComponent<ResourceManagement>().scrap >= cost.GetComponent<Cost>().turret)
@@ -156,15 +158,12 @@ public class EngineerTurn : EntityTurnBehaviour
 
         if (TurnBaseSystem.instance.OnBattlePhase)
         {
-            if (Status.AvalibleActionPoint > 0)
-            {
-                TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
-            }
-            else
-            {
-                TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
 
-            }
+            TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
+            TurnBaseSystem.instance.PlayerInteractScript.Attacking = true;
+            ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
+
+
 
 
         }

@@ -59,7 +59,7 @@ public class ShowMoveingRange : MonoBehaviour
         {
 
 
-            if (tile.occupyingCharacter != null)
+            if (tile.occupyingCharacter != null && (TurnBaseSystem.instance.PlayerInteractScript.Attacking || TurnBaseSystem.instance.OnBattlePhase == false))
             {
                 if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
@@ -70,7 +70,7 @@ public class ShowMoveingRange : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (TurnBaseSystem.instance.PlayerInteractScript.Attacking == false || TurnBaseSystem.instance.OnBattlePhase == false)
             {
                 tile.ShowRangeVisual = true;
             }
@@ -94,7 +94,7 @@ public class ShowMoveingRange : MonoBehaviour
         foreach (Tile tile in attackRange)
         {
 
-            if (tile.occupyingCharacter != null)
+            if (tile.occupyingCharacter != null && (TurnBaseSystem.instance.PlayerInteractScript.Attacking || TurnBaseSystem.instance.OnBattlePhase == false))
             {
                 if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
@@ -114,7 +114,7 @@ public class ShowMoveingRange : MonoBehaviour
         foreach (Tile tile in PodMoveRange)
         {
 
-            if (tile.occupyingCharacter != null)
+            if (tile.occupyingCharacter != null && (TurnBaseSystem.instance.PlayerInteractScript.Attacking || TurnBaseSystem.instance.OnBattlePhase == false))
             {
                 if (tile.occupyingCharacter.TryGetComponent<EntityTeam>(out EntityTeam teamCheck))
                 {
