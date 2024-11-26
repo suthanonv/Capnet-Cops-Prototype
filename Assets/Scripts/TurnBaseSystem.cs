@@ -129,73 +129,64 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     public Character GetHumenNearestChar(Character Enemy, List<Target> TargetPriority)
     {
         Character Nearest = null;
-        float PreviosDistance = 99999999;
+        float PreviosDistance = float.MaxValue;
 
+        // Iterate through target priorities
         foreach (Target PriorityTarget in TargetPriority)
         {
             if (PriorityTarget == Target.Player)
             {
-                foreach (EntityTurnBehaviour i in playerTurnSystems.List)
+                foreach (EntityTurnBehaviour entity in playerTurnSystems.List)
                 {
-                    if (i != null)
+                    if (entity != null)
                     {
-                        if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                        float currentDistance = Vector3.Distance(Enemy.transform.position, entity.transform.position);
+                        if (currentDistance < PreviosDistance)
                         {
-                            Nearest = i.gameObject.GetComponent<Character>();
-                            PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                            Nearest = entity.gameObject.GetComponent<Character>();
+                            PreviosDistance = currentDistance;
                         }
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
+
+
             }
-            else if (PriorityTarget == Target.Turret)
+            else
             {
-
-                foreach (EntityTurnBehaviour i in playerTurnSystems.List)
+                foreach (EntityTurnBehaviour entity in TurretTurn.List)
                 {
-                    if (i != null)
+                    if (entity != null)
                     {
-                        if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                        float currentDistance = Vector3.Distance(Enemy.transform.position, entity.transform.position);
+                        if (currentDistance < PreviosDistance)
                         {
-                            Nearest = i.gameObject.GetComponent<Character>();
-                            PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                            Nearest = entity.gameObject.GetComponent<Character>();
+                            PreviosDistance = currentDistance;
                         }
-                    }
-                    else
-                    {
-                        continue;
                     }
                 }
             }
 
+            // Break if we already found a target
             if (Nearest != null) break;
         }
+
+        // Fallback to base if needed
         if (TargetPriority[0] == Target.Base || Nearest == null)
         {
-            foreach (Transform i in BaseHitBox.transform)
+            foreach (Transform baseChild in BaseHitBox.transform)
             {
-                if (i != null)
+                if (baseChild != null)
                 {
-                    if (Vector3.Distance(Enemy.transform.position, i.transform.position) < PreviosDistance)
+                    float currentDistance = Vector3.Distance(Enemy.transform.position, baseChild.position);
+                    if (currentDistance < PreviosDistance)
                     {
-                        Nearest = i.gameObject.GetComponent<Character>();
-                        PreviosDistance = Vector3.Distance(Enemy.transform.position, i.transform.position);
+                        Nearest = baseChild.GetComponent<Character>();
+                        PreviosDistance = currentDistance;
                     }
                 }
-                else
-                {
-                    continue;
-                }
             }
-
-
         }
-
-
-
 
         return Nearest;
     }
