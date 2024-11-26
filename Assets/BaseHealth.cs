@@ -36,6 +36,6 @@ public class BaseHealth : MonoBehaviour
 
     public void Died()
     {
-        SceneManager.LoadScene("Lose");
+        SceneManager.LoadScene("Lose Scene");
     }
 }

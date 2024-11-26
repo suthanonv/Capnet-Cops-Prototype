@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class PodStroingScript : MonoBehaviour
 {
     public static PodStroingScript instance;
-    [SerializeField] private EnemySpawnPoint Pod; 
+    [SerializeField] private EnemySpawnPoint Pod;
     [SerializeField] private TextMeshProUGUI UiTExt;
 
     private int collecedPod;
@@ -19,7 +19,7 @@ public class PodStroingScript : MonoBehaviour
             UiTExt.text = $"{CollecedPod}/{Pod.podSpawningRanges.Count}";
             if (collecedPod == Pod.podSpawningRanges.Count)
             {
-                SceneManager.LoadScene("Win");
+                SceneManager.LoadScene("Win Scene");
             }
         }
     }
