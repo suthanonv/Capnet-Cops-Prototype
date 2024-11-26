@@ -125,8 +125,11 @@ public class EngineerTurn : EntityTurnBehaviour
 
 
 
+
         BuildingMode = false;
         offVisual();
+        this.GetComponent<Character>().WalkAble = true;
+
         TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
         ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
@@ -140,7 +143,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
         ShowMoveingRange.instance.CloseMovingRangeVisual();
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
-        if (TurnBaseSystem.instance.OnBattlePhase == false)
+        if (TurnBaseSystem.instance.OnBattlePhase == false && resourceManagement.GetComponent<ResourceManagement>().scrap >= cost.GetComponent<Cost>().turret)
         {
             showedVisual = false;
             BuildingMode = true;
@@ -203,6 +206,13 @@ public class EngineerTurn : EntityTurnBehaviour
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.ShowRangeVisual = false;
 
                     Status.AvalibleActionPoint--;
+
+                    if (resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
+                    {
+                        BuildingMode = false;
+                        offVisual();
+                    }
+
                     OnActionEnd();
                 }
             }
@@ -212,6 +222,7 @@ public class EngineerTurn : EntityTurnBehaviour
                 {
                     previsoTile.ClearHighlight();
                 }
+
             }
         }
     }
@@ -245,12 +256,7 @@ public class EngineerTurn : EntityTurnBehaviour
         if (OffAction || TurnBaseSystem.instance.PlayerInteractScript.selectedCharacter != null || TurnBaseSystem.instance.currentTurn == Turn.Enemies && TurnBaseSystem.instance.OnBattlePhase) { DeSelect(); return; }
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
-        if (BuildingMode == false || resourceManagement.GetComponent<ResourceManagement>().scrap < cost.GetComponent<Cost>().turret)
-        {
-            BuildingMode = false;
-            offVisual();
-        }
-
+        this.GetComponent<Character>().WalkAble = true;
 
 
         if (TurnBaseSystem.instance.OnBattlePhase)
