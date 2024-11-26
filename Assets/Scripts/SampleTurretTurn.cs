@@ -8,7 +8,8 @@ public class SampleTurretTurn : EntityTurnBehaviour
     private AnimationControll animC;
 
     private Animator anim;
-
+    public AudioClip shot1;
+    AudioSource audioSource;
 
 
 
@@ -52,6 +53,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
         }
         animC.Target = Target.GetComponent<EnemyHealth>();
         anim.SetTrigger("Attacking");
+        audioSource.PlayOneShot(shot1, 0.7f);
 
     }
 

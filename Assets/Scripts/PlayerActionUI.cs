@@ -74,8 +74,8 @@ public class PlayerActionUI : MonoBehaviour
         {
             if (Troops.Status.AvalibleMoveStep <= 20 || Troops.Status.AvalibleActionPoint <= 20)
             {
-                MpText.text = "Move Points: " + Troops.Status.AvalibleMoveStep.ToString();
-                ApText.text = "Action Points: " + Troops.Status.AvalibleActionPoint.ToString();
+                MpText.text = ": " + Troops.Status.AvalibleMoveStep.ToString();
+                ApText.text = ": " + Troops.Status.AvalibleActionPoint.ToString();
             }
    
         }
