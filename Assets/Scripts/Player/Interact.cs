@@ -127,14 +127,15 @@ public class Interact : MonoBehaviour
         }
         else
         {
-            NavigateToTile();
+            if (Walking)
+                NavigateToTile();
         }
 
     }
 
 
 
-
+    public bool Walking;
 
 
 
