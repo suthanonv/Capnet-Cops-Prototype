@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Turret
   m_EditorClassIdentifier: 
   MaxMove: 1
-  AttackRange: 5
+  baseAttackRange: 15
+  IsEnemy: 0
+  AttackRange: 15
   MoveSpeed: 0.5
