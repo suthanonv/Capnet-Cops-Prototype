@@ -995,7 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyToAttack: {fileID: 0}
-  ActiveRange: 10
+  ActiveRange: 15
   Center: {fileID: 0}
 --- !u!1 &1897953731125759598
 GameObject:
@@ -2109,11 +2109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Status:
-    BaseDamage: 25
+    BaseDamage: 100
     Speed: 0
     moveData: {fileID: 11400000, guid: 298bfae150d9423449d1868d7773cd29, type: 2}
     ActionPoint: 1
   currentState: 0
+  shot1: {fileID: 0}
   attackingRadius: {fileID: 5633291526766710156}
 --- !u!114 &4065032007382978698
 MonoBehaviour:
