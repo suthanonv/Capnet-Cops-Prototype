@@ -409,7 +409,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
         EndPharseButton.SetActive(false);
         PlayerInteractScript.enabled = false;
-
+        PlayerActionUI.instance.EnableUI = false;
         TurnNum = 0;
         currentTurn = Turn.Enemies;
 
