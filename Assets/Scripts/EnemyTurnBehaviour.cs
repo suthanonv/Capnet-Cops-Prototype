@@ -19,7 +19,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         TurnBaseSystem.instance.GetComponent<TurnBaseSystem>().enemiesTurnSystems.Add(this);
     }
 
-    bool Spawned = false;
+    public bool Spawned = false;
     public override void onTurn()
     {
         Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar, targets);

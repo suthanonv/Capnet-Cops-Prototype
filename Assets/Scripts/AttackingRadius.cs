@@ -55,7 +55,7 @@ public class AttackingRadius : MonoBehaviour
     {
         if (EnemyToAttack != null)
         {
-            if (EnemyToAttack.transform.GetChild(1).gameObject.GetComponent<AnimationControll>().IsPuasingSelf == false)
+            if (EnemyToAttack.transform.GetChild(1).gameObject.GetComponent<AnimationControll>().IsPuasingSelf == false && EnemyToAttack.GetComponent<EnemyTurnBehaviour>().Spawned)
             {
                 Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
                 Vector3 EnemyTransform = new Vector3(EnemyToAttack.transform.position.x, 0, EnemyToAttack.transform.position.z);
