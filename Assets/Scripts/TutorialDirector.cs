@@ -139,6 +139,17 @@ public class TutorialDirector : MonoBehaviour
         UpdatePod();
         updateTurret();
         CheckSelectCharacter();
+
+        if (EndPhaseButton.interactable == false)
+        {
+            EndPhaseButton.GetComponent<Image>().enabled = false;
+        }
+        else
+        {
+            EndPhaseButton.GetComponent<Image>().enabled = true;
+
+        }
+
     }
 
     public void SkipTutorial()
