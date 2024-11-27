@@ -9,7 +9,10 @@ public class TutorialDirector : MonoBehaviour
     [SerializeField] TMP_Text TutorialBody;
     [SerializeField] MaterialChange[] MaterialChanges;
     [SerializeField] GameObject Cameraholder;
-    [SerializeField] GameObject arrow;
+    [SerializeField] GameObject EndPhaseArrow;
+    [SerializeField] GameObject LeftArrow;
+    [SerializeField] GameObject LeftMiddleArrow;
+    [SerializeField] GameObject MiddleArrow;
     [SerializeField] TMP_Text next;
     [SerializeField] GameObject NextButton;
     [SerializeField] PodStroingScript podStorage;
@@ -17,6 +20,7 @@ public class TutorialDirector : MonoBehaviour
     [SerializeField] ResourceManagement ResourceManagement;
     [SerializeField] Button EndPhaseButton;
     [SerializeField] Interact interact;
+    [SerializeField] Character EngineerChar;
     Pod pod;
     MaterialChange podMat;
 
@@ -84,38 +88,46 @@ public class TutorialDirector : MonoBehaviour
         if (nextCount == 4 && DisPlayCount != nextCount)
         {
             DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
+        }
+        if (nextCount == 5 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
             Cameraholder.transform.position = Engineer.transform.position + new Vector3(-0.3f, 3.07f, 1.15f);
             MaterialChanges[1].AddingOutLine();
             StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            NextButton.SetActive(false);
 
         }
-        if (nextCount == 5 && DisPlayCount != nextCount)
+        if (nextCount == 6 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            Cameraholder.transform.position = Engineer.transform.position + new Vector3(-0.3f, 3.07f, 1.15f);
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            NextButton.SetActive(false);
+
+        }
+        if (nextCount == 7 && DisPlayCount != nextCount)
         {
             EndPhaseButton.interactable = true;
             DisPlayCount = nextCount;
             MaterialChanges[1].RemovingOutLine();
             StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
-        }
-        if (nextCount == 6 && DisPlayCount != nextCount)
-        {
-            StopAllCoroutines();
-            DisPlayCount = nextCount;
-            arrow.SetActive(false);
-
-            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
-
-        }
-        if (nextCount == 7 && DisPlayCount != nextCount)
-        {
-            DisPlayCount = nextCount;
-            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
-            NextButton.SetActive(false);
-
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
         }
         if (nextCount == 8 && DisPlayCount != nextCount)
         {
+            StopAllCoroutines();
             DisPlayCount = nextCount;
+            EndPhaseArrow.SetActive(false);
+
             StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
         }
         if (nextCount == 9 && DisPlayCount != nextCount)
         {
@@ -132,13 +144,34 @@ public class TutorialDirector : MonoBehaviour
         if (nextCount == 11 && DisPlayCount != nextCount)
         {
             DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            NextButton.SetActive(false);
+
+        }
+        if (nextCount == 12 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
+        }
+        if (nextCount == 13 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
             Tutorial.SetActive(false);
         }
 
-        ArrowAnimation();
+        EndPhaseArrowAnimation();
         UpdatePod();
         updateTurret();
         CheckSelectCharacter();
+        CheckSelectEngineer();
+        ArrowAnimation();
+        Count3ArrowTrigger();
+        Count6ArrowTrigger();
+        Count11ArrowTrigger();
+
 
         if (EndPhaseButton.interactable == false)
         {
@@ -162,15 +195,15 @@ public class TutorialDirector : MonoBehaviour
 
     public void SkipTutorial()
     {
-        if (nextCount < 11)
+        if (nextCount < 13)
         {
-            nextCount = 11;
+            nextCount = 13;
             EndPhaseButton.interactable = true;
         }
     }
     void CheckSelectCharacter()
     {
-        if (nextCount == 7)
+        if (nextCount == 9)
         {
             if (interact.selectedCharacter != null)
             {
@@ -192,7 +225,7 @@ public class TutorialDirector : MonoBehaviour
 
     void updateTurret()
     {
-        if (nextCount == 4)
+        if (nextCount == 6)
         {
             turret = FindAnyObjectByType<TurretHealth>();
             if (turret != null)
@@ -202,27 +235,117 @@ public class TutorialDirector : MonoBehaviour
         }
     }
 
-    void ArrowAnimation()
+    void CheckSelectEngineer()
     {
-        if (nextCount != 5) return;
-        arrow.SetActive(true);
+        if (nextCount == 5)
+        {
+            if (interact.selectedCharacter == EngineerChar)
+            {
+                nextCount++;
+            }
+        }
+    }
+
+    void EndPhaseArrowAnimation()
+    {
+        if (nextCount != 7) return;
+        EndPhaseArrow.SetActive(true);
         delay += Time.deltaTime;
-        if (delay >= 0.2)
+        if (delay >= 0.4)
         {
             sizeCount++;
             delay = 0;
         }
         if (sizeCount % 2 == 0)
         {
-            arrow.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            EndPhaseArrow.transform.position += new Vector3(0.05f, 0, 0);
         }
         else
         {
-            arrow.transform.localScale = new Vector3(1, 1, 1);
+            EndPhaseArrow.transform.position -= new Vector3(0.05f, 0, 0);
         }
     }
 
 
+    void ArrowAnimation()
+    {
+        if (nextCount != 3 && nextCount != 6 && nextCount != 11) return;
+        delay += Time.deltaTime;
+        if (delay >= 0.4)
+        {
+            sizeCount++;
+            delay = 0;
+        }
+        if (sizeCount % 2 == 0)
+        {
+            LeftArrow.transform.position += new Vector3(0, 0.05f, 0);
+            LeftMiddleArrow.transform.position += new Vector3(0, 0.05f, 0);
+            MiddleArrow.transform.position += new Vector3(0, 0.05f, 0);
+        }
+        else
+        {
+            LeftArrow.transform.position -= new Vector3(0, 0.05f, 0);
+            LeftMiddleArrow.transform.position -= new Vector3(0, 0.05f, 0);
+            MiddleArrow.transform.position -= new Vector3(0, 0.05f, 0);
+        }
+    }
+
+    void Count3ArrowTrigger()
+    {
+        if (nextCount != 3) return;
+        if (interact.selectedCharacter == EngineerChar)
+        {
+            LeftArrow.SetActive(true);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
+        }
+        else if (interact.selectedCharacter == null)
+        {
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
+        }
+        else 
+        {
+            LeftMiddleArrow.SetActive(true);
+            LeftArrow.SetActive(false);
+            MiddleArrow.SetActive(false);  
+        }
+    }
+
+    void Count6ArrowTrigger()
+    {
+        if(nextCount != 6) return;
+        if (interact.selectedCharacter == EngineerChar)
+        {
+            MiddleArrow.SetActive(true);
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+        }
+        else
+        {
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
+        }
+    }
+
+    void Count11ArrowTrigger()
+    {
+        if (nextCount != 11) return;
+        if (interact.selectedCharacter != null)
+        {
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(true);
+        }
+        else
+        {
+            LeftArrow.SetActive(false);
+            LeftMiddleArrow.SetActive(false);
+            MiddleArrow.SetActive(false);
+        }
+    }
 
     void ShowPlayer()
     {
@@ -265,14 +388,14 @@ public class TutorialDirector : MonoBehaviour
             yield return new WaitForSeconds(textDetail.TextPlaySpeed);
             count++;
         }
-        if (nextCount == 11)
+        if (nextCount == 13)
             StartCoroutine(CloseUI());
-        else if (nextCount == 6)
+        else if (nextCount == 8)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(15);
             NextButton.SetActive(true);
         }
-        else if (nextCount != 3 && nextCount != 4 && nextCount != 5 && nextCount != 7)
+        else if (nextCount != 3 && nextCount != 5 && nextCount != 6 && nextCount != 7 && nextCount != 9)
         {
             NextButton.SetActive(true);
         }
