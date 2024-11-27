@@ -419,6 +419,12 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         TurnNum = 0;
         currentTurn = Turn.Enemies;
 
+        EngineerTurn Engineer = GameObject.FindAnyObjectByType<EngineerTurn>();
+
+        if (Engineer != null)
+        {
+            Engineer.offVisual();
+        }
 
         foreach (EntityTurnBehaviour i in playerTurnSystems.List)
         {

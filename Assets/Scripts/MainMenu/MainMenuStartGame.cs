@@ -24,7 +24,7 @@ public class MainMenuStartGame : MonoBehaviour
             start = true;
             Debug.Log("Game is starting.");
             animator.SetTrigger("FadeOutText");
-            SceneManager.LoadScene("MySceneBroke");
+            SceneManager.LoadScene(1);
         }
         if (textFadeOutFinished)
         {
