@@ -20,7 +20,7 @@ public class TutorialDirector : MonoBehaviour
     Pod pod;
     MaterialChange podMat;
 
-    
+
     TurretHealth turret;
 
     [SerializeField] List<Text_Anim_Detail> Tutorial_Dialouge = new List<Text_Anim_Detail>();
@@ -146,6 +146,7 @@ public class TutorialDirector : MonoBehaviour
         if (nextCount < 11)
         {
             nextCount = 11;
+            EndPhaseButton.interactable = true;
         }
     }
     void CheckSelectCharacter()
