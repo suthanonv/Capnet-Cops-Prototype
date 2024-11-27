@@ -6,11 +6,20 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 {
     private Character enemyChar;
     private Tile destinationTile;
+    public AudioSource audioSource;
+    public AudioClip monsterRoar;
+    [Range(0.5f, 1.5f)] public float pitchMin = 0.8f;
+    [Range(0.5f, 1.5f)] public float pitchMax = 1.2f;
+
     [SerializeField] List<Target> targets = new List<Target>();
 
 
     protected override void Start()
     {
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = monsterRoar;
+        audioSource.playOnAwake = false;
         base.Start();
         Status.moveData.BaseAttackRange = Status.moveData.AttackRange;
         enemyChar = GetComponent<Character>();
@@ -24,7 +33,11 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
     {
         Character Human = TurnBaseSystem.instance.GetHumenNearestChar(enemyChar, targets);
 
-        if (Human == null) OnActionEnd();
+        if (Human == null)
+        {
+            OnActionEnd();
+            return; 
+        }
 
         destinationTile = Human.characterTile;
 
@@ -32,15 +45,17 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         CameraBehaviouerControll.instance.LookAtTarget(this.gameObject.transform);
         this.transform.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("Play");
 
-        if (Spawned == false)
+        if (!Spawned)
         {
-            return;
+            playRoarSound(true); 
+            Spawned = true;      
+        }
+        else
+        {
+            playRoarSound();     
         }
 
         base.onTurn();
-
-
-
 
         StartCoroutine(FindAndMove());
     }
@@ -98,4 +113,17 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         TurnBaseSystem.instance.ActionEnd = true;
         CameraBehaviouerControll.instance.ResetTransform();
     }
+
+    public void playRoarSound(bool forcePlay = false)
+    {
+        if (forcePlay || Random.value <= 0.3f) // 30% chance or forced play
+        {
+            // Randomize the pitch within the specified range
+            audioSource.pitch = Random.Range(pitchMin, pitchMax);
+
+            // Play the roar sound
+            audioSource.Play();
+        }
+    }
+
 }
