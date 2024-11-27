@@ -143,10 +143,18 @@ public class TutorialDirector : MonoBehaviour
         if (EndPhaseButton.interactable == false)
         {
             EndPhaseButton.GetComponent<Image>().enabled = false;
+            foreach (Transform i in EndPhaseButton.transform)
+            {
+                i.gameObject.SetActive(false);
+            }
         }
         else
         {
             EndPhaseButton.GetComponent<Image>().enabled = true;
+            foreach (Transform i in EndPhaseButton.transform)
+            {
+                i.gameObject.SetActive(true);
+            }
 
         }
 
