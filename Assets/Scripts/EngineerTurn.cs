@@ -19,7 +19,7 @@ public class EngineerTurn : EntityTurnBehaviour
 
     Animator anim;
 
-
+    [SerializeField] GameObject HoloGrameTurret;
 
     public override void ResetState()
     {
@@ -45,13 +45,15 @@ public class EngineerTurn : EntityTurnBehaviour
 
         return true;
     }
+
+    GameObject VisualTurret;
     protected override void Start()
     {
         base.Start();
         audioSource = GetComponent<AudioSource>();
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
-        
+
         if (resourceManagement == null)
         {
             resourceManagement = GameObject.Find("ResourceManagement");
@@ -65,7 +67,8 @@ public class EngineerTurn : EntityTurnBehaviour
         PlayerActionUI.instance.EndPhaseEvent.AddListener(offVisual);
 
         anim = this.transform.GetChild(1).GetComponent<Animator>();
-
+        VisualTurret = Instantiate(HoloGrameTurret, this.transform.position, Quaternion.identity);
+        VisualTurret.SetActive(false);
     }
     public override void onTurn()
     {
@@ -204,6 +207,8 @@ public class EngineerTurn : EntityTurnBehaviour
                         previsoTile.ClearHighlight();
                     }
                     previsoTile = TurnBaseSystem.instance.PlayerInteractScript.currentTile;
+                    VisualTurret.transform.position = TurnBaseSystem.instance.PlayerInteractScript.currentTile.transform.position + new Vector3(0, 0.17f, 0);
+                    VisualTurret.SetActive(true);
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.Highlight();
                 }
                 if (Input.GetMouseButtonDown(0))
@@ -236,6 +241,7 @@ public class EngineerTurn : EntityTurnBehaviour
                 if (previsoTile != null)
                 {
                     previsoTile.ClearHighlight();
+                    VisualTurret.SetActive(false);
                 }
 
             }
