@@ -152,7 +152,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
 
             }
-            else if (PriorityTarget != Target.Base)
+            else if (PriorityTarget == Target.Turret)
             {
                 foreach (EntityTurnBehaviour entity in TurretTurn.List)
                 {
@@ -167,6 +167,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                     }
                 }
             }
+
 
             // Break if we already found a target
             if (Nearest != null) break;
