@@ -130,6 +130,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
     {
         Character Nearest = null;
         float PreviosDistance = float.MaxValue;
+        playerTurnSystems.List.RemoveAll(item => item == null);
+        TurretTurn.List.RemoveAll(item => item == null);
 
         // Iterate through target priorities
         foreach (Target PriorityTarget in TargetPriority)
