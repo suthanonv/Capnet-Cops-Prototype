@@ -45,6 +45,10 @@ public class SampleTurretTurn : EntityTurnBehaviour
 
     public override void onTurn()
     {
+        if (this == null)
+        {
+            return;
+        }
         Debug.Log("Turn Play");
         if (Target == null)
         {
@@ -52,6 +56,7 @@ public class SampleTurretTurn : EntityTurnBehaviour
             return;
         }
         animC.Target = Target.GetComponent<EnemyHealth>();
+        audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(shot1, 0.7f);
         anim.SetTrigger("Attacking");
        
