@@ -47,7 +47,6 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
         if (!Spawned)
         {
-            playRoarSound(true);
             return;
         }
         else

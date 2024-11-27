@@ -8217,6 +8217,7 @@ GameObject:
   - component: {fileID: 3976780533780000511}
   - component: {fileID: 4015380564274647068}
   - component: {fileID: 5010939358972616539}
+  - component: {fileID: 8150818070625588661}
   m_Layer: 0
   m_Name: Drifter
   m_TagString: Untagged
@@ -8332,6 +8333,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPuasingSelf: 0
+--- !u!114 &8150818070625588661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681511213396290308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3f1815fbc7b4b41a47c1fe6fa0ac1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5727638473609015446
 GameObject:
   m_ObjectHideFlags: 0
@@ -9720,7 +9733,7 @@ MonoBehaviour:
     ActionPoint: 1
   currentState: 0
   audioSource: {fileID: 1628422638050690413}
-  monsterRoar: {fileID: 8300000, guid: 227bb8d09f6bfc34a81746277f060c0e, type: 3}
+  monsterRoar: {fileID: 8300000, guid: 07a3fdb39c523314abc5ae5623b435b3, type: 3}
   pitchMin: 1.204
   pitchMax: 1.5
   targets: 00000000
