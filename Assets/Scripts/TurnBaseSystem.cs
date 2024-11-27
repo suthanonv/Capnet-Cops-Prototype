@@ -308,7 +308,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
         {
             if (i.Status.AvalibleActionPoint > 0 || i.Status.AvalibleMoveStep > 0) return false;
         }
-
+        if (playerTurnSystems.List.Count == 0) return false;
         return true;
     }
 
