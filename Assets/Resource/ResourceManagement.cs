@@ -56,6 +56,7 @@ public class ResourceManagement : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T)) scrap += 100;
         OnResourceChange();
     }
 

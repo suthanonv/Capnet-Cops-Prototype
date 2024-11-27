@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PreparationPharse : MonoBehaviour
 {
@@ -59,6 +60,12 @@ public class PreparationPharse : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            CurrentClockTime.Hour = StartClockTIme.Hour;
+            CurrentClockTime.Min = StartClockTIme.Min;
+            CurrentClockTime.Second = StartClockTIme.Second;
+        }
         if (onCD == false)
         {
             onCD = true;

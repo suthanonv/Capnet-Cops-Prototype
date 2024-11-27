@@ -51,7 +51,7 @@ public class EngineerTurn : EntityTurnBehaviour
         audioSource = GetComponent<AudioSource>();
         character = this.gameObject.GetComponent<Character>();
         TurnBaseSystem.instance.playerTurnSystems.Add(this);
-
+        
         if (resourceManagement == null)
         {
             resourceManagement = GameObject.Find("ResourceManagement");
@@ -181,7 +181,7 @@ public class EngineerTurn : EntityTurnBehaviour
     {
 
 
-
+        if (Input.GetKeyDown(KeyCode.T)) BuildingRange = 70;
         if (BuildingMode && resourceManagement.GetComponent<ResourceManagement>().scrap >= cost.GetComponent<Cost>().turret)
         {
             HashSet<Tile> BuidlAbleTile = ShowMoveingRange.instance.CalculatePathfindingRange(character.characterTile, BuildingRange, this.GetComponent<EntityTeam>());
