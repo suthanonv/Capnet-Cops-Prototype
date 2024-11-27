@@ -207,6 +207,7 @@ public class EngineerTurn : EntityTurnBehaviour
                         previsoTile.ClearHighlight();
                     }
                     previsoTile = TurnBaseSystem.instance.PlayerInteractScript.currentTile;
+                    this.GetComponent<Character>().Character_LookAt(previsoTile);
                     VisualTurret.transform.position = TurnBaseSystem.instance.PlayerInteractScript.currentTile.transform.position + new Vector3(0, 0.17f, 0);
                     VisualTurret.SetActive(true);
                     TurnBaseSystem.instance.PlayerInteractScript.currentTile.Highlight();
