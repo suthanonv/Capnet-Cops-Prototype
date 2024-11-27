@@ -54,7 +54,7 @@ public class EnemyHealth : Health
 
     public bool CanbeTarget()
     {
-        return CurrentBulletQuque < MaxBulletQuque;
+        return true;
     }
 
     int MaxBulletQuque;

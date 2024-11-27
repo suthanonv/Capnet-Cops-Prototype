@@ -15,13 +15,11 @@ public class AttackingRadius : MonoBehaviour
     {
         entity = this.transform.parent.GetComponent<SampleTurretTurn>();
     }
+
     public void GetEnemy(GameObject Enemy)
     {
         EnemyToAttack = Enemy;
-
-
     }
-
 
     public void AttackAnyEnemy()
     {
@@ -36,17 +34,16 @@ public class AttackingRadius : MonoBehaviour
 
     public GameObject GetEnemy()
     {
-        TurnBaseSystem.instance.enemiesTurnSystems.List.RemoveAll(i => i == null);
-
-        foreach (EntityTurnBehaviour i in TurnBaseSystem.instance.enemiesTurnSystems.List)
+        Collider[] hitColliders = Physics.OverlapSphere(Center.position, ActiveRange);
+        foreach (Collider hitCollider in hitColliders)
         {
-            Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
-            Vector3 EnemyTransform = new Vector3(i.transform.position.x, 0, i.transform.position.z);
-            if (i.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
-                if (Vector3.Distance(thisTransform, EnemyTransform) <= ActiveRange && health.CanbeTarget())
+            if (hitCollider.TryGetComponent<EntityTurnBehaviour>(out EntityTurnBehaviour entityTurnBehaviour))
+            {
+                if (entityTurnBehaviour.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
                 {
-                    return i.gameObject;
+                    return entityTurnBehaviour.gameObject;
                 }
+            }
         }
         return null;
     }
@@ -57,19 +54,19 @@ public class AttackingRadius : MonoBehaviour
         {
             if (EnemyToAttack.transform.GetChild(1).gameObject.GetComponent<AnimationControll>().IsPuasingSelf == false && EnemyToAttack.GetComponent<EnemyTurnBehaviour>().Spawned)
             {
-                Vector3 thisTransform = new Vector3(this.transform.parent.position.x, 0, this.transform.parent.position.z);
-                Vector3 EnemyTransform = new Vector3(EnemyToAttack.transform.position.x, 0, EnemyToAttack.transform.position.z);
-
-                if (Vector3.Distance(thisTransform, EnemyTransform) <= ActiveRange && EnemyToAttack.GetComponent<EnemyHealth>().CanbeTarget() && !AttackAlready.Contains(EnemyToAttack))
+                Collider[] hitColliders = Physics.OverlapSphere(Center.position, ActiveRange);
+                foreach (Collider hitCollider in hitColliders)
                 {
-                    AttackAlready.Add(EnemyToAttack);
-                    entity.SetTarget(EnemyToAttack);
-                    TurretQuque.instance.AddingQuque(entity);
+                    if (hitCollider.gameObject == EnemyToAttack && !AttackAlready.Contains(EnemyToAttack))
+                    {
+                        AttackAlready.Add(EnemyToAttack);
+                        entity.SetTarget(EnemyToAttack);
+                        TurretQuque.instance.AddingQuque(entity);
+                    }
                 }
             }
         }
     }
-
 
     private void OnDrawGizmos()
     {
@@ -79,5 +76,4 @@ public class AttackingRadius : MonoBehaviour
             Gizmos.DrawWireSphere(Center.transform.position, ActiveRange);
         }
     }
-
 }

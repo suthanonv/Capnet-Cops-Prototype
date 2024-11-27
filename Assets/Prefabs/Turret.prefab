@@ -5940,7 +5940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyToAttack: {fileID: 0}
   ActiveRange: 10
-  Center: {fileID: 0}
+  Center: {fileID: 6412786672134408854}
 --- !u!1 &1897953731125759598
 GameObject:
   m_ObjectHideFlags: 0
