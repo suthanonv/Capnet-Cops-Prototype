@@ -5939,7 +5939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyToAttack: {fileID: 0}
-  ActiveRange: 15
+  ActiveRange: 10
   Center: {fileID: 0}
 --- !u!1 &1897953731125759598
 GameObject:
