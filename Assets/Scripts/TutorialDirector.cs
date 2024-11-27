@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 public class TutorialDirector : MonoBehaviour
 {
     [SerializeField] GameObject Tutorial;
@@ -12,9 +13,15 @@ public class TutorialDirector : MonoBehaviour
     [SerializeField] TMP_Text next;
     [SerializeField] GameObject NextButton;
     [SerializeField] PodStroingScript podStorage;
+    [SerializeField] GameObject Engineer;
+    [SerializeField] ResourceManagement ResourceManagement;
+    [SerializeField] Button EndPhaseButton;
+    [SerializeField] Interact interact;
     Pod pod;
     MaterialChange podMat;
 
+    
+    TurretHealth turret;
 
     [SerializeField] List<Text_Anim_Detail> Tutorial_Dialouge = new List<Text_Anim_Detail>();
     int count;
@@ -28,6 +35,8 @@ public class TutorialDirector : MonoBehaviour
     {
         if (nextCount == 0 && DisPlayCount != nextCount)
         {
+            EndPhaseButton.interactable = false;
+
             NextButton.SetActive(false);
 
             DisPlayCount = nextCount;
@@ -75,25 +84,52 @@ public class TutorialDirector : MonoBehaviour
         if (nextCount == 4 && DisPlayCount != nextCount)
         {
             DisPlayCount = nextCount;
-            NextButton.SetActive(false);
+            Cameraholder.transform.position = Engineer.transform.position + new Vector3(-0.3f, 3.07f, 1.15f);
+            MaterialChanges[1].AddingOutLine();
             StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
 
         }
         if (nextCount == 5 && DisPlayCount != nextCount)
         {
+            EndPhaseButton.interactable = true;
+            DisPlayCount = nextCount;
+            MaterialChanges[1].RemovingOutLine();
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+        }
+        if (nextCount == 6 && DisPlayCount != nextCount)
+        {
             StopAllCoroutines();
             DisPlayCount = nextCount;
             arrow.SetActive(false);
-            NextButton.SetActive(false);
-
 
             StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
 
-
-
+        }
+        if (nextCount == 7 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            NextButton.SetActive(false);
 
         }
-        if (nextCount == 6 && DisPlayCount != nextCount)
+        if (nextCount == 8 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+        }
+        if (nextCount == 9 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+            NextButton.SetActive(false);
+
+        }
+        if (nextCount == 10 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+        }
+        if (nextCount == 11 && DisPlayCount != nextCount)
         {
             DisPlayCount = nextCount;
             Tutorial.SetActive(false);
@@ -101,12 +137,26 @@ public class TutorialDirector : MonoBehaviour
 
         ArrowAnimation();
         UpdatePod();
+        updateTurret();
+        CheckSelectCharacter();
     }
 
     public void SkipTutorial()
     {
-        if (nextCount < 5)
-            nextCount = 5;
+        if (nextCount < 11)
+        {
+            nextCount = 11;
+        }
+    }
+    void CheckSelectCharacter()
+    {
+        if (nextCount == 7)
+        {
+            if (interact.selectedCharacter != null)
+            {
+                nextCount++;
+            }
+        }
     }
 
     void UpdatePod()
@@ -120,9 +170,21 @@ public class TutorialDirector : MonoBehaviour
         }
     }
 
+    void updateTurret()
+    {
+        if (nextCount == 4)
+        {
+            turret = FindAnyObjectByType<TurretHealth>();
+            if (turret != null)
+            {
+                nextCount++;
+            }
+        }
+    }
+
     void ArrowAnimation()
     {
-        if (nextCount != 4) return;
+        if (nextCount != 5) return;
         arrow.SetActive(true);
         delay += Time.deltaTime;
         if (delay >= 0.2)
@@ -183,9 +245,14 @@ public class TutorialDirector : MonoBehaviour
             yield return new WaitForSeconds(textDetail.TextPlaySpeed);
             count++;
         }
-        if (nextCount == 5)
+        if (nextCount == 11)
             StartCoroutine(CloseUI());
-        else if (nextCount != 3 && nextCount != 4)
+        else if (nextCount == 6)
+        {
+            yield return new WaitForSeconds(5);
+            NextButton.SetActive(true);
+        }
+        else if (nextCount != 3 && nextCount != 4 && nextCount != 5 && nextCount != 7)
         {
             NextButton.SetActive(true);
         }
