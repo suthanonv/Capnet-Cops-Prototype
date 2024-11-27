@@ -9693,10 +9693,10 @@ MonoBehaviour:
     m_Bits: 8
   IsObstacle: 0
   anim: {fileID: 0}
-  shot1: {fileID: 8300000, guid: 227bb8d09f6bfc34a81746277f060c0e, type: 3}
-  shot2: {fileID: 8300000, guid: 227bb8d09f6bfc34a81746277f060c0e, type: 3}
-  shot3: {fileID: 8300000, guid: 227bb8d09f6bfc34a81746277f060c0e, type: 3}
-  shot4: {fileID: 8300000, guid: 227bb8d09f6bfc34a81746277f060c0e, type: 3}
+  shot1: {fileID: 8300000, guid: 07a3fdb39c523314abc5ae5623b435b3, type: 3}
+  shot2: {fileID: 8300000, guid: 07a3fdb39c523314abc5ae5623b435b3, type: 3}
+  shot3: {fileID: 8300000, guid: 07a3fdb39c523314abc5ae5623b435b3, type: 3}
+  shot4: {fileID: 8300000, guid: 07a3fdb39c523314abc5ae5623b435b3, type: 3}
   isAttacking: 0
   FindLater: 0
   paused: 0
