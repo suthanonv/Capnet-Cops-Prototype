@@ -16859,7 +16859,7 @@ MonoBehaviour:
     moveData: {fileID: 11400000, guid: 298bfae150d9423449d1868d7773cd29, type: 2}
     ActionPoint: 1
   currentState: 0
-  shot1: {fileID: 0}
+  shot1: {fileID: 8300000, guid: f1b73bb2beabbe448ac5ac0dd0222fdd, type: 3}
   attackingRadius: {fileID: 5633291526766710156}
 --- !u!114 &4065032007382978698
 MonoBehaviour:
