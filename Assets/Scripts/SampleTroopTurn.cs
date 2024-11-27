@@ -166,6 +166,8 @@ public class SampleTroopTurn : EntityTurnBehaviour
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
 
         TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
+
         ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
     }
 
@@ -175,7 +177,7 @@ public class SampleTroopTurn : EntityTurnBehaviour
         {
             TurnBaseSystem.instance.PlayerInteractScript.Attacking = false;
         }
-
+        ShowMoveingRange.instance.CloseMovingRangeVisual();
         TurnBaseSystem.instance.PlayerInteractScript.ClearIlustatePath();
         TurnBaseSystem.instance.PlayerInteractScript.Walking = true;
         ShowMoveingRange.instance.ShowCharacterMoveRange(this.GetComponent<Character>().characterTile, Status, this.GetComponent<EntityTeam>());
