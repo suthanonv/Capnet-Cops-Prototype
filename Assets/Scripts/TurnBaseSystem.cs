@@ -304,6 +304,8 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     bool isallPlayerRanOutOfPoint()
     {
+        playerTurnSystems.List.RemoveAll(item => item == null);
+
         foreach (EntityTurnBehaviour i in playerTurnSystems.List)
         {
             if (i.Status.AvalibleActionPoint > 0 || i.Status.AvalibleMoveStep > 0) return false;
