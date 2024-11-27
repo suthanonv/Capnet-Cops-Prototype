@@ -41,7 +41,10 @@ public class AttackingRadius : MonoBehaviour
             {
                 if (entityTurnBehaviour.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
                 {
-                    return entityTurnBehaviour.gameObject;
+                    if (health.CanbeTarget())
+                    {
+                        return entityTurnBehaviour.gameObject;
+                    }
                 }
             }
         }
@@ -59,9 +62,15 @@ public class AttackingRadius : MonoBehaviour
                 {
                     if (hitCollider.gameObject == EnemyToAttack && !AttackAlready.Contains(EnemyToAttack))
                     {
-                        AttackAlready.Add(EnemyToAttack);
-                        entity.SetTarget(EnemyToAttack);
-                        TurretQuque.instance.AddingQuque(entity);
+                        if (EnemyToAttack.TryGetComponent<EnemyHealth>(out EnemyHealth health))
+                        {
+                            if (health.CanbeTarget())
+                            {
+                                AttackAlready.Add(EnemyToAttack);
+                                entity.SetTarget(EnemyToAttack);
+                                TurretQuque.instance.AddingQuque(entity);
+                            }
+                        }
                     }
                 }
             }
