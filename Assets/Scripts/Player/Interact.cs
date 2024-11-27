@@ -277,7 +277,7 @@ public class Interact : MonoBehaviour
 
             if (currentTile != null)
             {
-                if (Attacking == false)
+                if (Attacking == false || (Attacking == true && TurnBaseSystem.instance.OnBattlePhase == false))
                 {
                     if (Input.GetMouseButtonDown(0) && currentTile == newPath.tiles[newPath.tiles.Length - 1])
                     {
@@ -309,7 +309,7 @@ public class Interact : MonoBehaviour
                         return;
                     }
                 }
-                else
+                else if (Attacking)
                 {
                     if (currentTile.occupyingCharacter != null)
                     {

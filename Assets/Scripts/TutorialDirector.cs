@@ -17,7 +17,8 @@ public class TutorialDirector : MonoBehaviour
 
 
     [SerializeField] List<Text_Anim_Detail> Tutorial_Dialouge = new List<Text_Anim_Detail>();
-    public int nextCount { get; set; }
+    int count;
+    public int nextCount { get { return count; } set { count = value; StopAllCoroutines(); } }
     float delay;
     int sizeCount;
 
@@ -100,6 +101,12 @@ public class TutorialDirector : MonoBehaviour
 
         ArrowAnimation();
         UpdatePod();
+    }
+
+    public void SkipTutorial()
+    {
+        if (nextCount < 5)
+            nextCount = 5;
     }
 
     void UpdatePod()
