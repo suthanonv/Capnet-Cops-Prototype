@@ -1,0 +1,468 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: EnemySpawnPointVersion0.1
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: a2214270a12c5004ab31d665d49b59c8,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: TileLayer.m_Bits
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Base
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[0].WaveName
+    value: Wave 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[0].AllEnemyInWave.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[0].AllEnemyInWave.Array.data[0].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 28c870db76438324f85d96e54ad23767,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[0].AllEnemyInWave.Array.data[0].AmountToSpawn
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[0].AllEnemyInWave.Array.data[0].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[0].AllEnemyInWave.Array.data[0].SpawningDistance
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[1].WaveName
+    value: Wave 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[1].AllEnemyInWave.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[1].AllEnemyInWave.Array.data[0].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 1ae8589791b1c2744982965bcec3b362,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[1].AllEnemyInWave.Array.data[0].AmountToSpawn
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[1].AllEnemyInWave.Array.data[0].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[1].AllEnemyInWave.Array.data[0].SpawningDistance
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].WaveName
+    value: Wave 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[0].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 28c870db76438324f85d96e54ad23767,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[0].AmountToSpawn
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[0].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[0].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[1].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 1ae8589791b1c2744982965bcec3b362,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[1].AmountToSpawn
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[1].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[1].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[2].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: bc7b17a58e42f054489a458fb76355de,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[2].AmountToSpawn
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[2].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[2].AllEnemyInWave.Array.data[2].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].WaveName
+    value: Wave 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[0].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 28c870db76438324f85d96e54ad23767,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[0].AmountToSpawn
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[0].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[0].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[1].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 1ae8589791b1c2744982965bcec3b362,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[1].AmountToSpawn
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[1].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[1].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[2].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: bc7b17a58e42f054489a458fb76355de,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[2].AmountToSpawn
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[2].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[3].AllEnemyInWave.Array.data[2].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].WaveName
+    value: Wave 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[0].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 28c870db76438324f85d96e54ad23767,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[0].AmountToSpawn
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[0].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[0].SpawningDistance
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[1].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: 1ae8589791b1c2744982965bcec3b362,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[1].AmountToSpawn
+    value: 15
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[1].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[1].SpawningDistance
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[2].EnemyPrefab
+    value: 
+    objectReference: {fileID: 7545695975534224732, guid: bc7b17a58e42f054489a458fb76355de,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[2].AmountToSpawn
+    value: 7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[2].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: AllWaveComponent.Array.data[4].AllEnemyInWave.Array.data[2].SpawningDistance
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: Pod_Prefab
+    value: 
+    objectReference: {fileID: 1289465022801766931, guid: 908b7949a4c072c46ae81af2c0e1788b,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.size
+    value: 16
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[0].Name
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[0].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[0].SpawningDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[1].Name
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[1].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[1].SpawningDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[2].Name
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[2].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[2].SpawningDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[3].Name
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[3].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[3].SpawningDistance
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[4].Name
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[4].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[4].SpawningDistance
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[5].Name
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[5].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[5].SpawningDistance
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[6].Name
+    value: 7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[6].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[6].SpawningDistance
+    value: 25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[7].Name
+    value: 9
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[7].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[7].SpawningDistance
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[8].Name
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[8].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[8].SpawningDistance
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[9].Name
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[9].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[9].SpawningDistance
+    value: 45
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[10].Name
+    value: 9
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[10].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[10].SpawningDistance
+    value: 45
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[11].Name
+    value: 11
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[11].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[11].SpawningDistance
+    value: 45
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[12].Name
+    value: 12
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[12].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[12].SpawningDistance
+    value: 45
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[13].Name
+    value: 13
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[13].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[13].SpawningDistance
+    value: 50
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[14].Name
+    value: 14
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[14].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[14].SpawningDistance
+    value: 60
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[15].Name
+    value: 15
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[15].SpawningInRange
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: podSpawningRanges.Array.data[15].SpawningDistance
+    value: 60
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f422ba19980d12b4f833bb6f2bf6a17a, type: 3}
   m_Name: EnemyAMoveData
   m_EditorClassIdentifier: 
-  MaxMove: 8
+  MaxMove: 12
+  baseAttackRange: 1
   IsEnemy: 1
   AttackRange: 1
   MoveSpeed: 0.5
