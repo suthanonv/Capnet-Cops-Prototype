@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pathfinder
+  - CinematicCamera
+  - Gameview Without UI
   layers:
   - Default
   - TransparentFX
