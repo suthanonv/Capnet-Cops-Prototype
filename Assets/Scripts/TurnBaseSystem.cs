@@ -145,13 +145,14 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
                         {
                             Nearest = entity.gameObject.GetComponent<Character>();
                             PreviosDistance = currentDistance;
+
                         }
                     }
                 }
 
 
             }
-            else
+            else if (PriorityTarget != Target.Base)
             {
                 foreach (EntityTurnBehaviour entity in TurretTurn.List)
                 {
