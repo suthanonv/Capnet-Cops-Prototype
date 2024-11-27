@@ -77,7 +77,6 @@ public class PreparationPharse : MonoBehaviour
 
     public void SetToStartTime()
     {
-        Debug.Log("StartTime");
         CurrentClockTime.Hour = StartClockTIme.Hour;
         CurrentClockTime.Min = StartClockTIme.Min;
         CurrentClockTime.Second = StartClockTIme.Second;

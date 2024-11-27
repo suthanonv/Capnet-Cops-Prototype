@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuStartGame : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class MainMenuStartGame : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    
+
     void Update()
     {
         if (mainMenuSceneController.fadeInFinished && Input.GetKeyDown(KeyCode.Space))
@@ -26,6 +24,7 @@ public class MainMenuStartGame : MonoBehaviour
             start = true;
             Debug.Log("Game is starting.");
             animator.SetTrigger("FadeOutText");
+            SceneManager.LoadScene("MySceneBroke");
         }
         if (textFadeOutFinished)
         {

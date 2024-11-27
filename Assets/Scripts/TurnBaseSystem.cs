@@ -396,7 +396,7 @@ public class TurnBaseSystem : MonoSingleton<TurnBaseSystem>
 
     public void EndPlayerPhase()
     {
-        audioSource.PlayOneShot(endturn);
+        //PlayOneShot(endturn);
         ShowMoveingRange.instance.CloseMovingRangeVisual();
 
         ActionEnd = true;
