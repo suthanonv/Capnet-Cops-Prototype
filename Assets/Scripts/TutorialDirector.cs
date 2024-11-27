@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-
+using UnityEngine;
 public class TutorialDirector : MonoBehaviour
 {
     [SerializeField] GameObject Tutorial;
@@ -17,86 +15,124 @@ public class TutorialDirector : MonoBehaviour
     Pod pod;
     MaterialChange podMat;
 
-    int nextCount;
+
+    [SerializeField] List<Text_Anim_Detail> Tutorial_Dialouge = new List<Text_Anim_Detail>();
+    public int nextCount { get; set; }
     float delay;
     int sizeCount;
 
-    void Start()
-    {
-        ShowPlayer();
-        TutorialBody.text = "These are your Units use them wisely";
-    }
+    int DisPlayCount = -1;
 
     void Update()
     {
-        if ( nextCount == 0)
+        if (nextCount == 0 && DisPlayCount != nextCount)
         {
+            NextButton.SetActive(false);
+
+            DisPlayCount = nextCount;
             Cameraholder.transform.position = new Vector3(11.7f, 3.54f, 2.139658f);
+            ShowPlayer();
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
         }
-        if (nextCount == 1)
+        if (nextCount == 1 && DisPlayCount != nextCount)
         {
+            NextButton.SetActive(false);
+
+            DisPlayCount = nextCount;
             StopShowingPlayer();
             ShowShip();
-            TutorialBody.text = "This is your ship it's your only ticket out of here, protect it at all cost";
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
             Cameraholder.transform.position = new Vector3(4.855145f, 3.54f, -14.92151f);
         }
-        if (nextCount == 2)
+        if (nextCount == 2 && DisPlayCount != nextCount)
         {
+            NextButton.SetActive(false);
+
+            DisPlayCount = nextCount;
             StopShowingShip();
-            TutorialBody.text = "These are the lootpods, Contains the Materials you needs to fix your ship";
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
             pod = FindAnyObjectByType<Pod>();
-            Cameraholder.transform.position = pod.transform.position + new Vector3(-0.3f,3.07f,1.15f);
+            Cameraholder.transform.position = pod.transform.position + new Vector3(-0.3f, 3.07f, 1.15f);
             podMat = pod.GetComponentInChildren<MaterialChange>();
             podMat.AddingOutLine();
         }
-        if (nextCount == 3)
+        if (nextCount == 3 && DisPlayCount != nextCount)
         {
+            NextButton.SetActive(false);
+
+            DisPlayCount = nextCount;
             podMat.RemovingOutLine();
             ShowPlayer();
-            TutorialBody.text = "Select a unit and move them to a loot pod to collect them. Action buttons are on the bottom of the screen.";
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
             Cameraholder.transform.position = new Vector3(11.7f, 3.54f, 2.139658f);
+
+        }
+        if (nextCount == 4 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
             NextButton.SetActive(false);
-            if(podStorage.CollecedPod == 1)
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
+        }
+        if (nextCount == 5 && DisPlayCount != nextCount)
+        {
+            StopAllCoroutines();
+            DisPlayCount = nextCount;
+            arrow.SetActive(false);
+            NextButton.SetActive(false);
+
+
+            StartCoroutine(TextAnimation(Tutorial_Dialouge[nextCount]));
+
+
+
+
+        }
+        if (nextCount == 6 && DisPlayCount != nextCount)
+        {
+            DisPlayCount = nextCount;
+            Tutorial.SetActive(false);
+        }
+
+        ArrowAnimation();
+        UpdatePod();
+    }
+
+    void UpdatePod()
+    {
+        if (nextCount == 3)
+        {
+            if (podStorage.CollecedPod == 1)
             {
                 nextCount++;
             }
         }
-        if (nextCount == 4)
-        {
-            TutorialBody.text = "Press End Phase to Start enemies wave";
-            arrow.SetActive(true);
-            delay += Time.deltaTime;
-            if (delay >= 0.2)
-            {
-                sizeCount++;
-                delay = 0;
-            }
-            if(sizeCount % 2 ==0)
-            {
-                arrow.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            }
-            else
-            {
-                arrow.transform.localScale = new Vector3(1, 1, 1);
-            }
-        }
-        if (nextCount == 5)
-        {
-            arrow.SetActive(false);
-            TutorialBody.text = "These are the monster don't let them destroy your ship. End of tutorial. Goodluck";
-            next.text = "Start";
-            delay += Time.deltaTime;
-            if(delay >= 4)
-            {
-                NextButton.SetActive(true);
-            }
-        }
-        if (nextCount == 6)
-        {
-            Tutorial.SetActive(false);
-        }
-
     }
+
+    void ArrowAnimation()
+    {
+        if (nextCount != 4) return;
+        arrow.SetActive(true);
+        delay += Time.deltaTime;
+        if (delay >= 0.2)
+        {
+            sizeCount++;
+            delay = 0;
+        }
+        if (sizeCount % 2 == 0)
+        {
+            arrow.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        }
+        else
+        {
+            arrow.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
 
 
     void ShowPlayer()
@@ -124,5 +160,46 @@ public class TutorialDirector : MonoBehaviour
     public void Next()
     {
         nextCount++;
+        TutorialBody.text = "";
     }
+
+
+
+    IEnumerator TextAnimation(Text_Anim_Detail textDetail)
+    {
+        int count = 0;
+        TutorialBody.text = "";
+
+        while (TutorialBody.text.Length < textDetail.Text.Length)
+        {
+            TutorialBody.text += textDetail.Text[count];
+            yield return new WaitForSeconds(textDetail.TextPlaySpeed);
+            count++;
+        }
+        if (nextCount == 5)
+            StartCoroutine(CloseUI());
+        else if (nextCount != 3 && nextCount != 4)
+        {
+            NextButton.SetActive(true);
+        }
+
+    }
+
+    [SerializeField] float CloseTime = 4;
+    IEnumerator CloseUI()
+    {
+        yield return new WaitForSeconds(CloseTime);
+        nextCount++;
+    }
+
 }
+
+
+[System.Serializable]
+public class Text_Anim_Detail
+{
+    public string Text;
+    public float TextPlaySpeed;
+    public bool IsPLayed { get; set; }
+}
+
