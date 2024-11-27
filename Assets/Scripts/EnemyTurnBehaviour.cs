@@ -36,7 +36,7 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
         if (Human == null)
         {
             OnActionEnd();
-            return; 
+            return;
         }
 
         destinationTile = Human.characterTile;
@@ -47,12 +47,12 @@ public class EnemyTurnBehaviour : EntityTurnBehaviour
 
         if (!Spawned)
         {
-            playRoarSound(true); 
-            Spawned = true;      
+            playRoarSound(true);
+            return;
         }
         else
         {
-            playRoarSound();     
+            playRoarSound();
         }
 
         base.onTurn();
