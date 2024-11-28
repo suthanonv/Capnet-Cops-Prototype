@@ -105,6 +105,11 @@ public class MainMenuSceneController : MonoBehaviour
         }
     }
 
+    public void OnFadeOutComplete()
+    {
+        SceneManager.LoadScene("Tutorial update");
+    }
+
     public void OnCompleteCutToBlack()
     {
         Debug.Log("CutToBlack 60 seconds have passed");
