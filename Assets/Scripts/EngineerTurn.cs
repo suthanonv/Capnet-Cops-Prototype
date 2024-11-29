@@ -261,7 +261,7 @@ public class EngineerTurn : EntityTurnBehaviour
         {
             i.ShowRangeVisual = false;
         }
-
+        VisualTurret.SetActive(false);
         ShowedTile = new List<Tile>();
     }
 
