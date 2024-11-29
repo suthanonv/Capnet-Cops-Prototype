@@ -7,30 +7,38 @@ public class MainMenuCamDetection : MonoBehaviour
 {
     public UnityEvent unityEvent;
     public UnityEvent returnAnim;
+    private bool tf = false;
+    private bool triggerred;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entered Collider");
-        if(collision.gameObject.name == "Main Camera")
+        triggerred = true;
+        Debug.Log("Entered Trigger");
+        if (other.gameObject.name == "Main Camera")
         {
             unityEvent.Invoke();
         }
     }
-
-    private void OnCollisionExit(Collision collision)
+    private void Update()
     {
-        if (collision.gameObject.name == "Main Camera")
+        if(Input.GetKeyDown(KeyCode.Escape) && triggerred)
         {
-            unityEvent.Invoke();
+            tf = true;
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        Debug.Log("OnCollisionStay");
-        if (Input.GetKeyDown(KeyCode.Escape) && collision.gameObject.name == "Main Camera")
+        triggerred = false;
+        tf = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("OnTriggerStay");
+        if (tf)
         {
-            Debug.Log("Pressed Escape: Attempting to play Return animation");
+            Debug.Log("Pressed Escape Recently: Attempting to play Return animation");
             returnAnim.Invoke();
         }
     }
